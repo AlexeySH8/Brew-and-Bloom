@@ -32,7 +32,13 @@ public class CameraManager : MonoBehaviour
         if (Math.Abs(_target.position.y) > _yBoundary)
             targetPos.y = _target.position.y - Math.Sign(_target.position.y) * _yBoundary;
 
-        transform.position = Vector3.SmoothDamp(transform.position, targetPos,
-                ref _velocity, _smoothTime); 
+        if ((transform.position - targetPos).sqrMagnitude < 0.0001f) // removes the influence of SmoothDamp on the position
+        {
+            transform.position = targetPos;
+            _velocity = Vector3.zero;
+        }
+        else
+            transform.position = Vector3.SmoothDamp(transform.position, targetPos,
+                    ref _velocity, _smoothTime);
     }
 }

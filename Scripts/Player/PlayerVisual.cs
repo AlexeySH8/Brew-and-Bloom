@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class PlayerVisual : MonoBehaviour
 {
+    private PlayerController _playerController;
     private Animator _animator;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _playerController = GetComponentInParent<PlayerController>();
     }
 
     public void UpdateVisual(float horizontalInput, float verticalInput)
     {
         var isRunning = horizontalInput != 0 || verticalInput != 0;
         UpdateAnimation(isRunning);
-        UpdateFaceDirection(horizontalInput);
     }
 
     private void UpdateAnimation(bool isRunning)
@@ -23,11 +24,9 @@ public class PlayerVisual : MonoBehaviour
         _animator.SetBool("IsRunning", isRunning);
     }
 
-    private void UpdateFaceDirection(float horizontalInput)
+    public void FlipVisual()
     {
-        if (horizontalInput == 0) return;
-
-        float faceDirection = Mathf.Sign(horizontalInput);
-        transform.localScale = new Vector2(faceDirection, 1);
+        if (_playerController.FaceDirection.x == 0) return;
+        transform.localScale = new Vector2(_playerController.FaceDirection.x, transform.localScale.y);
     }
 }

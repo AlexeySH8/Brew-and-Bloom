@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PCInput : IPlayerInput
 {
-    float IPlayerInput.GetHorizontal() => Input.GetAxisRaw("Horizontal");
-    float IPlayerInput.GetVertical() => Input.GetAxisRaw("Vertical");
+    public float GetHorizontal() => Input.GetAxisRaw("Horizontal");
+    public float GetVertical() => Input.GetAxisRaw("Vertical");
+    public bool IsInteractPressed() => Input.GetKeyDown(KeyCode.E);
+    public bool IsDropPressed() => Input.GetKeyDown(KeyCode.Space);
 }
