@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Staff : MonoBehaviour, IHoldItem
+public class Staff : BaseTool
 {
-    public void Use()
+
+    public override void Use()
     {
         Debug.Log("Staff Use!");
     }

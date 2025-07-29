@@ -1,4 +1,6 @@
+using UnityEngine;
+
 public interface ICookingStation
 {
-    void Cook();
+    void Cook(GameObject ingredient);
 }

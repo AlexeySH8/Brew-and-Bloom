@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Fireplace : MonoBehaviour, ICookingStation
 {
-    public void Cook()
+    public void Cook(GameObject ingredient)
     {
         Debug.Log("FirePlace is coocked");
     }

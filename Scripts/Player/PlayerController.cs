@@ -46,15 +46,15 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateFaceDirection()
     {
-        if (_horizontalInput == 0 && _verticalInput != 0)
+        if (_horizontalInput != 0)
             _xFaceDirection = _horizontalInput;
-        else if (_horizontalInput != 0)
-            _xFaceDirection = _horizontalInput;
-
-        if (_verticalInput == 0 && _horizontalInput != 0)
-            _yFaceDirection = _verticalInput;
         else if (_verticalInput != 0)
+            _xFaceDirection = 0;
+
+        if (_verticalInput != 0)
             _yFaceDirection = _verticalInput;
+        else if (_horizontalInput != 0)
+            _yFaceDirection = 0;
 
         FaceDirection = new Vector2(_xFaceDirection, _yFaceDirection);
     }

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pick : MonoBehaviour, IHoldItem
+public class Pick : BaseTool
 {
-    public void Use()
+    public override void Use()
     {
         Debug.Log("Pick Use!");
     }
