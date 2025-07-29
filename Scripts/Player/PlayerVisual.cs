@@ -26,7 +26,6 @@ public class PlayerVisual : MonoBehaviour
 
     public void FlipVisual()
     {
-        if (_playerController.FaceDirection.x == 0) return;
-        transform.localScale = new Vector2(_playerController.FaceDirection.x, transform.localScale.y);
+        transform.localScale = new Vector2(_playerController.FaceDirection, transform.localScale.y);
     }
 }

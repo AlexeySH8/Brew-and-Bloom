@@ -3,40 +3,44 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Vector2 FaceDirection { get; private set; }
+    public Vector2 InteractionDirection { get; private set; }
+    public float FaceDirection { get; private set; }
     private IPlayerInput _input;
     private PlayerMovement _movement;
     private PlayerVisual _visual;
-    private ItemHandler _itemHandler;
+    private InteractionHandler _interactiveHandler;
+    private ItemHolder _itemHolder;
     private float _horizontalInput;
     private float _verticalInput;
-    private float _xFaceDirection;
-    private float _yFaceDirection;
+    private float _xInteractionDirection;
+    private float _yInteractionDirection;
 
     private void Awake()
     {
         _input = new PCInput();
         _movement = GetComponent<PlayerMovement>();
         _visual = GetComponentInChildren<PlayerVisual>();
-        _itemHandler = GetComponent<ItemHandler>();
-        _xFaceDirection = 1;
-        _yFaceDirection = 0;
+        _interactiveHandler = GetComponent<InteractionHandler>();
+        _itemHolder = GetComponent<ItemHolder>();
+        FaceDirection = 1;
+        _xInteractionDirection = 1;
+        _yInteractionDirection = 0;
     }
 
     private void Update()
     {
         _horizontalInput = _input.GetHorizontal();
         _verticalInput = _input.GetVertical();
-        UpdateFaceDirection();
+        UpdateDirections();
 
         _visual.UpdateVisual(_horizontalInput, _verticalInput);
         _visual.FlipVisual();
 
         if (_input.IsInteractPressed())
-            _itemHandler.HandleItem();
+            _interactiveHandler.Interact();
 
         if (_input.IsDropPressed())
-            _itemHandler.Drop();
+            _itemHolder.Drop(InteractionDirection.normalized);
     }
 
     private void FixedUpdate()
@@ -44,18 +48,21 @@ public class PlayerController : MonoBehaviour
         _movement.Move(_horizontalInput, _verticalInput);
     }
 
-    private void UpdateFaceDirection()
+    private void UpdateDirections()
     {
         if (_horizontalInput != 0)
-            _xFaceDirection = _horizontalInput;
+        {
+            _xInteractionDirection = _horizontalInput;
+            FaceDirection = _horizontalInput;
+        }
         else if (_verticalInput != 0)
-            _xFaceDirection = 0;
+            _xInteractionDirection = 0;
 
         if (_verticalInput != 0)
-            _yFaceDirection = _verticalInput;
+            _yInteractionDirection = _verticalInput;
         else if (_horizontalInput != 0)
-            _yFaceDirection = 0;
+            _yInteractionDirection = 0;
 
-        FaceDirection = new Vector2(_xFaceDirection, _yFaceDirection);
+        InteractionDirection = new Vector2(_xInteractionDirection, _yInteractionDirection);
     }
 }
