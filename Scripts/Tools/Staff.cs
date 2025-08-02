@@ -5,7 +5,7 @@ using UnityEngine;
 public class Staff : BaseTool
 {
 
-    public override void Use()
+    public override void Use(float faceDirection)
     {
         Debug.Log("Staff Use!");
     }

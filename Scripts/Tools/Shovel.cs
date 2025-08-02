@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class Shovel : BaseTool
 {
-    public override void Use()
+    public override void Use(float faceDirection)
     {
-        Debug.Log("Shovel  Use!");
+        Collider2D interactiveItem = Detect(faceDirection);
+        if (interactiveItem)
+        {
+            if (interactiveItem.TryGetComponent(out IShovelTarget pickTarget))
+                pickTarget.InteractWithShovel();
+        }
     }
 }

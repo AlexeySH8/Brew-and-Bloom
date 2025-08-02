@@ -11,11 +11,11 @@ public class InteractionHandler : MonoBehaviour
         _itemHolder = GetComponent<ItemHolder>();
     }
 
-    public void Interact()
+    public void Interact(float faceDirection)
     {
         var interactiveItem = _detector.Detect();
 
-        if (_itemHolder.HasItem)
+        if (_itemHolder.GetHeldItem())
         {
             var heldItem = _itemHolder.GetHeldItem();
             if (interactiveItem.collider != null && interactiveItem.collider.TryGetComponent(out ICookingStation cookingStation))
@@ -26,9 +26,13 @@ public class InteractionHandler : MonoBehaviour
             }
             else if (heldItem.TryGetComponent(out BaseTool tool))
             {
-                tool.Use();
+                tool.Use(faceDirection);
                 return;
             }
+        }
+        else if (interactiveItem.collider != null && interactiveItem.collider.TryGetComponent(out BaseItemDispenser pickupShelf))
+        {
+            _itemHolder.PickUp(pickupShelf.DispenseItem());
         }
         else if (interactiveItem.rigidbody != null && interactiveItem.rigidbody.TryGetComponent(out IHoldItem holdItem))
         {

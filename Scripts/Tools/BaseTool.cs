@@ -2,6 +2,9 @@ using UnityEngine;
 
 public abstract class BaseTool : MonoBehaviour, IHoldItem
 {
+    [SerializeField] protected float _interactionDistance = 0.5f;
+    [SerializeField] protected LayerMask _interectiveItemMask;
+
     private GameObject _shelf;
     protected Vector2 _positionOnShelf;
     protected Vector2 _initialScale;
@@ -19,7 +22,16 @@ public abstract class BaseTool : MonoBehaviour, IHoldItem
         _initialOrderInLayer = _spriteRenderer.sortingOrder;
     }
 
-    public abstract void Use();
+    public abstract void Use(float faceDirection);
+
+    protected virtual Collider2D Detect(float faceDirection)
+    {
+        Vector2 origin = transform.position;
+        Vector2 direction = new Vector2(faceDirection, 0);
+        RaycastHit2D hit = Physics2D.Raycast(origin, direction, _interactionDistance, _interectiveItemMask);
+        Debug.DrawRay(origin, direction * _interactionDistance, Color.red, 0.5f);
+        return hit.collider;
+    }
 
     public virtual void Discard()
     {

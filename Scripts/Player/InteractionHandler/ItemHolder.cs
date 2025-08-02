@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class ItemHolder : MonoBehaviour
 {
-    public bool HasItem {  get; private set; }
-
     [SerializeField] private Transform _holdToolSpot;
     [SerializeField] private Transform _holdIngredientSpot;
     [SerializeField] private GameObject _witchVisual;
@@ -15,13 +13,18 @@ public class ItemHolder : MonoBehaviour
     public void PickUp(GameObject holdItem)
     {
         _heldItem = holdItem;
-        HasItem = true;
 
         var xScale = Mathf.Abs(_heldItem.transform.localScale.x) *
             Mathf.Sign(_witchVisual.transform.localScale.x);
         _heldItem.transform.localScale = new Vector2(xScale, _witchVisual.transform.localScale.y);
 
-        _heldItem.transform.position = _holdToolSpot.position;
+        if (holdItem.TryGetComponent(out BaseTool tool))
+            _heldItem.transform.position = _holdToolSpot.position;
+        else if (holdItem.TryGetComponent(out BaseIngredient ingredient))
+            _heldItem.transform.position = _holdIngredientSpot.position;
+        else
+            Debug.LogWarning("Unknown heir of IHoldItem");
+
         _heldItem.transform.parent = _witchVisual.transform;
         _heldItem.transform.rotation = Quaternion.identity;
 
@@ -49,6 +52,5 @@ public class ItemHolder : MonoBehaviour
     public void Clear()
     {
         _heldItem = null;
-        HasItem = false;
     }
 }

@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
         _visual.FlipVisual();
 
         if (_input.IsInteractPressed())
-            _interactiveHandler.Interact();
+            _interactiveHandler.Interact(FaceDirection);
 
         if (_input.IsDropPressed())
             _itemHolder.Drop(InteractionDirection.normalized);
