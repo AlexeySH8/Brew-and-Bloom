@@ -2,8 +2,10 @@ using UnityEngine;
 
 public abstract class BaseTool : MonoBehaviour, IHoldItem
 {
+    public LayerMask InteractionMask { get; private set; }
+    public float InteractionDistance { get; private set; }
+    [SerializeField] protected LayerMask _interactionMask;
     [SerializeField] protected float _interactionDistance = 0.5f;
-    [SerializeField] protected LayerMask _interectiveItemMask;
 
     private GameObject _shelf;
     protected Vector2 _positionOnShelf;
@@ -20,18 +22,11 @@ public abstract class BaseTool : MonoBehaviour, IHoldItem
         _positionOnShelf = transform.position;
         _initialScale = transform.localScale;
         _initialOrderInLayer = _spriteRenderer.sortingOrder;
+        InteractionDistance = _interactionDistance;
+        InteractionMask = _interactionMask;
     }
 
-    public abstract void Use(float faceDirection);
-
-    protected virtual Collider2D Detect(float faceDirection)
-    {
-        Vector2 origin = transform.position;
-        Vector2 direction = new Vector2(faceDirection, 0);
-        RaycastHit2D hit = Physics2D.Raycast(origin, direction, _interactionDistance, _interectiveItemMask);
-        Debug.DrawRay(origin, direction * _interactionDistance, Color.red, 0.5f);
-        return hit.collider;
-    }
+    public abstract void Use(Collider2D target);
 
     public virtual void Discard()
     {

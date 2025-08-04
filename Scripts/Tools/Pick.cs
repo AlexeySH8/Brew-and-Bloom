@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class Pick : BaseTool
 {
-    public override void Use(float faceDirection)
+    public override void Use(Collider2D target)
     {
-        Collider2D interactiveItem = Detect(faceDirection);
-        if (interactiveItem)
-        {
-            if (interactiveItem.TryGetComponent(out IPickTarget pickTarget))
-                pickTarget.InteractWithPick();
-        }
+        if (target.TryGetComponent(out IPickTarget pickTarget))
+            pickTarget.InteractWithPick();
     }
 }

@@ -1,35 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Soil : MonoBehaviour, IPickTarget, IShovelTarget
 {
-    [SerializeField] private CultivationStage _currentStage = CultivationStage.BigStone;
+    public CultivationStage Stage { get; private set; }
+    [SerializeField] private CultivationStage _stage = CultivationStage.BigStone;
 
     private SoilVisual _visual;
 
     private void Awake()
     {
+        Stage = _stage;
         _visual = GetComponent<SoilVisual>();
-        _visual.Init();
-        _visual.UpdateSprite((int)_currentStage);
+        UpdateLayer();
     }
 
     public void InteractWithPick()
     {
-        if (_currentStage < CultivationStage.Soil)
-            Cultivate();
+        Cultivate();
     }
 
     public void InteractWithShovel()
     {
-        if (_currentStage > CultivationStage.SmallStone && _currentStage < CultivationStage.CultivatedSoil)
-            Cultivate();
+        Cultivate();
     }
 
     private void Cultivate()
     {
-        _currentStage++;
-        _visual.UpdateSprite((int)_currentStage);
+        if (Stage == CultivationStage.CultivatedSoil) return;
+        Stage++;
+        UpdateLayer();
+        _visual.UpdateSoilVisual();
+    }
+
+    private void UpdateLayer()
+    {
+        if (Stage < CultivationStage.Soil)
+            gameObject.layer = LayerMask.NameToLayer("PickTarget");
+        else if (Stage < CultivationStage.CultivatedSoil)
+            gameObject.layer = LayerMask.NameToLayer("ShovelTarget");
+        else
+            gameObject.layer = LayerMask.NameToLayer("Default");
     }
 }

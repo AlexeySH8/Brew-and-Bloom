@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaseIngredient : MonoBehaviour, IHoldItem
 {
-    public virtual void Use(float faceDirection)
+    public virtual void Use(Collider2D target)
     {
         return;
     }

@@ -5,26 +5,33 @@ public class SoilVisual : MonoBehaviour
 {
     [SerializeField] private Sprite[] _stageSprites;
 
+    private Soil _soil;
     private SpriteRenderer _ñontentSprite;
     private SpriteRenderer _soilSprite;
 
-    public void Init()
+    private void Awake()
     {
+        _soil = GetComponent<Soil>();
         _soilSprite = GetComponent<SpriteRenderer>();
         _ñontentSprite = transform.GetChild(0).GetComponentInChildren<SpriteRenderer>();
     }
 
-    public void UpdateSprite(int currentStage)
+    private void Start()
     {
-        if (currentStage >= (int)CultivationStage.Soil)
+        UpdateSoilVisual();
+    }
+
+    public void UpdateSoilVisual()
+    {
+        if (_soil.Stage < CultivationStage.Soil)
         {
-            _soilSprite.sprite = _stageSprites[currentStage];
-            _ñontentSprite.gameObject.SetActive(false);
+            _soilSprite.sprite = _stageSprites[(int)CultivationStage.Soil];
+            _ñontentSprite.sprite = _stageSprites[(int)_soil.Stage];
         }
         else
         {
-            _soilSprite.sprite = _stageSprites[(int)CultivationStage.Soil];
-            _ñontentSprite.sprite = _stageSprites[currentStage];
+            _soilSprite.sprite = _stageSprites[(int)_soil.Stage];
+            _ñontentSprite.gameObject.SetActive(false);
         }
     }
 

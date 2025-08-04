@@ -1,6 +1,8 @@
+using UnityEngine;
+
 public interface IHoldItem
 {
-    void Use(float faceDirection);
+    void Use(Collider2D target);
     void Discard();
 }
 

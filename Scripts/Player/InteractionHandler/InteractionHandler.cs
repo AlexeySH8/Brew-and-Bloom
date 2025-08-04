@@ -13,7 +13,7 @@ public class InteractionHandler : MonoBehaviour
 
     public void Interact(float faceDirection)
     {
-        var interactiveItem = _detector.Detect();
+        var interactiveItem = _detector.DetectInterectiveItem();
 
         if (_itemHolder.GetHeldItem())
         {
@@ -22,13 +22,14 @@ public class InteractionHandler : MonoBehaviour
             {
                 cookingStation.Cook(heldItem);
                 _itemHolder.Clear();
-                return;
             }
             else if (heldItem.TryGetComponent(out BaseTool tool))
             {
-                tool.Use(faceDirection);
-                return;
+                var toolTarget = _detector.DetectToolTrget(tool.InteractionDistance, tool.InteractionMask);
+                if (toolTarget)
+                    tool.Use(toolTarget);
             }
+            return;
         }
         else if (interactiveItem.collider != null && interactiveItem.collider.TryGetComponent(out BaseItemDispenser pickupShelf))
         {

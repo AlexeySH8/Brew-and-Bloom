@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InteractionDetector : MonoBehaviour
@@ -14,13 +15,23 @@ public class InteractionDetector : MonoBehaviour
         _playerController = GetComponent<PlayerController>();
     }
 
-    public RaycastHit2D Detect()
+    public RaycastHit2D DetectInterectiveItem()
     {
         Vector2 direction = _playerController.InteractionDirection.normalized;
         Vector2 origin = (Vector2)transform.position + direction * 0.1f;
-        RaycastHit2D objInFront = Physics2D.CircleCast(origin, _radius, direction, _distance, _interectiveItemMask);
+        RaycastHit2D interactiveItem = Physics2D.CircleCast(origin, _radius, direction,
+            _distance, _interectiveItemMask);
+        return interactiveItem;
+    }
 
-        return objInFront;
+    public Collider2D DetectToolTrget(float interactionDistance, LayerMask interactionMask)
+    {
+        Vector2 direction = new Vector2(_playerController.FaceDirection, 0);
+        Vector2 origin = transform.position;
+        RaycastHit2D toolTarget = Physics2D.Raycast(origin, direction,
+            interactionDistance, interactionMask);
+        Debug.DrawRay(origin, direction * interactionDistance, Color.red, 0.5f);
+        return toolTarget.collider;
     }
 
     private void OnDrawGizmos()
