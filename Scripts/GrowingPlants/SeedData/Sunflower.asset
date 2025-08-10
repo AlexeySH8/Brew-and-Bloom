@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d337d0fef05406445b1d3a2ff3785ee4, type: 3}
+  m_Name: Sunflower
+  m_EditorClassIdentifier: 
+  <MinStageTime>k__BackingField: 1
+  <MaxStageTime>k__BackingField: 1
+  <GrowthStageSprites>k__BackingField:
+  - {fileID: -2068407458, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}
+  - {fileID: -973410988, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}
+  - {fileID: -1948051728, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}
+  - {fileID: -1465553982, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}
+  <IngredientPrefab>k__BackingField: {fileID: 6045560286381424141, guid: c4d3f4126aea2c744be39f301f3ac87f, type: 3}

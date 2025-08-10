@@ -1,27 +1,42 @@
 using UnityEngine;
 
-public class Soil : MonoBehaviour, IPickTarget, IShovelTarget
+public enum CultivationStage
 {
-    public CultivationStage Stage { get; private set; }
-    [SerializeField] private CultivationStage _stage = CultivationStage.BigStone;
+    BigStone,
+    MediumStone,
+    SmallStone,
+    Soil,
+    LooseSoil,
+    CultivatedSoil
+}
 
-    private SoilVisual _visual;
+public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IReceivesHeldItem
+{
+    [field: SerializeField] public CultivationStage Stage { get; private set; }
+
+    private SoilVisual _soilVisual;
+    private GrowPlant _growPlant;
 
     private void Awake()
     {
-        Stage = _stage;
-        _visual = GetComponent<SoilVisual>();
+        _soilVisual = GetComponent<SoilVisual>();
+        _growPlant = GetComponent<GrowPlant>();
         UpdateLayer();
     }
 
-    public void InteractWithPick()
-    {
-        Cultivate();
-    }
+    public void InteractWithPick() => Cultivate();
 
-    public void InteractWithShovel()
+    public void InteractWithShovel() => Cultivate();
+
+    public void Receive(GameObject heldItem) => PlantsSeed(heldItem);
+
+    private void PlantsSeed(GameObject heldItem)
     {
-        Cultivate();
+        if (heldItem.TryGetComponent(out Seed seed))
+        {
+            _growPlant.PlantSeed(seed.Data, _soilVisual);
+            heldItem.GetComponent<IHoldItem>().Discard();
+        }
     }
 
     private void Cultivate()
@@ -29,7 +44,7 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget
         if (Stage == CultivationStage.CultivatedSoil) return;
         Stage++;
         UpdateLayer();
-        _visual.UpdateSoilVisual();
+        _soilVisual.UpdateCultivationSoilStage();
     }
 
     private void UpdateLayer()
@@ -39,6 +54,6 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget
         else if (Stage < CultivationStage.CultivatedSoil)
             gameObject.layer = LayerMask.NameToLayer("ShovelTarget");
         else
-            gameObject.layer = LayerMask.NameToLayer("Default");
+            gameObject.layer = LayerMask.NameToLayer("InteractiveItem");
     }
 }

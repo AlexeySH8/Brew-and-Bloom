@@ -1,10 +1,12 @@
 using UnityEngine;
 
-public class TrashCan : MonoBehaviour, ICookingStation
+public class TrashCan : MonoBehaviour, IReceivesHeldItem
 {
-    public void Cook(GameObject ingredient)
+    public void Receive(GameObject heldItem) => Utilize(heldItem);
+
+    public void Utilize(GameObject item)
     {
-        if (ingredient.TryGetComponent(out IHoldItem holdItem))
+        if (item.TryGetComponent(out IHoldItem holdItem))
             holdItem.Discard();
     }
 }

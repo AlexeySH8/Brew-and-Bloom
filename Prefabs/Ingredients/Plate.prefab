@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2519438755852013429}
   - component: {fileID: 7732138791474967779}
   - component: {fileID: 4017589017308705926}
-  - component: {fileID: 1472290390060403048}
+  - component: {fileID: 4602169220933875925}
   m_Layer: 6
   m_Name: Plate
   m_TagString: Untagged
@@ -159,7 +159,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.57, y: 0.41}
   m_EdgeRadius: 0
---- !u!114 &1472290390060403048
+--- !u!114 &4602169220933875925
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,6 +168,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3652270410516299021}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8de2721f2128d634384e82240b5f7f2b, type: 3}
+  m_Script: {fileID: 11500000, guid: aa1e67f44f24fea49bc8143fa5e2baea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseIngredient : MonoBehaviour, IHoldItem
+public class Ingredient : MonoBehaviour, IHoldItem
 {
     public virtual void Use(Collider2D target)
     {

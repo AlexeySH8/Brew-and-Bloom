@@ -14,14 +14,13 @@ public class InteractionHandler : MonoBehaviour
     public void Interact(float faceDirection)
     {
         var interactiveItem = _detector.DetectInterectiveItem();
+        var heldItem = _itemHolder.GetHeldItem();
 
-        if (_itemHolder.GetHeldItem())
+        if (heldItem)
         {
-            var heldItem = _itemHolder.GetHeldItem();
-            if (interactiveItem.collider != null && interactiveItem.collider.TryGetComponent(out ICookingStation cookingStation))
+            if (interactiveItem.collider != null && interactiveItem.collider.TryGetComponent(out IReceivesHeldItem receiver))
             {
-                cookingStation.Cook(heldItem);
-                _itemHolder.Clear();
+                receiver.Receive(heldItem);
             }
             else if (heldItem.TryGetComponent(out BaseTool tool))
             {
@@ -31,9 +30,9 @@ public class InteractionHandler : MonoBehaviour
             }
             return;
         }
-        else if (interactiveItem.collider != null && interactiveItem.collider.TryGetComponent(out BaseItemDispenser pickupShelf))
+        else if (interactiveItem.collider != null && interactiveItem.collider.TryGetComponent(out BaseItemDispenser dispenser))
         {
-            _itemHolder.PickUp(pickupShelf.DispenseItem());
+            _itemHolder.PickUp(dispenser.DispenseItem());
         }
         else if (interactiveItem.rigidbody != null && interactiveItem.rigidbody.TryGetComponent(out IHoldItem holdItem))
         {

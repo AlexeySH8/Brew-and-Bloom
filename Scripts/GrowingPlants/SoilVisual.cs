@@ -18,10 +18,10 @@ public class SoilVisual : MonoBehaviour
 
     private void Start()
     {
-        UpdateSoilVisual();
+        UpdateCultivationSoilStage();
     }
 
-    public void UpdateSoilVisual()
+    public void UpdateCultivationSoilStage()
     {
         if (_soil.Stage < CultivationStage.Soil)
         {
@@ -31,9 +31,16 @@ public class SoilVisual : MonoBehaviour
         else
         {
             _soilSprite.sprite = _stageSprites[(int)_soil.Stage];
-            _ñontentSprite.gameObject.SetActive(false);
+            ClearContentPlace();
         }
     }
+
+    public void UpdateGrowPlantStage(Sprite stage)
+    {
+        _ñontentSprite.sprite = stage;
+    }
+
+    public void ClearContentPlace() => _ñontentSprite.sprite = null;
 
     private void OnValidate()
     {
