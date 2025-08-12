@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class InteractionHandler : MonoBehaviour
@@ -13,8 +14,8 @@ public class InteractionHandler : MonoBehaviour
 
     public void Interact(float faceDirection)
     {
-        var interactiveItem = _detector.DetectInterectiveItem();
-        var heldItem = _itemHolder.GetHeldItem();
+        GameObject heldItem = _itemHolder.GetHeldItem();
+        RaycastHit2D interactiveItem = _detector.DetectInterectiveItem(heldItem != null);
 
         if (heldItem)
         {
@@ -24,7 +25,7 @@ public class InteractionHandler : MonoBehaviour
             }
             else if (heldItem.TryGetComponent(out BaseTool tool))
             {
-                var toolTarget = _detector.DetectToolTrget(tool.InteractionDistance, tool.InteractionMask);
+                var toolTarget = _detector.DetectToolTarget(tool.InteractionDistance, tool.InteractionMask);
                 if (toolTarget)
                     tool.Use(toolTarget);
             }
@@ -33,6 +34,7 @@ public class InteractionHandler : MonoBehaviour
         else if (interactiveItem.collider != null && interactiveItem.collider.TryGetComponent(out BaseItemDispenser dispenser))
         {
             _itemHolder.PickUp(dispenser.DispenseItem());
+            return;
         }
         else if (interactiveItem.rigidbody != null && interactiveItem.rigidbody.TryGetComponent(out IHoldItem holdItem))
         {

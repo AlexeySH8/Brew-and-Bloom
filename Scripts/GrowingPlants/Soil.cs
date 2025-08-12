@@ -32,10 +32,10 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IReceivesHeldItem
 
     private void PlantsSeed(GameObject heldItem)
     {
-        if (heldItem.TryGetComponent(out Seed seed))
+        if (heldItem.TryGetComponent(out Seed seed) && _growPlant.GrowingPlant == null)
         {
-            _growPlant.PlantSeed(seed.Data, _soilVisual);
             heldItem.GetComponent<IHoldItem>().Discard();
+            _growPlant.PlantSeed(seed.Data, _soilVisual);
         }
     }
 
