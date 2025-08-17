@@ -36,7 +36,7 @@ public class InteractionHandler : MonoBehaviour
             _itemHolder.PickUp(dispenser.DispenseItem());
             return;
         }
-        else if (interactiveItem.rigidbody != null && interactiveItem.rigidbody.TryGetComponent(out IHoldItem holdItem))
+        else if (interactiveItem.rigidbody != null && interactiveItem.rigidbody.TryGetComponent(out BaseHoldItem holdItem))
         {
             _itemHolder.PickUp(interactiveItem.rigidbody.gameObject);
             return;

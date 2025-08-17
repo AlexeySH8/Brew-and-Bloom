@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7451230442428741}
   - component: {fileID: 1762318343456181818}
   - component: {fileID: 7625505747597488733}
-  - component: {fileID: 3061493938476140357}
+  - component: {fileID: 4742173835942205661}
   m_Layer: 6
   m_Name: Skillet
   m_TagString: Untagged
@@ -159,7 +159,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.58, y: 0.57}
   m_EdgeRadius: 0
---- !u!114 &3061493938476140357
+--- !u!114 &4742173835942205661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,6 +168,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4776567966178762121}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa1e67f44f24fea49bc8143fa5e2baea, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c4d705f3288470418a9d7aa296596c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Data>k__BackingField: {fileID: 11400000, guid: 5605ae6e33cc97b4291859d72803dcb3, type: 2}

@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
         _itemHolder = GetComponent<ItemHolder>();
         FaceDirection = 1;
         _xInteractionDirection = 1;
-        _yInteractionDirection = 0;
+        _yInteractionDirection = 0;       
     }
 
     private void Update()

@@ -25,7 +25,7 @@ public class InteractionDetector : MonoBehaviour
         if (!hasHeldItem) 
         {
             var heldItem = interactiveItems
-                .FirstOrDefault(item => item.collider.TryGetComponent<IHoldItem>(out _));
+                .FirstOrDefault(item => item.collider.TryGetComponent<BaseHoldItem>(out _));
             if(heldItem) return heldItem;
         }
         return interactiveItems.FirstOrDefault();

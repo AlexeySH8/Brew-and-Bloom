@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4808188681959842648}
   - component: {fileID: 63981158354209877}
   - component: {fileID: 6547134768852221826}
-  - component: {fileID: 7986674940498289125}
+  - component: {fileID: 8977984633451979902}
   m_Layer: 6
   m_Name: Flask
   m_TagString: Ingredient
@@ -96,7 +96,7 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4856171900400046343}
   m_BodyType: 0
-  m_Simulated: 0
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
@@ -159,7 +159,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.40570873, y: 0.41403574}
   m_EdgeRadius: 0
---- !u!114 &7986674940498289125
+--- !u!114 &8977984633451979902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,6 +168,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4856171900400046343}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa1e67f44f24fea49bc8143fa5e2baea, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c4d705f3288470418a9d7aa296596c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Data>k__BackingField: {fileID: 0}

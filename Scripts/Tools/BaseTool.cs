@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class BaseTool : MonoBehaviour, IHoldItem
+public abstract class BaseTool : BaseHoldItem
 {
     [field: SerializeField] public LayerMask InteractionMask { get; private set; }
     [field: SerializeField] public float InteractionDistance { get; private set; }
@@ -22,9 +22,11 @@ public abstract class BaseTool : MonoBehaviour, IHoldItem
     //    _initialOrderInLayer = _spriteRenderer.sortingOrder;
     //}
 
-    public abstract void Use(Collider2D target);
+    public override void Use(Collider2D target) => UseTool(target);
 
-    public virtual void Discard()
+    protected abstract void UseTool(Collider2D target);
+
+    public override void Discard()
     {
         //transform.parent = _shelf.transform;
         //transform.position = _positionOnShelf;

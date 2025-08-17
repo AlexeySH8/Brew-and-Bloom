@@ -34,7 +34,10 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IReceivesHeldItem
     {
         if (heldItem.TryGetComponent(out Seed seed) && _growPlant.GrowingPlant == null)
         {
-            heldItem.GetComponent<IHoldItem>().Discard();
+            if (!seed.Data)
+                Debug.LogError($"{gameObject.name} has no SeedData");
+
+            heldItem.GetComponent<BaseHoldItem>().Discard();
             _growPlant.PlantSeed(seed.Data, _soilVisual);
         }
     }

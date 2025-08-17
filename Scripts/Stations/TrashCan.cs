@@ -6,7 +6,7 @@ public class TrashCan : MonoBehaviour, IReceivesHeldItem
 
     public void Utilize(GameObject item)
     {
-        if (item.TryGetComponent(out IHoldItem holdItem))
+        if (item.TryGetComponent(out BaseHoldItem holdItem))
             holdItem.Discard();
     }
 }
