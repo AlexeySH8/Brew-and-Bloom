@@ -40,7 +40,7 @@ public class Recipes : ScriptableObject
     private void OnValidate()
     {
         Dishes = _dishesList.ToDictionary(
-            dish => dish.Ingredients.Aggregate(0, (mask, i) => mask | (int)i.Data.Ingredient),
+            dish => dish.Ingredients.Aggregate(0, (mask, i) => mask | (int)i.Data.IngredientType),
             dish => dish.Dish
             );
     }

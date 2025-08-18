@@ -10,48 +10,76 @@ public class CoockingStation : MonoBehaviour, IReceivesHeldItem
 
     private int[] _currentIngredients;
     private int _index = 0;
-    protected Coroutine Coocking;
+    private CoockingStationVisual _stationVisual;
+    private Coroutine _coocking;
 
     private void Awake()
     {
         _currentIngredients = new int[_maxHeldIngredient];
+        _stationVisual = GetComponent<CoockingStationVisual>();
+    }
+
+    private void Start()
+    {
+        var a = Recipes.Dishes.FirstOrDefault();
+        Debug.Log(a.Key);
     }
 
     public void Receive(GameObject heldItem)
     {
         if (heldItem.TryGetComponent(out Ingredient ingredient) &&
-            !_unavailableIngredients.Contains(ingredient.Data))
+            !_unavailableIngredients.Contains(ingredient.Data) &&
+            _coocking == null)
         {
             if (!ingredient.Data)
                 Debug.LogError($"{gameObject.name} has no IngredientData");
 
             heldItem.GetComponent<BaseHoldItem>().Discard();
-            Coock(ingredient.Data);
+            Cook(ingredient);
         }
     }
 
-    private void Coock(IngredientData ingredientData)
+    private void Cook(Ingredient ingredient)
     {
-        if (_index < _currentIngredients.Length)
+        if (_index >= _currentIngredients.Length)
+            Clear();
+
+        AddIngredient(ingredient);
+
+        if (TryCoockDish(out GameObject dish))
         {
-            _index++;
-            _currentIngredients[_index] = (int)ingredientData.Ingredient;
-            GameObject dish = PrepareDish();
-            if (dish)
-            {
-                _index = 0;
-                _currentIngredients = new int[_currentIngredients.Length];
-                Instantiate(dish, transform.position, transform.rotation);
-            }
+            _coocking = StartCoroutine(CoockDish(dish));
         }
     }
 
-    private GameObject PrepareDish()
+    private IEnumerator CoockDish(GameObject dish)
+    {
+        yield return new WaitForSeconds(5);
+        Instantiate(dish, transform.position, transform.rotation);
+        Clear();
+    }
+
+    private void AddIngredient(Ingredient ingredient)
+    {
+        _currentIngredients[_index] = (int)ingredient.Data.IngredientType;
+        _stationVisual.AddIngredient(ingredient.GetComponent<SpriteRenderer>().sprite);
+        _index++;
+    }
+
+    private bool TryCoockDish(out GameObject dish)
     {
         int ingredients = 0;
         for (int i = 0; i < _currentIngredients.Length; i++)
             ingredients |= _currentIngredients[i];
-        Recipes.Dishes.TryGetValue(ingredients, out var dish);
-        return dish;
+        Debug.Log(ingredients);
+        return Recipes.Dishes.TryGetValue(ingredients, out dish);
+    }
+
+    private void Clear()
+    {
+        _currentIngredients = new int[_maxHeldIngredient];
+        _index = 0;
+        _coocking = null;
+        _stationVisual.ClearIngredients();
     }
 }

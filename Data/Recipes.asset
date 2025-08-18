@@ -15,4 +15,5 @@ MonoBehaviour:
   _dishesList:
   - Ingredients:
     - {fileID: 4274280387633462960, guid: c4d3f4126aea2c744be39f301f3ac87f, type: 3}
+    - {fileID: 19480671847957137, guid: f17e6745d00c4ab45a6e36b9b4d21164, type: 3}
     Dish: {fileID: 183234796291252989, guid: 33535757e89bdd64a83b730858f5ebca, type: 3}

@@ -29,17 +29,14 @@ public class InteractionHandler : MonoBehaviour
                 if (toolTarget)
                     tool.Use(toolTarget);
             }
-            return;
         }
         else if (interactiveItem.collider != null && interactiveItem.collider.TryGetComponent(out BaseItemDispenser dispenser))
         {
             _itemHolder.PickUp(dispenser.DispenseItem());
-            return;
         }
         else if (interactiveItem.rigidbody != null && interactiveItem.rigidbody.TryGetComponent(out BaseHoldItem holdItem))
         {
             _itemHolder.PickUp(interactiveItem.rigidbody.gameObject);
-            return;
         }
     }
 }
