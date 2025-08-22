@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
@@ -37,11 +35,22 @@ public class Recipes : ScriptableObject
         Powder = 1 << 14
     }
 
-    private void OnValidate()
+    public void InitializeDishesDictionary()
     {
         Dishes = _dishesList.ToDictionary(
             dish => dish.Ingredients.Aggregate(0, (mask, i) => mask | (int)i.Data.IngredientType),
             dish => dish.Dish
             );
     }
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        var assets = UnityEditor.AssetDatabase.FindAssets("t:Recipes");
+        if (assets.Length > 1)
+        {
+            Debug.LogError("There must be only one Recipes in a project!");
+        }
+    }
+#endif
 }

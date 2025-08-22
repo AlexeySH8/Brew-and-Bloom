@@ -19,18 +19,14 @@ public class CoockingStation : MonoBehaviour, IReceivesHeldItem
         _stationVisual = GetComponent<CoockingStationVisual>();
     }
 
-    private void Start()
-    {
-        var a = Recipes.Dishes.FirstOrDefault();
-        Debug.Log(a.Key);
-    }
-
     public void Receive(GameObject heldItem)
     {
         if (heldItem.TryGetComponent(out Ingredient ingredient) &&
             !_unavailableIngredients.Contains(ingredient.Data) &&
-            _coocking == null)
+            _coocking == null &&
+            !_currentIngredients.Contains((int)ingredient.Data.IngredientType))
         {
+
             if (!ingredient.Data)
                 Debug.LogError($"{gameObject.name} has no IngredientData");
 
@@ -45,6 +41,7 @@ public class CoockingStation : MonoBehaviour, IReceivesHeldItem
             Clear();
 
         AddIngredient(ingredient);
+        _stationVisual.ChangeColorTo(ingredient.Data.Color);
 
         if (TryCoockDish(out GameObject dish))
         {
@@ -54,7 +51,7 @@ public class CoockingStation : MonoBehaviour, IReceivesHeldItem
 
     private IEnumerator CoockDish(GameObject dish)
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
         Instantiate(dish, transform.position, transform.rotation);
         Clear();
     }
@@ -71,7 +68,6 @@ public class CoockingStation : MonoBehaviour, IReceivesHeldItem
         int ingredients = 0;
         for (int i = 0; i < _currentIngredients.Length; i++)
             ingredients |= _currentIngredients[i];
-        Debug.Log(ingredients);
         return Recipes.Dishes.TryGetValue(ingredients, out dish);
     }
 

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3639535554404515129}
   - component: {fileID: 2775451233152552320}
   - component: {fileID: 7863243954812132569}
-  - component: {fileID: 7685382150870370536}
   - component: {fileID: 7879365449052854552}
+  - component: {fileID: 1428729511357114972}
   m_Layer: 6
   m_Name: Sunflower
   m_TagString: Untagged
@@ -114,19 +114,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7685382150870370536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4324623612265046025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff8a366b22284a84db4b7f8ae939b731, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Data>k__BackingField: {fileID: 11400000, guid: 830627f693feb4f479558144487f91c9, type: 2}
 --- !u!58 &7879365449052854552
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -162,3 +149,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.07}
   serializedVersion: 2
   m_Radius: 0.2
+--- !u!114 &1428729511357114972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4324623612265046025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411cefb9ec865fc4cb6792267d71395f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Data>k__BackingField: {fileID: 11400000, guid: 830627f693feb4f479558144487f91c9, type: 2}

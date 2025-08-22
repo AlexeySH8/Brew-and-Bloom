@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public enum CultivationStage
@@ -14,13 +15,14 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IReceivesHeldItem
 {
     [field: SerializeField] public CultivationStage Stage { get; private set; }
 
+    [SerializeField] private int _minHarvestCount = 1;
+    [SerializeField] private int _maxHarvestCount = 3;
+
     private SoilVisual _soilVisual;
-    private GrowPlant _growPlant;
 
     private void Awake()
     {
         _soilVisual = GetComponent<SoilVisual>();
-        _growPlant = GetComponent<GrowPlant>();
         UpdateLayer();
     }
 
@@ -28,18 +30,36 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IReceivesHeldItem
 
     public void InteractWithShovel() => Cultivate();
 
-    public void Receive(GameObject heldItem) => PlantsSeed(heldItem);
+    public void Receive(GameObject heldItem) => StartCoroutine(PlantsSeed(heldItem));
 
-    private void PlantsSeed(GameObject heldItem)
+    private IEnumerator PlantsSeed(GameObject heldItem)
     {
-        if (heldItem.TryGetComponent(out Seed seed) && _growPlant.GrowingPlant == null)
+        if (heldItem.TryGetComponent(out Seed seed))
         {
             if (!seed.Data)
                 Debug.LogError($"{gameObject.name} has no SeedData");
 
             heldItem.GetComponent<BaseHoldItem>().Discard();
-            _growPlant.PlantSeed(seed.Data, _soilVisual);
+            DisableToInteractive();
+            yield return StartCoroutine(GrowPlant(seed.Data));
+            EnableToInteractive();
         }
+    }
+
+    private IEnumerator GrowPlant(SeedData seedData)
+    {
+        for (int i = 0; i < seedData.GrowthStageSprites.Count; i++)
+        {
+            Sprite stage = seedData.GrowthStageSprites[i];
+            _soilVisual.UpdateGrowPlantStage(stage);
+            yield return new WaitForSeconds(Random.Range(seedData.MinStageTime, seedData.MaxStageTime));
+        }
+
+        for (int i = 0; i < Random.Range(_minHarvestCount, _maxHarvestCount); i++)
+        {
+            Instantiate(seedData.IngredientPrefab, transform.position, transform.rotation);
+        }
+        _soilVisual.ClearContentPlace();
     }
 
     private void Cultivate()
@@ -57,6 +77,10 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IReceivesHeldItem
         else if (Stage < CultivationStage.CultivatedSoil)
             gameObject.layer = LayerMask.NameToLayer("ShovelTarget");
         else
-            gameObject.layer = LayerMask.NameToLayer("InteractiveItem");
+            EnableToInteractive();
     }
+
+    private void EnableToInteractive() => gameObject.layer = LayerMask.NameToLayer("InteractiveItem");
+
+    private void DisableToInteractive() => gameObject.layer = LayerMask.NameToLayer("Default");
 }

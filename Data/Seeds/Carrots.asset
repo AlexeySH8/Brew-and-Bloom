@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d337d0fef05406445b1d3a2ff3785ee4, type: 3}
+  m_Name: Carrots
+  m_EditorClassIdentifier: 
+  <MinStageTime>k__BackingField: 1
+  <MaxStageTime>k__BackingField: 1
+  <GrowthStageSprites>k__BackingField:
+  - {fileID: -2137986401, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}
+  - {fileID: 637038456, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}
+  - {fileID: -1061479771, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}
+  <IngredientPrefab>k__BackingField: {fileID: 6475928185811423897, guid: 44e33ca49224a9b41a416836fd79cf04, type: 3}

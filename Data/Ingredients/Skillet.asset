@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4df2cc9925d8744387b4d98ad3bfc99, type: 3}
   m_Name: Skillet
   m_EditorClassIdentifier: 
-  <Ingredient>k__BackingField: 2
-  <Color>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  <IngredientType>k__BackingField: 0
+  <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}

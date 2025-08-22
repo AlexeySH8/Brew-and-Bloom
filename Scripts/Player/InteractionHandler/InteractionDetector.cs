@@ -8,6 +8,7 @@ public class InteractionDetector : MonoBehaviour
     [SerializeField] private LayerMask _interectiveItemMask;
     [SerializeField] private float _interactionDistance = 1;
     [SerializeField] private float _radius = 0.1f;
+    [SerializeField] private float _interactionOffset = 0.1f;
     private PlayerController _playerController;
 
     private void Awake()
@@ -18,17 +19,21 @@ public class InteractionDetector : MonoBehaviour
     public RaycastHit2D DetectInterectiveItem(bool hasHeldItem)
     {
         Vector2 direction = _playerController.InteractionDirection.normalized;
-        Vector2 origin = (Vector2)transform.position + direction * 0.1f;
-        RaycastHit2D[] interactiveItems = Physics2D.CircleCastAll(origin, _radius, direction,
+        Vector2 origin = (Vector2)transform.position + direction * _interactionOffset;
+
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(origin, _radius, direction,
             _interactionDistance, _interectiveItemMask);
 
-        if (!hasHeldItem) 
-        {
-            var heldItem = interactiveItems
-                .FirstOrDefault(item => item.collider.TryGetComponent<BaseHoldItem>(out _));
-            if(heldItem) return heldItem;
-        }
-        return interactiveItems.FirstOrDefault();
+        if (hasHeldItem)
+            return hits
+                .FirstOrDefault(item => item.collider
+                .TryGetComponent<IReceivesHeldItem>(out _));
+
+        // priority on items that can be picked up
+        var heldItem = hits
+            .FirstOrDefault(item => item.collider
+            .TryGetComponent<BaseHoldItem>(out _));
+        return heldItem != default ? heldItem : hits.FirstOrDefault();
     }
 
     public Collider2D DetectToolTarget(float interactionToolDistance, LayerMask interactionMask)
@@ -46,7 +51,7 @@ public class InteractionDetector : MonoBehaviour
         if (_playerController == null) return;
 
         Vector2 direction = _playerController.InteractionDirection.normalized;
-        Vector2 origin = (Vector2)transform.position + direction * 0.1f;
+        Vector2 origin = (Vector2)transform.position + direction * _interactionOffset;
 
         Gizmos.color = Color.white;
 

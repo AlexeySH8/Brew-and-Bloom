@@ -19,7 +19,8 @@ public class InteractionHandler : MonoBehaviour
 
         if (heldItem)
         {
-            if (interactiveItem.collider != null && interactiveItem.collider.TryGetComponent(out IReceivesHeldItem receiver))
+            if (interactiveItem.collider != null && 
+                interactiveItem.collider.TryGetComponent(out IReceivesHeldItem receiver))
             {
                 receiver.Receive(heldItem);
             }
@@ -30,11 +31,13 @@ public class InteractionHandler : MonoBehaviour
                     tool.Use(toolTarget);
             }
         }
-        else if (interactiveItem.collider != null && interactiveItem.collider.TryGetComponent(out BaseItemDispenser dispenser))
+        else if (interactiveItem.collider != null && 
+            interactiveItem.collider.TryGetComponent(out BaseItemDispenser dispenser))
         {
             _itemHolder.PickUp(dispenser.DispenseItem());
         }
-        else if (interactiveItem.rigidbody != null && interactiveItem.rigidbody.TryGetComponent(out BaseHoldItem holdItem))
+        else if (interactiveItem.rigidbody != null && 
+            interactiveItem.rigidbody.TryGetComponent(out BaseHoldItem holdItem))
         {
             _itemHolder.PickUp(interactiveItem.rigidbody.gameObject);
         }

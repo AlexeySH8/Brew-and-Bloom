@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Sunflower
   m_EditorClassIdentifier: 
   <IngredientType>k__BackingField: 2048
-  <Color>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  <Color>k__BackingField: {r: 1, g: 0.31019166, b: 0, a: 1}

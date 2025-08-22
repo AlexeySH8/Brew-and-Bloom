@@ -15,5 +15,8 @@ MonoBehaviour:
   _dishesList:
   - Ingredients:
     - {fileID: 4274280387633462960, guid: c4d3f4126aea2c744be39f301f3ac87f, type: 3}
+    - {fileID: 5514443497916250511, guid: 44e33ca49224a9b41a416836fd79cf04, type: 3}
+    - {fileID: 3069154606877543807, guid: b9576bc26e981c545a691c83595f9638, type: 3}
+    - {fileID: 1528007637184417901, guid: 7fa1266a5ae8b024dba24c6f0b642584, type: 3}
     - {fileID: 19480671847957137, guid: f17e6745d00c4ab45a6e36b9b4d21164, type: 3}
     Dish: {fileID: 183234796291252989, guid: 33535757e89bdd64a83b730858f5ebca, type: 3}
