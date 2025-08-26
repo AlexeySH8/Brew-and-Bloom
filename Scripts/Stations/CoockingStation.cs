@@ -51,7 +51,7 @@ public class CoockingStation : MonoBehaviour, IReceivesHeldItem
 
     private IEnumerator CoockDish(GameObject dish)
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(0);
         Instantiate(dish, transform.position, transform.rotation);
         Clear();
     }
