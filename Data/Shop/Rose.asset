@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64fa8fe80abc6d34da8869f0c5a41649, type: 3}
-  m_Name: Sunflower
+  m_Name: Rose
   m_EditorClassIdentifier: 
-  <Item>k__BackingField: {fileID: 4324623612265046025, guid: cac00311ba1f6cc46a2ae214f8c34e80, type: 3}
-  <Price>k__BackingField: 10
+  <Item>k__BackingField: {fileID: 3378697735348527230, guid: 0a76bed6e23f1f849a123409146bd654, type: 3}
+  <Price>k__BackingField: 20

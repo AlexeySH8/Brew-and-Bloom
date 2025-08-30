@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IReceivesHeldItem
+public interface IReceiveHeldItem
 {
     void Receive(GameObject heldItem);
 }

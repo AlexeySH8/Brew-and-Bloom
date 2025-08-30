@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class BaseItemDispenser : MonoBehaviour
+public class ItemGiver : MonoBehaviour , IGiveHeldItem
 {
     [SerializeField] private GameObject _itemPrefab;
 
-    public GameObject DispenseItem()
+    public GameObject Give()
     {
         return Instantiate(_itemPrefab);
     }

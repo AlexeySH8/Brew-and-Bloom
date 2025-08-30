@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TrashCan : MonoBehaviour, IReceivesHeldItem
+public class TrashCan : MonoBehaviour, IReceiveHeldItem
 {
     public void Receive(GameObject heldItem) => Utilize(heldItem);
 

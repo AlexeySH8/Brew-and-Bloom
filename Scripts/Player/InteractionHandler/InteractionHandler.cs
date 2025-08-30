@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 
 public class InteractionHandler : MonoBehaviour
@@ -17,29 +16,35 @@ public class InteractionHandler : MonoBehaviour
         GameObject heldItem = _itemHolder.GetHeldItem();
         RaycastHit2D interactiveItem = _detector.DetectInterectiveItem(heldItem != null);
 
-        if (heldItem)
+        if (TryUseTool(heldItem)) return;
+
+        if (interactiveItem.collider == null) return;
+
+        if (heldItem && interactiveItem.collider.TryGetComponent(out IReceiveHeldItem receiver))
         {
-            if (interactiveItem.collider != null && 
-                interactiveItem.collider.TryGetComponent(out IReceivesHeldItem receiver))
+            receiver.Receive(heldItem);
+        }
+        else if (interactiveItem.collider.TryGetComponent(out IGiveHeldItem giver))
+        {
+            _itemHolder.PickUp(giver.Give());
+        }
+        else if (interactiveItem.collider.TryGetComponent(out IFreeInteractable interactable))
+        {
+            interactable.Interact();
+        }
+    }
+
+    private bool TryUseTool(GameObject heldItem)
+    {
+        if (heldItem && heldItem.TryGetComponent(out BaseTool tool))
+        {
+            var toolTarget = _detector.DetectToolTarget(tool.InteractionDistance, tool.InteractionMask);
+            if (toolTarget)
             {
-                receiver.Receive(heldItem);
-            }
-            else if (heldItem.TryGetComponent(out BaseTool tool))
-            {
-                var toolTarget = _detector.DetectToolTarget(tool.InteractionDistance, tool.InteractionMask);
-                if (toolTarget)
-                    tool.Use(toolTarget);
+                tool.Use(toolTarget);
+                return true;
             }
         }
-        else if (interactiveItem.collider != null && 
-            interactiveItem.collider.TryGetComponent(out BaseItemDispenser dispenser))
-        {
-            _itemHolder.PickUp(dispenser.DispenseItem());
-        }
-        else if (interactiveItem.rigidbody != null && 
-            interactiveItem.rigidbody.TryGetComponent(out BaseHoldItem holdItem))
-        {
-            _itemHolder.PickUp(interactiveItem.rigidbody.gameObject);
-        }
+        return false;
     }
 }

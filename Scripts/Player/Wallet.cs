@@ -12,14 +12,14 @@ public class Wallet : MonoBehaviour
     public void Add(int amount)
     {
         Balance += amount;
-        OnBalanceChanged?.Invoke(Balance);
+        OnBalanceChanged.Invoke(Balance);
     }
 
     public bool Remove(int amount)
     {
         if (Balance < amount) return false;
         Balance -= amount;
-        OnBalanceChanged?.Invoke(Balance);
+        OnBalanceChanged.Invoke(Balance);
         return true;
     }
 }

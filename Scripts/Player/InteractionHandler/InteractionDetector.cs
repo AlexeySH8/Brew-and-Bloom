@@ -24,10 +24,11 @@ public class InteractionDetector : MonoBehaviour
         RaycastHit2D[] hits = Physics2D.CircleCastAll(origin, _radius, direction,
             _interactionDistance, _interectiveItemMask);
 
+        // priority on items that cannot be picked up
         if (hasHeldItem)
             return hits
-                .FirstOrDefault(item => item.collider
-                .TryGetComponent<IReceivesHeldItem>(out _));
+                .FirstOrDefault(item => !item.collider
+                .TryGetComponent<BaseHoldItem>(out _));
 
         // priority on items that can be picked up
         var heldItem = hits

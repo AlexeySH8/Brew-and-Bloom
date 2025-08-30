@@ -11,7 +11,7 @@ public enum CultivationStage
     CultivatedSoil
 }
 
-public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IReceivesHeldItem
+public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IReceiveHeldItem
 {
     [field: SerializeField] public CultivationStage Stage { get; private set; }
 

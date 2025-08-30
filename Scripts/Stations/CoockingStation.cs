@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CoockingStation : MonoBehaviour, IReceivesHeldItem
+public class CoockingStation : MonoBehaviour, IReceiveHeldItem
 {
     [SerializeField] private int _maxHeldIngredient;
     [SerializeField] private IngredientData[] _unavailableIngredients;

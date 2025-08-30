@@ -9,18 +9,19 @@ public class Shop : MonoBehaviour
     [SerializeField] private GameObject _shopItemPrefab;
 
     [SerializeField] private Vector3 _startPos = new Vector3(-340f, 180f, 0f);
-    [SerializeField] private int _widthCount = 3;
+    [SerializeField] private int _colNumber = 3;
     [SerializeField] private float _widthOffset = 340f;
     [SerializeField] private float _heightOffset = 140f;
 
     private Transform _container;
+
     private float _distance = 1050f;
     private float _stepDistance = 210f;
     private float _time = 0.1f;
 
     private void Awake()
     {
-        _container = transform.Find("Container")?.gameObject.transform;
+        _container = transform.Find("Container").gameObject.transform;
         InitShop();
     }
 
@@ -44,8 +45,8 @@ public class Shop : MonoBehaviour
 
     private Vector3 GetGridPosition(int index)
     {
-        int row = index / _widthCount;
-        int col = index % _widthCount;
+        int col = index % _colNumber;
+        int row = index / _colNumber;
 
         return new Vector3(_startPos.x + (col * _widthOffset),
             _startPos.y - (row * _heightOffset), 0);
