@@ -19,6 +19,11 @@ public class HUDManager : MonoBehaviour
         _playerWallet.OnBalanceChanged += UpdateCoinsAmout;
     }
 
+    private void OnDisable()
+    {
+        _playerWallet.OnBalanceChanged -= UpdateCoinsAmout;
+    }
+
     private void UpdateCoinsAmout(int balance)
     {
         _coinsText.text = $"{balance}";

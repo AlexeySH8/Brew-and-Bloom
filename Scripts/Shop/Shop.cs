@@ -5,6 +5,7 @@ using UnityEngine;
 public class Shop : MonoBehaviour
 {
     [SerializeField] private Wallet _playerWallet;
+    [SerializeField] private ManeShop _seller;
     [SerializeField] private ShopItemData[] Assortment;
     [SerializeField] private GameObject _shopItemPrefab;
 
@@ -14,6 +15,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private float _heightOffset = 140f;
 
     private Transform _container;
+    private List<GameObject> _purchasedItems;
 
     private float _distance = 1050f;
     private float _stepDistance = 210f;
@@ -27,7 +29,8 @@ public class Shop : MonoBehaviour
 
     private void OnEnable()
     {
-        TransitionAnimation(true);
+        _purchasedItems = new List<GameObject>();
+        StartCoroutine(TransitionAnimationCourutine(true));
     }
 
     private void InitShop()
@@ -52,17 +55,18 @@ public class Shop : MonoBehaviour
             _startPos.y - (row * _heightOffset), 0);
     }
 
-    public void TryBuy(ShopItemData item)
+    public void TryBuy(ShopItemData itemData)
     {
-        if (_playerWallet.Remove(item.Price))
+        if (_playerWallet.Remove(itemData.Price))
         {
-            Debug.Log("Item is Bought !");
+            _purchasedItems.Add(itemData.Item);
         }
     }
 
-    public void TransitionAnimation(bool isOpen)
+    public void CloseShop()
     {
-        StartCoroutine(TransitionAnimationCourutine(isOpen));
+        _seller.DeliverItems(_purchasedItems);
+        StartCoroutine(TransitionAnimationCourutine(false));
     }
 
     private IEnumerator TransitionAnimationCourutine(bool isOpen)
