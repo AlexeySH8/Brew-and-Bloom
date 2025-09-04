@@ -7,21 +7,24 @@ public class ManeShop : MonoBehaviour, IFreeInteractable
     [SerializeField] private GameObject _shop;
 
     private Coroutine _delivering;
-    private ManeShopMovement _movement;
+    private ManeMovement _movement;
 
     private void Awake()
     {
-        _movement = GetComponent<ManeShopMovement>();
+        _movement = GetComponent<ManeMovement>();
     }
 
     public void Interact()
     {
-        if (_delivering == null)
-            _shop.SetActive(true);
+        if (_delivering != null) return;
+        _shop.SetActive(true);
     }
 
-    public void DeliverItems(List<GameObject> shoppingList) =>
+    public void DeliverItems(List<GameObject> shoppingList)
+    {
+        if (shoppingList.Count == 0) return;
         _delivering = StartCoroutine(DeliverItemsCourutine(shoppingList));
+    }
 
     private IEnumerator DeliverItemsCourutine(List<GameObject> shoppingList)
     {
@@ -33,7 +36,7 @@ public class ManeShop : MonoBehaviour, IFreeInteractable
             rb.AddForce(Vector2.down * 3, ForceMode2D.Impulse);
             yield return new WaitForSeconds(0.3f);
         }
-        _movement.EndDeliver();
+        _movement.StartMovingAround();
         _delivering = null;
     }
 }

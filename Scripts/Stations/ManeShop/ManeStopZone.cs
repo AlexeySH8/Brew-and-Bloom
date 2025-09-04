@@ -1,14 +1,14 @@
 using System;
 using UnityEngine;
 
-public class StopZone : MonoBehaviour
+public class ManeStopZone : MonoBehaviour
 {
-    private ManeShopMovement _movement;
+    private ManeMovement _movement;
     private bool _canStop = true;
 
     private void Awake()
     {
-        _movement = GetComponentInParent<ManeShopMovement>();
+        _movement = GetComponentInParent<ManeMovement>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

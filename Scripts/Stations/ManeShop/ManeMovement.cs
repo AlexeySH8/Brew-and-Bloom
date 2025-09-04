@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ManeShopMovement : MonoBehaviour
+public class ManeMovement : MonoBehaviour
 {
     [Header("Moving Around")]
     [SerializeField] private float _normalSpeed;
     [SerializeField] private Vector2 _minBounds;
     [SerializeField] private Vector2 _maxBounds;
+    [SerializeField] private float _minTimeNextPoint;
+    [SerializeField] private float _maxTimeNextPoint;
     [Header("Delivery")]
     [SerializeField] private float _deliverySpeed;
     [SerializeField] private float _radius;
@@ -16,11 +18,13 @@ public class ManeShopMovement : MonoBehaviour
     private float _currentSpeed;
     private Coroutine _movingRoutine;
     private Vector2 _targetPos;
-    private StopZone _stopZone;
+    private ManeStopZone _stopZone;
+    private ManeVisual _maneShopVisual;
 
     private void Awake()
     {
-        _stopZone = GetComponentInChildren<StopZone>();
+        _stopZone = GetComponentInChildren<ManeStopZone>();
+        _maneShopVisual = GetComponentInChildren<ManeVisual>();
     }
 
     private void Start()
@@ -32,17 +36,18 @@ public class ManeShopMovement : MonoBehaviour
 
     public void StartMovingAround()
     {
-        if (_movingRoutine == null)
-            _movingRoutine = StartCoroutine(MovingAround());
+        if (_movingRoutine != null) return;
+
+        _stopZone.EnableStopMoving();
+        _movingRoutine = StartCoroutine(MovingAround());
     }
 
     public void StopMoving()
     {
-        if (_movingRoutine != null)
-        {
-            StopCoroutine(_movingRoutine);
-            _movingRoutine = null;
-        }
+        if (_movingRoutine == null) return;
+
+        StopCoroutine(_movingRoutine);
+        _movingRoutine = null;
     }
 
     public IEnumerator StartDeliver()
@@ -52,16 +57,10 @@ public class ManeShopMovement : MonoBehaviour
 
         _currentSpeed = _deliverySpeed;
         _targetPos = GetRandomPickupPoint();
-        yield return Moving();
+        yield return Move();
 
         _targetPos = _deliveryPoint;
-        yield return Moving();       
-    }
-
-    public void EndDeliver()
-    {
-        StartMovingAround();
-        _stopZone.EnableStopMoving();
+        yield return Move();
     }
 
     private IEnumerator MovingAround()
@@ -70,29 +69,26 @@ public class ManeShopMovement : MonoBehaviour
         _targetPos = GetRandomTargetPos();
         while (true)
         {
-            yield return Moving();
-            yield return new WaitForSeconds(1);
+            yield return Move();
+            yield return new WaitForSeconds(
+                Random.Range(_minTimeNextPoint, _minTimeNextPoint));
             _targetPos = GetRandomTargetPos();
         }
     }
 
-    private IEnumerator Moving()
+    private IEnumerator Move()
     {
-        while (!Move())
+        float direction = Mathf.Sign(_targetPos.x - transform.position.x);
+        _maneShopVisual.FlipVisual(direction);
+
+        Vector2 velocity = Vector2.zero;
+        while (Vector2.Distance(transform.position, _targetPos) > 0.01f)
         {
+            transform.position = Vector2.SmoothDamp(
+            transform.position, _targetPos,
+            ref velocity, 0.3f, _currentSpeed);
             yield return null;
         }
-        yield break;
-    }
-
-    private bool Move()
-    {
-        transform.position = Vector2.MoveTowards(transform.position, _targetPos, _currentSpeed * Time.deltaTime);
-
-        if (Vector2.Distance(transform.position, _targetPos) < 0.01f)
-            return true;
-
-        return false;
     }
 
     private Vector2 GetRandomTargetPos()
@@ -104,7 +100,7 @@ public class ManeShopMovement : MonoBehaviour
 
     private Vector2 GetRandomPickupPoint()
     {
-        float angle = Random.Range(0f, 360f) * Mathf.Rad2Deg;
+        float angle = Random.Range(0f, Mathf.PI * 2f);
         Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
         return (Vector2)transform.position + direction * _radius;
     }
