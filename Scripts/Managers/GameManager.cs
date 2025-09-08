@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] Recipes _recipes;
-
-    private void Awake()
+    private void Start()
     {
-        _recipes.InitializeDishesDictionary();
+        GuestsManager.Instance.SpawnGuests();
     }
 }

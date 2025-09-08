@@ -161,3 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b548216050ba16e438d83ef181ddae5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Ingredients>k__BackingField:
+  - {fileID: 19480671847957137, guid: f17e6745d00c4ab45a6e36b9b4d21164, type: 3}
+  - {fileID: 1528007637184417901, guid: 7fa1266a5ae8b024dba24c6f0b642584, type: 3}
+  - {fileID: 4274280387633462960, guid: c4d3f4126aea2c744be39f301f3ac87f, type: 3}
