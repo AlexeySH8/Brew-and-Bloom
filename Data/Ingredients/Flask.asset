@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <IngredientType>k__BackingField: 4
   <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+  <IngredientPrefab>k__BackingField: {fileID: 4856171900400046343, guid: 4ed120bee7a32a54a9d7c85df02b130c, type: 3}
+  <Icon>k__BackingField: {fileID: 1817414060, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}

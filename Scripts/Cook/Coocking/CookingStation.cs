@@ -55,7 +55,7 @@ public class CookingStation : MonoBehaviour, IReceiveHeldItem
     private void AddIngredient(Ingredient ingredient)
     {
         _currentIngredientsMask |= (int)ingredient.Data.IngredientType;
-        _stationVisual.AddIngredient(ingredient.Icon);
+        _stationVisual.AddIngredient(ingredient.Data.Icon);
         _index++;
     }
 

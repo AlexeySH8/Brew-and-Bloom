@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f6ae940293a27745990e259d88cc522, type: 3}
-  m_Name: Recipes
+  m_Script: {fileID: 11500000, guid: 75afbd1f56cb71c419cfa562cd427b4e, type: 3}
+  m_Name: Guest3
   m_EditorClassIdentifier: 
-  _dishList:
-  - {fileID: 11400000, guid: 6a7b2445577136647b713a9ca298ffa3, type: 2}
+  <Name>k__BackingField: 
+  <MinPayment>k__BackingField: 50
+  <MaxPayment>k__BackingField: 100
+  <Visual>k__BackingField: {fileID: 0}
+  <Portrait>k__BackingField: {fileID: 0}

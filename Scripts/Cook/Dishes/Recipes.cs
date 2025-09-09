@@ -1,29 +1,30 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Recipes", menuName = "Farming/Recipes")]
 public class Recipes : ScriptableObject
 {
-    [SerializeField] private List<Dish> _dishList;
+    [SerializeField] private List<DishData> _dishList;
 
-    private static Dictionary<int, (GameObject Dish, Ingredient[])> _recipesList =
-        new Dictionary<int, (GameObject Dish, Ingredient[])>();
+    private static Dictionary<int, DishData> _recipes =
+        new Dictionary<int, DishData>();
 
     public static bool TryGetDish(int ingredientsMask, out GameObject dish)
     {
         dish = null;
-        if (_recipesList.TryGetValue(ingredientsMask, out (GameObject Dish, Ingredient[]) recipe))
+        if (_recipes.TryGetValue(ingredientsMask, out DishData recipe))
         {
-            dish = recipe.Dish;
+            dish = recipe.DishPrefab;
             return true;
         }
         return false;
     }
 
-    public static bool TryGetIngredients(int ingredientsMask, out Ingredient[] ingredients)
+    public static bool TryGetIngredients(int ingredientsMask, out IngredientData[] ingredients)
     {
         ingredients = null;
-        if (_recipesList.TryGetValue(ingredientsMask, out (GameObject, Ingredient[] Ingredients) recipe))
+        if (_recipes.TryGetValue(ingredientsMask, out DishData recipe))
         {
             ingredients = recipe.Ingredients;
             return true;
@@ -31,14 +32,18 @@ public class Recipes : ScriptableObject
         return false;
     }
 
-    public static GameObject GetRandomDish() => _recipesList[Random.Range(0, _recipesList.Count)].Dish;
+    public static DishData GetRandomDish()
+    {
+        var dishes = _recipes.Values.ToArray();
+        return dishes[Random.Range(0, dishes.Length)];
+    }
 
     private void OnEnable()
     {
-        _recipesList.Clear();
+        _recipes.Clear();
         foreach (var dish in _dishList)
         {
-            _recipesList.Add(dish.IngredientsMask, (dish.DishObject, dish.Ingredients));
+            _recipes.Add(dish.IngredientsMask, dish);
         }
     }
 

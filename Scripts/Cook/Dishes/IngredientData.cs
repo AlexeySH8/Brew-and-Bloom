@@ -27,4 +27,6 @@ public class IngredientData : ScriptableObject
 {
     [field: SerializeField] public IngredientType IngredientType { get; private set; }
     [field: SerializeField] public Color Color { get; private set; }
+    [field: SerializeField] public GameObject IngredientPrefab { get; private set; }
+    [field: SerializeField] public Sprite Icon { get; private set; }
 }
