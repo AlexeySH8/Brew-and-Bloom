@@ -38,7 +38,7 @@ public class Recipes : ScriptableObject
         return dishes[Random.Range(0, dishes.Length)];
     }
 
-    private void OnEnable()
+    public void Init()
     {
         _recipes.Clear();
         foreach (var dish in _dishList)

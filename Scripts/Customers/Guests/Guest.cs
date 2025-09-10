@@ -19,6 +19,6 @@ public class Guest
         IsServed = false;
         DishData dish = Recipes.GetRandomDish();
         int payment = Random.Range(_data.MinPayment, _data.MaxPayment);
-        CurrentOrder = new Order(dish, payment);
+        CurrentOrder = new Order(this, dish, payment);
     }
 }

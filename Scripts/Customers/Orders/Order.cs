@@ -1,18 +1,23 @@
-public class Order 
-{
-    public DishData Dish { get; private set; }
-    public int Payment { get; private set; }
-    public bool IsOrderPlaced { get; private set; }
+using UnityEngine;
 
-    public Order(DishData dishData, int payment)
+[System.Serializable]
+public class Order
+{
+    [field: SerializeField] public Guest Guest { get; private set; }
+    [field: SerializeField] public DishData Dish { get; private set; }
+    [field: SerializeField] public int Payment { get; private set; }
+    [field: SerializeField] public bool IsCompleted { get; private set; }
+
+    public Order(Guest guest, DishData dishData, int payment)
     {
+        Guest = guest;
         Dish = dishData;
         Payment = payment;
-        IsOrderPlaced = false;
+        IsCompleted = false;
     }
 
-    public void MarkAsPlaced()
+    public void MarkAsCompleted()
     {
-        IsOrderPlaced = true;
+        IsCompleted = true;
     }
 }

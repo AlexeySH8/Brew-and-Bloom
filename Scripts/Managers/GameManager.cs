@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    [SerializeField] private Recipes _recipes;
+
     public event Action OnGameStart;
 
     private void Awake()
@@ -17,7 +19,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        _recipes.Init();
     }
 
     private void StartGame() => OnGameStart?.Invoke();
