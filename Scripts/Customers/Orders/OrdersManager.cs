@@ -6,6 +6,7 @@ public class OrdersManager : MonoBehaviour
 {
     [SerializeField] private List<Order> _completedOrders = new List<Order>();
     [SerializeField] private List<Order> _orders = new List<Order>();
+
     private OrderVisual _orderVisual;
 
     private void Awake()
