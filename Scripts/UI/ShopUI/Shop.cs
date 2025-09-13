@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
+    public bool IsOpen { get; private set; }
+
     [SerializeField] private Wallet _playerWallet;
     [SerializeField] private ManeShop _seller;
     [SerializeField] private ShopItemData[] Assortment;
@@ -23,14 +25,9 @@ public class Shop : MonoBehaviour
 
     private void Awake()
     {
+        IsOpen = false;
         _container = transform.Find("Container").gameObject.transform;
         InitShop();
-    }
-
-    private void OnEnable()
-    {
-        _purchasedItems = new List<GameObject>();
-        StartCoroutine(TransitionAnimationCourutine(true));
     }
 
     private void InitShop()
@@ -63,6 +60,12 @@ public class Shop : MonoBehaviour
         }
     }
 
+    public void OpenShop()
+    {
+        _purchasedItems = new List<GameObject>();
+        StartCoroutine(TransitionAnimationCourutine(true));
+    }
+
     public void CloseShop()
     {
         _seller.DeliverItems(_purchasedItems);
@@ -71,6 +74,7 @@ public class Shop : MonoBehaviour
 
     private IEnumerator TransitionAnimationCourutine(bool isOpen)
     {
+        IsOpen = isOpen;
         float currentDistance = 0;
         float step = isOpen ? _stepDistance : _stepDistance * -1f;
         while (Mathf.Abs(currentDistance) != _distance)
@@ -79,6 +83,5 @@ public class Shop : MonoBehaviour
             currentDistance += step;
             yield return new WaitForSeconds(_time);
         }
-        gameObject.SetActive(isOpen);
     }
 }

@@ -1,26 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class OrdersManager : MonoBehaviour
 {
-    [SerializeField] private List<Order> _completedOrders = new List<Order>();
-    [SerializeField] private List<Order> _orders = new List<Order>();
+    [SerializeField] private List<DishData> _completedDishes = new List<DishData>();
+    private List<Order> _activeOrders = new List<Order>();
 
     private OrderVisual _orderVisual;
 
     private void Awake()
     {
         _orderVisual = GetComponent<OrderVisual>();
-    }
-
-    private void Update()
-    {
-        foreach (Order order in _orders)
-        {
-            if (order.IsCompleted && !_completedOrders.Contains(order))
-                OrderCompleted(order);
-        }
     }
 
     private void Start()
@@ -40,13 +32,25 @@ public class OrdersManager : MonoBehaviour
 
     private void AcceptOrders(Guest guest)
     {
-        _orders.Add(guest.CurrentOrder);
+        _activeOrders.Add(guest.CurrentOrder);
         _orderVisual.AddOrder(guest.CurrentOrder);
     }
 
-    private void OrderCompleted(Order order)
+    public void AddPlayerDish(DishData dishData)
     {
-        _completedOrders.Add(order);
-        _orderVisual.RemoveOrder(order);
+        _completedDishes.Add(dishData);
+        if (IsDishInOrders(dishData, out Order order))
+        {
+            order.MarkAsCompleted();
+            _orderVisual.RemoveOrder(order);
+            _activeOrders.Remove(order);
+        }
+    }
+
+    private bool IsDishInOrders(DishData dishData, out Order order)
+    {
+        order = _activeOrders.FirstOrDefault(
+            activeOrder => activeOrder.Dish.IngredientsMask == dishData.IngredientsMask);
+        return order != null;
     }
 }

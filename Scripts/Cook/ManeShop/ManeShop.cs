@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ManeShop : MonoBehaviour, IFreeInteractable
 {
-    [SerializeField] private GameObject _shop;
+    [SerializeField] private Shop _shop;
 
     private Coroutine _delivering;
     private ManeMovement _movement;
@@ -16,8 +16,8 @@ public class ManeShop : MonoBehaviour, IFreeInteractable
 
     public void Interact()
     {
-        if (_delivering != null) return;
-        _shop.SetActive(true);
+        if (_delivering != null || _shop.IsOpen) return;
+        _shop.OpenShop();
     }
 
     public void DeliverItems(List<GameObject> shoppingList)

@@ -3,7 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public class Order
 {
-    [field: SerializeField] public Guest Guest { get; private set; }
+    public Guest Guest { get; private set; }
     [field: SerializeField] public DishData Dish { get; private set; }
     [field: SerializeField] public int Payment { get; private set; }
     [field: SerializeField] public bool IsCompleted { get; private set; }

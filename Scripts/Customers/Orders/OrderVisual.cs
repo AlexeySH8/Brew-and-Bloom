@@ -24,9 +24,10 @@ public class OrderVisual : MonoBehaviour
             _availableOrderTemplates.Remove(orderTemplate);
             _activeOrders.Add(order.Guest, orderTemplate);
             orderTemplate.DisplayOrder(order.Dish);
-            return;
         }
-        _pendingOrders.Enqueue(order);
+        else
+            _pendingOrders.Enqueue(order);
+        _ordersUI.TextCount(_activeOrders.Count + _pendingOrders.Count);
     }
 
     public void RemoveOrder(Order order)
@@ -45,5 +46,6 @@ public class OrderVisual : MonoBehaviour
             orderTemplate.DisplayOrder(pendingOrder.Dish);
             _activeOrders.Add(pendingOrder.Guest, orderTemplate);
         }
+        _ordersUI.TextCount(_activeOrders.Count + _pendingOrders.Count);
     }
 }

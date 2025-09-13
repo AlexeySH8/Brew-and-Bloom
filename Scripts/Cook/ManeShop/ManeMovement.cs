@@ -11,6 +11,7 @@ public class ManeMovement : MonoBehaviour
     [SerializeField] private float _minTimeNextPoint;
     [SerializeField] private float _maxTimeNextPoint;
     [Header("Delivery")]
+    [SerializeField] private Shop _shop;
     [SerializeField] private float _deliverySpeed;
     [SerializeField] private float _radius;
     [SerializeField] private Vector2 _deliveryPoint;
