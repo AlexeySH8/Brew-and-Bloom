@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private Transform _target;
     [SerializeField] private float _xBoundary;
     [SerializeField] private float _yBoundary;
     [SerializeField] private float _smoothTime;
 
+    private Transform _target;
     private Vector3 _initialPos;
     private Vector3 _velocity;
     private bool isObserved = true;
@@ -15,6 +15,11 @@ public class CameraManager : MonoBehaviour
     private void Awake()
     {
         _initialPos = transform.position;
+    }
+
+    private void Start()
+    {
+        _target = GameObject.FindWithTag("Player").gameObject.transform;
     }
 
     private void LateUpdate()

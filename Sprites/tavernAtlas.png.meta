@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ad1aa0c3b510fd44ba35595cb49ef579
+guid: 9ff6c7149a64fd24f8551e618776f34b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -149,337 +149,316 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tree_0
+      name: tavernAtlas_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 320
-        height: 320
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 394
+        y: 930
+        width: 144
+        height: 135
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77d0908388efa4147afdc5c8799e7952
-      internalID: 1024639383
+      spriteID: 6464a5a242e27f04cb1d150dfb9e4e2e
+      internalID: -1230018247
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tree_1
+      name: tavernAtlas_3
       rect:
         serializedVersion: 2
-        x: 320
+        x: 572
         y: 0
-        width: 320
-        height: 320
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 1512
+        height: 1123
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63453a06caa53684a89bac80f532a72c
-      internalID: -440561985
+      spriteID: 6b5665238450e9543adbf2c61e965d9f
+      internalID: -2024991528
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tree_2
+      name: tavernAtlas_4
       rect:
         serializedVersion: 2
-        x: 640
-        y: 0
-        width: 320
-        height: 320
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 107
+        y: 829
+        width: 148
+        height: 152
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d4aa401abf89fa4a8fd9d1ab149c44b
-      internalID: -1470173914
+      spriteID: 01c95e05f4d173740ac420995da7dee2
+      internalID: -1068949310
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tree_3
+      name: tavernAtlas_6
       rect:
         serializedVersion: 2
-        x: 960
-        y: 0
-        width: 320
-        height: 320
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 407
+        y: 807
+        width: 133
+        height: 105
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6d4ed78d3f4f59c468dd1d243a63f86f
-      internalID: -1602602720
+      spriteID: 60251e7c770856446af5cda0510d54ca
+      internalID: -2051682702
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tree_4
+      name: tavernAtlas_8
       rect:
         serializedVersion: 2
-        x: 1280
-        y: 0
-        width: 320
-        height: 320
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 109
+        y: 651
+        width: 150
+        height: 140
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9102a8820c37a4541a9cce1cdf112a98
-      internalID: 435077149
+      spriteID: 17e61a3e2348fca44b7c595cd56d6235
+      internalID: -247230378
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tree_5
+      name: tavernAtlas_9
       rect:
         serializedVersion: 2
-        x: 1600
-        y: 0
-        width: 320
-        height: 320
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 388
+        y: 653
+        width: 153
+        height: 102
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c5a82f923440444fa6ae65047fb1c2d
-      internalID: 167796230
+      spriteID: 9378b49080f6c7244ae2b337b63e99eb
+      internalID: 1960945698
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tree_6
+      name: tavernAtlas_10
       rect:
         serializedVersion: 2
-        x: 1920
-        y: 0
-        width: 320
-        height: 320
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 276
+        y: 600
+        width: 50
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11759eaa8dc8c1845a528711011ac0a6
-      internalID: 438578820
+      spriteID: 6e48c68b1e74eb84cb7dbaa4eebd396a
+      internalID: 1883727965
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tree_7
+      name: tavernAtlas_11
       rect:
         serializedVersion: 2
-        x: 2240
-        y: 0
-        width: 320
-        height: 320
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 389
+        y: 447
+        width: 153
+        height: 166
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 395aac01ee0336d48bd3794f001478a0
-      internalID: 1074515417
+      spriteID: 0d4d0d1b1a17fc349850fb3c78c4b0a9
+      internalID: -1748064669
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tree_8
+      name: tavernAtlas_12
       rect:
         serializedVersion: 2
-        x: 2560
-        y: 0
-        width: 320
-        height: 320
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 37
+        y: 371
+        width: 289
+        height: 215
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58c899cd21dfcb849b9508e217aa3013
-      internalID: 1458927047
+      spriteID: 00ea178cf2936f243853755cb64f41b3
+      internalID: 628698763
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tree_9
+      name: tavernAtlas_13
       rect:
         serializedVersion: 2
-        x: 2880
-        y: 0
-        width: 320
-        height: 320
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 388
+        y: 240
+        width: 153
+        height: 173
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6c8f86fe0bae78945b14a08c2bf82868
-      internalID: 1816037573
+      spriteID: 1dcd615865a19aa4fb38755f59a7843d
+      internalID: 1531920293
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tree_10
+      name: tavernAtlas_14
       rect:
         serializedVersion: 2
-        x: 3200
-        y: 0
-        width: 320
-        height: 320
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 33
+        y: 40
+        width: 72
+        height: 279
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b8925d1e6d2749b4d9b03eff5e272aa9
-      internalID: 1124317277
+      spriteID: 99a19a280d6103a44a5a45679d5b27bd
+      internalID: -755423128
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tree_11
+      name: tavernAtlas_15
       rect:
         serializedVersion: 2
-        x: 3520
-        y: 0
-        width: 320
-        height: 320
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 200
+        y: 312
+        width: 40
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b4c6ec25753d9544a4f319890d25883
-      internalID: 1503687503
+      spriteID: 8dd34d31b53a3cd41ade4042dbcc8cb8
+      internalID: 1805835155
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tree_12
+      name: tavernAtlas_16
       rect:
         serializedVersion: 2
-        x: 3840
-        y: 0
-        width: 320
-        height: 320
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 168
+        y: 22
+        width: 90
+        height: 252
+      alignment: 9
+      pivot: {x: 0.5637336, y: 0.083778545}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b355512169c2714c9b20754274c8456
-      internalID: -1958386319
+      spriteID: b8a2ae0b568fbda46b5181a0b358b20d
+      internalID: -439125633
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tree_13
+      name: tavernAtlas_17
       rect:
         serializedVersion: 2
-        x: 4160
-        y: 0
-        width: 320
-        height: 320
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 374
+        y: 10
+        width: 169
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f905d3cc4e510549ba56d16196c0fcb
-      internalID: -1183818945
+      spriteID: f8fd5f1eb1ca9d04297d6d4236aad284
+      internalID: 1271138049
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tree_14
+      name: tavernAtlas_0
       rect:
         serializedVersion: 2
-        x: 4480
-        y: 0
-        width: 320
-        height: 320
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 107
+        y: 1019
+        width: 148
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d36897436f6984458c64e3398dfd26e
-      internalID: 1143985920
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tree_15
-      rect:
-        serializedVersion: 2
-        x: 4800
-        y: 0
-        width: 320
-        height: 320
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c5c1d191fb5d8ef42b5d46478c6d208d
-      internalID: -2120592311
+      spriteID: d5eea2c9106bc8f468c10b337d7933c9
+      internalID: 1416958993
       vertices: []
       indices: 
       edges: []
@@ -495,22 +474,24 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Tree_0: 1024639383
-      Tree_1: -440561985
-      Tree_10: 1124317277
-      Tree_11: 1503687503
-      Tree_12: -1958386319
-      Tree_13: -1183818945
-      Tree_14: 1143985920
-      Tree_15: -2120592311
-      Tree_2: -1470173914
-      Tree_3: -1602602720
-      Tree_4: 435077149
-      Tree_5: 167796230
-      Tree_6: 438578820
-      Tree_7: 1074515417
-      Tree_8: 1458927047
-      Tree_9: 1816037573
+      tavernAtlas_0: 1416958993
+      tavernAtlas_1: 646343874
+      tavernAtlas_10: 1883727965
+      tavernAtlas_11: -1748064669
+      tavernAtlas_12: 628698763
+      tavernAtlas_13: 1531920293
+      tavernAtlas_14: -755423128
+      tavernAtlas_15: 1805835155
+      tavernAtlas_16: -439125633
+      tavernAtlas_17: 1271138049
+      tavernAtlas_2: -1230018247
+      tavernAtlas_3: -2024991528
+      tavernAtlas_4: -1068949310
+      tavernAtlas_5: -2008301054
+      tavernAtlas_6: -2051682702
+      tavernAtlas_7: -1578228441
+      tavernAtlas_8: -247230378
+      tavernAtlas_9: 1960945698
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
