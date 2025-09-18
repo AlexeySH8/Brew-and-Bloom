@@ -13,8 +13,8 @@ public class GuestsManager : MonoBehaviour
     [SerializeField] private float _minTimeNextGuest = 1f;
     [SerializeField] private float _maxTimeNextGuest = 3f;
 
-    private List<Guest> _allGuests = new List<Guest>();
-    private List<Guest> _guestForDay = new List<Guest>();
+    private List<Guest> _allGuests;
+    private List<Guest> _guestForDay;
 
     private void Awake()
     {
@@ -30,11 +30,16 @@ public class GuestsManager : MonoBehaviour
     private void Start()
     {
         //SubscribeToEvents();
-        StartCoroutine(CheckOrders());
+        StartCoroutine(InviteGuestsForDayRoutine());
     }
 
-    private IEnumerator CheckOrders()
+    public IReadOnlyList<Guest> GuestsForDay => _guestForDay;
+
+    public bool HasGuestForDay => _guestForDay != null && _guestForDay.Count > 0;
+
+    private IEnumerator InviteGuestsForDayRoutine()
     {
+        _guestForDay = new List<Guest>();
         yield return new WaitForSeconds(0.1f);
         StartCoroutine(InviteGuestsForDay());
     }
@@ -68,7 +73,7 @@ public class GuestsManager : MonoBehaviour
             Guest guest = temp[i];
             guest.MakeOrder();
             _guestForDay.Add(guest);
-            OnGuestArrived.Invoke(guest);
+            OnGuestArrived?.Invoke(guest);
             yield return new WaitForSeconds(UnityEngine.Random.Range(
                 _minTimeNextGuest, _maxTimeNextGuest));
         }
@@ -76,9 +81,13 @@ public class GuestsManager : MonoBehaviour
 
     private void LoadGuests()
     {
-        foreach (GuestData guestData in _allGuestsData)
+        _allGuests = new List<Guest>(); // then it will load from saves
+        if (_allGuests == null || _allGuests.Count == 0)
         {
-            _allGuests.Add(new Guest(guestData));
+            foreach (GuestData guestData in _allGuestsData)
+            {
+                _allGuests.Add(new Guest(guestData));
+            }
         }
     }
 }
