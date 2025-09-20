@@ -6,6 +6,7 @@ public class Shop : MonoBehaviour
 {
     public bool IsOpen { get; private set; }
 
+    //[SerializeField] private Wallet _playerWallet;
     [SerializeField] private Wallet _playerWallet;
     [SerializeField] private ManeShop _seller;
     [SerializeField] private ShopItemData[] Assortment;
@@ -28,6 +29,12 @@ public class Shop : MonoBehaviour
         IsOpen = false;
         _container = transform.Find("Container").gameObject.transform;
         InitShop();
+    }
+
+    private void Start()
+    {
+        GameObject player = GameObject.FindWithTag("Player");
+        _playerWallet = player.GetComponent<Wallet>();
     }
 
     private void InitShop()

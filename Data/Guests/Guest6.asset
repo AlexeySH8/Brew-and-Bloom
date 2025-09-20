@@ -15,5 +15,5 @@ MonoBehaviour:
   <Name>k__BackingField: 
   <MinPayment>k__BackingField: 50
   <MaxPayment>k__BackingField: 100
-  <Visual>k__BackingField: {fileID: 0}
+  <GuestPrefab>k__BackingField: {fileID: 8942452282436301040, guid: cfdf8187373683144af0019c063232a7, type: 3}
   <Portrait>k__BackingField: {fileID: 0}
