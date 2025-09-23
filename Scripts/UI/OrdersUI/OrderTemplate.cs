@@ -27,7 +27,7 @@ public class OrderTemplate : MonoBehaviour
         {
             IngredientData ingredientData = dishData.Ingredients[i];
             _ingredientsTemplate[i].sprite = ingredientData.Icon;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.08f);
         }
         _dishTemplate.sprite = dishData.Icon;
     }

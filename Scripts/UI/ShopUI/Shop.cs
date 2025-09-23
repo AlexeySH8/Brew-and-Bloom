@@ -6,8 +6,6 @@ public class Shop : MonoBehaviour
 {
     public bool IsOpen { get; private set; }
 
-    //[SerializeField] private Wallet _playerWallet;
-    [SerializeField] private Wallet _playerWallet;
     [SerializeField] private ManeShop _seller;
     [SerializeField] private ShopItemData[] Assortment;
     [SerializeField] private GameObject _shopItemPrefab;
@@ -17,17 +15,16 @@ public class Shop : MonoBehaviour
     [SerializeField] private float _widthOffset = 340f;
     [SerializeField] private float _heightOffset = 140f;
 
+    private Wallet _playerWallet;
     private Transform _container;
     private List<GameObject> _purchasedItems;
-
-    private float _distance = 1050f;
-    private float _stepDistance = 210f;
-    private float _time = 0.1f;
+    private SlideAnimation _slideAnimation;
 
     private void Awake()
     {
         IsOpen = false;
         _container = transform.Find("Container").gameObject.transform;
+        _slideAnimation = GetComponent<SlideAnimation>();
         InitShop();
     }
 
@@ -69,26 +66,15 @@ public class Shop : MonoBehaviour
 
     public void OpenShop()
     {
+        IsOpen = true;
         _purchasedItems = new List<GameObject>();
-        StartCoroutine(TransitionAnimationCourutine(true));
+        _slideAnimation.Transition(IsOpen);
     }
 
     public void CloseShop()
     {
+        IsOpen = false;
         _seller.DeliverItems(_purchasedItems);
-        StartCoroutine(TransitionAnimationCourutine(false));
-    }
-
-    private IEnumerator TransitionAnimationCourutine(bool isOpen)
-    {
-        IsOpen = isOpen;
-        float currentDistance = 0;
-        float step = isOpen ? _stepDistance : _stepDistance * -1f;
-        while (Mathf.Abs(currentDistance) != _distance)
-        {
-            transform.Translate(new Vector2(0, step));
-            currentDistance += step;
-            yield return new WaitForSeconds(_time);
-        }
+        _slideAnimation.Transition(IsOpen);
     }
 }

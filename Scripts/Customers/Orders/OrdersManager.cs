@@ -6,14 +6,8 @@ using UnityEngine;
 public class OrdersManager : MonoBehaviour
 {
     [SerializeField] private List<DishData> _completedDishes = new List<DishData>();
+    [SerializeField] private OrderVisual _orderVisual;
     private List<Order> _activeOrders = new List<Order>();
-
-    private OrderVisual _orderVisual;
-
-    private void Awake()
-    {
-        _orderVisual = GetComponent<OrderVisual>();
-    }
 
     private void Start()
     {

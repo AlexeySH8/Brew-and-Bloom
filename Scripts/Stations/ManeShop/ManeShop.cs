@@ -16,6 +16,7 @@ public class ManeShop : MonoBehaviour, IFreeInteractable
 
     public void Interact()
     {
+        Debug.Log(_shop.IsOpen);
         if (_delivering != null || _shop.IsOpen) return;
         _shop.OpenShop();
     }

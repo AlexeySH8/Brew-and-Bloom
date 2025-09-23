@@ -1,19 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class OrderVisual : MonoBehaviour
 {
-    [SerializeField] private OrdersUI _ordersUI;
+    public List<OrderTemplate> OrderTemplates { get; private set; }
+
+    [SerializeField] private TextMeshProUGUI _ordersCountText;
 
     private Dictionary<Guest, OrderTemplate> _activeOrders = new Dictionary<Guest, OrderTemplate>();
     private Queue<Order> _pendingOrders = new Queue<Order>();
     private List<OrderTemplate> _availableOrderTemplates;
 
-    private void Start()
+    private void Awake()
     {
-        _availableOrderTemplates = new List<OrderTemplate>(_ordersUI.OrderTemplates);
+        OrderTemplates = FindObjectsOfType<OrderTemplate>().ToList();
+        _availableOrderTemplates = new List<OrderTemplate>(OrderTemplates);
     }
 
     public void AddOrder(Order order)
@@ -27,7 +31,7 @@ public class OrderVisual : MonoBehaviour
         }
         else
             _pendingOrders.Enqueue(order);
-        _ordersUI.TextCount(_activeOrders.Count + _pendingOrders.Count);
+        UpdateOrderCountText();
     }
 
     public void RemoveOrder(Order order)
@@ -46,6 +50,12 @@ public class OrderVisual : MonoBehaviour
             orderTemplate.DisplayOrder(pendingOrder.Dish);
             _activeOrders.Add(pendingOrder.Guest, orderTemplate);
         }
-        _ordersUI.TextCount(_activeOrders.Count + _pendingOrders.Count);
+        UpdateOrderCountText();
+    }
+
+    public void UpdateOrderCountText()
+    {
+        int currentCount = _activeOrders.Count + _pendingOrders.Count;
+        _ordersCountText.text = "Orders:" + currentCount.ToString();
     }
 }

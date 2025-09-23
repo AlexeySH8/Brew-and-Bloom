@@ -14,3 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dishList:
   - {fileID: 11400000, guid: 6a7b2445577136647b713a9ca298ffa3, type: 2}
+  - {fileID: 11400000, guid: b943ee7ab28c28141bd5efc016e3d8c7, type: 2}
+  - {fileID: 11400000, guid: 840fe7f4bd033cd4da696513419b9c45, type: 2}
+  - {fileID: 11400000, guid: 99bb70fc837c1524ab9ebdd22cb8e577, type: 2}
+  - {fileID: 11400000, guid: cb7c587a3ae24b2409f6e70580f14e17, type: 2}
+  - {fileID: 11400000, guid: 4bc0acfda57103d4b9403562b948ee58, type: 2}

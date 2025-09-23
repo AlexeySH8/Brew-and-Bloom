@@ -24,6 +24,7 @@ public class GuestPlacer : MonoBehaviour
         // Place(TestGuestsForDay());
     }
 
+    // DELEATE LATER
     private void Start()
     {
         _freeTables = new List<Table>(_tables);

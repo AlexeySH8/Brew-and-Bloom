@@ -723,9 +723,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1573035215}
-        m_TargetAssemblyTypeName: OrdersUI, Assembly-CSharp
-        m_MethodName: TransitionAnimation
+      - m_Target: {fileID: 1573035216}
+        m_TargetAssemblyTypeName: SlideAnimation, Assembly-CSharp
+        m_MethodName: Transition
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -734,6 +734,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 52668793}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &52668795
 MonoBehaviour:
@@ -9032,9 +9044,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1573035215}
-        m_TargetAssemblyTypeName: OrdersUI, Assembly-CSharp
-        m_MethodName: TransitionAnimation
+      - m_Target: {fileID: 1573035216}
+        m_TargetAssemblyTypeName: SlideAnimation, Assembly-CSharp
+        m_MethodName: Transition
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9043,6 +9055,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 52668793}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &662801647
 MonoBehaviour:
@@ -13564,6 +13588,7 @@ GameObject:
   m_Component:
   - component: {fileID: 963950198}
   - component: {fileID: 963950199}
+  - component: {fileID: 963950200}
   m_Layer: 5
   m_Name: UI_Shop
   m_TagString: Untagged
@@ -13606,7 +13631,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c78fe4892440e9148bab58f42712981d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerWallet: {fileID: 0}
   _seller: {fileID: 607495734}
   Assortment:
   - {fileID: 11400000, guid: 9bad370957e883a44896b9caf939d648, type: 2}
@@ -13629,6 +13653,22 @@ MonoBehaviour:
   _colNumber: 3
   _widthOffset: 340
   _heightOffset: 140
+--- !u!114 &963950200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963950197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 791351771b54ac7478339990f76f379c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startPosition: {x: 130, y: -1035}
+  _endPosition: {x: 130, y: 15}
+  _time: 0.5
+  _stepTime: 0.1
 --- !u!4 &965863485 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7735623843903714051, guid: fee1271f5e092c44aafc5adbe5c9dcad, type: 3}
@@ -21209,6 +21249,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1573035214}
   - component: {fileID: 1573035215}
+  - component: {fileID: 1573035216}
   m_Layer: 5
   m_Name: OrdersUI
   m_TagString: Untagged
@@ -21255,9 +21296,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ordersCountText: {fileID: 1495838934}
   _ordersButton: {fileID: 52668794}
-  _stepDistance: 100
+  _stepDistance: 125
   _distance: 500
-  _time: 0.1
+  _time: 0.07
+--- !u!114 &1573035216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573035213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 791351771b54ac7478339990f76f379c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startPosition: {x: -1200, y: 0}
+  _endPosition: {x: -700, y: 0}
+  _time: 0.3
+  _stepTime: 0.07
 --- !u!4 &1581555318 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7735623843903714051, guid: fee1271f5e092c44aafc5adbe5c9dcad, type: 3}
