@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8160162655177885868}
   m_Layer: 0
-  m_Name: OrderContainer
+  m_Name: DishGuestContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

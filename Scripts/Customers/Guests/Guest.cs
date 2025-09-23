@@ -20,6 +20,11 @@ public class Guest
         CurrentOrder = new Order(this, dish, payment);
     }
 
+    public override string ToString()
+    {
+        return Data.Name;
+    }
+
     public void StartDialogue()
     {
         Debug.Log("Dialogue Started");

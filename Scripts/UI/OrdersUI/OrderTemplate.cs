@@ -1,42 +1,35 @@
-using System.Collections;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class OrderTemplate : MonoBehaviour
 {
-    [SerializeField] private Image[] _ingredientsTemplate;
-    [SerializeField] private Image _dishTemplate;
-    [SerializeField] private Sprite _defaultSprite;
+    [SerializeField] private Image GuestIcon;
+    [SerializeField] private Image DishIcon;
+    [SerializeField] private GameObject _completeStatus;
+    [SerializeField] private GameObject _incompleteStatus;
+    [SerializeField] private TextMeshProUGUI _price;
 
-    public void DisplayOrder(DishData dishData)
+    public void DisplayOrder(Order order)
     {
-        ClearVisual();
-        StopAllCoroutines();
-        StartCoroutine(DisplayOrderRoutine(dishData));
+        GuestIcon.sprite = order.Guest.Data.Portrait;
+        DishIcon.sprite = order.Dish.Icon;
+        _price.text = order.Payment.ToString();
     }
 
-    private IEnumerator DisplayOrderRoutine(DishData dishData)
+    public void SetStatus(bool isOrderCompleted)
     {
-        if (dishData.Ingredients.Length > _ingredientsTemplate.Length)
+        if (isOrderCompleted)
         {
-            Debug.LogError($"There are too many ingredients in the {dishData.name}");
-            yield break;
+            _completeStatus.SetActive(true);
+            _incompleteStatus.SetActive(false);
+        }
+        else
+        {
+            _completeStatus.SetActive(false);
+            _incompleteStatus.SetActive(true);
         }
 
-        for (int i = 0; i < dishData.Ingredients.Length; i++)
-        {
-            IngredientData ingredientData = dishData.Ingredients[i];
-            _ingredientsTemplate[i].sprite = ingredientData.Icon;
-            yield return new WaitForSeconds(0.08f);
-        }
-        _dishTemplate.sprite = dishData.Icon;
-    }
-
-    public void ClearVisual()
-    {
-        for (int i = 0; i < _ingredientsTemplate.Length; i++)
-            _ingredientsTemplate[i].sprite = _defaultSprite;
-
-        _dishTemplate.sprite = _defaultSprite;
     }
 }

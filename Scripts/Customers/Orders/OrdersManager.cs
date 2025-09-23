@@ -6,7 +6,7 @@ using UnityEngine;
 public class OrdersManager : MonoBehaviour
 {
     [SerializeField] private List<DishData> _completedDishes = new List<DishData>();
-    [SerializeField] private OrderVisual _orderVisual;
+    [SerializeField] private DishPanel _orderVisual;
     private List<Order> _activeOrders = new List<Order>();
 
     private void Start()

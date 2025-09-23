@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Guest6
   m_EditorClassIdentifier: 
   <Name>k__BackingField: 
-  <MinPayment>k__BackingField: 50
-  <MaxPayment>k__BackingField: 100
+  <MinPayment>k__BackingField: 1
+  <MaxPayment>k__BackingField: 17
   <GuestPrefab>k__BackingField: {fileID: 8942452282436301040, guid: cfdf8187373683144af0019c063232a7, type: 3}
-  <Portrait>k__BackingField: {fileID: 0}
+  <Portrait>k__BackingField: {fileID: 21300000, guid: 8e0dd3a032ae1f14493e5d787531e96c, type: 3}

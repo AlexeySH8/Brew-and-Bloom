@@ -28,7 +28,9 @@ public class GuestPlacer : MonoBehaviour
     private void Start()
     {
         _freeTables = new List<Table>(_tables);
-        Place(TestGuestsForDay());
+        var testList = TestGuestsForDay();
+        Place(testList);
+        OrdersPanel.Instance.AddOrders(testList);
     }
 
     private void Update()
@@ -44,7 +46,9 @@ public class GuestPlacer : MonoBehaviour
         foreach (var table in _tables)
             table.Clear();
         _freeTables = new List<Table>(_tables);
-        Place(TestGuestsForDay());
+        var testList = TestGuestsForDay();
+        OrdersPanel.Instance.AddOrders(testList);
+        Place(testList);
     }
 
     private void Place(IReadOnlyList<Guest> guestsForDay)
