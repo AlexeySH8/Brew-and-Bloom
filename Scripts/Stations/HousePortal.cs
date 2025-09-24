@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class HousePortal : MonoBehaviour, IReceiveHeldItem, IFreeInteractable
 {
-    [SerializeField] private OrdersManager _ordersManager;
-
     public void Interact()
     {
         LoadTavernScene();
@@ -16,7 +14,7 @@ public class HousePortal : MonoBehaviour, IReceiveHeldItem, IFreeInteractable
     {
         if (heldItem.TryGetComponent(out Dish dish))
         {
-            _ordersManager.AddPlayerDish(dish.Data);
+            OrdersManager.Instance.AddPlayerDish(dish.Data);
             dish.GetComponent<BaseHoldItem>().Discard();
         }
         else

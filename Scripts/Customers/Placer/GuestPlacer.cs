@@ -8,52 +8,24 @@ public class GuestPlacer : MonoBehaviour
     private List<Table> _freeTables;
     private List<GameObject> _guests;
 
-    [Header("Test")]
-    [SerializeField] private List<GuestData> _allGuestsData;
-
-    private void Awake()
-    {
-        // _freeTables = new List<Table>(_tables);
-
-        //if (GuestsManager.Instance != null &&
-        //    GuestsManager.Instance.HasGuestForDay)
-        //    Place(GuestsManager.Instance.GuestsForDay);
-        //else
-        //    Debug.Log("There are no guests.");
-
-        // Place(TestGuestsForDay());
-    }
-
-    // DELEATE LATER
     private void Start()
     {
-        _freeTables = new List<Table>(_tables);
-        var testList = TestGuestsForDay();
-        Place(testList);
-        OrdersPanel.Instance.AddOrders(testList);
+        SubscribeToEvents();
     }
 
-    private void Update()
+    private void SubscribeToEvents()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-            ReRespawn();
+        GuestsManager.Instance.OnGuestsArrived += Place;
     }
 
-    private void ReRespawn()
+    private void OnDisable()
     {
-        foreach (var guest in _guests)
-            Destroy(guest);
-        foreach (var table in _tables)
-            table.Clear();
-        _freeTables = new List<Table>(_tables);
-        var testList = TestGuestsForDay();
-        OrdersPanel.Instance.AddOrders(testList);
-        Place(testList);
+        GuestsManager.Instance.OnGuestsArrived -= Place;
     }
 
-    private void Place(IReadOnlyList<Guest> guestsForDay)
+    public void Place(IReadOnlyList<Guest> guestsForDay)
     {
-        _guests = new List<GameObject>();
+        Clear();
         foreach (Guest guest in guestsForDay)
         {
             GameObject instance = Instantiate(guest.Data.GuestPrefab,
@@ -70,6 +42,19 @@ public class GuestPlacer : MonoBehaviour
         }
     }
 
+    private void Clear()
+    {
+        if (_guests != null)
+            foreach (var guest in _guests)
+                Destroy(guest);
+        if (_tables != null)
+            foreach (var table in _tables)
+                table.Clear();
+
+        _freeTables = new List<Table>(_tables);
+        _guests = new List<GameObject>();
+    }
+
     private void SetTablePosition(GameObject guest)
     {
         if (_freeTables.Count == 0)
@@ -81,43 +66,5 @@ public class GuestPlacer : MonoBehaviour
         table.SitDown(guest);
         if (!table.IsFree())
             _freeTables.Remove(table);
-    }
-
-    private List<Guest> TestGuestsForDay()
-    {
-        Debug.Log("TEST GUESTS appeared");
-
-        var allGuests = SpawnTestGuests();
-        var testGuestsForDay = new List<Guest>();
-        int count = UnityEngine.Random.Range(3, allGuests.Count);
-        List<Guest> temp = new List<Guest>(allGuests);
-
-        // mixes up the guests
-        for (int i = 0; i < temp.Count; i++)
-        {
-            int r = UnityEngine.Random.Range(0, allGuests.Count);
-            (temp[i], temp[r]) = (temp[r], temp[i]);
-        }
-
-        for (int i = 0; i < count; i++)
-        {
-            Guest guest = temp[i];
-            guest.MakeOrder();
-            testGuestsForDay.Add(guest);
-        }
-        return testGuestsForDay;
-    }
-
-    private List<Guest> SpawnTestGuests()
-    {
-        var testGuests = new List<Guest>(); // then it will load from saves
-        if (testGuests == null || testGuests.Count == 0)
-        {
-            foreach (GuestData guestData in _allGuestsData)
-            {
-                testGuests.Add(new Guest(guestData));
-            }
-        }
-        return testGuests;
     }
 }

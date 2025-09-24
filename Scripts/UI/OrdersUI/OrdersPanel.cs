@@ -8,20 +8,31 @@ public class OrdersPanel : MonoBehaviour
     [SerializeField] private GameObject _orderTemplatePref;
 
     private Dictionary<Guest, GameObject> _activeOrders;
-
-    public static OrdersPanel Instance { get; private set; }
+    private SlideAnimation _slideAnimation;
+    private bool _isOpen;
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
+        _isOpen = false;
+        _slideAnimation = GetComponent<SlideAnimation>();
     }
 
-    public void AddOrders(List<Guest> guests)
+    private void Start()
+    {
+        SubscribeToEvents();
+    }
+
+    private void SubscribeToEvents()
+    {
+        GuestsManager.Instance.OnGuestsArrived += AddOrders;
+    }
+
+    private void OnDisable()
+    {
+        GuestsManager.Instance.OnGuestsArrived -= AddOrders;
+    }
+
+    public void AddOrders(IReadOnlyList<Guest> guests)
     {
         Clear();
         foreach (Guest guest in guests)
@@ -33,14 +44,6 @@ public class OrdersPanel : MonoBehaviour
                 .GetComponent<OrderTemplate>()
                 .DisplayOrder(order);
         }
-    }
-
-    private void Clear()
-    {
-        if (_activeOrders != null && _activeOrders.Count > 0)
-            foreach (GameObject order in _activeOrders.Values)
-                Destroy(order);
-        _activeOrders = new Dictionary<Guest, GameObject>();
     }
 
     public void UpdateStatusOrder(bool isOrderCompleted, Guest guest)
@@ -56,5 +59,28 @@ public class OrdersPanel : MonoBehaviour
         }
 
         orderTemplate.SetStatus(isOrderCompleted);
+    }
+
+    public void Open()
+    {
+        if (_isOpen) return;
+        _isOpen = true;
+        _slideAnimation.Transition(_isOpen);
+    }
+
+    public void Close() { if (_isOpen) { StartCoroutine(CloseRoutine()); } }
+
+    private IEnumerator CloseRoutine()
+    {
+        yield return _slideAnimation.TransitionRoutine(!_isOpen);
+        _isOpen = false;
+    }
+
+    private void Clear()
+    {
+        if (_activeOrders != null && _activeOrders.Count > 0)
+            foreach (GameObject order in _activeOrders.Values)
+                Destroy(order);
+        _activeOrders = new Dictionary<Guest, GameObject>();
     }
 }

@@ -2,16 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class GuestsManager : MonoBehaviour
 {
     public static GuestsManager Instance;
-    public event Action<Guest> OnGuestArrived;
+
+    public event Action<IReadOnlyList<Guest>> OnGuestsArrived;
 
     [SerializeField] private List<GuestData> _allGuestsData;
-    [SerializeField] private int _minGuestCount = 3;
-    [SerializeField] private float _minTimeNextGuest = 1f;
-    [SerializeField] private float _maxTimeNextGuest = 3f;
+    [SerializeField] private int _minGuestCount;
 
     private List<Guest> _allGuests;
     private List<Guest> _guestForDay;
@@ -30,18 +30,12 @@ public class GuestsManager : MonoBehaviour
     private void Start()
     {
         //SubscribeToEvents();
-        StartCoroutine(InviteGuestsForDayRoutine());
     }
 
-    public IReadOnlyList<Guest> GuestsForDay => _guestForDay;
-
-    public bool HasGuestForDay => _guestForDay != null && _guestForDay.Count > 0;
-
-    private IEnumerator InviteGuestsForDayRoutine()
+    private void Update()
     {
-        _guestForDay = new List<Guest>();
-        yield return new WaitForSeconds(0.1f);
-        StartCoroutine(InviteGuestsForDay());
+        if (Input.GetKeyDown(KeyCode.R))
+            CreateGuestsForDay();
     }
 
     //private void SubscribeToEvents()
@@ -54,9 +48,9 @@ public class GuestsManager : MonoBehaviour
     //    GameManager.Instance.OnGameStart -= PrepareGuestsForDay;
     //}
 
-    private IEnumerator InviteGuestsForDay()
+    private void CreateGuestsForDay()
     {
-        _guestForDay.Clear();
+        _guestForDay = new List<Guest>();
 
         int count = UnityEngine.Random.Range(_minGuestCount, _allGuests.Count);
         List<Guest> temp = new List<Guest>(_allGuests);
@@ -73,10 +67,9 @@ public class GuestsManager : MonoBehaviour
             Guest guest = temp[i];
             guest.MakeOrder();
             _guestForDay.Add(guest);
-            OnGuestArrived?.Invoke(guest);
-            yield return new WaitForSeconds(UnityEngine.Random.Range(
-                _minTimeNextGuest, _maxTimeNextGuest));
         }
+
+        OnGuestsArrived?.Invoke(_guestForDay);
     }
 
     private void LoadGuests()

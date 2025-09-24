@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2365614479354839211}
   - component: {fileID: 682493871043853806}
   - component: {fileID: 5398654680731401274}
-  - component: {fileID: 7056764334812423256}
   m_Layer: 6
   m_Name: Portal
   m_TagString: Untagged
@@ -220,16 +219,3 @@ PolygonCollider2D:
       - {x: 0.82, y: 0.7}
       - {x: 0.79999995, y: 0.71999997}
   m_UseDelaunayMesh: 0
---- !u!114 &7056764334812423256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2865133330096155575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 910515624eb902d429429ac822c756b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ordersManager: {fileID: 0}

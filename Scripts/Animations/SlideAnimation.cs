@@ -14,7 +14,7 @@ public class SlideAnimation : MonoBehaviour
 
     public void Transition(bool isOpen) => _transition = StartCoroutine(TransitionRoutine(isOpen));
 
-    private IEnumerator TransitionRoutine(bool isOpen)
+    public IEnumerator TransitionRoutine(bool isOpen)
     {
         if (_stepTime > _time)
         {
