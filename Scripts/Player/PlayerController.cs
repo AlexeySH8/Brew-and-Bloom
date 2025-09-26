@@ -5,11 +5,17 @@ public class PlayerController : MonoBehaviour
 {
     public Vector2 InteractionDirection { get; private set; }
     public float FaceDirection { get; private set; }
+
+    [SerializeField] private bool _canMove;
+    [SerializeField] private bool _canDrop;
+    [SerializeField] private bool _canInteract;
+
     private IPlayerInput _input;
     private PlayerMovement _movement;
     private PlayerVisual _visual;
     private InteractionHandler _interactiveHandler;
     private ItemHolder _itemHolder;
+    private GuestDialogue _dialoguePartner;
     private float _horizontalInput;
     private float _verticalInput;
     private float _xInteractionDirection;
@@ -24,22 +30,34 @@ public class PlayerController : MonoBehaviour
         _itemHolder = GetComponent<ItemHolder>();
         FaceDirection = 1;
         _xInteractionDirection = 1;
-        _yInteractionDirection = 0;       
+        _yInteractionDirection = 0;
+        _canMove = true;
+        _canDrop = true;
+        _canInteract = true;
     }
 
     private void Update()
     {
-        _horizontalInput = _input.GetHorizontal();
-        _verticalInput = _input.GetVertical();
+        if (_canMove)
+        {
+            _horizontalInput = _input.GetHorizontal();
+            _verticalInput = _input.GetVertical();
+        }
+
         UpdateDirections();
 
         _visual.UpdateVisual(_horizontalInput, _verticalInput);
         _visual.FlipVisual();
 
-        if (_input.IsInteractPressed())
-            _interactiveHandler.Interact(FaceDirection);
+        if (_canInteract && _input.IsInteractPressed())
+        {
+            if (_dialoguePartner != null)
+                _dialoguePartner.NextLineDialogue();
+            else
+                _interactiveHandler.Interact(FaceDirection);
+        }
 
-        if (_input.IsDropPressed())
+        if (_canDrop && _input.IsDropPressed())
             _itemHolder.Drop(InteractionDirection.normalized);
     }
 
@@ -64,5 +82,19 @@ public class PlayerController : MonoBehaviour
             _yInteractionDirection = 0;
 
         InteractionDirection = new Vector2(_xInteractionDirection, _yInteractionDirection);
+    }
+
+    public void StartDialogue(GuestDialogue guestDialogue)
+    {
+        _dialoguePartner = guestDialogue;
+        _canMove = false;
+        _canDrop = false;
+    }
+
+    public void EndDialogue()
+    {
+        _dialoguePartner = null;
+        _canMove = true;
+        _canDrop = true;
     }
 }

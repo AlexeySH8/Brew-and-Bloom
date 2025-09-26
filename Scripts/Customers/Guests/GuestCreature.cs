@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GuestCreature : MonoBehaviour, IReceiveHeldItem
+public class GuestCreature : MonoBehaviour, IReceiveHeldItem, IFreeInteractable
 {
     private Guest _guest;
     private GameObject _orderDisplay;
@@ -26,6 +26,8 @@ public class GuestCreature : MonoBehaviour, IReceiveHeldItem
         ShowOrderDisplay();
     }
 
+    public void Interact() => _guest.StartDialogue();
+
     public void Receive(GameObject heldItem)
     {
         if (_guest == null)
@@ -44,6 +46,11 @@ public class GuestCreature : MonoBehaviour, IReceiveHeldItem
 
             _guest.StartDialogue();
         }
+    }
+
+    private void OnDestroy()
+    {
+        _guest.EndDialogue();
     }
 
     private void ShowOrderDisplay()

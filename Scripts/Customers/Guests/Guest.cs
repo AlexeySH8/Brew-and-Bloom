@@ -7,9 +7,13 @@ public class Guest
     public Order CurrentOrder { get; private set; }
     public bool IsServed { get; private set; }
 
+    private GuestDialogue _guestDialogue;
+
     public Guest(GuestData data)
     {
         Data = data;
+        _guestDialogue = new GuestDialogue(data.DialogueData, 
+            Data.Portrait, Data.Name);
     }
 
     public void MakeOrder()
@@ -20,13 +24,12 @@ public class Guest
         CurrentOrder = new Order(this, dish, payment);
     }
 
+    public void StartDialogue() => _guestDialogue.StartDialogue();
+
+    public void EndDialogue() => _guestDialogue.SetNextDialoguePart();
+
     public override string ToString()
     {
         return Data.Name;
-    }
-
-    public void StartDialogue()
-    {
-        Debug.Log("Dialogue Started");
     }
 }
