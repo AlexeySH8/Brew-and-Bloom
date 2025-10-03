@@ -50,7 +50,7 @@ public class GuestCreature : MonoBehaviour, IReceiveHeldItem, IFreeInteractable
 
     private void OnDestroy()
     {
-        _guest.EndDialogue();
+        _guest.SetNextDialoguePart();
     }
 
     private void ShowOrderDisplay()

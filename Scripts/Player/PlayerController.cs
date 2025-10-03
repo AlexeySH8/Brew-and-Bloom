@@ -63,7 +63,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _movement.Move(_horizontalInput, _verticalInput);
+        if (_canMove)
+            _movement.Move(_horizontalInput, _verticalInput);
     }
 
     private void UpdateDirections()
@@ -89,6 +90,9 @@ public class PlayerController : MonoBehaviour
         _dialoguePartner = guestDialogue;
         _canMove = false;
         _canDrop = false;
+
+        _horizontalInput = 0;
+        _verticalInput = 0;
     }
 
     public void EndDialogue()

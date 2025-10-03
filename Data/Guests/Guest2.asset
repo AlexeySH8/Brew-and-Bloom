@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75afbd1f56cb71c419cfa562cd427b4e, type: 3}
   m_Name: Guest2
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: 
+  <Name>k__BackingField: Guest2
   <MinPayment>k__BackingField: 1
   <MaxPayment>k__BackingField: 17
   <GuestPrefab>k__BackingField: {fileID: 6022133775915593664, guid: 2d0df9aa71c3e984088c6b39ffeb4362, type: 3}
   <Portrait>k__BackingField: {fileID: 21300000, guid: 61150749b4309114b96053579f71f501, type: 3}
+  <DefaultDialogueData>k__BackingField: {fileID: 0}
+  <TypingSound>k__BackingField: {fileID: 8300000, guid: 80dd4713915b6d74ea3720aa548e8378, type: 3}
+  <DialoguesData>k__BackingField: []

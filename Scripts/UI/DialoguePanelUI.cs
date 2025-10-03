@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Localization;
 using UnityEngine.UI;
 
 public class DialoguePanelUI : MonoBehaviour
@@ -13,9 +12,19 @@ public class DialoguePanelUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _guestName;
     [SerializeField] private TextMeshProUGUI _dialogueText;
 
+
+    private char[] _sentenceDelimiters = new char[]
+{
+    '.',
+    '!',
+    '?',
+    ';',
+    ':',
+    '…'
+};
     private Coroutine _typing;
 
-    public void StarDialogue(Sprite guestPortrait, string guestName)
+    public void StartDialogue(Sprite guestPortrait, string guestName)
     {
         _guestPortret.sprite = guestPortrait;
         _guestName.text = guestName;
@@ -25,22 +34,33 @@ public class DialoguePanelUI : MonoBehaviour
         _dialogueBox.GetComponent<SlideAnimation>().Transition(true);
     }
 
-    public void TypeLine(string line, float typingSpeed)
+    public void TypeLine(string line, float typingSpeed, AudioClip typingSound)
     {
         if (_typing != null)
         {
             StopCoroutine(_typing);
             _typing = null;
         }
-        _typing = StartCoroutine(TypeLineRoutine(line, typingSpeed));
+        _typing = StartCoroutine(TypeLineRoutine(line, typingSpeed, typingSound));
     }
 
-    public IEnumerator TypeLineRoutine(string line, float typingSpeed)
+    public IEnumerator TypeLineRoutine(string line, float typingSpeed, AudioClip typingSound)
     {
         _dialogueText.SetText("");
+        int counter = 0;
+
         foreach (char letters in line)
         {
             _dialogueText.text += letters;
+            if (counter % 2 == 0)
+                SFX.Instance.PlayAudioClip(typingSound);
+
+            if (_sentenceDelimiters.Contains(letters))
+            {
+                yield return new WaitForSeconds(Random.Range(0.3f, 0.5f));
+            }
+
+            counter++;
             yield return new WaitForSeconds(typingSpeed);
         }
         _typing = null;
@@ -51,4 +71,6 @@ public class DialoguePanelUI : MonoBehaviour
         _portretBox.GetComponent<SlideAnimation>().Transition(false);
         _dialogueBox.GetComponent<SlideAnimation>().Transition(false);
     }
+
+    public bool IsTyping() => _typing != null;
 }

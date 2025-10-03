@@ -9,39 +9,46 @@ public class GuestDialogue
     private int _dialoguePartIndex;
     private int _lineIndex;
     private DialogueData[] _dialoguesData;
+    private DialogueData _defaultDialogueData;
     private DialogueData _dialogueDataPart;
     private PlayerController _playerController;
     private DialoguePanelUI _dialoguePanelUI;
     private Sprite _guestPortret;
     private string _guestName;
+    private AudioClip _guestTypingSound;
     private LocalizedString _currentLine;
     private bool _isStoryFinished;
     private static readonly string DEFAULT_DIALOGUE_PATH = "Assets/Data/Dialogue/DefaultDialogue.asset";
 
-    public GuestDialogue(DialogueData[] dialoguesData, Sprite guestPortret, string guestName)
+    public GuestDialogue(GuestData guestData)
     {
-        _dialoguesData = dialoguesData;
-        _guestPortret = guestPortret;
-        _guestName = guestName;
+        _dialoguesData = guestData.DialoguesData;
+        _guestPortret = guestData.Portrait;
+        _guestName = guestData.Name;
+        _guestTypingSound = guestData.TypingSound;
         _dialoguePartIndex = 0;
         _isStoryFinished = false;
+
+        if (guestData.DefaultDialogueData == null)
+        {
+            _defaultDialogueData = Addressables
+                .LoadAssetAsync<DialogueData>(DEFAULT_DIALOGUE_PATH)
+                .WaitForCompletion();
+        }
+        else
+            _defaultDialogueData = guestData.DefaultDialogueData;
+
     }
 
     public void StartDialogue()
     {
         #region Exception Check
-        if (_dialoguesData.Length == 0)
-        {
-            Debug.LogError("The dialog array is empty");
-            return;
-        }
-
         if (_playerController == null)
         {
             _playerController = GameObject.FindAnyObjectByType<PlayerController>();
             if (_playerController == null)
             {
-                Debug.LogError("DialoguePanel not found");
+                Debug.LogError("Player not found");
                 return;
             }
         }
@@ -59,18 +66,20 @@ public class GuestDialogue
 
         _lineIndex = 0;
         SetDialoguePart();
-        _dialoguePanelUI.StarDialogue(_guestPortret, _guestName);
+        _dialoguePanelUI.StartDialogue(_guestPortret, _guestName);
         _playerController.StartDialogue(this);
         NextLineDialogue();
     }
 
     public void NextLineDialogue()
     {
+        if (_dialoguePanelUI.IsTyping()) return;
+
+        if (_currentLine != null)
+            _currentLine.StringChanged -= OnStringChanged;
+
         if (!_isStoryFinished && _lineIndex < _dialogueDataPart.DialogueLines.Length)
         {
-            if (_currentLine != null)
-                _currentLine.StringChanged -= OnStringChanged;
-
             _currentLine = _dialogueDataPart.DialogueLines[_lineIndex];
 
             _currentLine.StringChanged += OnStringChanged; //Call TypeLine
@@ -78,9 +87,6 @@ public class GuestDialogue
         }
         else if (_isStoryFinished && _lineIndex == 0)
         {
-            if (_currentLine != null)
-                _currentLine.StringChanged -= OnStringChanged;
-
             // Select random lines from Default 
             _currentLine = _dialogueDataPart.DialogueLines[Random.Range(
                     0, _dialogueDataPart.DialogueLines.Length)];
@@ -97,12 +103,11 @@ public class GuestDialogue
     {
         if (_isStoryFinished) return;
 
-        if (_dialoguePartIndex == _dialoguesData.Length)
+        if (_dialoguesData.Length == 0 ||
+            _dialoguePartIndex >= _dialoguesData.Length)
         {
             _isStoryFinished = true;
-            _dialogueDataPart = Addressables
-                .LoadAssetAsync<DialogueData>(DEFAULT_DIALOGUE_PATH)
-                .WaitForCompletion();
+            _dialogueDataPart = _defaultDialogueData;
             return;
         }
         _dialogueDataPart = _dialoguesData[_dialoguePartIndex];
@@ -110,14 +115,19 @@ public class GuestDialogue
 
     private void EndDialogue()
     {
+        if (_currentLine != null)
+            _currentLine.StringChanged -= OnStringChanged;
+
         _playerController.EndDialogue();
         _dialoguePanelUI.EndDialogue();
     }
 
     public void SetNextDialoguePart() => _dialoguePartIndex++;
 
+    // TypeLine
     private void OnStringChanged(string newValue)
     {
-        _dialoguePanelUI.TypeLine(_currentLine.GetLocalizedString(), _dialogueDataPart.TypingSpeed);
+        _dialoguePanelUI.TypeLine(_currentLine.GetLocalizedString(),
+            _dialogueDataPart.TypingSpeed, _guestTypingSound);
     }
 }

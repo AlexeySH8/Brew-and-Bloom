@@ -12,8 +12,7 @@ public class Guest
     public Guest(GuestData data)
     {
         Data = data;
-        _guestDialogue = new GuestDialogue(data.DialogueData, 
-            Data.Portrait, Data.Name);
+        _guestDialogue = new GuestDialogue(Data);
     }
 
     public void MakeOrder()
@@ -26,7 +25,7 @@ public class Guest
 
     public void StartDialogue() => _guestDialogue.StartDialogue();
 
-    public void EndDialogue() => _guestDialogue.SetNextDialoguePart();
+    public void SetNextDialoguePart() => _guestDialogue.SetNextDialoguePart();
 
     public override string ToString()
     {
