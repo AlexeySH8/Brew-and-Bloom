@@ -36,16 +36,14 @@ public class GuestCreature : MonoBehaviour, IReceiveHeldItem, IFreeInteractable
             return;
         }
 
-        if (heldItem.TryGetComponent(out Dish dish))
+        if (!_guest.IsServed && heldItem.TryGetComponent(out Dish dish))
         {
             dish.GetComponent<BaseHoldItem>().Discard();
             HideOrderDisplay();
 
-            if (dish.Data.IngredientsMask == _guest.CurrentOrder.Dish.IngredientsMask)
-                _guest.CurrentOrder.MarkAsCompleted();
-
-            _guest.StartDialogue();
+            _guest.CompleteOrder(dish.Data.IngredientsMask);
         }
+        _guest.StartDialogue();
     }
 
     private void OnDestroy()

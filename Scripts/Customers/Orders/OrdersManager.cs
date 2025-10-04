@@ -67,7 +67,7 @@ public class OrdersManager : MonoBehaviour
         _completedDishes.Add(dishData);
         if (IsDishInOrders(dishData, out Order order))
         {
-            order.MarkAsCompleted();
+            order.IsCompleted = true;
             OnOrderCompleted?.Invoke(order);
             _activeOrders.Remove(order);
         }

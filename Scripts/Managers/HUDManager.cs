@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class HUDManager : MonoBehaviour
 {
-    // [SerializeField] private Wallet _playerWallet;
-    [SerializeField] private Wallet _playerWallet;
     [SerializeField] private TextMeshProUGUI _coinsText;
+    private Wallet _playerWallet;
 
     private void Start()
     {
         GameObject player = GameObject.FindWithTag("Player");
-        _playerWallet = player.GetComponent<Wallet>();
+        _playerWallet = player.GetComponent<PlayerController>().Wallet;
         SubscribeToEvents();
         UpdateCoinsAmout(_playerWallet.Balance);
     }

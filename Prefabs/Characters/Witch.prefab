@@ -78,7 +78,6 @@ GameObject:
   - component: {fileID: 1957882677522323774}
   - component: {fileID: 2612100941852599841}
   - component: {fileID: 5847831708017810119}
-  - component: {fileID: 3067346442647616331}
   m_Layer: 0
   m_Name: Witch
   m_TagString: Player
@@ -176,6 +175,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b41b43e2d30ab534980987abc740e694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerData: {fileID: 11400000, guid: 8b8a57c62826c594aaccf894e561d9c2, type: 2}
+  _canMove: 0
+  _canDrop: 0
+  _canInteract: 0
 --- !u!114 &6996514465472350033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,19 +238,6 @@ MonoBehaviour:
   _interactionDistance: 0.5
   _radius: 0.4
   _interactionOffset: 0.2
---- !u!114 &3067346442647616331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6115500994057415989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3608fb8b61c6234b966f33888b52391, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Balance>k__BackingField: 300
 --- !u!1 &6991232686041946899
 GameObject:
   m_ObjectHideFlags: 0

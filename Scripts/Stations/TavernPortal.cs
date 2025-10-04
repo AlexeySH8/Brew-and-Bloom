@@ -6,12 +6,12 @@ using static UnityEngine.Mesh;
 
 public class TavernPortal : MonoBehaviour, IFreeInteractable
 {
-    private OrdersPanel _ordersPanel;
+    private OrdersPanelUI _ordersPanel;
     [SerializeField] GameObject _testPrefab;
 
     private void Awake()
     {
-        _ordersPanel = FindAnyObjectByType<OrdersPanel>();
+        _ordersPanel = FindAnyObjectByType<OrdersPanelUI>();
     }
 
     private void Start()
@@ -22,6 +22,12 @@ public class TavernPortal : MonoBehaviour, IFreeInteractable
     public void Interact()
     {
         _ordersPanel.Open();
+    }
+
+    public void EndDay()
+    {
+        DayManager.Instance.EndDay();
+        SceneManager.LoadScene("House");
     }
 
     private IEnumerator GiveCompletedDishesRoutine()

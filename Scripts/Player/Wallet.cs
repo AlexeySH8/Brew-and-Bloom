@@ -1,25 +1,57 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class Wallet : MonoBehaviour
+public class Wallet
 {
-    [field: SerializeField] public int Balance { get; private set; }
-
     public event Action<int> OnBalanceChanged;
+    public event Action<int> OnDailyEarningChanged;
 
-    public void Add(int amount)
+    private PlayerData _playerData;
+
+    public int Balance => _playerData.Balance;
+
+    public int DailyEarning => _playerData.DailyEarning;
+
+    public Wallet(PlayerData playerData)
     {
-        Balance += amount;
-        OnBalanceChanged.Invoke(Balance);
+        _playerData = playerData;
+        SubscribeToEvents();
+    }
+
+    private void SubscribeToEvents()
+    {
+        DayManager.Instance.OnStartDay += StartNewDay;
+    }
+
+    public void AddToBalance(int amount)
+    {
+        if (amount <= 0) return;
+        _playerData.Balance += amount;
+        OnBalanceChanged?.Invoke(_playerData.Balance);
+    }
+
+    public void AddToDailyEarning(int amount)
+    {
+        if (amount <= 0) return;
+        _playerData.DailyEarning += amount;
+        OnDailyEarningChanged?.Invoke(_playerData.DailyEarning);
+    }
+
+    private void StartNewDay()
+    {
+        AddToBalance(_playerData.DailyEarning);
+        _playerData.DailyEarning = 0;
     }
 
     public bool Remove(int amount)
     {
-        if (Balance < amount) return false;
-        Balance -= amount;
-        OnBalanceChanged.Invoke(Balance);
+        if (_playerData.Balance < amount) return false;
+        _playerData.Balance -= amount;
+        OnBalanceChanged?.Invoke(_playerData.Balance);
         return true;
+    }
+
+    public void Dispose()
+    {
+        DayManager.Instance.OnStartDay -= StartNewDay;
     }
 }

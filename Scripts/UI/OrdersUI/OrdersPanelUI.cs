@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class OrdersPanel : MonoBehaviour
+public class OrdersPanelUI : MonoBehaviour
 {
     [SerializeField] private Transform _content;
     [SerializeField] private GameObject _orderTemplatePref;
+    [SerializeField] private TextMeshProUGUI _moneyEarnedText;
 
     private Dictionary<Guest, GameObject> _activeOrders;
     private SlideAnimation _slideAnimation;
     private bool _isOpen;
+    private Wallet _playerWallet;
 
     private void Awake()
     {
@@ -19,17 +22,20 @@ public class OrdersPanel : MonoBehaviour
 
     private void Start()
     {
+        _playerWallet = FindAnyObjectByType<PlayerController>().Wallet;
         SubscribeToEvents();
     }
 
     private void SubscribeToEvents()
     {
         GuestsManager.Instance.OnGuestsArrived += AddOrders;
+        _playerWallet.OnDailyEarningChanged += UpdateMoneyEarnedText;
     }
 
     private void OnDisable()
     {
         GuestsManager.Instance.OnGuestsArrived -= AddOrders;
+        _playerWallet.OnDailyEarningChanged -= UpdateMoneyEarnedText;
     }
 
     public void AddOrders(IReadOnlyList<Guest> guests)
@@ -37,6 +43,7 @@ public class OrdersPanel : MonoBehaviour
         Clear();
         foreach (Guest guest in guests)
         {
+            guest.OnOrderCompleted += UpdateStatusOrder;
             Order order = guest.CurrentOrder;
             GameObject orderTemplate = Instantiate(_orderTemplatePref, _content);
             _activeOrders.Add(order.Guest, orderTemplate);
@@ -46,7 +53,7 @@ public class OrdersPanel : MonoBehaviour
         }
     }
 
-    public void UpdateStatusOrder(bool isOrderCompleted, Guest guest)
+    public void UpdateStatusOrder(Guest guest, bool isOrderCompleted)
     {
         OrderTemplate orderTemplate =
             _activeOrders[guest]
@@ -59,6 +66,11 @@ public class OrdersPanel : MonoBehaviour
         }
 
         orderTemplate.SetStatus(isOrderCompleted);
+    }
+
+    public void UpdateMoneyEarnedText(int currentAmount)
+    {
+        _moneyEarnedText.text = currentAmount.ToString();
     }
 
     public void Open()
@@ -79,8 +91,14 @@ public class OrdersPanel : MonoBehaviour
     private void Clear()
     {
         if (_activeOrders != null && _activeOrders.Count > 0)
-            foreach (GameObject order in _activeOrders.Values)
-                Destroy(order);
+        {
+            foreach (Guest guest in _activeOrders.Keys)
+            {
+                var orderPref = _activeOrders[guest];
+                guest.OnOrderCompleted -= UpdateStatusOrder;
+                Destroy(orderPref);
+            }
+        }
         _activeOrders = new Dictionary<Guest, GameObject>();
     }
 }

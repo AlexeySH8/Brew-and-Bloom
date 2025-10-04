@@ -31,7 +31,7 @@ public class Shop : MonoBehaviour
     private void Start()
     {
         GameObject player = GameObject.FindWithTag("Player");
-        _playerWallet = player.GetComponent<Wallet>();
+        _playerWallet = player.GetComponent<PlayerController>().Wallet;
     }
 
     private void InitShop()

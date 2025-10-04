@@ -5,7 +5,9 @@ public class PlayerController : MonoBehaviour
 {
     public Vector2 InteractionDirection { get; private set; }
     public float FaceDirection { get; private set; }
+    public Wallet Wallet { get; private set; }
 
+    [SerializeField] private PlayerData _playerData;
     [SerializeField] private bool _canMove;
     [SerializeField] private bool _canDrop;
     [SerializeField] private bool _canInteract;
@@ -28,12 +30,18 @@ public class PlayerController : MonoBehaviour
         _visual = GetComponentInChildren<PlayerVisual>();
         _interactiveHandler = GetComponent<InteractionHandler>();
         _itemHolder = GetComponent<ItemHolder>();
+       // Wallet = new Wallet(_playerData);
         FaceDirection = 1;
         _xInteractionDirection = 1;
         _yInteractionDirection = 0;
         _canMove = true;
         _canDrop = true;
         _canInteract = true;
+    }
+
+    private void Start()
+    {
+        Wallet = new Wallet(_playerData);
     }
 
     private void Update()
@@ -100,5 +108,10 @@ public class PlayerController : MonoBehaviour
         _dialoguePartner = null;
         _canMove = true;
         _canDrop = true;
+    }
+
+    private void OnDestroy()
+    {
+        Wallet?.Dispose();
     }
 }
