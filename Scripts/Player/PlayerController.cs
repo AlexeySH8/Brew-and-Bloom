@@ -1,19 +1,18 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using Zenject;
 
 public class PlayerController : MonoBehaviour
 {
     public Vector2 InteractionDirection { get; private set; }
     public float FaceDirection { get; private set; }
-    public Wallet Wallet { get; private set; }
 
-    [SerializeField] private PlayerData _playerData;
     [SerializeField] private bool _canMove;
     [SerializeField] private bool _canDrop;
     [SerializeField] private bool _canInteract;
 
     private IPlayerInput _input;
     private PlayerMovement _movement;
+    private PlayerWallet _wallet;
     private PlayerVisual _visual;
     private InteractionHandler _interactiveHandler;
     private ItemHolder _itemHolder;
@@ -23,25 +22,25 @@ public class PlayerController : MonoBehaviour
     private float _xInteractionDirection;
     private float _yInteractionDirection;
 
+    [Inject]
+    public void Construct(IPlayerInput input , PlayerWallet playerWallet)
+    {
+        _input = input;
+        _wallet = playerWallet;
+    }
+
     private void Awake()
     {
-        _input = new PCInput();
         _movement = GetComponent<PlayerMovement>();
         _visual = GetComponentInChildren<PlayerVisual>();
         _interactiveHandler = GetComponent<InteractionHandler>();
         _itemHolder = GetComponent<ItemHolder>();
-       // Wallet = new Wallet(_playerData);
         FaceDirection = 1;
         _xInteractionDirection = 1;
         _yInteractionDirection = 0;
         _canMove = true;
         _canDrop = true;
         _canInteract = true;
-    }
-
-    private void Start()
-    {
-        Wallet = new Wallet(_playerData);
     }
 
     private void Update()
@@ -112,6 +111,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnDestroy()
     {
-        Wallet?.Dispose();
+        _wallet.Dispose();
     }
 }

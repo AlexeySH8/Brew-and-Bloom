@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 public class CameraManager : MonoBehaviour
 {
@@ -12,14 +13,15 @@ public class CameraManager : MonoBehaviour
     private Vector3 _velocity;
     private bool isObserved = true;
 
+    [Inject]
+    public void Construct(PlayerController playerController)
+    {
+        _target = playerController.transform;
+    }
+
     private void Awake()
     {
         _initialPos = transform.position;
-    }
-
-    private void Start()
-    {
-        _target = GameObject.FindWithTag("Player").gameObject.transform;
     }
 
     private void LateUpdate()

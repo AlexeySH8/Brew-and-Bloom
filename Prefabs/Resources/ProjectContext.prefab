@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8343476587614757448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7663356244831268149}
+  - component: {fileID: 3772749852613191265}
+  - component: {fileID: -68288071987429127}
+  m_Layer: 0
+  m_Name: ProjectContext
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7663356244831268149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8343476587614757448}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3772749852613191265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8343476587614757448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4e6589720da476459dc6dd71624b071, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: -68288071987429127}
+  _installerPrefabs: []
+  _parentNewObjectsUnderContext: 0
+  _editorReflectionBakingCoverageMode: 0
+  _buildsReflectionBakingCoverageMode: 0
+  _settings:
+    _ensureDeterministicDestructionOrderOnApplicationQuit: 0
+    _displayWarningWhenResolvingDuringInstall: 1
+    _validationRootResolveMethod: 0
+    _validationErrorResponse: 0
+    _signalSettings:
+      _defaultSyncMode: 0
+      _missingHandlerDefaultResponse: 2
+      _requireStrictUnsubscribe: 0
+      _defaultAsyncTickPriority: 1
+--- !u!114 &-68288071987429127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8343476587614757448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b3a57d94aecb4843aa6597605ebdf7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _recipesPref: {fileID: 11400000, guid: 05bd3d9bdb0cf884c9408401c743979c, type: 2}
+  _playerDataPref: {fileID: 11400000, guid: 8b8a57c62826c594aaccf894e561d9c2, type: 2}
+  _gameManagerPref: {fileID: 2923825150399875043, guid: 11481663eaf54f748981c30217c354b1, type: 3}
+  _sfxManagerPref: {fileID: 5759422229559150521, guid: d275b92f69cf7d34ebfe4912dd900393, type: 3}
+  _musicManagerPref: {fileID: 324371944599307883, guid: 5d8565d10be368d46b3a92282b51e0a9, type: 3}
+  _dayManagerPref: {fileID: 5013307618319797745, guid: aa008156d5852dd45bed0b1660a3b8a6, type: 3}
+  _guestsManagerPref: {fileID: 8745685700036167885, guid: a6ad59268bb975b4b9e2d4004858d595, type: 3}
+  _ordersManagerPref: {fileID: 4604877139414676425, guid: 033e01aa3b6d59c40ad119bad5d685d6, type: 3}
+  _playerControllerPref: {fileID: 4201505269331970972, guid: da335caea9df7a84d94ecdcda160f94a, type: 3}

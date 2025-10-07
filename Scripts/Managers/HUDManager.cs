@@ -1,15 +1,21 @@
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 public class HUDManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _coinsText;
-    private Wallet _playerWallet;
+
+    private PlayerWallet _playerWallet;
+
+    [Inject]
+    public void Construct(PlayerWallet playerWallet)
+    {
+        _playerWallet = playerWallet;
+    }
 
     private void Start()
     {
-        GameObject player = GameObject.FindWithTag("Player");
-        _playerWallet = player.GetComponent<PlayerController>().Wallet;
         SubscribeToEvents();
         UpdateCoinsAmout(_playerWallet.Balance);
     }

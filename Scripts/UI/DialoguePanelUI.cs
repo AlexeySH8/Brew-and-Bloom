@@ -3,6 +3,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class DialoguePanelUI : MonoBehaviour
 {
@@ -12,17 +13,22 @@ public class DialoguePanelUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _guestName;
     [SerializeField] private TextMeshProUGUI _dialogueText;
 
-
+    private Coroutine _typing;
+    private SFXManager _sfxManager;
     private char[] _sentenceDelimiters = new char[]
 {
     '.',
     '!',
     '?',
     ';',
-    ':',
-    '…'
+    ':'
 };
-    private Coroutine _typing;
+
+    [Inject]
+    public void Construct(SFXManager sfxManager)
+    {
+        _sfxManager = sfxManager;
+    }
 
     public void StartDialogue(Sprite guestPortrait, string guestName)
     {
@@ -53,7 +59,7 @@ public class DialoguePanelUI : MonoBehaviour
         {
             _dialogueText.text += letters;
             if (counter % 2 == 0)
-                SFX.Instance.PlayAudioClip(typingSound);
+                _sfxManager.PlayAudioClip(typingSound);
 
             if (_sentenceDelimiters.Contains(letters))
             {

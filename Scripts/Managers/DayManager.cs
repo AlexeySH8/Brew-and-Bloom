@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class DayManager : MonoBehaviour
 {
-    public static DayManager Instance { get; private set; }
-
     [field: SerializeField] public int CurrentDay { get; private set; }
 
     public event Action OnStartDay;
@@ -15,12 +13,6 @@ public class DayManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
         CurrentDay = 1;
     }
 

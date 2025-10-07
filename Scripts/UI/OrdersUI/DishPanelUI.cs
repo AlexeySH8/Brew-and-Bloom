@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 public class DishPanelUI : MonoBehaviour
 {
@@ -11,26 +12,27 @@ public class DishPanelUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _ordersCountText;
 
     private Dictionary<Guest, GameObject> _activeDishes = new Dictionary<Guest, GameObject>();
+    private OrdersManager _ordersManager;
 
-    private void Start()
+    [Inject]
+    public void Construct(OrdersManager ordersManager)
     {
+        _ordersManager = ordersManager;
         SubscribeToEvents();
     }
 
     private void SubscribeToEvents()
     {
-        if (OrdersManager.Instance == null) return;
-
-        OrdersManager.Instance.OnOrderAccepted += AddOrder;
-        OrdersManager.Instance.OnOrderCompleted += RemoveOrder;
-        OrdersManager.Instance.OnOrdersCleared += Clear;
+        _ordersManager.OnOrderAccepted += AddOrder;
+        _ordersManager.OnOrderCompleted += RemoveOrder;
+        _ordersManager.OnOrdersCleared += Clear;
     }
 
     private void OnDisable()
     {
-        OrdersManager.Instance.OnOrderAccepted -= AddOrder;
-        OrdersManager.Instance.OnOrderCompleted -= RemoveOrder;
-        OrdersManager.Instance.OnOrdersCleared -= Clear;
+        _ordersManager.OnOrderAccepted -= AddOrder;
+        _ordersManager.OnOrderCompleted -= RemoveOrder;
+        _ordersManager.OnOrdersCleared -= Clear;
     }
 
     public void AddOrder(Order order)

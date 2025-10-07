@@ -2,53 +2,49 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
+using Zenject;
 
 public class GuestsManager : MonoBehaviour
 {
-    public static GuestsManager Instance;
-
     public event Action<IReadOnlyList<Guest>> OnGuestsArrived;
+    public IReadOnlyList<Guest> GuestForDay => _guestForDay;
 
     [SerializeField] private List<GuestData> _allGuestsData;
     [SerializeField] private int _minGuestCount;
 
+    private GameManager _gameManager;
+    private Recipes _recipes;
+    private PlayerWallet _playerWallet;
     private List<Guest> _allGuests;
     private List<Guest> _guestForDay;
 
-    private void Awake()
+    [Inject]
+    public void Construct(GameManager gameManager, Recipes recipes, PlayerWallet playerWallet)
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-        LoadGuests();
-    }
+        _gameManager = gameManager;
+        _recipes = recipes;
+        _playerWallet = playerWallet;
 
-    private void Start()
-    {
-        //SubscribeToEvents();
+        LoadGuests();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
-            CreateGuestsForDay();
+            ChooseGuestsForDay();
     }
 
-    //private void SubscribeToEvents()
-    //{
-    //    GameManager.Instance.OnGameStart += PrepareGuestsForDay;
-    //}
+    private void SubscribeToEvents()
+    {
+        _gameManager.OnGameStart += ChooseGuestsForDay;
+    }
 
-    //private void OnDisable()
-    //{
-    //    GameManager.Instance.OnGameStart -= PrepareGuestsForDay;
-    //}
+    private void OnDisable()
+    {
+        _gameManager.OnGameStart -= ChooseGuestsForDay;
+    }
 
-    private void CreateGuestsForDay()
+    private void ChooseGuestsForDay()
     {
         _guestForDay = new List<Guest>();
 
@@ -79,7 +75,7 @@ public class GuestsManager : MonoBehaviour
         {
             foreach (GuestData guestData in _allGuestsData)
             {
-                _allGuests.Add(new Guest(guestData));
+                _allGuests.Add(new Guest(guestData, _recipes, _playerWallet));
             }
         }
     }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 public class OrdersPanelUI : MonoBehaviour
 {
@@ -11,30 +12,34 @@ public class OrdersPanelUI : MonoBehaviour
 
     private Dictionary<Guest, GameObject> _activeOrders;
     private SlideAnimation _slideAnimation;
+    private GuestsManager _guestsManager;
+    private PlayerWallet _playerWallet;
     private bool _isOpen;
-    private Wallet _playerWallet;
+
+    [Inject]
+    public void Construct(GuestsManager guestsManager, PlayerWallet playerWallet)
+    {
+        _guestsManager = guestsManager;
+        _playerWallet = playerWallet;
+        _isOpen = false;
+        SubscribeToEvents();
+    }
 
     private void Awake()
     {
-        _isOpen = false;
         _slideAnimation = GetComponent<SlideAnimation>();
-    }
-
-    private void Start()
-    {
-        _playerWallet = FindAnyObjectByType<PlayerController>().Wallet;
-        SubscribeToEvents();
+        AddOrders(_guestsManager.GuestForDay);
     }
 
     private void SubscribeToEvents()
     {
-        GuestsManager.Instance.OnGuestsArrived += AddOrders;
+        _guestsManager.OnGuestsArrived += AddOrders;
         _playerWallet.OnDailyEarningChanged += UpdateMoneyEarnedText;
     }
 
     private void OnDisable()
     {
-        GuestsManager.Instance.OnGuestsArrived -= AddOrders;
+        _guestsManager.OnGuestsArrived -= AddOrders;
         _playerWallet.OnDailyEarningChanged -= UpdateMoneyEarnedText;
     }
 

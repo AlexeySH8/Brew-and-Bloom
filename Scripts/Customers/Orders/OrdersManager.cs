@@ -3,43 +3,38 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 public class OrdersManager : MonoBehaviour
 {
-    public static OrdersManager Instance;
-
     [SerializeField] private List<DishData> _completedDishes = new List<DishData>();
+
+    public IReadOnlyList<DishData> CompletedDishes => _completedDishes;
+    public IReadOnlyList<Order> ActiveOrders => _activeOrders;
 
     public event Action<Order> OnOrderAccepted;
     public event Action<Order> OnOrderCompleted;
     public event Action OnOrdersCleared;
 
     private List<Order> _activeOrders = new List<Order>();
+    private GuestsManager _guestsManager;
     private Coroutine _acceptOrdersRoutine;
 
-    private void Awake()
+    [Inject]
+    public void Construct(GuestsManager guestsManager)
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-    }
-
-    private void Start()
-    {
+        _guestsManager = guestsManager;
         SubscribeToEvents();
     }
 
     private void SubscribeToEvents()
     {
-        GuestsManager.Instance.OnGuestsArrived += AcceptOrders;
+        _guestsManager.OnGuestsArrived += AcceptOrders;
     }
 
     private void OnDisable()
     {
-        GuestsManager.Instance.OnGuestsArrived -= AcceptOrders;
+        _guestsManager.OnGuestsArrived -= AcceptOrders;
     }
 
     private void AcceptOrders(IReadOnlyList<Guest> guests)
@@ -78,9 +73,5 @@ public class OrdersManager : MonoBehaviour
         order = _activeOrders.FirstOrDefault(
             activeOrder => activeOrder.Dish.IngredientsMask == dishData.IngredientsMask);
         return order != null;
-    }
-
-    public IReadOnlyList<DishData> CompletedDishes() => _completedDishes;
-
-    public IReadOnlyList<Order> ActiveOrders() => _activeOrders;
+    }    
 }

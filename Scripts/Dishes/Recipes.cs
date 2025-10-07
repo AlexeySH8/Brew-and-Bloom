@@ -1,16 +1,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 [CreateAssetMenu(fileName = "Recipes", menuName = "Farming/Recipes")]
 public class Recipes : ScriptableObject
 {
     [SerializeField] private List<DishData> _dishList;
 
-    private static Dictionary<int, DishData> _recipes =
+    private Dictionary<int, DishData> _recipes =
         new Dictionary<int, DishData>();
 
-    public static bool TryGetDish(int ingredientsMask, out GameObject dish)
+    public void Initialize()
+    {
+        _recipes.Clear();
+        foreach (var dish in _dishList)
+        {
+            _recipes.Add(dish.IngredientsMask, dish);
+        }
+    }
+
+    public bool TryGetDish(int ingredientsMask, out GameObject dish)
     {
         dish = null;
         if (_recipes.TryGetValue(ingredientsMask, out DishData recipe))
@@ -21,7 +31,7 @@ public class Recipes : ScriptableObject
         return false;
     }
 
-    public static bool TryGetIngredients(int ingredientsMask, out IngredientData[] ingredients)
+    public bool TryGetIngredients(int ingredientsMask, out IngredientData[] ingredients)
     {
         ingredients = null;
         if (_recipes.TryGetValue(ingredientsMask, out DishData recipe))
@@ -32,19 +42,10 @@ public class Recipes : ScriptableObject
         return false;
     }
 
-    public static DishData GetRandomDish()
+    public DishData GetRandomDish()
     {
         var dishes = _recipes.Values.ToArray();
         return dishes[Random.Range(0, dishes.Length)];
-    }
-
-    public void Init()
-    {
-        _recipes.Clear();
-        foreach (var dish in _dishList)
-        {
-            _recipes.Add(dish.IngredientsMask, dish);
-        }
     }
 
 #if UNITY_EDITOR

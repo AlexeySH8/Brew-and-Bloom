@@ -1,26 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class GuestPlacer : MonoBehaviour
 {
     [SerializeField] List<Table> _tables;
+
     private List<Table> _freeTables;
     private List<GameObject> _guests;
+    private GuestsManager _guestsManager;
 
-    private void Start()
+    [Inject]
+    public void Construct(GuestsManager guestsManager)
     {
+        _guestsManager = guestsManager;
         SubscribeToEvents();
+    }
+
+    private void Awake()
+    {
+        Place(_guestsManager.GuestForDay);
     }
 
     private void SubscribeToEvents()
     {
-        GuestsManager.Instance.OnGuestsArrived += Place;
+        _guestsManager.OnGuestsArrived += Place;
     }
 
     private void OnDisable()
     {
-        GuestsManager.Instance.OnGuestsArrived -= Place;
+        _guestsManager.OnGuestsArrived -= Place;
     }
 
     public void Place(IReadOnlyList<Guest> guestsForDay)

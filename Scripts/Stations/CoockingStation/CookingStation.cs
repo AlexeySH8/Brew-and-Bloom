@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 public class CookingStation : MonoBehaviour, IReceiveHeldItem
 {
@@ -10,8 +11,15 @@ public class CookingStation : MonoBehaviour, IReceiveHeldItem
 
     private int _currentIngredientsMask;
     private int _index = 0;
+    private Recipes _recipes;
     private CoockingStationVisual _stationVisual;
     private Coroutine _cooking;
+
+    [Inject]
+    public void Construct(Recipes recipes)
+    {
+        _recipes = recipes;
+    }
 
     private void Awake()
     {
@@ -39,7 +47,7 @@ public class CookingStation : MonoBehaviour, IReceiveHeldItem
         AddIngredient(ingredient);
         _stationVisual.ChangeColorTo(ingredient.Data.Color);
 
-        if (Recipes.TryGetDish(_currentIngredientsMask, out GameObject dish))
+        if (_recipes.TryGetDish(_currentIngredientsMask, out GameObject dish))
         {
             _cooking = StartCoroutine(CookingDish(dish));
         }

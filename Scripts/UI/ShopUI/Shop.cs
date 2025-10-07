@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class Shop : MonoBehaviour
 {
     public bool IsOpen { get; private set; }
 
-    [SerializeField] private ManeShop _seller;
     [SerializeField] private ShopItemData[] Assortment;
     [SerializeField] private GameObject _shopItemPrefab;
 
@@ -15,23 +15,25 @@ public class Shop : MonoBehaviour
     [SerializeField] private float _widthOffset = 340f;
     [SerializeField] private float _heightOffset = 140f;
 
-    private Wallet _playerWallet;
+    private Seller _seller;
+    private PlayerWallet _playerWallet;
     private Transform _container;
     private List<GameObject> _purchasedItems;
     private SlideAnimation _slideAnimation;
 
+    [Inject]
+    public void Construct(PlayerWallet playerWallet , Seller seller)
+    {
+        _playerWallet = playerWallet;
+        _seller = seller;
+        IsOpen = false;
+    }
+
     private void Awake()
     {
-        IsOpen = false;
         _container = transform.Find("Container").gameObject.transform;
         _slideAnimation = GetComponent<SlideAnimation>();
         InitShop();
-    }
-
-    private void Start()
-    {
-        GameObject player = GameObject.FindWithTag("Player");
-        _playerWallet = player.GetComponent<PlayerController>().Wallet;
     }
 
     private void InitShop()
