@@ -12,19 +12,19 @@ public class GuestsManager : MonoBehaviour
     [SerializeField] private List<GuestData> _allGuestsData;
     [SerializeField] private int _minGuestCount;
 
-    private GameManager _gameManager;
+    private GameSceneManager _gameSceneManager;
     private Recipes _recipes;
     private PlayerWallet _playerWallet;
     private List<Guest> _allGuests;
     private List<Guest> _guestForDay;
 
     [Inject]
-    public void Construct(GameManager gameManager, Recipes recipes, PlayerWallet playerWallet)
+    public void Construct(GameSceneManager gameSceneManager, Recipes recipes, PlayerWallet playerWallet)
     {
-        _gameManager = gameManager;
+        _gameSceneManager = gameSceneManager;
         _recipes = recipes;
         _playerWallet = playerWallet;
-
+        SubscribeToEvents();
         LoadGuests();
     }
 
@@ -36,12 +36,12 @@ public class GuestsManager : MonoBehaviour
 
     private void SubscribeToEvents()
     {
-        _gameManager.OnGameStart += ChooseGuestsForDay;
+        _gameSceneManager.OnHouseLoaded += ChooseGuestsForDay;
     }
 
     private void OnDisable()
     {
-        _gameManager.OnGameStart -= ChooseGuestsForDay;
+        _gameSceneManager.OnHouseLoaded -= ChooseGuestsForDay;
     }
 
     private void ChooseGuestsForDay()

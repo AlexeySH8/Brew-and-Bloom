@@ -7,11 +7,13 @@ using Zenject;
 public class HousePortal : MonoBehaviour, IReceiveHeldItem, IFreeInteractable
 {
     private OrdersManager _ordersManager;
+    private GameSceneManager _gameSceneManager;
 
     [Inject]
-    public void Construct(OrdersManager ordersManager)
+    public void Construct(OrdersManager ordersManager, GameSceneManager gameSceneManager)
     {
         _ordersManager = ordersManager;
+        _gameSceneManager = gameSceneManager;
     }
 
     public void Interact()
@@ -34,6 +36,6 @@ public class HousePortal : MonoBehaviour, IReceiveHeldItem, IFreeInteractable
 
     private void LoadTavernScene()
     {
-        SceneManager.LoadScene("Tavern");
+        _gameSceneManager.LoadTavernScene();
     }
 }

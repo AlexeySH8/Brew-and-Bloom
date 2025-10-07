@@ -3,12 +3,12 @@ using Zenject;
 
 public class BootstrapInstaller : MonoInstaller
 {
+    [SerializeField] private int _startingBalance;
     [SerializeField] private Recipes _recipesPref;
-    [SerializeField] private PlayerData _playerDataPref;
     [SerializeField] private GameManager _gameManagerPref;
+    [SerializeField] private GameSceneManager _gameSceneManagerPref;
     [SerializeField] private SFXManager _sfxManagerPref;
     [SerializeField] private MusicManager _musicManagerPref;
-    [SerializeField] private DayManager _dayManagerPref;
     [SerializeField] private GuestsManager _guestsManagerPref;
     [SerializeField] private OrdersManager _ordersManagerPref;
     [SerializeField] private PlayerController _playerControllerPref;
@@ -26,16 +26,16 @@ public class BootstrapInstaller : MonoInstaller
             .FromComponentInNewPrefab(_gameManagerPref)
             .AsSingle().NonLazy();
 
+        Container.Bind<GameSceneManager>()
+            .FromComponentInNewPrefab(_gameSceneManagerPref)
+            .AsSingle().NonLazy();
+
         Container.Bind<MusicManager>()
             .FromComponentInNewPrefab(_musicManagerPref)
             .AsSingle().NonLazy();
 
         Container.Bind<SFXManager>()
             .FromComponentInNewPrefab(_sfxManagerPref)
-            .AsSingle().NonLazy();
-
-        Container.Bind<DayManager>()
-            .FromComponentInNewPrefab(_dayManagerPref)
             .AsSingle().NonLazy();
 
         Container.Bind<GuestsManager>()
@@ -52,10 +52,8 @@ public class BootstrapInstaller : MonoInstaller
         Container.Bind<IPlayerInput>()
             .To<PCInput>().AsSingle();
 
-        Container.Bind<PlayerData>()
-            .FromInstance(_playerDataPref).AsSingle();
-
-        Container.Bind<PlayerWallet>().AsSingle();
+        Container.Bind<PlayerWallet>().AsSingle()
+            .WithArguments(_startingBalance);
 
         Container.Bind<PlayerController>()
             .FromComponentInNewPrefab(_playerControllerPref)

@@ -77,6 +77,7 @@ MonoBehaviour:
   _recipesPref: {fileID: 11400000, guid: 05bd3d9bdb0cf884c9408401c743979c, type: 2}
   _playerDataPref: {fileID: 11400000, guid: 8b8a57c62826c594aaccf894e561d9c2, type: 2}
   _gameManagerPref: {fileID: 2923825150399875043, guid: 11481663eaf54f748981c30217c354b1, type: 3}
+  _gameSceneManagerPref: {fileID: 5238498326887593915, guid: c31a897dbc25a384c97397a612016b83, type: 3}
   _sfxManagerPref: {fileID: 5759422229559150521, guid: d275b92f69cf7d34ebfe4912dd900393, type: 3}
   _musicManagerPref: {fileID: 324371944599307883, guid: 5d8565d10be368d46b3a92282b51e0a9, type: 3}
   _dayManagerPref: {fileID: 5013307618319797745, guid: aa008156d5852dd45bed0b1660a3b8a6, type: 3}

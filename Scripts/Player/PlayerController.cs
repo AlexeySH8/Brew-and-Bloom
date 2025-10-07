@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
 
     private IPlayerInput _input;
     private PlayerMovement _movement;
-    private PlayerWallet _wallet;
     private PlayerVisual _visual;
     private InteractionHandler _interactiveHandler;
     private ItemHolder _itemHolder;
@@ -23,10 +22,9 @@ public class PlayerController : MonoBehaviour
     private float _yInteractionDirection;
 
     [Inject]
-    public void Construct(IPlayerInput input , PlayerWallet playerWallet)
+    public void Construct(IPlayerInput input)
     {
         _input = input;
-        _wallet = playerWallet;
     }
 
     private void Awake()
@@ -107,10 +105,5 @@ public class PlayerController : MonoBehaviour
         _dialoguePartner = null;
         _canMove = true;
         _canDrop = true;
-    }
-
-    private void OnDestroy()
-    {
-        _wallet.Dispose();
     }
 }

@@ -8,15 +8,15 @@ public class TavernPortal : MonoBehaviour, IFreeInteractable
 {
     private OrdersManager _ordersManager;
     private OrdersPanelUI _ordersPanelUI;
-    private DayManager _dayManager;
+    private GameSceneManager _gameSceneManager;
 
     [Inject]
     public void Construct(OrdersManager ordersManager, OrdersPanelUI ordersPanelUI,
-        DayManager dayManager)
+        GameSceneManager gameSceneManager)
     {
         _ordersManager = ordersManager;
         _ordersPanelUI = ordersPanelUI;
-        _dayManager = dayManager;
+        _gameSceneManager = gameSceneManager;
     }
 
     private void Start()
@@ -31,8 +31,7 @@ public class TavernPortal : MonoBehaviour, IFreeInteractable
 
     public void EndDay()
     {
-        _dayManager.EndDay();
-        SceneManager.LoadScene("House");
+        _gameSceneManager.LoadHouseScene();
     }
 
     private IEnumerator GiveCompletedDishesRoutine(IReadOnlyList<DishData> dishesData)
