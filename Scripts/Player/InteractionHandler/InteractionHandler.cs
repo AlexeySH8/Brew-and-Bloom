@@ -22,11 +22,15 @@ public class InteractionHandler : MonoBehaviour
 
         if (heldItem && interactiveItem.collider.TryGetComponent(out IReceiveHeldItem receiver))
         {
-            receiver.Receive(heldItem);
+            _itemHolder.Clear();
+            if (!receiver.Receive(heldItem))
+                _itemHolder.PickUp(heldItem);
         }
         else if (interactiveItem.collider.TryGetComponent(out IGiveHeldItem giver))
         {
-            _itemHolder.PickUp(giver.Give());
+            GameObject item = giver.Give();
+            if (item != null)
+                _itemHolder.PickUp(item);
         }
         else if (interactiveItem.collider.TryGetComponent(out IFreeInteractable interactable))
         {

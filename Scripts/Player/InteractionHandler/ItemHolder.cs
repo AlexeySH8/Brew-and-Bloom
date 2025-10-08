@@ -8,6 +8,8 @@ public class ItemHolder : MonoBehaviour
     [SerializeField] private float _throwingForce;
 
     private GameObject _heldItem;
+    private Rigidbody2D _heldItemRB;
+
     private int _initialOrderInLayer;
 
     public GameObject GetHeldItem() => _heldItem;
@@ -15,6 +17,7 @@ public class ItemHolder : MonoBehaviour
     public void PickUp(GameObject holdItem)
     {
         _heldItem = holdItem;
+        _heldItemRB = _heldItem.GetComponent<Rigidbody2D>();
 
         var xScale = Mathf.Abs(_heldItem.transform.localScale.x) *
             Mathf.Sign(_witchVisual.transform.localScale.x);
@@ -30,16 +33,16 @@ public class ItemHolder : MonoBehaviour
 
         var spriteRender = _heldItem.GetComponent<SpriteRenderer>();
         _initialOrderInLayer = spriteRender.sortingOrder;
-        spriteRender.sortingOrder = _witchVisual.GetComponent<SpriteRenderer>().sortingOrder + 1;
+        spriteRender.sortingOrder = _witchVisual.GetComponent<SpriteRenderer>().sortingOrder + 1; // the witch's sprite did not obscure the object
 
-        _heldItem.GetComponent<Rigidbody2D>().simulated = false;
-        _heldItem.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        _heldItemRB.simulated = false;
     }
 
     public void Drop(Vector2 forceVector)
     {
         if (!_heldItem) return;
-        var rb = _heldItem.GetComponent<Rigidbody2D>();        
+
+        var rb = _heldItemRB;
         rb.transform.position += (Vector3)(forceVector * 0.2f); // Moves the object collider away from the player collider
         Clear();
         rb.AddForce(forceVector * _throwingForce, ForceMode2D.Impulse);
@@ -47,9 +50,12 @@ public class ItemHolder : MonoBehaviour
 
     public void Clear()
     {
-        _heldItem.GetComponent<Rigidbody2D>().simulated = true;
+        if (_heldItem == null) return;
+
+        _heldItemRB.simulated = true;
         _heldItem.GetComponent<SpriteRenderer>().sortingOrder = _initialOrderInLayer;
         _heldItem.transform.parent = null;
         _heldItem = null;
+        _heldItemRB = null;
     }
 }

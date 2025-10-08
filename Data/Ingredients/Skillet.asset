@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4df2cc9925d8744387b4d98ad3bfc99, type: 3}
   m_Name: Skillet
   m_EditorClassIdentifier: 
-  <IngredientType>k__BackingField: 0
+  <IngredientType>k__BackingField: 2
   <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
   <IngredientPrefab>k__BackingField: {fileID: 4776567966178762121, guid: 7f080607b792071438edba7560a47c54, type: 3}
   <Icon>k__BackingField: {fileID: -1909869900, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}

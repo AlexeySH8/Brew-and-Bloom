@@ -391,8 +391,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -1.0297, y: 0.9217, z: 0}
-    m_Extent: {x: 7.7868996, y: 5.7954, z: 0}
+    m_Center: {x: -1.02985, y: 0.9224999, z: 0}
+    m_Extent: {x: 7.78745, y: 5.7953997, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -1411,6 +1411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16143db08294a49438f821eac0768f9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerControllerPref: {fileID: 4201505269331970972, guid: da335caea9df7a84d94ecdcda160f94a, type: 3}
 --- !u!114 &179581278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4729,7 +4730,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e06d0bd901265a14bbe6731165d4f490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _testPrefab: {fileID: 183234796291252989, guid: 33535757e89bdd64a83b730858f5ebca, type: 3}
 --- !u!4 &781357681 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7735623843903714051, guid: fee1271f5e092c44aafc5adbe5c9dcad, type: 3}

@@ -74,13 +74,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b3a57d94aecb4843aa6597605ebdf7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startingBalance: 300
   _recipesPref: {fileID: 11400000, guid: 05bd3d9bdb0cf884c9408401c743979c, type: 2}
-  _playerDataPref: {fileID: 11400000, guid: 8b8a57c62826c594aaccf894e561d9c2, type: 2}
   _gameManagerPref: {fileID: 2923825150399875043, guid: 11481663eaf54f748981c30217c354b1, type: 3}
   _gameSceneManagerPref: {fileID: 5238498326887593915, guid: c31a897dbc25a384c97397a612016b83, type: 3}
   _sfxManagerPref: {fileID: 5759422229559150521, guid: d275b92f69cf7d34ebfe4912dd900393, type: 3}
   _musicManagerPref: {fileID: 324371944599307883, guid: 5d8565d10be368d46b3a92282b51e0a9, type: 3}
-  _dayManagerPref: {fileID: 5013307618319797745, guid: aa008156d5852dd45bed0b1660a3b8a6, type: 3}
   _guestsManagerPref: {fileID: 8745685700036167885, guid: a6ad59268bb975b4b9e2d4004858d595, type: 3}
   _ordersManagerPref: {fileID: 4604877139414676425, guid: 033e01aa3b6d59c40ad119bad5d685d6, type: 3}
   _playerControllerPref: {fileID: 4201505269331970972, guid: da335caea9df7a84d94ecdcda160f94a, type: 3}

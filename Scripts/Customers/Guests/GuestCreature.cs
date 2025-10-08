@@ -26,24 +26,30 @@ public class GuestCreature : MonoBehaviour, IReceiveHeldItem, IFreeInteractable
         ShowOrderDisplay();
     }
 
-    public void Interact() => _guest.StartDialogue();
-
-    public void Receive(GameObject heldItem)
+    public void Interact()
     {
+        if (_guest.IsServed)
+            _guest.StartDialogue();
+    }
+
+    public bool Receive(GameObject heldItem)
+    {
+        bool reciveResult = false;
         if (_guest == null)
         {
             Debug.LogError("Guest creature is not initialized");
-            return;
+            return false;
         }
 
         if (!_guest.IsServed && heldItem.TryGetComponent(out Dish dish))
         {
+            reciveResult = true;
             dish.GetComponent<BaseHoldItem>().Discard();
             HideOrderDisplay();
-
             _guest.CompleteOrder(dish.Data.IngredientsMask);
         }
         _guest.StartDialogue();
+        return reciveResult;
     }
 
     private void OnDestroy()

@@ -2,12 +2,13 @@ using System;
 
 public class PlayerWallet
 {
-    public event Action<int> OnBalanceChanged;
-    public event Action<int> OnDailyEarningChanged;
-    private GameSceneManager _gameSceneManager;
-
     public int Balance { get; private set; }
     public int DailyEarning { get; private set; }
+
+    public event Action<int> OnBalanceChanged;
+    public event Action<int> OnDailyEarningChanged;
+
+    private GameSceneManager _gameSceneManager;
 
     public PlayerWallet(GameSceneManager gameSceneManager, int startingBalance)
     {
@@ -19,11 +20,6 @@ public class PlayerWallet
     private void SubscribeToEvents()
     {
         _gameSceneManager.OnHouseLoaded += StartNewDay;
-    }
-
-    public void Dispose()
-    {
-        _gameSceneManager.OnHouseLoaded -= StartNewDay;
     }
 
     public void AddToBalance(int amount)

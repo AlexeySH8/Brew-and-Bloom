@@ -11,7 +11,6 @@ public class BootstrapInstaller : MonoInstaller
     [SerializeField] private MusicManager _musicManagerPref;
     [SerializeField] private GuestsManager _guestsManagerPref;
     [SerializeField] private OrdersManager _ordersManagerPref;
-    [SerializeField] private PlayerController _playerControllerPref;
 
     public override void InstallBindings()
     {
@@ -54,10 +53,6 @@ public class BootstrapInstaller : MonoInstaller
 
         Container.Bind<PlayerWallet>().AsSingle()
             .WithArguments(_startingBalance);
-
-        Container.Bind<PlayerController>()
-            .FromComponentInNewPrefab(_playerControllerPref)
-            .AsSingle();
     }
 
     private void BindRecipes()

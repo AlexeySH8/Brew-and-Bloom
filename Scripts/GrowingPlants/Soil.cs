@@ -30,20 +30,25 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IReceiveHeldItem
 
     public void InteractWithShovel() => Cultivate();
 
-    public void Receive(GameObject heldItem) => StartCoroutine(PlantsSeed(heldItem));
-
-    private IEnumerator PlantsSeed(GameObject heldItem)
+    public bool Receive(GameObject heldItem)
     {
         if (heldItem.TryGetComponent(out Seed seed))
         {
-            if (!seed.Data)
-                Debug.LogError($"{gameObject.name} has no SeedData");
-
+            StartCoroutine(PlantsSeed(seed.Data));
             heldItem.GetComponent<BaseHoldItem>().Discard();
-            DisableToInteractive();
-            yield return StartCoroutine(GrowPlant(seed.Data));
-            EnableToInteractive();
+            return true;
         }
+        return false;
+    }
+
+    private IEnumerator PlantsSeed(SeedData seedData)
+    {
+        if (!seedData)
+            Debug.LogError($"{gameObject.name} has no SeedData");
+
+        DisableToInteractive();
+        yield return StartCoroutine(GrowPlant(seedData));
+        EnableToInteractive();
     }
 
     private IEnumerator GrowPlant(SeedData seedData)
@@ -55,11 +60,16 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IReceiveHeldItem
             yield return new WaitForSeconds(Random.Range(seedData.MinStageTime, seedData.MaxStageTime));
         }
 
+        SpawnHarvest(seedData);
+        _soilVisual.ClearContentPlace();
+    }
+
+    private void SpawnHarvest(SeedData seedData)
+    {
         for (int i = 0; i < Random.Range(_minHarvestCount, _maxHarvestCount); i++)
         {
             Instantiate(seedData.IngredientPrefab, transform.position, transform.rotation);
         }
-        _soilVisual.ClearContentPlace();
     }
 
     private void Cultivate()
