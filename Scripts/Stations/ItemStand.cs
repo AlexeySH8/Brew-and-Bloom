@@ -1,38 +1,47 @@
 using UnityEngine;
 
-public class ItemStand : MonoBehaviour, IGiveHeldItem, IReceiveHeldItem
+public class ItemStand : MonoBehaviour, IGiveHeldItem, IReceiveHeldItem, IItemHolder
 {
     [SerializeField] private Transform _standPoint;
 
-    private GameObject _standingItem;
+    private SpriteRenderer _itemStandVisual;
+    private BaseHoldItem _standingItem;
+
+    public Transform ParentPoint => _standPoint;
+
+    public int SortingOrderOffset => _itemStandVisual.sortingOrder + 1;
+
+    private void Awake()
+    {
+        _itemStandVisual = GetComponent<SpriteRenderer>();
+    }
 
     public GameObject Give()
     {
         if (_standingItem == null) return null;
 
-        _standingItem.GetComponent<Rigidbody2D>().simulated = true;
-        _standingItem.transform.SetParent(null);
-        GameObject item = _standingItem;
-        _standingItem = null;
+        GameObject item = _standingItem.gameObject;
+        _standingItem.SetHolder(null);
         return item;
-        //GameObject item = Instantiate(_standingItem);
-        //Destroy(_standingItem);
-        //return item;
     }
 
-    public bool Receive(GameObject heldItem)
+    public bool TryReceive(GameObject heldItem)
     {
         if (_standingItem != null) return false;
 
-        _standingItem = heldItem;
-        _standingItem.GetComponent<Rigidbody2D>().simulated = false;
-        _standingItem.transform.SetParent(_standPoint);
-        _standingItem.transform.localPosition = Vector3.zero;
+        _standingItem = heldItem.GetComponent<BaseHoldItem>();
+        _standingItem.SetHolder(this);
 
         return true;
-        //_standingItem = Instantiate(heldItem);
-        //_standingItem.GetComponent<Rigidbody2D>().simulated = false;
-        //_standingItem.transform.position = _standPoint.position;
-        //Destroy(heldItem);
+    }
+
+    public void ItemReceived(BaseHoldItem holdItem)
+    {
+
+    }
+
+    public void ItemRemoved(BaseHoldItem holdItem)
+    {
+        _standingItem = null;
     }
 }

@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class PlayerVisual : MonoBehaviour
 {
+    public SpriteRenderer SpriteRenderer {  get; private set; }
+
     private PlayerController _playerController;
     private Animator _animator;
 
     private void Awake()
     {
+        SpriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         _playerController = GetComponentInParent<PlayerController>();
     }

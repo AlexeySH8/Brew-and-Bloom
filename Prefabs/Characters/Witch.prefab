@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 63956232600998575}
   m_Layer: 0
-  m_Name: HoldItemSpot
+  m_Name: HoldItemPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2173342254922158584}
   m_Layer: 0
-  m_Name: HoldToolSpot
+  m_Name: HoldToolPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,8 +76,8 @@ GameObject:
   - component: {fileID: 4201505269331970972}
   - component: {fileID: 6996514465472350033}
   - component: {fileID: 1957882677522323774}
-  - component: {fileID: 2612100941852599841}
   - component: {fileID: 5847831708017810119}
+  - component: {fileID: 8659951469332290978}
   m_Layer: 0
   m_Name: Witch
   m_TagString: Player
@@ -200,23 +200,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6115500994057415989}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7997c8e436c6ff243bc0d6bb98071d5d, type: 3}
+  m_Script: {fileID: 11500000, guid: 29290c21ba8b2414a94bb37ebcc0199f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2612100941852599841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6115500994057415989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb09d677a3e6b2e44b65b7bdefb0b8b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _holdToolSpot: {fileID: 2173342254922158584}
-  _holdItemSpot: {fileID: 63956232600998575}
+  _holdToolPoint: {fileID: 2173342254922158584}
+  _holdItemPoint: {fileID: 63956232600998575}
   _witchVisual: {fileID: 6991232686041946899}
   _throwingForce: 30
 --- !u!114 &5847831708017810119
@@ -237,6 +225,18 @@ MonoBehaviour:
   _interactionDistance: 0.5
   _radius: 0.4
   _interactionOffset: 0.2
+--- !u!114 &8659951469332290978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6115500994057415989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eda5b2cb623eb5446a6fd4cb703ff86d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6991232686041946899
 GameObject:
   m_ObjectHideFlags: 0

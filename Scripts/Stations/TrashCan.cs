@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TrashCan : MonoBehaviour, IReceiveHeldItem
 {
-    public bool Receive(GameObject heldItem)
+    public bool TryReceive(GameObject heldItem)
     {
         return Utilize(heldItem);
     }

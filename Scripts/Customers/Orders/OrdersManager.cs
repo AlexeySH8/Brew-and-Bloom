@@ -30,11 +30,13 @@ public class OrdersManager : MonoBehaviour
     private void SubscribeToEvents()
     {
         _guestsManager.OnGuestsArrived += AcceptOrders;
+        OnOrdersCleared += ClearCompletedDishes;
     }
 
     private void OnDisable()
     {
         _guestsManager.OnGuestsArrived -= AcceptOrders;
+        OnOrdersCleared -= ClearCompletedDishes;
     }
 
     private void AcceptOrders(IReadOnlyList<Guest> guests)
@@ -73,5 +75,7 @@ public class OrdersManager : MonoBehaviour
         order = _activeOrders.FirstOrDefault(
             activeOrder => activeOrder.Dish.IngredientsMask == dishData.IngredientsMask);
         return order != null;
-    }    
+    }
+
+    private void ClearCompletedDishes() { _completedDishes.Clear(); }
 }

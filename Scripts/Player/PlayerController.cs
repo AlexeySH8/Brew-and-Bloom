@@ -13,8 +13,8 @@ public class PlayerController : MonoBehaviour
     private IPlayerInput _input;
     private PlayerMovement _movement;
     private PlayerVisual _visual;
-    private InteractionHandler _interactiveHandler;
-    private ItemHolder _itemHolder;
+    private PlayerInteractionHandler _interactiveHandler;
+    private PlayerItemHolder _itemHolder;
     private GuestDialogue _dialoguePartner;
     private float _horizontalInput;
     private float _verticalInput;
@@ -31,8 +31,8 @@ public class PlayerController : MonoBehaviour
     {
         _movement = GetComponent<PlayerMovement>();
         _visual = GetComponentInChildren<PlayerVisual>();
-        _interactiveHandler = GetComponent<InteractionHandler>();
-        _itemHolder = GetComponent<ItemHolder>();
+        _interactiveHandler = GetComponent<PlayerInteractionHandler>();
+        _itemHolder = GetComponent<PlayerItemHolder>();
         FaceDirection = 1;
         _xInteractionDirection = 1;
         _yInteractionDirection = 0;

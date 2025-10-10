@@ -32,7 +32,7 @@ public class GuestCreature : MonoBehaviour, IReceiveHeldItem, IFreeInteractable
             _guest.StartDialogue();
     }
 
-    public bool Receive(GameObject heldItem)
+    public bool TryReceive(GameObject heldItem)
     {
         bool reciveResult = false;
         if (_guest == null)

@@ -27,7 +27,7 @@ public class CookingStation : MonoBehaviour, IReceiveHeldItem
         _stationVisual = GetComponent<CoockingStationVisual>();
     }
 
-    public bool Receive(GameObject heldItem)
+    public bool TryReceive(GameObject heldItem)
     {
         if (heldItem.TryGetComponent(out Ingredient ingredient) &&
             !_unavailableIngredients.Contains(ingredient.Data) &&
