@@ -22,6 +22,7 @@ public class ItemStand : MonoBehaviour, IGiveHeldItem, IReceiveHeldItem, IItemHo
 
         GameObject item = _standingItem.gameObject;
         _standingItem.SetHolder(null);
+        _standingItem = null;
         return item;
     }
 
@@ -35,12 +36,7 @@ public class ItemStand : MonoBehaviour, IGiveHeldItem, IReceiveHeldItem, IItemHo
         return true;
     }
 
-    public void ItemReceived(BaseHoldItem holdItem)
-    {
-
-    }
-
-    public void ItemRemoved(BaseHoldItem holdItem)
+    public void OnItemRemoved(BaseHoldItem holdItem)
     {
         _standingItem = null;
     }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -37,16 +35,7 @@ public class InteractionDetector : MonoBehaviour
         return heldItem != default ? heldItem : hits.FirstOrDefault();
     }
 
-    public Collider2D DetectToolTarget(float interactionToolDistance, LayerMask interactionMask)
-    {
-        Vector2 direction = new Vector2(_playerController.FaceDirection, 0);
-        Vector2 origin = transform.position;
-        RaycastHit2D toolTarget = Physics2D.Raycast(origin, direction,
-            interactionToolDistance, interactionMask);
-        Debug.DrawRay(origin, direction * interactionToolDistance, Color.red, 0.5f);
-        return toolTarget.collider;
-    }
-
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (_playerController == null) return;
@@ -65,4 +54,5 @@ public class InteractionDetector : MonoBehaviour
         Gizmos.DrawLine(origin + Vector2.right * _radius, end + Vector2.right * _radius);
         Gizmos.DrawLine(origin - Vector2.right * _radius, end - Vector2.right * _radius);
     }
+#endif
 }

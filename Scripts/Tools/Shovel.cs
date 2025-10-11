@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shovel : BaseTool
+public class Shovel : BaseUsableItem
 {
-    protected override void UseTool(Collider2D target)
+    public override bool TryUse()
     {
-        if (target.TryGetComponent(out IShovelTarget pickTarget))
-            pickTarget.InteractWithShovel();
+        Collider2D target = DetectTarget();
+        if (target != null &&
+            target.TryGetComponent(out IShovelTarget shovelTarget))
+        {
+            shovelTarget.InteractWithShovel();
+            return true;
+        }
+        return false;
     }
 }

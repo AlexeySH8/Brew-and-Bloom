@@ -4,6 +4,5 @@ public interface IItemHolder
 {
     Transform ParentPoint { get; }
     int SortingOrderOffset { get; }
-    void ItemReceived(BaseHoldItem holdItem);
-    void ItemRemoved(BaseHoldItem holdItem);
+    void OnItemRemoved(BaseHoldItem holdItem);
 }

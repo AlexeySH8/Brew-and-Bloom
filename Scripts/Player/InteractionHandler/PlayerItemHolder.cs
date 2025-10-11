@@ -21,8 +21,9 @@ public class PlayerItemHolder : MonoBehaviour, IItemHolder
 
     public void PickUp(BaseHoldItem holdItem)
     {
-        AlignItemDirection(holdItem);
         holdItem.SetHolder(this);
+        _heldItem = holdItem;
+        SetItemPosition();
     }
 
     public void Drop(Vector2 forceVector)
@@ -35,29 +36,15 @@ public class PlayerItemHolder : MonoBehaviour, IItemHolder
         rb.AddForce(forceVector * _throwingForce, ForceMode2D.Impulse);
     }
 
-    public void ItemReceived(BaseHoldItem holdItem)
-    {
-        _heldItem = holdItem;
-        SetItemPosition();
-    }
-
-    public void ItemRemoved(BaseHoldItem holdItem)
+    public void OnItemRemoved(BaseHoldItem holdItem)
     {
         if (_heldItem == null || _heldItem != holdItem) return;
         _heldItem = null;
     }
 
-    private void AlignItemDirection(BaseHoldItem holdItem)
-    {
-        float holderFacing = Mathf.Sign(_witchVisual.transform.localScale.x);
-        Vector3 itemScale = holdItem.transform.localScale;
-        itemScale.x = Mathf.Abs(itemScale.x) * holderFacing;
-        holdItem.transform.localScale = itemScale;
-    }
-
     private void SetItemPosition()
     {
-        if (_heldItem.TryGetComponent(out BaseTool tool))
+        if (_heldItem.TryGetComponent(out BaseUsableItem tool))
             _heldItem.transform.position = _holdToolPoint.position;
         else
             _heldItem.transform.position = _holdItemPoint.position;

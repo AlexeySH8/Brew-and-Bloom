@@ -52,8 +52,9 @@ public class PlayerInteractionHandler : MonoBehaviour
         }
         else if (target.TryGetComponent(out IGiveHeldItem giver))
         {
-            BaseHoldItem item = giver.Give().GetComponent<BaseHoldItem>();
-            _itemHolder.PickUp(item);
+            GameObject item = giver.Give();
+            if (item == null) return;
+            _itemHolder.PickUp(item.GetComponent<BaseHoldItem>());
         }
         else if (target.TryGetComponent(out IFreeInteractable interactable))
         {
@@ -63,16 +64,8 @@ public class PlayerInteractionHandler : MonoBehaviour
 
     private bool TryUseItem(GameObject heldItem)
     {
-        if (heldItem.TryGetComponent(out BaseTool tool))
-        {
-            var toolTarget = _detector
-                .DetectToolTarget(tool.InteractionDistance, tool.InteractionMask);
-            if (toolTarget)
-            {
-                tool.Use(toolTarget);
-                return true;
-            }
-        }
+        if (heldItem.TryGetComponent(out BaseUsableItem usableItem))
+            return usableItem.TryUse();
         return false;
     }
 }

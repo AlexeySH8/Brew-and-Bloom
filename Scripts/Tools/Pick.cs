@@ -1,12 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Pick : BaseTool
+public class Pick : BaseUsableItem
 {
-    protected override void UseTool(Collider2D target)
+    public override bool TryUse()
     {
-        if (target.TryGetComponent(out IPickTarget pickTarget))
+        Collider2D target = DetectTarget();
+        if (target != null &&
+            target.TryGetComponent(out IPickTarget pickTarget))
+        {
             pickTarget.InteractWithPick();
+            return true;
+        }
+        return false;
     }
 }
