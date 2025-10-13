@@ -37,7 +37,6 @@ public class SellerMovement : MonoBehaviour
 
     private void Start()
     {
-        _currentSpeed = _normalSpeed;
         _targetPos = GetRandomPosition();
         StartMovingAround();
     }
@@ -79,7 +78,7 @@ public class SellerMovement : MonoBehaviour
         {
             yield return Move();
             yield return new WaitForSeconds(
-                Random.Range(_minTimeNextPoint, _minTimeNextPoint));
+                Random.Range(_minTimeNextPoint, _maxTimeNextPoint));
             _targetPos = GetRandomPosition();
         }
     }

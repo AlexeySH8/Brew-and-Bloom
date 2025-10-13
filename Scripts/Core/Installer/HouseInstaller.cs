@@ -19,6 +19,10 @@ public class HouseInstaller : MonoInstaller
         Container.Bind<Seller>()
             .FromComponentInNewPrefab(_seller)
             .AsSingle();
+
+        Container.Bind<ButPen>()
+            .FromComponentInHierarchy()
+            .AsSingle();
     }
 }
 

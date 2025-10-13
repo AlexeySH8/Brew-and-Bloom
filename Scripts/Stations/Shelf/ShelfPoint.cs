@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShelfPoint : MonoBehaviour, IItemHolder, IGiveHeldItem, IReceiveHeldItem
@@ -58,6 +56,6 @@ public class ShelfPoint : MonoBehaviour, IItemHolder, IGiveHeldItem, IReceiveHel
         if (child == null) return;
 
         if (!TryReceive(child.gameObject))
-            Debug.LogError($"The wrong {child.name} of the parent {this.name}");
+            Debug.LogError($"The wrong {child.name} of the parent {name}");
     }
 }

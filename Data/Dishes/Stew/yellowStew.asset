@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21ba3cd6122372f479b83c0ca14b034d, type: 3}
+  m_Name: yellowStew
+  m_EditorClassIdentifier: 
+  <Ingredients>k__BackingField:
+  - {fileID: 11400000, guid: 5605ae6e33cc97b4291859d72803dcb3, type: 2}
+  - {fileID: 11400000, guid: 821fe2ec1f12d6b4cac73a40149267d4, type: 2}
+  - {fileID: 11400000, guid: 0faed72ed5a69f74cbe23518b2793146, type: 2}
+  - {fileID: 11400000, guid: c20dc3b93c30b3c45a04fe7a06f04bad, type: 2}
+  <IngredientsMask>k__BackingField: 2130
+  <DishPrefab>k__BackingField: {fileID: 4200490475171296627, guid: 2335c993e38a9a6418cee4ae166c6452, type: 3}
+  <Icon>k__BackingField: {fileID: 2025430028, guid: 4e989b33028f673458a8a76fa6a57b49, type: 3}

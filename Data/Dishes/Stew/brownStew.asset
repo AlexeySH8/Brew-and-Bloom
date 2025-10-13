@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21ba3cd6122372f479b83c0ca14b034d, type: 3}
+  m_Name: brownStew
+  m_EditorClassIdentifier: 
+  <Ingredients>k__BackingField:
+  - {fileID: 11400000, guid: 5605ae6e33cc97b4291859d72803dcb3, type: 2}
+  - {fileID: 11400000, guid: cf508cc1aa73fd349a46571e55a126ae, type: 2}
+  - {fileID: 11400000, guid: b404e3304d4c37a41a00b2c0e4bd97c4, type: 2}
+  <IngredientsMask>k__BackingField: 24578
+  <DishPrefab>k__BackingField: {fileID: 2316253431896534459, guid: 92fa8cba23309304d8356ca204d58ce0, type: 3}
+  <Icon>k__BackingField: {fileID: 1085937876, guid: 4e989b33028f673458a8a76fa6a57b49, type: 3}

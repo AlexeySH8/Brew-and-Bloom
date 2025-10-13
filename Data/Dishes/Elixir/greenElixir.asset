@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21ba3cd6122372f479b83c0ca14b034d, type: 3}
+  m_Name: greenElixir
+  m_EditorClassIdentifier: 
+  <Ingredients>k__BackingField:
+  - {fileID: 11400000, guid: bf81ea5d9a2ea4c4e915e6d9150c6aee, type: 2}
+  - {fileID: 11400000, guid: b404e3304d4c37a41a00b2c0e4bd97c4, type: 2}
+  - {fileID: 11400000, guid: dce99c95cd1482d47a0d6cd4dc3fbbc5, type: 2}
+  <IngredientsMask>k__BackingField: 17412
+  <DishPrefab>k__BackingField: {fileID: 7342817486832437876, guid: 89a17571032a28b4ebe37dbd6b6fd37f, type: 3}
+  <Icon>k__BackingField: {fileID: 1600657264, guid: 4e989b33028f673458a8a76fa6a57b49, type: 3}
