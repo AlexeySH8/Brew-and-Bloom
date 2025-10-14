@@ -21,12 +21,12 @@ public class HousePortal : MonoBehaviour, IReceiveHeldItem, IFreeInteractable
         LoadTavernScene();
     }
 
-    public bool TryReceive(GameObject heldItem)
+    public bool TryReceive(BaseHoldItem heldItem)
     {
         if (heldItem.TryGetComponent(out Dish dish))
         {
             _ordersManager.AddPlayerDish(dish.Data);
-            dish.GetComponent<BaseHoldItem>().Discard();
+            dish.Discard();
             return true;
         }
         else

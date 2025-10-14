@@ -2,5 +2,6 @@ using UnityEngine;
 
 public interface IGiveHeldItem
 {
-    GameObject Give();
+    //GameObject GiveItem();
+    BaseHoldItem GiveItem();
 }

@@ -1,18 +1,16 @@
 using UnityEngine;
 
-public class PlayerItemHolder : MonoBehaviour, IItemHolder
+public class PlayerItemHolder : BaseItemHolder
 {
     [SerializeField] private Transform _holdToolPoint;
     [SerializeField] private Transform _holdItemPoint;
     [SerializeField] private float _throwingForce;
 
     private PlayerVisual _witchVisual;
-    private BaseHoldItem _heldItem;
     private Rigidbody2D _heldItemRB;
 
-
-    public Transform ParentPoint => _witchVisual.transform;
-    public int SortingOrderOffset => _witchVisual.SpriteRenderer.sortingOrder + 1;
+    public override Transform ParentPoint => _witchVisual.transform;
+    public override int SortingOrderOffset => _witchVisual.SpriteRenderer.sortingOrder + 1;
 
     private void Awake()
     {
@@ -21,25 +19,19 @@ public class PlayerItemHolder : MonoBehaviour, IItemHolder
 
     public void PickUp(BaseHoldItem holdItem)
     {
-        holdItem.SetHolder(this);
-        _heldItem = holdItem;
-        SetItemPosition();
+        if (TryReceive(holdItem))
+            SetItemPosition();
     }
 
     public void Drop(Vector2 forceVector)
     {
-        if (!_heldItem) return;
+        BaseHoldItem heldItem = GiveItem();
 
-        var rb = _heldItem.Rigidbody;
+        if (heldItem == null) return;
+
+        var rb = heldItem.Rigidbody;
         rb.transform.position += (Vector3)(forceVector * 0.2f); // Moves the object collider away from the player collider
-        _heldItem.SetHolder(null);
         rb.AddForce(forceVector * _throwingForce, ForceMode2D.Impulse);
-    }
-
-    public void OnItemRemoved(BaseHoldItem holdItem)
-    {
-        if (_heldItem == null || _heldItem != holdItem) return;
-        _heldItem = null;
     }
 
     private void SetItemPosition()

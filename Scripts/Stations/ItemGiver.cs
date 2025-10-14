@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class ItemGiver : MonoBehaviour , IGiveHeldItem
 {
-    [SerializeField] private GameObject _itemPrefab;
+    [SerializeField] private BaseHoldItem _itemPrefab;
 
-    public GameObject Give()
+    public BaseHoldItem GiveItem()
     {
         return Instantiate(_itemPrefab);
     }

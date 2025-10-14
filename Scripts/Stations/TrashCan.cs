@@ -2,18 +2,11 @@ using UnityEngine;
 
 public class TrashCan : MonoBehaviour, IReceiveHeldItem
 {
-    public bool TryReceive(GameObject heldItem)
+    public bool TryReceive(BaseHoldItem heldItem)
     {
-        return Utilize(heldItem);
+        Utilize(heldItem);
+        return true;
     }
 
-    public bool Utilize(GameObject item)
-    {
-        if (item.TryGetComponent(out BaseHoldItem holdItem))
-        {
-            holdItem.Discard();
-            return true;
-        }
-        return false;
-    }
+    public void Utilize(BaseHoldItem holdItem) => holdItem.Discard();
 }

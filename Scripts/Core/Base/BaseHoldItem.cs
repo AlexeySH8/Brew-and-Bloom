@@ -4,7 +4,7 @@ public abstract class BaseHoldItem : MonoBehaviour
 {
     public Rigidbody2D Rigidbody { get; private set; }
 
-    protected IItemHolder _currentHolder;
+    protected BaseItemHolder _currentHolder;
     protected SpriteRenderer _spriteRenderer;
     protected int _defaultSortingOrder;
 
@@ -17,7 +17,7 @@ public abstract class BaseHoldItem : MonoBehaviour
         CheckParent();
     }
 
-    public void SetHolder(IItemHolder newHolder)
+    public void SetHolder(BaseItemHolder newHolder)
     {
         _currentHolder?.OnItemRemoved(this);
         _currentHolder = newHolder;
@@ -50,7 +50,7 @@ public abstract class BaseHoldItem : MonoBehaviour
     private void CheckParent()
     {
         Transform parent = transform.parent;
-        if (parent != null && !parent.TryGetComponent<IItemHolder>(out _))
+        if (parent != null && !parent.TryGetComponent<BaseItemHolder>(out _))
             Debug.LogError($"The parent of {gameObject.name} does not implement the IItemHolder");
     }
 

@@ -30,12 +30,12 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IReceiveHeldItem
 
     public void InteractWithShovel() => Cultivate();
 
-    public bool TryReceive(GameObject heldItem)
+    public bool TryReceive(BaseHoldItem heldItem)
     {
         if (heldItem.TryGetComponent(out Seed seed))
         {
             StartCoroutine(PlantsSeed(seed.Data));
-            heldItem.GetComponent<BaseHoldItem>().Discard();
+            heldItem.Discard();
             return true;
         }
         return false;

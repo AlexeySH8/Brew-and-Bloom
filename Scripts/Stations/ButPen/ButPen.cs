@@ -14,6 +14,7 @@ public class ButPen : MonoBehaviour
     {
         _area = GetComponent<BoxCollider2D>();
         _powderSpawners = GetComponentInChildren<PowderSpawner>();
+        TrySpawnBut();
     }
 
     [ContextMenu("Spawn But")]

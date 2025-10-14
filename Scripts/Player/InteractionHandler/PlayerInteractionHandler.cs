@@ -13,7 +13,7 @@ public class PlayerInteractionHandler : MonoBehaviour
 
     public void Interact(float faceDirection)
     {
-        GameObject heldItem = _itemHolder.GetHeldItem();
+        BaseHoldItem heldItem = _itemHolder.HeldItem;
         RaycastHit2D hit = _detector.DetectInterectiveItem(heldItem != null);
         Collider2D interactiveItem = hit.collider;
 
@@ -31,7 +31,7 @@ public class PlayerInteractionHandler : MonoBehaviour
             HandleEmptyHandInteraction(interactiveItem);
     }
 
-    private void HandleFullHandInteraction(GameObject heldItem, Collider2D target)
+    private void HandleFullHandInteraction(BaseHoldItem heldItem, Collider2D target)
     {
         if (target.TryGetComponent(out IReceiveHeldItem receiver))
         {
@@ -52,9 +52,9 @@ public class PlayerInteractionHandler : MonoBehaviour
         }
         else if (target.TryGetComponent(out IGiveHeldItem giver))
         {
-            GameObject item = giver.Give();
+            BaseHoldItem item = giver.GiveItem();
             if (item == null) return;
-            _itemHolder.PickUp(item.GetComponent<BaseHoldItem>());
+            _itemHolder.PickUp(item);
         }
         else if (target.TryGetComponent(out IFreeInteractable interactable))
         {
@@ -62,7 +62,7 @@ public class PlayerInteractionHandler : MonoBehaviour
         }
     }
 
-    private bool TryUseItem(GameObject heldItem)
+    private bool TryUseItem(BaseHoldItem heldItem)
     {
         if (heldItem.TryGetComponent(out BaseUsableItem usableItem))
             return usableItem.TryUse();

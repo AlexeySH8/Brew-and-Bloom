@@ -32,7 +32,7 @@ public class GuestCreature : MonoBehaviour, IReceiveHeldItem, IFreeInteractable
             _guest.StartDialogue();
     }
 
-    public bool TryReceive(GameObject heldItem)
+    public bool TryReceive(BaseHoldItem heldItem)
     {
         bool reciveResult = false;
         if (_guest == null)
@@ -44,7 +44,7 @@ public class GuestCreature : MonoBehaviour, IReceiveHeldItem, IFreeInteractable
         if (!_guest.IsServed && heldItem.TryGetComponent(out Dish dish))
         {
             reciveResult = true;
-            dish.GetComponent<BaseHoldItem>().Discard();
+            dish.Discard();
             HideOrderDisplay();
             _guest.CompleteOrder(dish.Data.IngredientsMask);
         }

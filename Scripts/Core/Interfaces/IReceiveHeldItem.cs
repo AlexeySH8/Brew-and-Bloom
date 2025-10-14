@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IReceiveHeldItem
 {
-    bool TryReceive(GameObject heldItem);
+    bool TryReceive(BaseHoldItem heldItem);
 }
