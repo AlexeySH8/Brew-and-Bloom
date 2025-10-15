@@ -4,9 +4,10 @@ using System.Linq;
 using UnityEngine;
 using Zenject;
 
-public class CookingStation : MonoBehaviour, IReceiveHeldItem
+public class CookingStation : BaseItemHolder
 {
     [SerializeField] private int _maxHeldIngredient;
+    [SerializeField] private Transform _dishHolder;
     [SerializeField] private IngredientData[] _unavailableIngredients;
 
     private int _currentIngredientsMask;
@@ -14,6 +15,11 @@ public class CookingStation : MonoBehaviour, IReceiveHeldItem
     private Recipes _recipes;
     private CoockingStationVisual _stationVisual;
     private Coroutine _cooking;
+
+    public override Transform ParentPoint => _dishHolder;
+
+    public override int SortingOrderOffset
+        => _stationVisual.SpriteRenderer.sortingOrder + 1;
 
     [Inject]
     public void Construct(Recipes recipes)
@@ -27,7 +33,7 @@ public class CookingStation : MonoBehaviour, IReceiveHeldItem
         _stationVisual = GetComponent<CoockingStationVisual>();
     }
 
-    public bool TryReceive(BaseHoldItem heldItem)
+    public override bool TryReceive(BaseHoldItem heldItem)
     {
         if (heldItem.TryGetComponent(out Ingredient ingredient) &&
             !_unavailableIngredients.Contains(ingredient.Data) &&
@@ -39,6 +45,12 @@ public class CookingStation : MonoBehaviour, IReceiveHeldItem
             return true;
         }
         return false;
+    }
+
+    public override BaseHoldItem GiveItem()
+    {
+        Clear();
+        return base.GiveItem();
     }
 
     private void Cook(Ingredient ingredient)
@@ -58,8 +70,11 @@ public class CookingStation : MonoBehaviour, IReceiveHeldItem
     private IEnumerator CookingDish(GameObject dish)
     {
         yield return new WaitForSeconds(0);
-        Instantiate(dish, transform.position, transform.rotation);
-        Clear();
+        BaseHoldItem holdItem = Instantiate(
+            dish, transform.position, transform.rotation)
+            .GetComponent<BaseHoldItem>();
+        base.TryReceive(holdItem);
+        _stationVisual.ClearIngredients();
     }
 
     private void AddIngredient(Ingredient ingredient)

@@ -12,13 +12,12 @@ public class CoockingStationVisual : MonoBehaviour
     [SerializeField] private SpriteRenderer _spriteColor;
     [SerializeField] private float _duration = 1f;
 
-    private Color _original—olor;
-
+    public SpriteRenderer SpriteRenderer { get; private set; }
     private List<GameObject> _containersList = new();
 
     private void Awake()
     {
-        _original—olor = _spriteColor.color;
+        SpriteRenderer = _spriteColor;
     }
 
     public void AddIngredient(Sprite ingredient)
@@ -34,13 +33,13 @@ public class CoockingStationVisual : MonoBehaviour
     {
         foreach (GameObject container in _containersList)
             Destroy(container);
-        ChangeColorTo(_original—olor);
+        ChangeColorTo(Color.white);
         _containersList.Clear();
     }
 
     public void ChangeColorTo(Color color)
     {
-        if (color == Color.white) return;
+        if (color == Color.black) return; // kitchenware
         StartCoroutine(ChangeColorCoroutineTo(color));
     }
 

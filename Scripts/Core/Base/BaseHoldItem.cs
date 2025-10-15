@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 public abstract class BaseHoldItem : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public abstract class BaseHoldItem : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _defaultSortingOrder = _spriteRenderer.sortingOrder;
 
+        ItemPool.Instance.Register(this);
         CheckParent();
     }
 
@@ -56,6 +58,7 @@ public abstract class BaseHoldItem : MonoBehaviour
 
     public virtual void Discard()
     {
+        ItemPool.Instance.Unregister(this);
         SetHolder(null);
         Destroy(gameObject);
     }

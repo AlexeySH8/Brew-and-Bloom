@@ -38,6 +38,7 @@ public class Seller : MonoBehaviour, IFreeInteractable
         foreach (GameObject item in shoppingList)
         {
             var prefab = Instantiate(item, transform.position, transform.rotation);
+            prefab.GetComponent<BaseHoldItem>();
             var rb = prefab.GetComponent<Rigidbody2D>();
             rb.AddForce(Vector2.down * 3, ForceMode2D.Impulse);
             yield return new WaitForSeconds(0.3f);

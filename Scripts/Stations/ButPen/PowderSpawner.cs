@@ -13,6 +13,7 @@ public class PowderSpawner : MonoBehaviour
     private BoxCollider2D _area;
     private int _currentPowderCount;
 
+
     private void Awake()
     {
         _area = GetComponent<BoxCollider2D>();
@@ -39,7 +40,6 @@ public class PowderSpawner : MonoBehaviour
                 powder.Init(this);
 
                 _currentPowderCount++;
-                Debug.Log(_currentPowderCount);
             }
         }
     }

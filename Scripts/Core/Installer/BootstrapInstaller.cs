@@ -7,6 +7,7 @@ public class BootstrapInstaller : MonoInstaller
     [SerializeField] private Recipes _recipesPref;
     [SerializeField] private GameManager _gameManagerPref;
     [SerializeField] private GameSceneManager _gameSceneManagerPref;
+    [SerializeField] private ItemPool _itemPoolPref;
     [SerializeField] private SFXManager _sfxManagerPref;
     [SerializeField] private MusicManager _musicManagerPref;
     [SerializeField] private GuestsManager _guestsManagerPref;
@@ -43,6 +44,10 @@ public class BootstrapInstaller : MonoInstaller
 
         Container.Bind<OrdersManager>()
             .FromComponentInNewPrefab(_ordersManagerPref)
+            .AsSingle().NonLazy();
+
+        Container.Bind<ItemPool>()
+            .FromComponentInNewPrefab(_itemPoolPref)
             .AsSingle().NonLazy();
     }
 

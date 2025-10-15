@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public enum CultivationStage
 {
@@ -19,6 +20,8 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IReceiveHeldItem
     [SerializeField] private int _maxHarvestCount = 3;
 
     private SoilVisual _soilVisual;
+
+    [Inject]
 
     private void Awake()
     {

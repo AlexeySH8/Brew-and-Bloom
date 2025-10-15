@@ -1,6 +1,7 @@
 using UnityEngine;
+using Zenject;
 
-public class ItemGiver : MonoBehaviour , IGiveHeldItem
+public class ItemGiver : MonoBehaviour, IGiveHeldItem
 {
     [SerializeField] private BaseHoldItem _itemPrefab;
 
