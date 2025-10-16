@@ -10,7 +10,7 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
     private const string PickTargetLayer = "PickTarget";
     private const string ShovelTargetLayer = "ShovelTarget";
     private const string StaffTargetLayer = "StaffTarget";
-    private const string InteractiveItemtLayer = "InteractiveItem";
+    private const string InteractiveItemLayer = "InteractiveItem";
     private const string DefaultLayer = "Default";
 
     private void Awake()
@@ -29,13 +29,13 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
 
     public void InteractWithShovel() => Cultivate();
 
-    public void InteractWithStaff() => _growPlant.SetWateredPlant(false);
+    public void InteractWithStaff() => _growPlant.SetPlantNeedWater(false);
 
     public bool TryReceive(BaseHoldItem heldItem)
     {
         if (heldItem.TryGetComponent(out Seed seed))
         {
-            DisableToInteractive();
+            DisableInteractive();
             _growPlant.PlantSeed(seed.Data);
             heldItem.Discard();
             return true;
@@ -60,12 +60,12 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
         else if (_growPlant.IsWaterNeed)
             gameObject.layer = LayerMask.NameToLayer(StaffTargetLayer);
         else
-            EnableToInteractive();
+            EnableInteractive();
     }
 
-    private void EnableToInteractive() =>
-        gameObject.layer = LayerMask.NameToLayer(InteractiveItemtLayer);
+    private void EnableInteractive() =>
+        gameObject.layer = LayerMask.NameToLayer(InteractiveItemLayer);
 
-    private void DisableToInteractive() =>
+    private void DisableInteractive() =>
         gameObject.layer = LayerMask.NameToLayer(DefaultLayer);
 }

@@ -34,7 +34,11 @@ public class SoilVisual : MonoBehaviour
         _ñontentSprite.sprite = stage;
     }
 
-    public void ClearContentPlace() => _ñontentSprite.sprite = null;
+    public void ClearContentPlace()
+    {
+        _ñontentSprite.sprite = null;
+        SetWaterNeedIcon(false);
+    }
 
     public void SetWaterNeedIcon(bool isNeedWater) => _waterNeedIcon.SetActive(isNeedWater);
 

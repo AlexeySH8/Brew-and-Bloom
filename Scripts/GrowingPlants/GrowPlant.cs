@@ -7,9 +7,13 @@ public class GrowPlant : MonoBehaviour
 
     [SerializeField] private int _minHarvestCount = 1;
     [SerializeField] private int _maxHarvestCount = 3;
+    [SerializeField] private int _minTimeToDryOut = 5;
+    [SerializeField] private int _maxTimeToDryOut = 7;
 
     private Soil _soil;
     private SoilVisual _soilVisual;
+    private Coroutine _growingPlant;
+    private Coroutine _dryOutRoutine;
 
     private void Awake()
     {
@@ -19,40 +23,50 @@ public class GrowPlant : MonoBehaviour
 
     public void PlantSeed(SeedData seedData)
     {
-        if (!seedData)
-        {
-            Debug.LogError($"{gameObject.name} has no SeedData");
-            return;
-        }
-        StartCoroutine(StartGrowPlant(seedData));
+        if (seedData == null || _growingPlant != null) return;
+        _growingPlant = StartCoroutine(StartGrowPlant(seedData));
     }
 
     private IEnumerator StartGrowPlant(SeedData seedData)
     {
-        for (int i = 0; i < seedData.GrowthStageSprites.Count; i++)
+        foreach (Sprite stage in seedData.GrowthStageSprites)
         {
-            Sprite stage = seedData.GrowthStageSprites[i];
             _soilVisual.UpdateGrowPlantStage(stage);
-
-            PlantNeedWater();
+            MaybeRequireWater();
             yield return new WaitUntil(() => !IsWaterNeed);
-
             yield return new WaitForSeconds(Random.Range(seedData.MinStageTime, seedData.MaxStageTime));
         }
         EndGrowPlant(seedData);
     }
 
-    private void PlantNeedWater()
+    private void MaybeRequireWater()
     {
-        //bool isNeed = Random.value > 0.2f;
-        bool isNeed = true;
+        bool isWaterNeed = Random.value > 0.8f; // 20% true
 
-        if (isNeed)
-            SetWateredPlant(true);
+        if (isWaterNeed)
+        {
+            SetPlantNeedWater(isWaterNeed);
+            _dryOutRoutine = StartCoroutine(PlantDriedOut());
+        }
     }
 
-    public void SetWateredPlant(bool isWaterNeed)
+    private IEnumerator PlantDriedOut()
     {
+        yield return new WaitForSeconds(
+            Random.Range(_minTimeToDryOut, _maxTimeToDryOut));
+        EndGrowPlant(null);
+    }
+
+    public void SetPlantNeedWater(bool isWaterNeed)
+    {
+        if (IsWaterNeed == isWaterNeed) return;
+
+        if (!isWaterNeed && _dryOutRoutine != null)
+        {
+            StopCoroutine(_dryOutRoutine);
+            _dryOutRoutine = null;
+        }
+
         IsWaterNeed = isWaterNeed;
         _soilVisual.SetWaterNeedIcon(IsWaterNeed);
         _soil.UpdateLayer();
@@ -62,13 +76,22 @@ public class GrowPlant : MonoBehaviour
     {
         if (seedData != null)
             SpawnHarvest(seedData);
+
+        if (_growingPlant != null)
+        {
+            StopCoroutine(_growingPlant);
+            _growingPlant = null;
+        }
+
+        IsWaterNeed = false;
+
         _soil.UpdateLayer();
         _soilVisual.ClearContentPlace();
     }
 
     private void SpawnHarvest(SeedData seedData)
     {
-        for (int i = 0; i < Random.Range(_minHarvestCount, _maxHarvestCount); i++)
+        for (int i = 0; i < Random.Range(_minHarvestCount, _maxHarvestCount + 1); i++)
             Instantiate(seedData.IngredientPrefab, transform.position, transform.rotation);
     }
 }
