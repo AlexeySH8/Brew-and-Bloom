@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2868539538297707971}
   - component: {fileID: 7451230442428741}
   - component: {fileID: 1762318343456181818}
-  - component: {fileID: 7625505747597488733}
   - component: {fileID: 4742173835942205661}
+  - component: {fileID: 741226897259752424}
   m_Layer: 6
   m_Name: Skillet
   m_TagString: Untagged
@@ -114,8 +114,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &7625505747597488733
-BoxCollider2D:
+--- !u!114 &4742173835942205661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4776567966178762121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c4d705f3288470418a9d7aa296596c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Data>k__BackingField: {fileID: 11400000, guid: 5605ae6e33cc97b4291859d72803dcb3, type: 2}
+--- !u!58 &741226897259752424
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -146,29 +159,6 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.58, y: 0.57}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: 0.02}
   serializedVersion: 2
-  m_Size: {x: 0.58, y: 0.57}
-  m_EdgeRadius: 0
---- !u!114 &4742173835942205661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4776567966178762121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c4d705f3288470418a9d7aa296596c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Data>k__BackingField: {fileID: 11400000, guid: 5605ae6e33cc97b4291859d72803dcb3, type: 2}
+  m_Radius: 0.22

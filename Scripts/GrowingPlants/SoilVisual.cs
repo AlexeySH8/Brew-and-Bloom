@@ -3,34 +3,28 @@ using UnityEngine;
 
 public class SoilVisual : MonoBehaviour
 {
+    [SerializeField] private GameObject _waterNeedIcon;
     [SerializeField] private Sprite[] _stageSprites;
 
-    private Soil _soil;
     private SpriteRenderer _ñontentSprite;
     private SpriteRenderer _soilSprite;
 
     private void Awake()
     {
-        _soil = GetComponent<Soil>();
         _soilSprite = GetComponent<SpriteRenderer>();
         _ñontentSprite = transform.GetChild(0).GetComponentInChildren<SpriteRenderer>();
     }
 
-    private void Start()
+    public void UpdateCultivationStage(CultivationStage currentStage)
     {
-        UpdateCultivationSoilStage();
-    }
-
-    public void UpdateCultivationSoilStage()
-    {
-        if (_soil.Stage < CultivationStage.Soil)
+        if (currentStage < CultivationStage.Soil)
         {
             _soilSprite.sprite = _stageSprites[(int)CultivationStage.Soil];
-            _ñontentSprite.sprite = _stageSprites[(int)_soil.Stage];
+            _ñontentSprite.sprite = _stageSprites[(int)currentStage];
         }
         else
         {
-            _soilSprite.sprite = _stageSprites[(int)_soil.Stage];
+            _soilSprite.sprite = _stageSprites[(int)currentStage];
             ClearContentPlace();
         }
     }
@@ -41,6 +35,8 @@ public class SoilVisual : MonoBehaviour
     }
 
     public void ClearContentPlace() => _ñontentSprite.sprite = null;
+
+    public void SetWaterNeedIcon(bool isNeedWater) => _waterNeedIcon.SetActive(isNeedWater);
 
     private void OnValidate()
     {

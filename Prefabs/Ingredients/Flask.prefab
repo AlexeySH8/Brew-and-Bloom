@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4103692439922783331}
   - component: {fileID: 4808188681959842648}
   - component: {fileID: 63981158354209877}
-  - component: {fileID: 6547134768852221826}
   - component: {fileID: 8977984633451979902}
+  - component: {fileID: 2007690916914986606}
   m_Layer: 6
   m_Name: Flask
   m_TagString: Ingredient
@@ -114,8 +114,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &6547134768852221826
-BoxCollider2D:
+--- !u!114 &8977984633451979902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4856171900400046343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c4d705f3288470418a9d7aa296596c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Data>k__BackingField: {fileID: 11400000, guid: bf81ea5d9a2ea4c4e915e6d9150c6aee, type: 2}
+--- !u!58 &2007690916914986606
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -146,29 +159,6 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.025836557}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.45, y: 0.51}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: -0, y: -0.03}
   serializedVersion: 2
-  m_Size: {x: 0.40570873, y: 0.41403574}
-  m_EdgeRadius: 0
---- !u!114 &8977984633451979902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4856171900400046343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c4d705f3288470418a9d7aa296596c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Data>k__BackingField: {fileID: 11400000, guid: bf81ea5d9a2ea4c4e915e6d9150c6aee, type: 2}
+  m_Radius: 0.18
