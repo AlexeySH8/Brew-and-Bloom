@@ -22,7 +22,7 @@ public class Shop : MonoBehaviour
     private SlideAnimation _slideAnimation;
 
     [Inject]
-    public void Construct(PlayerWallet playerWallet , Seller seller)
+    public void Construct(PlayerWallet playerWallet, Seller seller)
     {
         _playerWallet = playerWallet;
         _seller = seller;
@@ -58,10 +58,17 @@ public class Shop : MonoBehaviour
             _startPos.y - (row * _heightOffset), 0);
     }
 
-    public void TryBuy(ShopItemData itemData)
+    public void TryBuy(ShopItemUI shopItemUI)
     {
-        if (_playerWallet.Remove(itemData.Price))
+        ShopItemData itemData = shopItemUI.Data;
+        if (_playerWallet.TryRemove(itemData.Price))
         {
+            if (itemData.Item.TryGetComponent(out IShopService shopService))
+            {
+                if (!shopService.TryApply())
+                    shopItemUI.BlockItem();
+                return;
+            }
             _purchasedItems.Add(itemData.Item);
         }
     }

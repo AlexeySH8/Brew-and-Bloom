@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6744100434078370479}
   - component: {fileID: 4455843797357034098}
   - component: {fileID: 4593532356503862781}
-  - component: {fileID: 4199415154315683973}
   - component: {fileID: 5442566680945433312}
+  - component: {fileID: 4199415154315683973}
   m_Layer: 6
   m_Name: Soil 1
   m_TagString: Untagged
@@ -147,7 +147,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89bbfe09227f6a5499eac2ce1b2e87dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Stage>k__BackingField: 0
+  _currentStage: 0
+  _minResetStageTime: 30
+  _maxResetStageTime: 60
+--- !u!114 &5442566680945433312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669132595179891251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e63ff5aede0f2c4f8f73c132c2002a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minHarvestCount: 1
+  _maxHarvestCount: 3
+  _waterNeedChance: 0.1
+  _minTimeToDryOut: 20
+  _maxTimeToDryOut: 40
 --- !u!114 &4199415154315683973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,20 +187,6 @@ MonoBehaviour:
   - {fileID: -698652314, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}
   - {fileID: -471780239, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}
   - {fileID: -500544328, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}
---- !u!114 &5442566680945433312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1669132595179891251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e63ff5aede0f2c4f8f73c132c2002a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _minHarvestCount: 1
-  _maxHarvestCount: 3
 --- !u!1 &1915841593198721661
 GameObject:
   m_ObjectHideFlags: 0

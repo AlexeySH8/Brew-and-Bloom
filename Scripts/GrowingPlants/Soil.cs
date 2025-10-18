@@ -1,11 +1,15 @@
+using System.Collections;
 using UnityEngine;
 
 public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IReceiveHeldItem
 {
     [SerializeField] private CultivationStage _currentStage;
+    [SerializeField] private float _minResetStageTime;
+    [SerializeField] private float _maxResetStageTime;
 
     private GrowPlant _growPlant;
     private SoilVisual _soilVisual;
+    private Coroutine _stageResetRoutine;
 
     private const string PickTargetLayer = "PickTarget";
     private const string ShovelTargetLayer = "ShovelTarget";
@@ -21,8 +25,7 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
 
     private void Start()
     {
-        UpdateLayer();
-        _soilVisual.UpdateCultivationStage(_currentStage);
+        UpdateStage();
     }
 
     public void InteractWithPick() => Cultivate();
@@ -36,6 +39,7 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
         if (heldItem.TryGetComponent(out Seed seed))
         {
             DisableInteractive();
+            StopStageReset();
             _growPlant.PlantSeed(seed.Data);
             heldItem.Discard();
             return true;
@@ -45,10 +49,35 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
 
     private void Cultivate()
     {
-        if (_currentStage == CultivationStage.CultivatedSoil) return;
-        _currentStage++;
-        UpdateLayer();
-        _soilVisual.UpdateCultivationStage(_currentStage);
+        if (_currentStage >= CultivationStage.CultivatedSoil) return;
+
+        _currentStage = (CultivationStage)((int)_currentStage + 1);
+        UpdateStage();
+        StartStageReset();
+    }
+
+    public void StartStageReset()
+    {
+        StopStageReset();
+        _stageResetRoutine = StartCoroutine(StageResetRoutine());
+    }
+
+    private void StopStageReset()
+    {
+        if (_stageResetRoutine != null)
+        {
+            StopCoroutine(_stageResetRoutine);
+            _stageResetRoutine = null;
+        }
+    }
+
+    private IEnumerator StageResetRoutine()
+    {
+        yield return new WaitForSeconds(
+            Random.Range(_minResetStageTime, _maxResetStageTime));
+
+        _currentStage = CultivationStage.BigStone;
+        UpdateStage();
     }
 
     public void UpdateLayer()
@@ -61,6 +90,12 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
             gameObject.layer = LayerMask.NameToLayer(StaffTargetLayer);
         else
             EnableInteractive();
+    }
+
+    private void UpdateStage()
+    {
+        UpdateLayer();
+        _soilVisual.UpdateCultivationStage(_currentStage);
     }
 
     private void EnableInteractive() =>

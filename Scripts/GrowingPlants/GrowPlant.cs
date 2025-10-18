@@ -7,6 +7,7 @@ public class GrowPlant : MonoBehaviour
 
     [SerializeField] private int _minHarvestCount = 1;
     [SerializeField] private int _maxHarvestCount = 3;
+    [SerializeField] private float _waterNeedChance = 0.1f;
     [SerializeField] private int _minTimeToDryOut = 5;
     [SerializeField] private int _maxTimeToDryOut = 7;
 
@@ -24,24 +25,26 @@ public class GrowPlant : MonoBehaviour
     public void PlantSeed(SeedData seedData)
     {
         if (seedData == null || _growingPlant != null) return;
-        _growingPlant = StartCoroutine(StartGrowPlant(seedData));
+        _growingPlant = StartCoroutine(GrowPlantRoutine(seedData));
     }
 
-    private IEnumerator StartGrowPlant(SeedData seedData)
+    private IEnumerator GrowPlantRoutine(SeedData seedData)
     {
         foreach (Sprite stage in seedData.GrowthStageSprites)
         {
             _soilVisual.UpdateGrowPlantStage(stage);
             MaybeRequireWater();
+
             yield return new WaitUntil(() => !IsWaterNeed);
             yield return new WaitForSeconds(Random.Range(seedData.MinStageTime, seedData.MaxStageTime));
         }
+        yield return new WaitForSeconds(Random.Range(seedData.MinStageTime, seedData.MaxStageTime));
         EndGrowPlant(seedData);
     }
 
     private void MaybeRequireWater()
     {
-        bool isWaterNeed = Random.value > 0.8f; // 20% true
+        bool isWaterNeed = Random.value < _waterNeedChance;
 
         if (isWaterNeed)
         {
@@ -86,6 +89,7 @@ public class GrowPlant : MonoBehaviour
         IsWaterNeed = false;
 
         _soil.UpdateLayer();
+        _soil.StartStageReset();
         _soilVisual.ClearContentPlace();
     }
 

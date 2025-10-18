@@ -42,7 +42,7 @@ public class PlayerWallet
         DailyEarning = 0;
     }
 
-    public bool Remove(int amount)
+    public bool TryRemove(int amount)
     {
         if (Balance < amount) return false;
         Balance -= amount;

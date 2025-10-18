@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemImage: {fileID: 1465671569728211724}
+  _coinImage: {fileID: 1829586301444825405}
   _priceText: {fileID: 7606928905412460836}
 --- !u!1 &4753318006091531445
 GameObject:
