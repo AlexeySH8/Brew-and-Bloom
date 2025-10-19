@@ -17,13 +17,16 @@ public class Shop : MonoBehaviour
 
     private Seller _seller;
     private PlayerWallet _playerWallet;
+    private ShopServiceFactory _shopServiceFactory;
     private Transform _container;
     private List<GameObject> _purchasedItems;
     private SlideAnimation _slideAnimation;
 
     [Inject]
-    public void Construct(PlayerWallet playerWallet, Seller seller)
+    public void Construct(PlayerWallet playerWallet, Seller seller,
+        ShopServiceFactory shopServiceFactory)
     {
+        _shopServiceFactory = shopServiceFactory;
         _playerWallet = playerWallet;
         _seller = seller;
         IsOpen = false;
@@ -61,16 +64,17 @@ public class Shop : MonoBehaviour
     public void TryBuy(ShopItemUI shopItemUI)
     {
         ShopItemData itemData = shopItemUI.Data;
-        if (_playerWallet.TryRemove(itemData.Price))
+        if (!_playerWallet.TryRemove(itemData.Price))
+            return;
+
+        if (itemData.ServiceType != ShopServiceType.None)
         {
-            if (itemData.Item.TryGetComponent(out IShopService shopService))
-            {
-                if (!shopService.TryApply())
-                    shopItemUI.BlockItem();
-                return;
-            }
-            _purchasedItems.Add(itemData.Item);
+            var service = _shopServiceFactory.Create(itemData.ServiceType);
+            if (service == null || !service.TryApply())
+                shopItemUI.BlockItem();
+            return;
         }
+        _purchasedItems.Add(itemData.ItemPrefab);
     }
 
     public void OpenShop()

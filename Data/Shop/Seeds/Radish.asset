@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fa8fe80abc6d34da8869f0c5a41649, type: 3}
   m_Name: Radish
   m_EditorClassIdentifier: 
-  <Item>k__BackingField: {fileID: 2753128242762029525, guid: a818a83568a8e7a45b9469df2744527d, type: 3}
   <Price>k__BackingField: 10
+  <Icon>k__BackingField: {fileID: 1509154673, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}
+  <ItemPrefab>k__BackingField: {fileID: 2753128242762029525, guid: a818a83568a8e7a45b9469df2744527d, type: 3}
+  <ServiceType>k__BackingField: 0

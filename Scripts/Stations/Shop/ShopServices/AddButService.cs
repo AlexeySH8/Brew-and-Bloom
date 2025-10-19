@@ -1,12 +1,16 @@
 using UnityEngine;
 
-public class AddButService : MonoBehaviour, IShopService
+public class AddButService : IShopService
 {
     private ButPen _butPen;
 
+    public AddButService(ButPen butPen)
+    {
+        _butPen = butPen;
+    }
+
     public bool TryApply()
     {
-        _butPen = FindAnyObjectByType<ButPen>();
         return _butPen.TrySpawnBut();
     }
 }

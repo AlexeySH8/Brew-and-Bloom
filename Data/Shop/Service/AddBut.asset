@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fa8fe80abc6d34da8869f0c5a41649, type: 3}
   m_Name: AddBut
   m_EditorClassIdentifier: 
-  <Item>k__BackingField: {fileID: 3916788142806279209, guid: fdd2684e33d66ed4a89c69cc50b50288, type: 3}
   <Price>k__BackingField: 10
+  <Icon>k__BackingField: {fileID: -1316391192, guid: 342803fa141daea48abfbacdda20266e, type: 3}
+  <ItemPrefab>k__BackingField: {fileID: 0}
+  <ServiceType>k__BackingField: 1

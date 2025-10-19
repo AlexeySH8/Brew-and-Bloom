@@ -9,6 +9,7 @@ public class CoockingStationVisual : MonoBehaviour
     [SerializeField] private float _xDeltaContainerPos = 0.42f;
     [SerializeField] private GameObject _containerPrefab;
     [Header("Color Change")]
+    [SerializeField] private bool _canChangeColor;
     [SerializeField] private SpriteRenderer _spriteColor;
     [SerializeField] private float _duration = 1f;
 
@@ -39,7 +40,7 @@ public class CoockingStationVisual : MonoBehaviour
 
     public void ChangeColorTo(Color color)
     {
-        if (color == Color.black) return; // kitchenware
+        if (!_canChangeColor || color == Color.black) return; // kitchenware
         StartCoroutine(ChangeColorCoroutineTo(color));
     }
 

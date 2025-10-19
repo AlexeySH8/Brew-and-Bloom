@@ -17,7 +17,7 @@ public class ShopItemUI : MonoBehaviour
     {
         Data = data;
         _shop = shop;
-        _itemImage.sprite = Data.Item.GetComponent<SpriteRenderer>().sprite;
+        _itemImage.sprite = Data.Icon;
         _priceText.text = Data.Price.ToString();
         _buyButton = GetComponent<Button>();
         _buyButton.onClick.AddListener(Buy);

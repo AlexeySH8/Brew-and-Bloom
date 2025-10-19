@@ -23,6 +23,12 @@ public class HouseInstaller : MonoInstaller
         Container.Bind<ButPen>()
             .FromComponentInHierarchy()
             .AsSingle();
+
+        Container.Bind<ShopServiceFactory>()
+            .AsSingle();
+
+        Container.Bind<AddButService>()
+            .AsTransient();
     }
 }
 

@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fa8fe80abc6d34da8869f0c5a41649, type: 3}
   m_Name: Potato
   m_EditorClassIdentifier: 
-  <Item>k__BackingField: {fileID: 5373344515353800457, guid: 3a64dbd903074964a96aa39ecb3fcc7c, type: 3}
   <Price>k__BackingField: 10
+  <Icon>k__BackingField: {fileID: 901275372, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}
+  <ItemPrefab>k__BackingField: {fileID: 5373344515353800457, guid: 3a64dbd903074964a96aa39ecb3fcc7c, type: 3}
+  <ServiceType>k__BackingField: 0
