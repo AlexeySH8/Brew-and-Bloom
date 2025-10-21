@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private PlayerVisual _visual;
     private PlayerInteractionHandler _interactiveHandler;
     private PlayerItemHolder _itemHolder;
-    private GuestDialogue _dialoguePartner;
+    private IActiveInteraction _interactionPartner;
     private float _horizontalInput;
     private float _verticalInput;
     private float _xInteractionDirection;
@@ -56,8 +56,8 @@ public class PlayerController : MonoBehaviour
 
         if (_canInteract && _input.IsInteractPressed())
         {
-            if (_dialoguePartner != null)
-                _dialoguePartner.NextLineDialogue();
+            if (_interactionPartner != null)
+                _interactionPartner.HandleInteractPressed();
             else
                 _interactiveHandler.Interact(FaceDirection);
         }
@@ -90,9 +90,9 @@ public class PlayerController : MonoBehaviour
         InteractionDirection = new Vector2(_xInteractionDirection, _yInteractionDirection);
     }
 
-    public void StartDialogue(GuestDialogue guestDialogue)
+    public void StartActiveInteraction(IActiveInteraction activeInteraction)
     {
-        _dialoguePartner = guestDialogue;
+        _interactionPartner = activeInteraction;
         _canMove = false;
         _canDrop = false;
 
@@ -100,9 +100,9 @@ public class PlayerController : MonoBehaviour
         _verticalInput = 0;
     }
 
-    public void EndDialogue()
+    public void EndActiveInteraction()
     {
-        _dialoguePartner = null;
+        _interactionPartner = null;
         _canMove = true;
         _canDrop = true;
     }

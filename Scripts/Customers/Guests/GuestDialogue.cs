@@ -1,10 +1,8 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Localization;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
-public class GuestDialogue
+public class GuestDialogue : IActiveInteraction
 {
     private int _dialoguePartIndex;
     private int _lineIndex;
@@ -40,6 +38,10 @@ public class GuestDialogue
 
     }
 
+    public void HandleInteractPressed() => NextLineDialogue();
+
+    public void EndActiveInteraction() => EndDialogue();
+
     public void StartDialogue()
     {
         #region Exception Check
@@ -67,11 +69,11 @@ public class GuestDialogue
         _lineIndex = 0;
         SetDialoguePart();
         _dialoguePanelUI.StartDialogue(_guestPortret, _guestName);
-        _playerController.StartDialogue(this);
+        _playerController.StartActiveInteraction(this);
         NextLineDialogue();
     }
 
-    public void NextLineDialogue()
+    private void NextLineDialogue()
     {
         if (_dialoguePanelUI.IsTyping()) return;
 
@@ -118,7 +120,7 @@ public class GuestDialogue
         if (_currentLine != null)
             _currentLine.StringChanged -= OnStringChanged;
 
-        _playerController.EndDialogue();
+        _playerController.EndActiveInteraction();
         _dialoguePanelUI.EndDialogue();
     }
 

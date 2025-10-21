@@ -2,29 +2,24 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimmingBar : MonoBehaviour
+public class TimingBar : MonoBehaviour
 {
-    [SerializeField] private float _speedDefault;
-    [SerializeField] private float _stepDelayDefault;
+    [SerializeField] private float _baseSpeed;
+    [SerializeField] private float _baseStepDelay;
+    [SerializeField] private float _difficultyMultiplier;
     [SerializeField] private RectTransform _bar;
     [SerializeField] private RectTransform _successZone;
     [SerializeField] private RectTransform _indicator;
 
-    private float _currentSpeed, _currentStepDelay;
+    private float _currentSpeed, _currentStepDelay, _baseXZoneScale;
     private float _indicatorXBoundary, _zoneXBoundary;
     private bool _movingRight = true;
     Coroutine _moving;
 
     private void Awake()
     {
-        _currentSpeed = _speedDefault;
-        _currentStepDelay = _stepDelayDefault;
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-            CheckSuccess();
+        _baseXZoneScale = _successZone.localScale.x;
+        ResetDifficulty();
     }
 
     public void StartPlay()
@@ -37,18 +32,17 @@ public class TimmingBar : MonoBehaviour
 
     public void EndPlay()
     {
-        gameObject.SetActive(false);
         StopCoroutine(_moving);
         _moving = null;
-        _currentSpeed *= 2;
-        _currentStepDelay /= 2;
+        IncreaseDifficulty();
+        gameObject.SetActive(false);
     }
 
     private IEnumerator MoveIndicator()
     {
         while (true)
         {
-            float step = _speedDefault * _stepDelayDefault * (_movingRight ? 1 : -1);
+            float step = _currentSpeed * _currentStepDelay * (_movingRight ? 1 : -1);
             _indicator.anchoredPosition += new Vector2(step, 0);
 
             if (_indicator.anchoredPosition.x >= _indicatorXBoundary)
@@ -56,7 +50,7 @@ public class TimmingBar : MonoBehaviour
             else if (_indicator.anchoredPosition.x <= -_indicatorXBoundary)
                 _movingRight = true;
 
-            yield return new WaitForSeconds(_stepDelayDefault);
+            yield return new WaitForSeconds(_currentStepDelay);
         }
     }
 
@@ -69,14 +63,26 @@ public class TimmingBar : MonoBehaviour
         float indicatorRight = _indicator.anchoredPosition.x + _indicator.rect.width / 2;
 
         bool isSuccess = zoneLeft <= indicatorLeft && zoneRight >= indicatorRight;
-        if (isSuccess)
-        {
-            Debug.Log("WIN");
-        }
-        else
-            Debug.Log("LOSE");
         SetSuccessZone();
         return isSuccess;
+    }
+
+    private void IncreaseDifficulty()
+    {
+        var zoneScale = _successZone.localScale;
+        zoneScale.x = Mathf.Max(0.1f, _successZone.localScale.x / _difficultyMultiplier);
+        _successZone.localScale = zoneScale;
+        _currentSpeed *= _difficultyMultiplier;
+        _currentStepDelay /= _difficultyMultiplier;
+    }
+
+    private void ResetDifficulty()
+    {
+        var zoneScale = _successZone.localScale;
+        zoneScale.x = _baseXZoneScale;
+        _successZone.localScale = zoneScale;
+        _currentSpeed = _baseSpeed;
+        _currentStepDelay = _baseStepDelay;
     }
 
     private void SetSuccessZone()

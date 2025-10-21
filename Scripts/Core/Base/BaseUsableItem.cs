@@ -18,5 +18,5 @@ public abstract class BaseUsableItem : BaseHoldItem
         return toolTarget.collider;
     }
 
-    public override void Discard() { }
+    //public override void Discard() { }
 }

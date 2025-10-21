@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcSpawnAnimation : MonoBehaviour
+public class ArcAnimation : MonoBehaviour
 {
-    [SerializeField] private float _height = 1f;       // высота дуги
-    [SerializeField] private float _duration = 0.5f;   // время полета
-    [SerializeField] private Vector3 _offset; // куда смещается объект от портала
+    private float _height;       // высота дуги
+    private float _duration;   // время полета
+    private Vector3 _offset; // куда смещается объект от портала
 
     private Vector3 _startPos;
     private Vector3 _endPos;
 
-    public void LaunchFrom(Vector3 startPosition)
+    public void Animate(Vector3 startPosition, Vector3 offset,
+        float height = 1f, float duration = 0.5f)
     {
-        _offset = new Vector3(Random.Range(-2f, 2f), -1.5f, 0);
+        _height = height;
+        _duration = duration;
+        _offset = offset;
         _startPos = startPosition;
         _endPos = startPosition + _offset;
         transform.position = _startPos;

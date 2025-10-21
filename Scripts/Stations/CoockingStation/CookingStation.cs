@@ -32,7 +32,7 @@ public class CookingStation : BaseItemHolder
 
     private void Awake()
     {
-        IsCookingStop = true;
+        IsCookingStop = false;
         _currentIngredientsMask = 0;
         _stationVisual = GetComponent<CoockingStationVisual>();
     }

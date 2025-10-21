@@ -40,10 +40,10 @@ public class TavernPortal : MonoBehaviour, IFreeInteractable
         {
             GameObject dish = Instantiate(dishData.DishPrefab);
 
-            if (!dish.TryGetComponent(out ArcSpawnAnimation arc))
-                arc = dish.AddComponent<ArcSpawnAnimation>();
+            if (!dish.TryGetComponent(out ArcAnimation arc))
+                arc = dish.AddComponent<ArcAnimation>();
 
-            arc.LaunchFrom(transform.position);
+            //arc.LaunchFrom(transform.position);
             yield return new WaitForSeconds(1f);
         }
     }

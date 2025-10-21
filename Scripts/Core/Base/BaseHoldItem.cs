@@ -1,9 +1,8 @@
 using UnityEngine;
-using Zenject;
-
 public abstract class BaseHoldItem : MonoBehaviour
 {
     public Rigidbody2D Rigidbody { get; private set; }
+    public ArcAnimation ArcAnimation { get; private set; }
 
     protected BaseItemHolder _currentHolder;
     protected SpriteRenderer _spriteRenderer;
@@ -14,7 +13,7 @@ public abstract class BaseHoldItem : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _defaultSortingOrder = _spriteRenderer.sortingOrder;
-
+        ArcAnimation = gameObject.AddComponent<ArcAnimation>();
         ItemPool.Instance.Register(this);
         CheckParent();
     }
