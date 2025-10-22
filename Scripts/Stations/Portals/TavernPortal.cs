@@ -6,6 +6,8 @@ using Zenject;
 
 public class TavernPortal : MonoBehaviour, IFreeInteractable
 {
+    [SerializeField] private Vector3 _spawnOffset = new Vector3(1, 2, 0);
+
     private OrdersManager _ordersManager;
     private OrdersPanelUI _ordersPanelUI;
     private GameSceneManager _gameSceneManager;
@@ -40,10 +42,10 @@ public class TavernPortal : MonoBehaviour, IFreeInteractable
         {
             GameObject dish = Instantiate(dishData.DishPrefab);
 
-            if (!dish.TryGetComponent(out ArcAnimation arc))
-                arc = dish.AddComponent<ArcAnimation>();
+            dish
+                .GetComponent<BaseHoldItem>()
+                .ArcAnimation.Animate(transform.position, _spawnOffset);
 
-            //arc.LaunchFrom(transform.position);
             yield return new WaitForSeconds(1f);
         }
     }

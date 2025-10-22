@@ -13,7 +13,12 @@ public abstract class BaseHoldItem : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _defaultSortingOrder = _spriteRenderer.sortingOrder;
-        ArcAnimation = gameObject.AddComponent<ArcAnimation>();
+
+        if (TryGetComponent(out ArcAnimation arc))
+            ArcAnimation = arc;
+        else
+            ArcAnimation = gameObject.AddComponent<ArcAnimation>();
+
         ItemPool.Instance.Register(this);
         CheckParent();
     }

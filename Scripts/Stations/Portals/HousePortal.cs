@@ -1,24 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 public class HousePortal : MonoBehaviour, IReceiveHeldItem, IFreeInteractable
 {
     private OrdersManager _ordersManager;
     private GameSceneManager _gameSceneManager;
+    private PortalUI _portalUI;
 
     [Inject]
-    public void Construct(OrdersManager ordersManager, GameSceneManager gameSceneManager)
+    public void Construct(OrdersManager ordersManager, GameSceneManager gameSceneManager,
+        PortalUI portalUI)
     {
         _ordersManager = ordersManager;
         _gameSceneManager = gameSceneManager;
+        _portalUI = portalUI;
     }
 
     public void Interact()
     {
-        LoadTavernScene();
+        _portalUI.Show(CancelLoadTavernScene, ConfirmLoadTavernScene);
     }
 
     public bool TryReceive(BaseHoldItem heldItem)
@@ -31,13 +31,15 @@ public class HousePortal : MonoBehaviour, IReceiveHeldItem, IFreeInteractable
         }
         else
         {
-            LoadTavernScene();
+            _portalUI.Show(CancelLoadTavernScene, ConfirmLoadTavernScene);
         }
         return false;
     }
 
-    private void LoadTavernScene()
+    private void ConfirmLoadTavernScene()
     {
         _gameSceneManager.LoadTavernScene();
     }
+
+    private void CancelLoadTavernScene() { }
 }

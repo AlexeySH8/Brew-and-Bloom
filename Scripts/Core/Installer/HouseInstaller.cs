@@ -29,6 +29,10 @@ public class HouseInstaller : MonoInstaller
 
         Container.Bind<AddButService>()
             .AsTransient();
+
+        Container.Bind<PortalUI>()
+            .FromComponentInHierarchy()
+            .AsSingle().NonLazy();
     }
 }
 

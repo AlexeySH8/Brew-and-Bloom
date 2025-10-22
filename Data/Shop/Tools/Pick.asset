@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64fa8fe80abc6d34da8869f0c5a41649, type: 3}
-  m_Name: AddBut
+  m_Name: Pick
   m_EditorClassIdentifier: 
-  <Price>k__BackingField: 50
-  <Icon>k__BackingField: {fileID: -1316391192, guid: 342803fa141daea48abfbacdda20266e, type: 3}
-  <ItemPrefab>k__BackingField: {fileID: 0}
-  <ServiceType>k__BackingField: 1
+  <Price>k__BackingField: 100
+  <Icon>k__BackingField: {fileID: 733644454, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}
+  <ItemPrefab>k__BackingField: {fileID: 231443583562039617, guid: b572cd524a75fd841a6455663e8ddaec, type: 3}
+  <ServiceType>k__BackingField: 0

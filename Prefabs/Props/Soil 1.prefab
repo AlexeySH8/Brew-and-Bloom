@@ -148,8 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentStage: 0
-  _minResetStageTime: 35
-  _maxResetStageTime: 80
+  _minResetStageTime: 90
+  _maxResetStageTime: 120
 --- !u!114 &5442566680945433312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minHarvestCount: 1
   _maxHarvestCount: 3
-  _waterNeedChance: 0.99
+  _waterNeedChance: 0.2
   _minTimeToDryOut: 20
   _maxTimeToDryOut: 40
 --- !u!114 &4199415154315683973
