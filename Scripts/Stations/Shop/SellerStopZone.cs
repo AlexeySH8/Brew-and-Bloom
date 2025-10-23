@@ -8,12 +8,13 @@ public class SellerStopZone : MonoBehaviour
     [SerializeField] private float _minWaitTime;
     [SerializeField] private float _maxWaitTime;
 
+    private Coroutine _waiting;
     private SellerMovement _movement;
     private Shop _shop;
     private bool _canStop;
 
     [Inject]
-    public void Contruct(Shop shop)
+    public void Construct(Shop shop)
     {
         _shop = shop;
         _canStop = true;
@@ -26,13 +27,16 @@ public class SellerStopZone : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out PlayerController _) && _canStop)
-            StartCoroutine(PlayerNearby());
+        if (collision.TryGetComponent(out PlayerController _) &&
+            _canStop && _waiting == null)
+            _waiting = StartCoroutine(PlayerNearby());
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (!_shop.IsOpen && collision.TryGetComponent(out PlayerController _) && _canStop)
+        if (!isActiveAndEnabled) return;
+        if (collision.TryGetComponent(out PlayerController _) &&
+            _canStop && !_shop.IsOpen)
             _movement.StartMovingAround();
     }
 
@@ -44,6 +48,8 @@ public class SellerStopZone : MonoBehaviour
 
         if (!_shop.IsOpen)
             _movement.StartMovingAround();
+
+        _waiting = null;
     }
 
     public void EnableStopMoving() => _canStop = true;

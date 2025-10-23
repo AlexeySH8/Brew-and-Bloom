@@ -5,7 +5,7 @@ public class ItemPool : MonoBehaviour
 {
     public static ItemPool Instance { get; private set; }
 
-    private const int MaxItemCountInScene = 50;
+    private const int MaxItemCountInScene = 150;
     private Queue<BaseHoldItem> _queueHoldItem = new Queue<BaseHoldItem>();
     private HashSet<BaseHoldItem> _hashSetHoldItems = new HashSet<BaseHoldItem>();
 

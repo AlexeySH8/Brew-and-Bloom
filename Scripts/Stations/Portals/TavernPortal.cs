@@ -1,13 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 public class TavernPortal : MonoBehaviour, IFreeInteractable
 {
-    [SerializeField] private Vector3 _spawnOffset = new Vector3(1, 2, 0);
-
     private OrdersManager _ordersManager;
     private OrdersPanelUI _ordersPanelUI;
     private GameSceneManager _gameSceneManager;
@@ -41,10 +38,10 @@ public class TavernPortal : MonoBehaviour, IFreeInteractable
         foreach (var dishData in dishesData)
         {
             GameObject dish = Instantiate(dishData.DishPrefab);
-
+            Vector3 spawnOffset = new Vector3(Random.Range(-1.5f, 1.5f), -2, 0);
             dish
                 .GetComponent<BaseHoldItem>()
-                .ArcAnimation.Animate(transform.position, _spawnOffset);
+                .ArcAnimation.Animate(transform.position, spawnOffset);
 
             yield return new WaitForSeconds(1f);
         }

@@ -15,4 +15,5 @@ public enum ShopServiceType
 {
     None,
     AddBut,
+    EndGame
 }

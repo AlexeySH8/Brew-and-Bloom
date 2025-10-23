@@ -15,6 +15,7 @@ public class ShopServiceFactory
         return type switch
         {
             ShopServiceType.AddBut => _container.Instantiate<AddButService>(),
+            ShopServiceType.EndGame => _container.Instantiate<EndGameService>(),
             _ => null
         };
     }

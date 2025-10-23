@@ -29,21 +29,26 @@ public class Seller : MonoBehaviour, IFreeInteractable
     public void DeliverItems(List<GameObject> shoppingList)
     {
         if (shoppingList.Count == 0) return;
-        _delivering = StartCoroutine(DeliverItemsCourutine(shoppingList));
+        _delivering = StartCoroutine(DeliverItemsRoutine(shoppingList));
     }
 
-    private IEnumerator DeliverItemsCourutine(List<GameObject> shoppingList)
+    private IEnumerator DeliverItemsRoutine(List<GameObject> shoppingList)
     {
         yield return StartCoroutine(_movement.StartDeliver());
+        yield return StartCoroutine(SpawnPurchasedItems(shoppingList));
+
+        _movement.StartMovingAround();
+        _delivering = null;
+    }
+
+    private IEnumerator SpawnPurchasedItems(List<GameObject> shoppingList)
+    {
         foreach (GameObject item in shoppingList)
         {
             var prefab = Instantiate(item, transform.position, transform.rotation);
-            prefab.GetComponent<BaseHoldItem>();
             var rb = prefab.GetComponent<Rigidbody2D>();
             rb.AddForce(Vector2.down * 3, ForceMode2D.Impulse);
             yield return new WaitForSeconds(0.3f);
         }
-        _movement.StartMovingAround();
-        _delivering = null;
     }
 }

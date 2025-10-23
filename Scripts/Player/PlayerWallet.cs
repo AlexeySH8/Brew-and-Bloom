@@ -8,6 +8,7 @@ public class PlayerWallet
     public event Action<int> OnBalanceChanged;
     public event Action<int> OnDailyEarningChanged;
 
+    private const int MaxBalance = 999;
     private GameSceneManager _gameSceneManager;
 
     public PlayerWallet(GameSceneManager gameSceneManager, int startingBalance)
@@ -25,7 +26,7 @@ public class PlayerWallet
     public void AddToBalance(int amount)
     {
         if (amount <= 0) return;
-        Balance += amount;
+        Balance = (int)MathF.Min(MaxBalance, Balance + amount);
         OnBalanceChanged?.Invoke(Balance);
     }
 

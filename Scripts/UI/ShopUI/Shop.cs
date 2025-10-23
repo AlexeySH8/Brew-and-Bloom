@@ -88,6 +88,7 @@ public class Shop : MonoBehaviour
     {
         IsOpen = false;
         _seller.DeliverItems(_purchasedItems);
+        _purchasedItems = new List<GameObject>();
         _slideAnimation.Transition(IsOpen);
     }
 }

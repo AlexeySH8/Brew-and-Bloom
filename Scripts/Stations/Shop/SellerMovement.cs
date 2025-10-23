@@ -20,7 +20,7 @@ public class SellerMovement : MonoBehaviour
     private Coroutine _movingRoutine;
     private Vector2 _targetPos;
     private SellerStopZone _stopZone;
-    private SellerVisual _maneShopVisual;
+    private SellerVisual _sellerVisual;
 
     [Inject]
     public void Construct(Shop shop)
@@ -32,12 +32,12 @@ public class SellerMovement : MonoBehaviour
     {
         transform.position = GetRandomPosition();
         _stopZone = GetComponentInChildren<SellerStopZone>();
-        _maneShopVisual = GetComponentInChildren<SellerVisual>();
+        _sellerVisual = GetComponentInChildren<SellerVisual>();
+        _targetPos = GetRandomPosition();
     }
 
     private void Start()
     {
-        _targetPos = GetRandomPosition();
         StartMovingAround();
     }
 
@@ -86,7 +86,7 @@ public class SellerMovement : MonoBehaviour
     private IEnumerator Move()
     {
         float direction = Mathf.Sign(_targetPos.x - transform.position.x);
-        _maneShopVisual.FlipVisual(direction);
+        _sellerVisual.FlipVisual(direction);
 
         Vector2 velocity = Vector2.zero;
         while (Vector2.Distance(transform.position, _targetPos) > 0.01f)
