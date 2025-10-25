@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Shovel
   m_EditorClassIdentifier: 
   <Price>k__BackingField: 100
-  <Icon>k__BackingField: {fileID: 1595492548, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: ee6072cb6fdaf83448789dd4984159c8, type: 3}
   <ItemPrefab>k__BackingField: {fileID: 1330555347528795510, guid: c4458d5dbdef5ea468041cb4868b63cc, type: 3}
   <ServiceType>k__BackingField: 0

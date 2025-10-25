@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: AddBut
   m_EditorClassIdentifier: 
   <Price>k__BackingField: 50
-  <Icon>k__BackingField: {fileID: -1316391192, guid: 342803fa141daea48abfbacdda20266e, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 37947fa435b281d48a9d9786bb0c8b87, type: 3}
   <ItemPrefab>k__BackingField: {fileID: 0}
   <ServiceType>k__BackingField: 1

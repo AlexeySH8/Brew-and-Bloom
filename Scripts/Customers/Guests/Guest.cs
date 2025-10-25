@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 public class Guest
 {
@@ -45,8 +44,5 @@ public class Guest
 
     public void SetNextDialoguePart() => _guestDialogue.SetNextDialoguePart();
 
-    public override string ToString()
-    {
-        return Data.Name;
-    }
+    public override string ToString() => Data.Name;
 }

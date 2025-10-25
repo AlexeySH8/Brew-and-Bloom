@@ -19,12 +19,12 @@ public class CoinsUI : MonoBehaviour
     public void Construct(PlayerWallet playerWallet)
     {
         _playerWallet = playerWallet;
+        _currentBalance = _playerWallet.Balance;
+        SubscribeToEvents();
     }
 
     private void Start()
     {
-        _currentBalance = _playerWallet.Balance;
-        SubscribeToEvents();
         UpdateCoinsAmout(_playerWallet.Balance);
     }
 
@@ -35,8 +35,6 @@ public class CoinsUI : MonoBehaviour
 
     private void UpdateCoinsAmout(int newBalance)
     {
-        if (_currentBalance == newBalance) return;
-
         if (_coinsUpdating != null)
         {
             _currentBalance = _targetBalance;

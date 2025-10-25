@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: EndGame
   m_EditorClassIdentifier: 
   <Price>k__BackingField: 999
-  <Icon>k__BackingField: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 770f1aab46b9fd8468786e2aed9c5fff, type: 3}
   <ItemPrefab>k__BackingField: {fileID: 0}
   <ServiceType>k__BackingField: 2

@@ -3,7 +3,6 @@ using Zenject;
 
 public class BootstrapInstaller : MonoInstaller
 {
-    [SerializeField] private int _startingBalance;
     [SerializeField] private Recipes _recipesPref;
     [SerializeField] private GameManager _gameManagerPref;
     [SerializeField] private GameSceneManager _gameSceneManagerPref;
@@ -24,6 +23,10 @@ public class BootstrapInstaller : MonoInstaller
     {
         Container.Bind<GameManager>()
             .FromComponentInNewPrefab(_gameManagerPref)
+            .AsSingle().NonLazy();
+
+        Container.Bind<IDataPersistenceManager>()
+            .To<DataPresistenceManager>()
             .AsSingle().NonLazy();
 
         Container.Bind<GameSceneManager>()
@@ -56,8 +59,7 @@ public class BootstrapInstaller : MonoInstaller
         Container.Bind<IPlayerInput>()
             .To<PCInput>().AsSingle();
 
-        Container.Bind<PlayerWallet>().AsSingle()
-            .WithArguments(_startingBalance);
+        Container.Bind<PlayerWallet>().AsSingle();
     }
 
     private void BindRecipes()

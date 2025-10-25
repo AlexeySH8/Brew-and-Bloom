@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Pick
   m_EditorClassIdentifier: 
   <Price>k__BackingField: 100
-  <Icon>k__BackingField: {fileID: 733644454, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: ca14f20a8f34dfb4784d448fecf3ca85, type: 3}
   <ItemPrefab>k__BackingField: {fileID: 231443583562039617, guid: b572cd524a75fd841a6455663e8ddaec, type: 3}
   <ServiceType>k__BackingField: 0
