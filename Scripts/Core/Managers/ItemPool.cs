@@ -1,13 +1,24 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Zenject;
 
-public class ItemPool : MonoBehaviour
+public class ItemPool : MonoBehaviour, IDataPersistence
 {
     public static ItemPool Instance { get; private set; }
 
     private const int MaxItemCountInScene = 150;
-    private Queue<BaseHoldItem> _queueHoldItem = new Queue<BaseHoldItem>();
-    private HashSet<BaseHoldItem> _hashSetHoldItems = new HashSet<BaseHoldItem>();
+    private IDataPersistenceManager _dataPersistenceManager;
+    private GameSceneManager _gameSceneManager;
+    private List<BaseHoldItem> _registeredHoldItems = new();
+    private List<ItemSaveData> _itemsSaveData = new();
+
+    [Inject]
+    public void Construct(IDataPersistenceManager dataPersistenceManager)
+    {
+        _dataPersistenceManager = dataPersistenceManager;
+        _dataPersistenceManager.Register(this);
+    }
 
     private void Awake()
     {
@@ -23,24 +34,61 @@ public class ItemPool : MonoBehaviour
 
     public void Register(BaseHoldItem newItem)
     {
-        if (_hashSetHoldItems.Contains(newItem)) return;
+        if (_registeredHoldItems.Contains(newItem)) return;
 
-        if (_hashSetHoldItems.Count >= MaxItemCountInScene)
+        if (_registeredHoldItems.Count >= MaxItemCountInScene)
             DiscardOldestItem();
 
-        _queueHoldItem.Enqueue(newItem);
-        _hashSetHoldItems.Add(newItem);
+        _registeredHoldItems.Add(newItem);
     }
 
     public void Unregister(BaseHoldItem item)
     {
-        _hashSetHoldItems.Remove(item);
+        _registeredHoldItems.Remove(item);
     }
 
     private void DiscardOldestItem()
     {
-        _queueHoldItem
-            .Dequeue()
-            .Discard();
+        BaseHoldItem oldestItem = _registeredHoldItems.FirstOrDefault();
+        oldestItem.Discard();
+    }
+
+    public void LoadData(GameData gameData)
+    {
+        _itemsSaveData = gameData.ItemsSaveData;
+
+        foreach (var itemSave in _itemsSaveData)
+        {
+            GameObject prefab = Resources.Load<GameObject>(itemSave.PrefabPath);
+            Vector3 position = new Vector3(
+                itemSave.Position[0], itemSave.Position[1], itemSave.Position[2]);
+            Quaternion rotation = new Quaternion(
+                itemSave.Rotation[0], itemSave.Rotation[1],
+                itemSave.Rotation[2], itemSave.Rotation[3]);
+
+            GameObject itemObj = Instantiate(prefab, position, rotation);
+        }
+    }
+
+    public void SaveData(GameData gameData)
+    {
+        _itemsSaveData = new();
+        foreach (var item in _registeredHoldItems)
+        {
+            ItemSaveData itemSave = new ItemSaveData();
+
+            itemSave.PrefabPath = item.PrefabPath;
+            itemSave.Position[0] = item.transform.position.x;
+            itemSave.Position[1] = item.transform.position.y;
+            itemSave.Position[2] = item.transform.position.z;
+
+            itemSave.Rotation[0] = item.transform.rotation.x;
+            itemSave.Rotation[1] = item.transform.rotation.y;
+            itemSave.Rotation[2] = item.transform.rotation.z;
+            itemSave.Rotation[3] = item.transform.rotation.w;
+
+            _itemsSaveData.Add(itemSave);
+        }
+        gameData.ItemsSaveData = _itemsSaveData;
     }
 }

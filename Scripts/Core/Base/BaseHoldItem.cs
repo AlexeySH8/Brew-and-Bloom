@@ -1,6 +1,7 @@
 using UnityEngine;
 public abstract class BaseHoldItem : MonoBehaviour
 {
+    [HideInInspector] public string PrefabPath;
     public Rigidbody2D Rigidbody { get; private set; }
     public ArcAnimation ArcAnimation { get; private set; }
 
@@ -65,5 +66,10 @@ public abstract class BaseHoldItem : MonoBehaviour
         ItemPool.Instance.Unregister(this);
         SetHolder(null);
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        ItemPool.Instance.Unregister(this);
     }
 }

@@ -26,7 +26,7 @@ public class BootstrapInstaller : MonoInstaller
             .AsSingle().NonLazy();
 
         Container.Bind<IDataPersistenceManager>()
-            .To<DataPresistenceManager>()
+            .To<DataPersistenceManager>()
             .AsSingle().NonLazy();
 
         Container.Bind<GameSceneManager>()

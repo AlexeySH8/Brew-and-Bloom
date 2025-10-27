@@ -8,7 +8,7 @@ public class PlayerWallet : IDataPersistence
     public event Action<int> OnBalanceChanged;
     public event Action<int> OnDailyEarningChanged;
 
-    private int _startingBalance = 300;
+    private const int _startingBalance = 300;
     private const int MaxBalance = 999;
     private GameSceneManager _gameSceneManager;
     private IDataPersistenceManager _dataPresistenceManager;
@@ -31,7 +31,7 @@ public class PlayerWallet : IDataPersistence
     public void AddToBalance(int amount)
     {
         if (amount <= 0) return;
-        Balance = (int)MathF.Min(MaxBalance, Balance + amount);
+        Balance = Math.Min(MaxBalance, Balance + amount);
         OnBalanceChanged?.Invoke(Balance);
     }
 

@@ -69,8 +69,13 @@ public class CoinsUI : MonoBehaviour
         _coinsText.text = $"{_targetBalance}";
     }
 
-    private void OnDisable()
+    private void UnSubscribeToEvents()
     {
         _playerWallet.OnBalanceChanged -= UpdateCoinsAmout;
+    }
+
+    private void OnDisable()
+    {
+        UnSubscribeToEvents();
     }
 }
