@@ -150,6 +150,7 @@ MonoBehaviour:
   _currentStage: 0
   _minResetStageTime: 120
   _maxResetStageTime: 240
+  _soilId: feb347d4cd345f34aad87f1844986684
 --- !u!114 &5442566680945433312
 MonoBehaviour:
   m_ObjectHideFlags: 0

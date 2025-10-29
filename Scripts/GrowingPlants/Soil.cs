@@ -1,21 +1,33 @@
 using System.Collections;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
+using Zenject;
 
-public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IReceiveHeldItem
+public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IReceiveHeldItem, IDataPersistence
 {
     [SerializeField] private CultivationStage _currentStage;
     [SerializeField] private float _minResetStageTime;
     [SerializeField] private float _maxResetStageTime;
+    [SerializeField] private string _soilId;
 
     private GrowPlant _growPlant;
     private SoilVisual _soilVisual;
     private Coroutine _stageResetRoutine;
+    private IDataPersistenceManager _persistenceManager;
 
     private const string PickTargetLayer = "PickTarget";
     private const string ShovelTargetLayer = "ShovelTarget";
     private const string StaffTargetLayer = "StaffTarget";
     private const string InteractiveItemLayer = "InteractiveItem";
     private const string DefaultLayer = "Default";
+
+    [Inject]
+    public void Construct(IDataPersistenceManager persistenceManager)
+    {
+        _persistenceManager = persistenceManager;
+        _persistenceManager.Register(this);
+    }
 
     private void Awake()
     {
@@ -53,7 +65,6 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
 
         _currentStage = (CultivationStage)((int)_currentStage + 1);
         UpdateStage();
-        StartStageReset();
     }
 
     public void StartStageReset()
@@ -94,6 +105,7 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
 
     private void UpdateStage()
     {
+        StartStageReset();
         UpdateLayer();
         _soilVisual.UpdateCultivationStage(_currentStage);
     }
@@ -103,4 +115,43 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
 
     private void DisableInteractive() =>
         gameObject.layer = LayerMask.NameToLayer(DefaultLayer);
+
+    public void LoadData(GameData gameData)
+    {
+        SoilData soilData = gameData.SoilsData
+            .FirstOrDefault(s => s.SoilId == _soilId);
+
+        if (soilData == null) return;
+
+        _currentStage = (CultivationStage)soilData.CultivationStage;
+    }
+
+    public void SaveData(GameData gameData)
+    {
+        SoilData soilData = gameData.SoilsData.
+            FirstOrDefault(s => s.SoilId == _soilId);
+
+        if (soilData == null)
+        {
+            soilData = new SoilData() { SoilId = _soilId };
+            gameData.SoilsData.Add(soilData);
+        }
+        soilData.CultivationStage = (int)_currentStage;
+    }
+
+    private void OnDestroy()
+    {
+        _persistenceManager.Unregister(this);
+    }
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        if (string.IsNullOrEmpty(_soilId))
+        {
+            _soilId = GUID.Generate().ToString();
+            EditorUtility.SetDirty(this);
+        }
+    }
+#endif
 }

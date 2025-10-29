@@ -19,7 +19,7 @@ public class BaseHoldItemEditor : Editor
         if (resourcesIndex == -1)
             return;
 
-        string resoursecPath = assetPath.Substring(resourcesIndex + 11); // 11 = длина "/Resources/"
+        string resoursecPath = assetPath.Substring(resourcesIndex + 11); // 11 = length of "/Resources/"
         resoursecPath = resoursecPath.Replace(".prefab", "");
 
         if (item.PrefabPath != resoursecPath)
@@ -28,7 +28,7 @@ public class BaseHoldItemEditor : Editor
             EditorUtility.SetDirty(item);
         }
 
-        //запрет на изменение пути вручную
+        //prohibition on manual path changes
         GUI.enabled = false;
         EditorGUILayout.TextField("PrefabPath (auto) : ", item.PrefabPath);
         GUI.enabled = true;

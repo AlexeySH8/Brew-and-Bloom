@@ -1,13 +1,18 @@
+using System.Linq;
 using UnityEngine;
+using Zenject;
 
 public abstract class BaseItemHolder : MonoBehaviour, IGiveHeldItem, IReceiveHeldItem
 {
     public abstract Transform ParentPoint { get; }
     public abstract int SortingOrderOffset { get; }
-
-    protected BaseHoldItem _heldItem;
-
     public BaseHoldItem HeldItem => _heldItem;
+    protected BaseHoldItem _heldItem;
+    
+    protected virtual void Awake()
+    {
+        CheckChildren();
+    }
 
     public virtual bool TryReceive(BaseHoldItem heldItem)
     {
@@ -38,5 +43,23 @@ public abstract class BaseItemHolder : MonoBehaviour, IGiveHeldItem, IReceiveHel
     {
         if (_heldItem == null || _heldItem != holdItem) return;
         _heldItem = null;
+    }
+
+    private void CheckChildren()
+    {
+        if (ParentPoint.childCount == 0) return;
+
+        for (int i = 0; i < ParentPoint.childCount; i++)
+        {
+            Transform child = ParentPoint.GetChild(i);
+
+            // If the object was manually inserted into the parent
+            if (child.TryGetComponent(out BaseHoldItem holdItem) &&
+                !holdItem.HasParent())
+            {
+                if (!TryReceive(holdItem))
+                    Debug.LogError($"Object {holdItem.name} cannot be inserted into parent {this.name}");
+            }
+        }
     }
 }

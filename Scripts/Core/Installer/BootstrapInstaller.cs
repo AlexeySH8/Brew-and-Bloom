@@ -4,7 +4,7 @@ using Zenject;
 public class BootstrapInstaller : MonoInstaller
 {
     [SerializeField] private Recipes _recipesPref;
-    [SerializeField] private GameManager _gameManagerPref;
+    [SerializeField] private DataPersistenceManager _dataPersistenceManagerPref;
     [SerializeField] private GameSceneManager _gameSceneManagerPref;
     [SerializeField] private ItemPool _itemPoolPref;
     [SerializeField] private SFXManager _sfxManagerPref;
@@ -21,12 +21,8 @@ public class BootstrapInstaller : MonoInstaller
 
     private void BindManagers()
     {
-        Container.Bind<GameManager>()
-            .FromComponentInNewPrefab(_gameManagerPref)
-            .AsSingle().NonLazy();
-
         Container.Bind<IDataPersistenceManager>()
-            .To<DataPersistenceManager>()
+            .FromComponentInNewPrefab(_dataPersistenceManagerPref)
             .AsSingle().NonLazy();
 
         Container.Bind<GameSceneManager>()

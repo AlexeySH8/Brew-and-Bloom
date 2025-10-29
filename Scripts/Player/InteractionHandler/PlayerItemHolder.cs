@@ -12,9 +12,10 @@ public class PlayerItemHolder : BaseItemHolder
     public override Transform ParentPoint => _witchVisual.transform;
     public override int SortingOrderOffset => _witchVisual.SpriteRenderer.sortingOrder + 1;
 
-    private void Awake()
+    protected override void Awake()
     {
         _witchVisual = GetComponentInChildren<PlayerVisual>();
+        base.Awake();
     }
 
     public void PickUp(BaseHoldItem holdItem)

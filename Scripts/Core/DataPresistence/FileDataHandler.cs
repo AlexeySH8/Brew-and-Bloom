@@ -61,4 +61,10 @@ public class FileDataHandler
             Debug.LogError($"SAVING ERROR with Path: {fullPath} : {e}");
         }
     }
+
+    public bool Exists()
+    {
+        string fullPath = Path.Combine(_dataPath, _fileName);
+        return File.Exists(fullPath);
+    }
 }

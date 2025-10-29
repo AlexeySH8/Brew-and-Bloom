@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 public class ItemPool : MonoBehaviour, IDataPersistence
@@ -9,7 +10,6 @@ public class ItemPool : MonoBehaviour, IDataPersistence
 
     private const int MaxItemCountInScene = 150;
     private IDataPersistenceManager _dataPersistenceManager;
-    private GameSceneManager _gameSceneManager;
     private List<BaseHoldItem> _registeredHoldItems = new();
     private List<ItemSaveData> _itemsSaveData = new();
 
@@ -55,8 +55,13 @@ public class ItemPool : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData gameData)
     {
-        _itemsSaveData = gameData.ItemsSaveData;
+        string currentScene = SceneManager.GetActiveScene().name;
+        SceneItemData sceneData = gameData.ScenesItems
+            .FirstOrDefault(s => s.SceneName == currentScene);
 
+        if (sceneData == null) return;
+
+        _itemsSaveData = sceneData.ItemsSaveData;
         foreach (var itemSave in _itemsSaveData)
         {
             GameObject prefab = Resources.Load<GameObject>(itemSave.PrefabPath);
@@ -89,6 +94,16 @@ public class ItemPool : MonoBehaviour, IDataPersistence
 
             _itemsSaveData.Add(itemSave);
         }
-        gameData.ItemsSaveData = _itemsSaveData;
+
+        string currentScene = SceneManager.GetActiveScene().name;
+        SceneItemData sceneData = gameData.ScenesItems
+            .FirstOrDefault(s => s.SceneName == currentScene);
+
+        if (sceneData == null)
+        {
+            sceneData = new SceneItemData() { SceneName = currentScene };
+            gameData.ScenesItems.Add(sceneData);
+        }
+        sceneData.ItemsSaveData = _itemsSaveData;
     }
 }

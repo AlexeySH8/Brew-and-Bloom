@@ -30,8 +30,9 @@ public class CookingStation : BaseItemHolder
         _recipes = recipes;
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         IsCookingStop = false;
         _currentIngredientsMask = 0;
         _stationVisual = GetComponent<CoockingStationVisual>();

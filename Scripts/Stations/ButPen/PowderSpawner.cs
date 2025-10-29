@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-public class PowderSpawner : MonoBehaviour
+public class PowderSpawner : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private int _maxPowderCount;
     [SerializeField] private GameObject _powderPrefab;
@@ -11,14 +12,20 @@ public class PowderSpawner : MonoBehaviour
 
     public List<Coroutine> Spawners { get; private set; }
     private BoxCollider2D _area;
-    private int _currentPowderCount;
+    private IDataPersistenceManager _persistenceManager;
+    private int _currentPowderCount = 0;
 
+    [Inject]
+    public void Construct(IDataPersistenceManager persistenceManager)
+    {
+        _persistenceManager = persistenceManager;
+        _persistenceManager.Register(this);
+    }
 
     private void Awake()
     {
         _area = GetComponent<BoxCollider2D>();
         Spawners = new List<Coroutine>();
-        _currentPowderCount = 0;
     }
 
     public void AddSpawner()
@@ -56,5 +63,15 @@ public class PowderSpawner : MonoBehaviour
     public void OnPowderDestroy()
     {
         _currentPowderCount = Mathf.Max(0, _currentPowderCount - 1);
+    }
+
+    public void LoadData(GameData gameData)
+    {
+        _currentPowderCount = gameData.CurrentPowderCount;
+    }
+
+    public void SaveData(GameData gameData)
+    {
+        gameData.CurrentPowderCount = _currentPowderCount;
     }
 }

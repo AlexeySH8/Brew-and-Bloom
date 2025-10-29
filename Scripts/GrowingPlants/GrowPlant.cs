@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class GrowPlant : MonoBehaviour
 {
@@ -12,9 +13,23 @@ public class GrowPlant : MonoBehaviour
     [SerializeField] private int _maxTimeToDryOut = 7;
 
     private Soil _soil;
+    private SeedData _seedData;
     private SoilVisual _soilVisual;
     private Coroutine _growingPlant;
     private Coroutine _dryOutRoutine;
+    private GameSceneManager _gameSceneManager;
+
+    [Inject]
+    public void Construct(GameSceneManager gameSceneManager)
+    {
+        _gameSceneManager = gameSceneManager;
+        SubscribeToEvents();
+    }
+
+    private void SubscribeToEvents()
+    {
+        _gameSceneManager.OnHouseUnloading += EndGrowPlant;
+    }
 
     private void Awake()
     {
@@ -25,21 +40,22 @@ public class GrowPlant : MonoBehaviour
     public void PlantSeed(SeedData seedData)
     {
         if (seedData == null || _growingPlant != null) return;
-        _growingPlant = StartCoroutine(GrowPlantRoutine(seedData));
+        _seedData = seedData;
+        _growingPlant = StartCoroutine(GrowPlantRoutine());
     }
 
-    private IEnumerator GrowPlantRoutine(SeedData seedData)
+    private IEnumerator GrowPlantRoutine()
     {
-        foreach (Sprite stage in seedData.GrowthStageSprites)
+        foreach (Sprite stage in _seedData.GrowthStageSprites)
         {
             _soilVisual.UpdateGrowPlantStage(stage);
             MaybeRequireWater();
 
             yield return new WaitUntil(() => !IsWaterNeed);
-            yield return new WaitForSeconds(Random.Range(seedData.MinStageTime, seedData.MaxStageTime));
+            yield return new WaitForSeconds(Random.Range(_seedData.MinStageTime, _seedData.MaxStageTime));
         }
-        yield return new WaitForSeconds(Random.Range(seedData.MinStageTime, seedData.MaxStageTime));
-        EndGrowPlant(seedData);
+        yield return new WaitForSeconds(Random.Range(_seedData.MinStageTime, _seedData.MaxStageTime));
+        EndGrowPlant();
     }
 
     private void MaybeRequireWater()
@@ -57,7 +73,8 @@ public class GrowPlant : MonoBehaviour
     {
         yield return new WaitForSeconds(
             Random.Range(_minTimeToDryOut, _maxTimeToDryOut));
-        EndGrowPlant(null);
+        _seedData = null;
+        EndGrowPlant();
     }
 
     public void SetPlantNeedWater(bool isWaterNeed)
@@ -75,10 +92,12 @@ public class GrowPlant : MonoBehaviour
         _soil.UpdateLayer();
     }
 
-    private void EndGrowPlant(SeedData seedData)
+    private void EndGrowPlant()
     {
-        if (seedData != null)
-            SpawnHarvest(seedData);
+        //if (_seedData != null)
+        //    SpawnHarvest();
+        if (_seedData == null) return;
+        SpawnHarvest();
 
         if (_growingPlant != null)
         {
@@ -93,9 +112,20 @@ public class GrowPlant : MonoBehaviour
         _soilVisual.ClearContentPlace();
     }
 
-    private void SpawnHarvest(SeedData seedData)
+    private void SpawnHarvest()
     {
         for (int i = 0; i < Random.Range(_minHarvestCount, _maxHarvestCount + 1); i++)
-            Instantiate(seedData.IngredientPrefab, transform.position, transform.rotation);
+            Instantiate(_seedData.IngredientPrefab, transform.position, transform.rotation);
+        _seedData = null;
+    }
+
+    private void OnDisable()
+    {
+        UnsubscribeFromEvents();
+    }
+
+    private void UnsubscribeFromEvents()
+    {
+        _gameSceneManager.OnHouseUnloading -= EndGrowPlant;
     }
 }

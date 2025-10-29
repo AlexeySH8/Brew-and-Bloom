@@ -45,12 +45,14 @@ public abstract class BaseHoldItem : MonoBehaviour
             _spriteRenderer.sortingOrder = newHolder.SortingOrderOffset;
 
             Rigidbody.simulated = false;
+            ItemPool.Instance.Unregister(this);
         }
         else
         {
             transform.SetParent(null);
             Rigidbody.simulated = true;
             _spriteRenderer.sortingOrder = _defaultSortingOrder;
+            ItemPool.Instance.Register(this);
         }
     }
 
@@ -61,9 +63,10 @@ public abstract class BaseHoldItem : MonoBehaviour
             Debug.LogError($"The parent of {gameObject.name} does not implement the IItemHolder");
     }
 
+    public bool HasParent() => _currentHolder != null;
+
     public virtual void Discard()
     {
-        ItemPool.Instance.Unregister(this);
         SetHolder(null);
         Destroy(gameObject);
     }
