@@ -10,9 +10,27 @@ public class GameData
     public bool IsToolSpawned;
     public int PowderSpawnersCount;
     public int CurrentPowderCount;
-    public List<SceneItemData> ScenesItems = new();
-    public List<ItemHolderData> ItemHolders = new();
-    public List<SoilData> SoilsData = new();
+    public List<GuestSaveData> GuestsSaveData = new();
+    public List<SceneItemData> ScenesItemsData = new();
+    public List<ItemHolderSaveData> ItemHoldersSaveData = new();
+    public List<SoilSaveData> SoilsSaveData = new();
+}
+
+[Serializable]
+public class GuestSaveData
+{
+    public string GuestId;
+    public int DialoguePartIndex;
+    public bool IsServed;
+    public CurrentOrderSaveData CurrentOrderSaveData;
+}
+
+[Serializable]
+public class CurrentOrderSaveData
+{
+    public int Payment;
+    public int IngredientsMask;
+    public bool IsCompleted;
 }
 
 [Serializable]
@@ -31,14 +49,14 @@ public class ItemSaveData
 }
 
 [Serializable]
-public class ItemHolderData
+public class ItemHolderSaveData
 {
     public string HolderId;
     public string PrefabPath;
 }
 
 [Serializable]
-public class SoilData
+public class SoilSaveData
 {
     public string SoilId;
     public int CultivationStage;

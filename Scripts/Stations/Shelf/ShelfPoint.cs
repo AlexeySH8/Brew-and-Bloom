@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -39,36 +38,16 @@ public class ShelfPoint : BaseItemHolder, IDataPersistence
     public void LoadData(GameData gameData)
     {
         _isToolSpawned = gameData.IsToolSpawned;
-
-        ItemHolderData holderData = gameData.ItemHolders
-            .FirstOrDefault(h => h.HolderId == name);
-
-        if (holderData == null || _heldItem != null) return;
-
-        GameObject prefab = Resources.Load<GameObject>(holderData.PrefabPath);
-        var item = Instantiate(prefab);
-        BaseHoldItem holdItem = item.GetComponent<BaseHoldItem>();
-        TryReceive(holdItem);
+        LoadHeldItem(gameData);
     }
 
     public void SaveData(GameData gameData)
     {
         gameData.IsToolSpawned = _isToolSpawned;
-
-        if (_heldItem == null) return;
-
-        ItemHolderData holderData = gameData.ItemHolders
-            .FirstOrDefault(h => h.HolderId == name);
-
-        if (holderData == null)
-        {
-            holderData = new ItemHolderData() { HolderId = name };
-            gameData.ItemHolders.Add(holderData);
-        }
-        holderData.PrefabPath = _heldItem.PrefabPath;
+        SaveHeldItem(gameData);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         _persistenceManager.Unregister(this);
     }

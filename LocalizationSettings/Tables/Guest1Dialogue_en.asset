@@ -19,11 +19,39 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 1773476380672
-    m_Localized: Hi !
+    m_Localized: part 0  line 0
     m_Metadata:
       m_Items: []
   - m_Id: 5006341046272
-    m_Localized: How are you ?
+    m_Localized: part 0  line 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12559067187642368
+    m_Localized: part 0  line 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12560560380837888
+    m_Localized: part 1  line 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12560689452154880
+    m_Localized: part 1  line 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12560730560528384
+    m_Localized: part 1  line 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12560864811810816
+    m_Localized: part 2  line 0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12560900471783424
+    m_Localized: part 2  line 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12560922093420544
+    m_Localized: part 2  line 2
     m_Metadata:
       m_Items: []
   references:

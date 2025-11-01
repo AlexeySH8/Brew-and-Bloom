@@ -16,6 +16,11 @@ public class Recipes : ScriptableObject
         _recipes.Clear();
         foreach (var dish in _dishList)
         {
+            if (_recipes.ContainsKey(dish.IngredientsMask))
+            {
+                Debug.LogError("A dish with these ingredients already exists. " +
+                    "The ingredient mask must be unique.");
+            }
             _recipes.Add(dish.IngredientsMask, dish);
         }
     }

@@ -3,28 +3,34 @@ using System;
 public class Guest
 {
     public GuestData Data { get; private set; }
-    public Order CurrentOrder { get; private set; }
+    public Order CurrentOrder { get; set; }
+    public int DialoguePartIndex { get; private set; }
     public bool IsServed { get; private set; }
+
     public event Action<Guest, bool> OnOrderCompleted;
 
     private Recipes _recipes;
     private PlayerWallet _playerWallet;
     private GuestDialogue _guestDialogue;
 
-    public Guest(GuestData data, Recipes recipes, PlayerWallet playerWallet)
+    public Guest(GuestData data, Recipes recipes, PlayerWallet playerWallet,
+         int dialoguePartIndex = 0, bool isServed = false)
     {
         Data = data;
+        DialoguePartIndex = dialoguePartIndex;
+        IsServed = isServed;
         _recipes = recipes;
         _playerWallet = playerWallet;
-        _guestDialogue = new GuestDialogue(Data);
+        _guestDialogue = new GuestDialogue(Data, DialoguePartIndex);
     }
 
     public void MakeOrder()
     {
+        if (CurrentOrder != null) return;
         IsServed = false;
         DishData dish = _recipes.GetRandomDish();
         int payment = UnityEngine.Random.Range(Data.MinPayment, Data.MaxPayment);
-        CurrentOrder = new Order(this, dish, payment);
+        CurrentOrder = new Order(this, dish, payment, false);
     }
 
     public void CompleteOrder(int dishIngredientsMask)
@@ -38,6 +44,7 @@ public class Guest
             _playerWallet.AddToDailyEarning(CurrentOrder.Payment);
         }
         OnOrderCompleted?.Invoke(this, CurrentOrder.IsCompleted);
+        CurrentOrder = null;
     }
 
     public void StartDialogue() => _guestDialogue.StartDialogue();

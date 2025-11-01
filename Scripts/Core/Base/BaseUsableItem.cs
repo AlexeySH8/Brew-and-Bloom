@@ -17,6 +17,4 @@ public abstract class BaseUsableItem : BaseHoldItem
         Debug.DrawRay(origin, direction * InteractionDistance, Color.red, 0.5f);
         return toolTarget.collider;
     }
-
-    //public override void Discard() { }
 }

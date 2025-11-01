@@ -118,7 +118,7 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
 
     public void LoadData(GameData gameData)
     {
-        SoilData soilData = gameData.SoilsData
+        SoilSaveData soilData = gameData.SoilsSaveData
             .FirstOrDefault(s => s.SoilId == _soilId);
 
         if (soilData == null) return;
@@ -128,13 +128,13 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
 
     public void SaveData(GameData gameData)
     {
-        SoilData soilData = gameData.SoilsData.
+        SoilSaveData soilData = gameData.SoilsSaveData.
             FirstOrDefault(s => s.SoilId == _soilId);
 
         if (soilData == null)
         {
-            soilData = new SoilData() { SoilId = _soilId };
-            gameData.SoilsData.Add(soilData);
+            soilData = new SoilSaveData() { SoilId = _soilId };
+            gameData.SoilsSaveData.Add(soilData);
         }
         soilData.CultivationStage = (int)_currentStage;
     }
@@ -144,14 +144,10 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
         _persistenceManager.Unregister(this);
     }
 
-#if UNITY_EDITOR
-    private void OnValidate()
+    [ContextMenu("Generate Unique Id")]
+    private void GenerateUniqueId()
     {
-        if (string.IsNullOrEmpty(_soilId))
-        {
-            _soilId = GUID.Generate().ToString();
-            EditorUtility.SetDirty(this);
-        }
+        _soilId = GUID.Generate().ToString();
+        EditorUtility.SetDirty(this);
     }
-#endif
 }

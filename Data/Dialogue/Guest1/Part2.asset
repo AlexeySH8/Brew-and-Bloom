@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f5663f961715ec47ba43c4c1de610d8, type: 3}
-  m_Name: Part0
+  m_Name: Part2
   m_EditorClassIdentifier: 
   <TypingSpeed>k__BackingField: 0.03
   <DialogueLines>k__BackingField:
   - m_TableReference:
       m_TableCollectionName: GUID:e2c77b8dd9995714e84866cc90de90a5
     m_TableEntryReference:
-      m_KeyId: 1773476380672
+      m_KeyId: 12560864811810816
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -25,7 +25,7 @@ MonoBehaviour:
   - m_TableReference:
       m_TableCollectionName: GUID:e2c77b8dd9995714e84866cc90de90a5
     m_TableEntryReference:
-      m_KeyId: 5006341046272
+      m_KeyId: 12560900471783424
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -33,7 +33,7 @@ MonoBehaviour:
   - m_TableReference:
       m_TableCollectionName: GUID:e2c77b8dd9995714e84866cc90de90a5
     m_TableEntryReference:
-      m_KeyId: 12559067187642368
+      m_KeyId: 12560922093420544
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

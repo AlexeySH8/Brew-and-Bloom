@@ -16,15 +16,17 @@ public class PlayerController : MonoBehaviour
     private PlayerInteractionHandler _interactiveHandler;
     private PlayerItemHolder _itemHolder;
     private IActiveInteraction _interactionPartner;
+    private GameSceneManager _gameSceneManager;
     private float _horizontalInput;
     private float _verticalInput;
     private float _xInteractionDirection;
     private float _yInteractionDirection;
 
     [Inject]
-    public void Construct(IPlayerInput input)
+    public void Construct(IPlayerInput input, GameSceneManager gameSceneManager)
     {
         _input = input;
+        _gameSceneManager = gameSceneManager;
     }
 
     private void Awake()
@@ -39,6 +41,11 @@ public class PlayerController : MonoBehaviour
         _canMove = true;
         _canDrop = true;
         _canInteract = true;
+    }
+
+    private void Start()
+    {
+        _gameSceneManager.OnHouseUnloading += DropHeldItem;
     }
 
     private void Update()
@@ -63,7 +70,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (_canDrop && _input.IsDropPressed())
-            _itemHolder.Drop(InteractionDirection.normalized);
+            DropHeldItem();
     }
 
     private void FixedUpdate()
@@ -90,6 +97,8 @@ public class PlayerController : MonoBehaviour
         InteractionDirection = new Vector2(_xInteractionDirection, _yInteractionDirection);
     }
 
+    private void DropHeldItem() => _itemHolder.Drop(InteractionDirection.normalized);
+
     public void StartActiveInteraction(IActiveInteraction activeInteraction)
     {
         _interactionPartner = activeInteraction;
@@ -105,5 +114,10 @@ public class PlayerController : MonoBehaviour
         _interactionPartner = null;
         _canMove = true;
         _canDrop = true;
+    }
+
+    private void OnDisable()
+    {
+        _gameSceneManager.OnHouseUnloading -= DropHeldItem;
     }
 }

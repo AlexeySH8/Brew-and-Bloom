@@ -94,8 +94,6 @@ public class GrowPlant : MonoBehaviour
 
     private void EndGrowPlant()
     {
-        //if (_seedData != null)
-        //    SpawnHarvest();
         if (_seedData == null) return;
         SpawnHarvest();
 

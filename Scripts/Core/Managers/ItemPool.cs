@@ -10,14 +10,18 @@ public class ItemPool : MonoBehaviour, IDataPersistence
 
     private const int MaxItemCountInScene = 150;
     private IDataPersistenceManager _dataPersistenceManager;
+    private GameSceneManager _gameSceneManager;
     private List<BaseHoldItem> _registeredHoldItems = new();
-    private List<ItemSaveData> _itemsSaveData = new();
+    private List<SceneItemData> _scenesItemsSaveData = new();
 
     [Inject]
-    public void Construct(IDataPersistenceManager dataPersistenceManager)
+    public void Construct(IDataPersistenceManager dataPersistenceManager, GameSceneManager gameSceneManager)
     {
+        _gameSceneManager = gameSceneManager;
         _dataPersistenceManager = dataPersistenceManager;
         _dataPersistenceManager.Register(this);
+
+        gameSceneManager.OnHouseLoaded += SpawnSavedItems;
     }
 
     private void Awake()
@@ -28,7 +32,6 @@ public class ItemPool : MonoBehaviour, IDataPersistence
             Destroy(gameObject);
             return;
         }
-
         Instance = this;
     }
 
@@ -53,16 +56,15 @@ public class ItemPool : MonoBehaviour, IDataPersistence
         oldestItem.Discard();
     }
 
-    public void LoadData(GameData gameData)
+    private void SpawnSavedItems()
     {
         string currentScene = SceneManager.GetActiveScene().name;
-        SceneItemData sceneData = gameData.ScenesItems
+        var itemsSaveData = _scenesItemsSaveData
             .FirstOrDefault(s => s.SceneName == currentScene);
 
-        if (sceneData == null) return;
+        if (itemsSaveData == null) return;
 
-        _itemsSaveData = sceneData.ItemsSaveData;
-        foreach (var itemSave in _itemsSaveData)
+        foreach (var itemSave in itemsSaveData.ItemsSaveData)
         {
             GameObject prefab = Resources.Load<GameObject>(itemSave.PrefabPath);
             Vector3 position = new Vector3(
@@ -75,9 +77,16 @@ public class ItemPool : MonoBehaviour, IDataPersistence
         }
     }
 
+    public void LoadData(GameData gameData)
+    {
+        _scenesItemsSaveData = gameData.ScenesItemsData;
+    }
+
     public void SaveData(GameData gameData)
     {
-        _itemsSaveData = new();
+        string currentScene = SceneManager.GetActiveScene().name;
+        List<ItemSaveData> itemsToSave = new List<ItemSaveData>();
+
         foreach (var item in _registeredHoldItems)
         {
             ItemSaveData itemSave = new ItemSaveData();
@@ -92,18 +101,22 @@ public class ItemPool : MonoBehaviour, IDataPersistence
             itemSave.Rotation[2] = item.transform.rotation.z;
             itemSave.Rotation[3] = item.transform.rotation.w;
 
-            _itemsSaveData.Add(itemSave);
+            itemsToSave.Add(itemSave);
         }
 
-        string currentScene = SceneManager.GetActiveScene().name;
-        SceneItemData sceneData = gameData.ScenesItems
+        SceneItemData currentSceneData = gameData.ScenesItemsData
             .FirstOrDefault(s => s.SceneName == currentScene);
 
-        if (sceneData == null)
+        if (currentSceneData == null)
         {
-            sceneData = new SceneItemData() { SceneName = currentScene };
-            gameData.ScenesItems.Add(sceneData);
+            currentSceneData = new SceneItemData() { SceneName = currentScene };
+            gameData.ScenesItemsData.Add(currentSceneData);
         }
-        sceneData.ItemsSaveData = _itemsSaveData;
+        currentSceneData.ItemsSaveData = itemsToSave;
+    }
+
+    private void OnDisable()
+    {
+        _dataPersistenceManager.Unregister(this);
     }
 }

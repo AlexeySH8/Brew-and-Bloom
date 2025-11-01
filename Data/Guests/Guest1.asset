@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Guest1
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Guest1
+  <GuestId>k__BackingField: c089d95e3a64b9f41b7389f187294c7a
   <MinPayment>k__BackingField: 50
   <MaxPayment>k__BackingField: 150
   <GuestPrefab>k__BackingField: {fileID: 6999058681313874584, guid: 60bd1d8187d1e3c48b849c3315294f2a, type: 3}
@@ -21,3 +22,5 @@ MonoBehaviour:
   <TypingSound>k__BackingField: {fileID: 8300000, guid: 40754123023d9bd47ba9b905e52a1549, type: 3}
   <DialoguesData>k__BackingField:
   - {fileID: 11400000, guid: 1ce61e483468d2f4e8cc87499586812b, type: 2}
+  - {fileID: 11400000, guid: 90d857fb9c7550f449b03d7f6a27baff, type: 2}
+  - {fileID: 11400000, guid: c391f6c0d76532c4fa3051f1b446be77, type: 2}

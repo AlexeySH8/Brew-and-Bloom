@@ -35,9 +35,11 @@ public class GameSceneManager : MonoBehaviour, IDataPersistence
         {
             case HouseSceneName:
                 OnHouseLoaded?.Invoke();
+                _persistenceManager.SaveGame();
                 break;
             case TavernSceneName:
                 OnTavernLoaded?.Invoke();
+                _persistenceManager.SaveGame();
                 break;
         }
     }
@@ -75,11 +77,6 @@ public class GameSceneManager : MonoBehaviour, IDataPersistence
         SceneManager.LoadScene(TavernSceneName);
     }
 
-    private void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= HandleSceneLoaded;
-    }
-
     public void LoadData(GameData gameData)
     {
         SavedSceneName = gameData.SavedSceneName;
@@ -87,7 +84,11 @@ public class GameSceneManager : MonoBehaviour, IDataPersistence
 
     public void SaveData(GameData gameData)
     {
-        if (CurrenSceneName != "Menu")
-            gameData.SavedSceneName = CurrenSceneName;
+        gameData.SavedSceneName = CurrenSceneName;
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= HandleSceneLoaded;
     }
 }

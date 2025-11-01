@@ -391,8 +391,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -1.02985, y: 0.9224999, z: 0}
-    m_Extent: {x: 7.78745, y: 5.7953997, z: 0}
+    m_Center: {x: -1.0297, y: 0.9221499, z: 0}
+    m_Extent: {x: 7.7862997, y: 5.7964497, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -12758,6 +12758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemImage: {fileID: 0}
+  _coinImage: {fileID: 0}
   _priceText: {fileID: 8557664012360596920}
 --- !u!114 &8557664012360596920
 MonoBehaviour:

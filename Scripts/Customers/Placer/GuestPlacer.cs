@@ -15,23 +15,23 @@ public class GuestPlacer : MonoBehaviour
     public void Construct(GuestsManager guestsManager)
     {
         _guestsManager = guestsManager;
-        SubscribeToEvents();
+        //SubscribeToEvents();
     }
 
-    private void Awake()
+    private void Start()
     {
         Place(_guestsManager.GuestForDay);
     }
 
-    private void SubscribeToEvents()
-    {
-        _guestsManager.OnGuestsArrived += Place;
-    }
+    //private void SubscribeToEvents()
+    //{
+    //    _guestsManager.OnGuestsArrived += Place;
+    //}
 
-    private void OnDisable()
-    {
-        _guestsManager.OnGuestsArrived -= Place;
-    }
+    //private void OnDisable()
+    //{
+    //    _guestsManager.OnGuestsArrived -= Place;
+    //}
 
     public void Place(IReadOnlyList<Guest> guestsForDay)
     {

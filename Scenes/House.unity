@@ -758,6 +758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba815a14d134bf041871e1cc61dd1187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _holderId: 16ea6e2bf58591c44a63f36839f3e840
   _toolPref: {fileID: 2709620680749415698, guid: b572cd524a75fd841a6455663e8ddaec, type: 3}
 --- !u!1 &46737142
 GameObject:
@@ -3316,6 +3317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba815a14d134bf041871e1cc61dd1187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _holderId: 90560b01c0d69a34392576164d68fd70
   _toolPref: {fileID: 1694680577412407528, guid: c4458d5dbdef5ea468041cb4868b63cc, type: 3}
 --- !u!1001 &375457941
 PrefabInstance:
@@ -3898,6 +3900,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1401351380}
     m_Modifications:
+    - target: {fileID: -2239675663972298895, guid: e7ac8d22469f4b64f9f24ff8b222855e, type: 3}
+      propertyPath: _holderId
+      value: af1570567a4f16443a054de3eb532c45
+      objectReference: {fileID: 0}
     - target: {fileID: 2642476488278754326, guid: e7ac8d22469f4b64f9f24ff8b222855e, type: 3}
       propertyPath: m_Name
       value: ItemStand
@@ -3963,6 +3969,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1401351380}
     m_Modifications:
+    - target: {fileID: -2239675663972298895, guid: e7ac8d22469f4b64f9f24ff8b222855e, type: 3}
+      propertyPath: _holderId
+      value: 470bada4dcffd1a4495805ca2fc6c3dc
+      objectReference: {fileID: 0}
     - target: {fileID: 2642476488278754326, guid: e7ac8d22469f4b64f9f24ff8b222855e, type: 3}
       propertyPath: m_Name
       value: ItemStand (2)
@@ -6439,6 +6449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5080c998d137eed41bb9cf9094ea3a4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _holderId: 75b84045c25207147972d85763a121ee
   IsCookingStop: 0
   _maxHeldIngredient: 5
   _dishHolder: {fileID: 1096831183}
@@ -12533,6 +12544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6171c1be67567cc4ba8aa37abb2aa4a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _holderId: 6e38693ab500bdf44be9f3e10fad85e9
   _timmingBar: {fileID: 565106313}
   _parentPoint: {fileID: 475572437}
   _spriteRenderer: {fileID: 1076210495}
@@ -13556,6 +13568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba815a14d134bf041871e1cc61dd1187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _holderId: 175b04529269ef24a995b42f893ace6e
   _toolPref: {fileID: 8779016342961774366, guid: d2687851d3e48c34491c6310d7f85f41, type: 3}
 --- !u!1001 &1242066975
 PrefabInstance:
@@ -14024,6 +14037,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1401351380}
     m_Modifications:
+    - target: {fileID: -2239675663972298895, guid: e7ac8d22469f4b64f9f24ff8b222855e, type: 3}
+      propertyPath: _holderId
+      value: 5a9aae6fd65b19947b7c3afa9a325a87
+      objectReference: {fileID: 0}
     - target: {fileID: 2642476488278754326, guid: e7ac8d22469f4b64f9f24ff8b222855e, type: 3}
       propertyPath: m_Name
       value: ItemStand (4)
@@ -14238,6 +14255,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1401351380}
     m_Modifications:
+    - target: {fileID: -2239675663972298895, guid: e7ac8d22469f4b64f9f24ff8b222855e, type: 3}
+      propertyPath: _holderId
+      value: 18d0ad47c01e8b544962de326306f227
+      objectReference: {fileID: 0}
     - target: {fileID: 2642476488278754326, guid: e7ac8d22469f4b64f9f24ff8b222855e, type: 3}
       propertyPath: m_Name
       value: ItemStand (5)
@@ -16061,6 +16082,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1401351380}
     m_Modifications:
+    - target: {fileID: -2239675663972298895, guid: e7ac8d22469f4b64f9f24ff8b222855e, type: 3}
+      propertyPath: _holderId
+      value: 55c840fa591d5514aa45d3165a40746e
+      objectReference: {fileID: 0}
     - target: {fileID: 2642476488278754326, guid: e7ac8d22469f4b64f9f24ff8b222855e, type: 3}
       propertyPath: m_Name
       value: ItemStand (1)
@@ -17050,6 +17075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5080c998d137eed41bb9cf9094ea3a4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _holderId: 6023b3b2dc933a7418b24d9bc9e758ad
   IsCookingStop: 0
   _maxHeldIngredient: 5
   _dishHolder: {fileID: 465079425}
@@ -18117,6 +18143,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1401351380}
     m_Modifications:
+    - target: {fileID: -2239675663972298895, guid: e7ac8d22469f4b64f9f24ff8b222855e, type: 3}
+      propertyPath: _holderId
+      value: f2888a3cf122ae7478c34a2bab8c57c2
+      objectReference: {fileID: 0}
     - target: {fileID: 2642476488278754326, guid: e7ac8d22469f4b64f9f24ff8b222855e, type: 3}
       propertyPath: m_Name
       value: ItemStand (6)
@@ -19671,6 +19701,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1401351380}
     m_Modifications:
+    - target: {fileID: -2239675663972298895, guid: e7ac8d22469f4b64f9f24ff8b222855e, type: 3}
+      propertyPath: _holderId
+      value: 16ffea01ce7b4714f9120d4f0a10abfc
+      objectReference: {fileID: 0}
     - target: {fileID: 2642476488278754326, guid: e7ac8d22469f4b64f9f24ff8b222855e, type: 3}
       propertyPath: m_Name
       value: ItemStand (3)

@@ -21,18 +21,30 @@ public class Menu : MonoBehaviour
     private void Awake()
     {
         SetFunctionsToButtons();
-        _continueGameButton.gameObject
-            .SetActive(_dataPersistenceManager.HasSave());
+        SetDisplayContinueButton();
     }
 
     private void SetFunctionsToButtons()
     {
-        _continueGameButton.onClick
-            .AddListener(_gameSceneManager.LoadCurrentScene);
+        _newGameButton.onClick.AddListener(NewGame);
+        _continueGameButton.onClick.AddListener(ContinueGame);
+    }
 
-        _newGameButton.onClick
-            .AddListener(_dataPersistenceManager.NewGame);
-        _newGameButton.onClick
-            .AddListener(_gameSceneManager.LoadHouseScene);
+    private void NewGame()
+    {
+        _dataPersistenceManager.NewGame();
+        _gameSceneManager.LoadHouseScene();
+    }
+
+    private void ContinueGame()
+    {
+        _dataPersistenceManager.LoadGame();
+        _gameSceneManager.LoadCurrentScene();
+    }
+
+    private void SetDisplayContinueButton()
+    {
+        _continueGameButton.gameObject
+            .SetActive(_dataPersistenceManager.HasSave());
     }
 }

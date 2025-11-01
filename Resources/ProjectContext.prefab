@@ -76,6 +76,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recipesPref: {fileID: 11400000, guid: 05bd3d9bdb0cf884c9408401c743979c, type: 2}
   _dataPersistenceManagerPref: {fileID: 620088816649499361, guid: 2f05a579f0f563f44b6e090c4da812ab, type: 3}
+  _dayManagerPref: {fileID: 994225200577225023, guid: aa008156d5852dd45bed0b1660a3b8a6, type: 3}
+  _guestSaveSystemPref: {fileID: 7364201390212849799, guid: 8359503e0bb88f24bbd1b7bf9a6641cd, type: 3}
   _gameSceneManagerPref: {fileID: 5238498326887593915, guid: c31a897dbc25a384c97397a612016b83, type: 3}
   _itemPoolPref: {fileID: 8533384717705542304, guid: dd3cf1b494c7c0e4596820475e0d138e, type: 3}
   _sfxManagerPref: {fileID: 5759422229559150521, guid: d275b92f69cf7d34ebfe4912dd900393, type: 3}

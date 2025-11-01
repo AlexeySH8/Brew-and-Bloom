@@ -28,7 +28,6 @@ public class OrdersPanelUI : MonoBehaviour
     private void Awake()
     {
         _slideAnimation = GetComponent<SlideAnimation>();
-        AddOrders(_guestsManager.GuestForDay);
     }
 
     private void SubscribeToEvents()
@@ -85,7 +84,11 @@ public class OrdersPanelUI : MonoBehaviour
         _slideAnimation.Transition(_isOpen);
     }
 
-    public void Close() { if (_isOpen) { StartCoroutine(CloseRoutine()); } }
+    public void Close()
+    {
+        if (_isOpen)
+            StartCoroutine(CloseRoutine());
+    }
 
     private IEnumerator CloseRoutine()
     {

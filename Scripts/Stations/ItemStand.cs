@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -25,33 +24,9 @@ public class ItemStand : BaseItemHolder, IDataPersistence
         base.Awake();
     }
 
-    public void LoadData(GameData gameData)
-    {
-        ItemHolderData holderData = gameData.ItemHolders
-            .FirstOrDefault(h => h.HolderId == name);
+    public void LoadData(GameData gameData) => LoadHeldItem(gameData);
 
-        if (holderData == null) return;
-
-        GameObject prefab = Resources.Load<GameObject>(holderData.PrefabPath);
-        var item = Instantiate(prefab);
-        BaseHoldItem holdItem = item.GetComponent<BaseHoldItem>();
-        TryReceive(holdItem);
-    }
-
-    public void SaveData(GameData gameData)
-    {
-        if (_heldItem == null) return;
-
-        ItemHolderData holderData = gameData.ItemHolders
-            .FirstOrDefault(h => h.HolderId == name);
-
-        if (holderData == null)
-        {
-            holderData = new ItemHolderData() { HolderId = name };
-            gameData.ItemHolders.Add(holderData);
-        }
-        holderData.PrefabPath = _heldItem.PrefabPath;
-    }
+    public void SaveData(GameData gameData) => SaveHeldItem(gameData);
 
     private void OnDisable()
     {

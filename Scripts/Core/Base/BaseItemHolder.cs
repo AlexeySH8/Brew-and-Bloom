@@ -1,6 +1,6 @@
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
-using Zenject;
 
 public abstract class BaseItemHolder : MonoBehaviour, IGiveHeldItem, IReceiveHeldItem
 {
@@ -8,7 +8,8 @@ public abstract class BaseItemHolder : MonoBehaviour, IGiveHeldItem, IReceiveHel
     public abstract int SortingOrderOffset { get; }
     public BaseHoldItem HeldItem => _heldItem;
     protected BaseHoldItem _heldItem;
-    
+    [SerializeField] protected string _holderId = "";
+
     protected virtual void Awake()
     {
         CheckChildren();
@@ -61,5 +62,38 @@ public abstract class BaseItemHolder : MonoBehaviour, IGiveHeldItem, IReceiveHel
                     Debug.LogError($"Object {holdItem.name} cannot be inserted into parent {this.name}");
             }
         }
+    }
+
+    protected virtual void LoadHeldItem(GameData gameData)
+    {
+        ItemHolderSaveData holderData = gameData.ItemHoldersSaveData
+            .FirstOrDefault(h => h.HolderId == _holderId);
+
+        if (holderData == null || string.IsNullOrEmpty(holderData.PrefabPath)) return;
+
+        GameObject prefab = Resources.Load<GameObject>(holderData.PrefabPath);
+        var item = Instantiate(prefab);
+        BaseHoldItem holdItem = item.GetComponent<BaseHoldItem>();
+        TryReceive(holdItem);
+    }
+
+    protected virtual void SaveHeldItem(GameData gameData)
+    {
+        ItemHolderSaveData holderData = gameData.ItemHoldersSaveData
+            .FirstOrDefault(h => h.HolderId == name);
+
+        if (holderData == null)
+        {
+            holderData = new ItemHolderSaveData() { HolderId = _holderId };
+            gameData.ItemHoldersSaveData.Add(holderData);
+        }
+        holderData.PrefabPath = _heldItem != null ? _heldItem.PrefabPath : "";
+    }
+
+    [ContextMenu("Generate Unique Id")]
+    private void GenerateUniqueId()
+    {
+        _holderId = GUID.Generate().ToString();
+        EditorUtility.SetDirty(this);
     }
 }

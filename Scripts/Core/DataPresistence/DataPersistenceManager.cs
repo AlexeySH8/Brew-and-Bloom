@@ -16,19 +16,15 @@ public class DataPersistenceManager : MonoBehaviour, IDataPersistenceManager
         string dataPath = Application.persistentDataPath;
         _dataHandler = new FileDataHandler(dataPath, FileName);
         _gameSceneManager = gameSceneManager;
-        SubscribeToEvents();
     }
 
-    private void Awake()
+    private void Update()
     {
-        if (HasSave())
-            LoadGame();
-    }
-
-    private void SubscribeToEvents()
-    {
-        _gameSceneManager.OnHouseLoaded += LoadGame;
-        _gameSceneManager.OnTavernLoaded += LoadGame;
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            Debug.Log("Player press manual saving");
+            SaveGame();
+        }
     }
 
     public void NewGame()
@@ -77,20 +73,4 @@ public class DataPersistenceManager : MonoBehaviour, IDataPersistenceManager
     }
 
     public bool HasSave() => _dataHandler.Exists();
-
-    private void UnsubscribeFromEvents()
-    {
-        _gameSceneManager.OnHouseLoaded -= SaveGame;
-        _gameSceneManager.OnTavernLoaded -= SaveGame;
-    }
-
-    private void OnApplicationQuit()
-    {
-        SaveGame();
-    }
-
-    private void OnDisable()
-    {
-        UnsubscribeFromEvents();
-    }
 }

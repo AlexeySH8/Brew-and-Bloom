@@ -8,11 +8,11 @@ public class Order
     [field: SerializeField] public int Payment { get; private set; }
     [field: SerializeField] public bool IsCompleted { get; set; }
 
-    public Order(Guest guest, DishData dishData, int payment)
+    public Order(Guest guest, DishData dishData, int payment , bool isCompleted)
     {
         Guest = guest;
         Dish = dishData;
         Payment = payment;
-        IsCompleted = false;
+        IsCompleted = isCompleted;
     }
 }

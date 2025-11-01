@@ -18,13 +18,13 @@ public class GuestDialogue : IActiveInteraction
     private bool _isStoryFinished;
     private static readonly string DEFAULT_DIALOGUE_PATH = "Assets/Data/Dialogue/DefaultDialogue.asset";
 
-    public GuestDialogue(GuestData guestData)
+    public GuestDialogue(GuestData guestData, int dialoguePartIndex)
     {
         _dialoguesData = guestData.DialoguesData;
         _guestPortret = guestData.Portrait;
         _guestName = guestData.Name;
         _guestTypingSound = guestData.TypingSound;
-        _dialoguePartIndex = 0;
+        _dialoguePartIndex = dialoguePartIndex;
         _isStoryFinished = false;
 
         if (guestData.DefaultDialogueData == null)

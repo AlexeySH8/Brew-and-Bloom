@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 public class PlayerItemHolder : BaseItemHolder
 {
@@ -24,15 +25,15 @@ public class PlayerItemHolder : BaseItemHolder
             SetItemPosition();
     }
 
-    public void Drop(Vector2 forceVector)
+    public void Drop(Vector2 forceDirection)
     {
         BaseHoldItem heldItem = GiveItem();
 
         if (heldItem == null) return;
 
         var rb = heldItem.Rigidbody;
-        rb.transform.position += (Vector3)(forceVector * 0.2f); // Moves the object collider away from the player collider
-        rb.AddForce(forceVector * _throwingForce, ForceMode2D.Impulse);
+        rb.transform.position += (Vector3)(forceDirection * 0.2f); // Moves the object collider away from the player collider
+        rb.AddForce(forceDirection * _throwingForce, ForceMode2D.Impulse);
     }
 
     private void SetItemPosition()
