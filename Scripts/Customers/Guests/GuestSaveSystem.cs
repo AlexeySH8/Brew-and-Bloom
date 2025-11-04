@@ -69,9 +69,8 @@ public class GuestSaveSystem : MonoBehaviour, IDataPersistence
                 }
             }
             loadGuest.CurrentOrder = currentOrder;
-            var oldGuest = AllGuests.FirstOrDefault(g => g.Data.GuestId == loadGuest.Data.GuestId);
-            var indexOldGuest = AllGuests.IndexOf(oldGuest);
-            AllGuests[indexOldGuest] = loadGuest;
+            Guest oldGuest = AllGuests.FirstOrDefault(g => g.Data.GuestId == loadGuest.Data.GuestId);
+            oldGuest.RestoreFromSaveData(loadGuest, _recipes, _playerWallet);
         }
     }
 
@@ -93,7 +92,7 @@ public class GuestSaveSystem : MonoBehaviour, IDataPersistence
                 currentOrderSaveData = new CurrentOrderSaveData();
                 currentOrderSaveData.Payment = currentOrder.Payment;
                 currentOrderSaveData.IngredientsMask = currentOrder.Dish.IngredientsMask;
-                currentOrder.IsCompleted = currentOrder.IsCompleted;
+                currentOrderSaveData.IsCompleted = currentOrder.IsCompleted;
             }
             guestSaveData.CurrentOrderSaveData = currentOrderSaveData;
             guestsSaveData.Add(guestSaveData);

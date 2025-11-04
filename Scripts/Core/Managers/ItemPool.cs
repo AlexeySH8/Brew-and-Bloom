@@ -20,8 +20,7 @@ public class ItemPool : MonoBehaviour, IDataPersistence
         _gameSceneManager = gameSceneManager;
         _dataPersistenceManager = dataPersistenceManager;
         _dataPersistenceManager.Register(this);
-
-        gameSceneManager.OnHouseLoaded += SpawnSavedItems;
+        _gameSceneManager.OnTavernUnloading += DiscardTavernItems;
     }
 
     private void Awake()
@@ -56,30 +55,16 @@ public class ItemPool : MonoBehaviour, IDataPersistence
         oldestItem.Discard();
     }
 
-    private void SpawnSavedItems()
+    private void DiscardTavernItems()
     {
-        string currentScene = SceneManager.GetActiveScene().name;
-        var itemsSaveData = _scenesItemsSaveData
-            .FirstOrDefault(s => s.SceneName == currentScene);
-
-        if (itemsSaveData == null) return;
-
-        foreach (var itemSave in itemsSaveData.ItemsSaveData)
-        {
-            GameObject prefab = Resources.Load<GameObject>(itemSave.PrefabPath);
-            Vector3 position = new Vector3(
-                itemSave.Position[0], itemSave.Position[1], itemSave.Position[2]);
-            Quaternion rotation = new Quaternion(
-                itemSave.Rotation[0], itemSave.Rotation[1],
-                itemSave.Rotation[2], itemSave.Rotation[3]);
-
-            GameObject itemObj = Instantiate(prefab, position, rotation);
-        }
+        foreach (var item in _registeredHoldItems)
+            Destroy(item);
     }
 
     public void LoadData(GameData gameData)
     {
         _scenesItemsSaveData = gameData.ScenesItemsData;
+        SpawnSavedItems();
     }
 
     public void SaveData(GameData gameData)
@@ -115,8 +100,30 @@ public class ItemPool : MonoBehaviour, IDataPersistence
         currentSceneData.ItemsSaveData = itemsToSave;
     }
 
+    private void SpawnSavedItems()
+    {
+        string currentScene = SceneManager.GetActiveScene().name;
+        var itemsSaveData = _scenesItemsSaveData
+            .FirstOrDefault(s => s.SceneName == currentScene);
+
+        if (itemsSaveData == null) return;
+
+        foreach (var itemSave in itemsSaveData.ItemsSaveData)
+        {
+            GameObject prefab = Resources.Load<GameObject>(itemSave.PrefabPath);
+            Vector3 position = new Vector3(
+                itemSave.Position[0], itemSave.Position[1], itemSave.Position[2]);
+            Quaternion rotation = new Quaternion(
+                itemSave.Rotation[0], itemSave.Rotation[1],
+                itemSave.Rotation[2], itemSave.Rotation[3]);
+
+            GameObject itemObj = Instantiate(prefab, position, rotation);
+        }
+    }
+
     private void OnDisable()
     {
+        _gameSceneManager.OnTavernUnloading -= DiscardTavernItems;
         _dataPersistenceManager.Unregister(this);
     }
 }

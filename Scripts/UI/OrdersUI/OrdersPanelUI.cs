@@ -10,7 +10,7 @@ public class OrdersPanelUI : MonoBehaviour
     [SerializeField] private GameObject _orderTemplatePref;
     [SerializeField] private TextMeshProUGUI _moneyEarnedText;
 
-    private Dictionary<Guest, GameObject> _activeOrders;
+    private Dictionary<Guest, GameObject> _activeOrders = new();
     private SlideAnimation _slideAnimation;
     private GuestsManager _guestsManager;
     private PlayerWallet _playerWallet;
@@ -30,30 +30,38 @@ public class OrdersPanelUI : MonoBehaviour
         _slideAnimation = GetComponent<SlideAnimation>();
     }
 
+    private void Start()
+    {
+        AddOrders(_guestsManager.GuestForDay);
+        UpdateMoneyEarnedText(_playerWallet.DailyEarning);
+    }
+
     private void SubscribeToEvents()
     {
-        _guestsManager.OnGuestsArrived += AddOrders;
         _playerWallet.OnDailyEarningChanged += UpdateMoneyEarnedText;
     }
 
     private void OnDisable()
     {
-        _guestsManager.OnGuestsArrived -= AddOrders;
         _playerWallet.OnDailyEarningChanged -= UpdateMoneyEarnedText;
     }
 
     public void AddOrders(IReadOnlyList<Guest> guests)
     {
-        Clear();
+        //Clear();
         foreach (Guest guest in guests)
         {
-            guest.OnOrderCompleted += UpdateStatusOrder;
             Order order = guest.CurrentOrder;
             GameObject orderTemplate = Instantiate(_orderTemplatePref, _content);
             _activeOrders.Add(order.Guest, orderTemplate);
             orderTemplate
                 .GetComponent<OrderTemplate>()
                 .DisplayOrder(order);
+
+            if (guest.IsServed)
+                UpdateStatusOrder(guest, guest.CurrentOrder.IsCompleted);
+            else
+                guest.OnOrderCompleted += UpdateStatusOrder;
         }
     }
 
@@ -98,15 +106,19 @@ public class OrdersPanelUI : MonoBehaviour
 
     private void Clear()
     {
-        if (_activeOrders != null && _activeOrders.Count > 0)
+        if (_activeOrders.Count == 0) return;
+
+        foreach (Guest guest in _activeOrders.Keys)
         {
-            foreach (Guest guest in _activeOrders.Keys)
-            {
-                var orderPref = _activeOrders[guest];
-                guest.OnOrderCompleted -= UpdateStatusOrder;
-                Destroy(orderPref);
-            }
+            var orderPref = _activeOrders[guest];
+            guest.OnOrderCompleted -= UpdateStatusOrder;
+            Destroy(orderPref);
         }
-        _activeOrders = new Dictionary<Guest, GameObject>();
+        _activeOrders.Clear();
+    }
+
+    private void OnDestroy()
+    {
+        Clear();
     }
 }

@@ -19,12 +19,11 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 275119996928
-    m_Localized: "El plato result\xF3 muy equilibrado en sabor y agradablemente abundante."
+    m_Localized: "\u0424"
     m_Metadata:
       m_Items: []
   - m_Id: 432603529216
-    m_Localized: El establecimiento se distingue por su ambiente tranquilo y un servicio
-      de alta calidad.
+    m_Localized: "\u0424"
     m_Metadata:
       m_Items: []
   references:

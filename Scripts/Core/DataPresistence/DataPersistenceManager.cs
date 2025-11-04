@@ -61,6 +61,11 @@ public class DataPersistenceManager : MonoBehaviour, IDataPersistenceManager
             persistence.LoadData(GameData);
     }
 
+    public void LoadGameMeta()
+    {
+        GameData = _dataHandler.LoadData();
+    }
+
     public void Register(IDataPersistence persistence)
     {
         if (!_dataPersistences.Contains(persistence))

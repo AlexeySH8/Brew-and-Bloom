@@ -6,5 +6,6 @@ public interface IDataPersistenceManager
     void NewGame();
     void SaveGame();
     void LoadGame();
+    void LoadGameMeta();
     bool HasSave();
 }

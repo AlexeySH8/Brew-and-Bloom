@@ -30,9 +30,7 @@ public class HousePortal : MonoBehaviour, IReceiveHeldItem, IFreeInteractable
             return true;
         }
         else
-        {
             _portalUI.Show(CancelLoadTavernScene, ConfirmLoadTavernScene);
-        }
         return false;
     }
 

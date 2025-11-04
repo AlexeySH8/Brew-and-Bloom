@@ -79,6 +79,12 @@ public abstract class BaseItemHolder : MonoBehaviour, IGiveHeldItem, IReceiveHel
 
     protected virtual void SaveHeldItem(GameData gameData)
     {
+        if (string.IsNullOrEmpty(_holderId))
+        {
+            Debug.LogError($"The ItemHolder {name} does not have ID. Item {_heldItem.name} not saved");
+            return;
+        }
+
         ItemHolderSaveData holderData = gameData.ItemHoldersSaveData
             .FirstOrDefault(h => h.HolderId == name);
 

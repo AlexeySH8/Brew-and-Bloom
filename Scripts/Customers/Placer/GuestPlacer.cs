@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -15,23 +14,12 @@ public class GuestPlacer : MonoBehaviour
     public void Construct(GuestsManager guestsManager)
     {
         _guestsManager = guestsManager;
-        //SubscribeToEvents();
     }
 
     private void Start()
     {
         Place(_guestsManager.GuestForDay);
     }
-
-    //private void SubscribeToEvents()
-    //{
-    //    _guestsManager.OnGuestsArrived += Place;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    _guestsManager.OnGuestsArrived -= Place;
-    //}
 
     public void Place(IReadOnlyList<Guest> guestsForDay)
     {

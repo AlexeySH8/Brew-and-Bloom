@@ -23,17 +23,6 @@ public class GuestsManager : MonoBehaviour
         SubscribeToEvents();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            foreach (var guest in LoadGuestForDay())
-            {
-                Debug.Log(guest.CurrentOrder.Dish.name);
-            }
-        }
-    }
-
     private void Start()
     {
         if (_guestSaveSystem.AllGuests == null ||
@@ -96,8 +85,8 @@ public class GuestsManager : MonoBehaviour
         List<Guest> loadGuestsForDay = new List<Guest>();
         foreach (Guest guest in _allGuests)
         {
-            if (guest.CurrentOrder != null &&
-                guest.CurrentOrder.Dish.IngredientsMask != 0)
+            if (guest.IsServed || (guest.CurrentOrder != null &&
+                guest.CurrentOrder.Dish.IngredientsMask != 0))
                 loadGuestsForDay.Add(guest);
         }
         return loadGuestsForDay;
@@ -106,7 +95,12 @@ public class GuestsManager : MonoBehaviour
     private void ClearGuestForDay()
     {
         foreach (Guest guest in _guestForDay)
+        {
+            guest.SetNextDialoguePart();
             guest.CurrentOrder = null;
+            guest.IsServed = false;
+        }
+        _guestForDay.Clear();
     }
 
     private void OnDisable()

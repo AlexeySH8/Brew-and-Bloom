@@ -34,12 +34,12 @@ public class GameSceneManager : MonoBehaviour, IDataPersistence
         switch (scene.name)
         {
             case HouseSceneName:
+                _persistenceManager.LoadGame();
                 OnHouseLoaded?.Invoke();
-                _persistenceManager.SaveGame();
                 break;
             case TavernSceneName:
+                _persistenceManager.LoadGame();
                 OnTavernLoaded?.Invoke();
-                _persistenceManager.SaveGame();
                 break;
         }
     }
@@ -85,6 +85,11 @@ public class GameSceneManager : MonoBehaviour, IDataPersistence
     public void SaveData(GameData gameData)
     {
         gameData.SavedSceneName = CurrenSceneName;
+    }
+
+    private void OnApplicationQuit()
+    {
+        _persistenceManager.SaveGame();
     }
 
     private void OnDestroy()

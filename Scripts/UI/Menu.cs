@@ -38,7 +38,7 @@ public class Menu : MonoBehaviour
 
     private void ContinueGame()
     {
-        _dataPersistenceManager.LoadGame();
+        _dataPersistenceManager.LoadGameMeta();
         _gameSceneManager.LoadCurrentScene();
     }
 

@@ -23,7 +23,10 @@ public class GuestCreature : MonoBehaviour, IReceiveHeldItem, IFreeInteractable
         if (_dishDisplay == null)
             Debug.LogError($"{gameObject.name} DishDisplay is not specified");
 
-        ShowOrderDisplay();
+        if (_guest.IsServed)
+            HideOrderDisplay();
+        else
+            ShowOrderDisplay();
     }
 
     public void Interact()
@@ -50,11 +53,6 @@ public class GuestCreature : MonoBehaviour, IReceiveHeldItem, IFreeInteractable
         }
         _guest.StartDialogue();
         return reciveResult;
-    }
-
-    private void OnDestroy()
-    {
-        _guest.SetNextDialoguePart();
     }
 
     private void ShowOrderDisplay()

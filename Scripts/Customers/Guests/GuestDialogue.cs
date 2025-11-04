@@ -4,7 +4,6 @@ using UnityEngine.Localization;
 
 public class GuestDialogue : IActiveInteraction
 {
-    private int _dialoguePartIndex;
     private int _lineIndex;
     private DialogueData[] _dialoguesData;
     private DialogueData _defaultDialogueData;
@@ -18,13 +17,12 @@ public class GuestDialogue : IActiveInteraction
     private bool _isStoryFinished;
     private static readonly string DEFAULT_DIALOGUE_PATH = "Assets/Data/Dialogue/DefaultDialogue.asset";
 
-    public GuestDialogue(GuestData guestData, int dialoguePartIndex)
+    public GuestDialogue(GuestData guestData)
     {
         _dialoguesData = guestData.DialoguesData;
         _guestPortret = guestData.Portrait;
         _guestName = guestData.Name;
         _guestTypingSound = guestData.TypingSound;
-        _dialoguePartIndex = dialoguePartIndex;
         _isStoryFinished = false;
 
         if (guestData.DefaultDialogueData == null)
@@ -42,7 +40,7 @@ public class GuestDialogue : IActiveInteraction
 
     public void EndActiveInteraction() => EndDialogue();
 
-    public void StartDialogue()
+    public void StartDialogue(int dialoguePartIndex)
     {
         #region Exception Check
         if (_playerController == null)
@@ -67,7 +65,7 @@ public class GuestDialogue : IActiveInteraction
         #endregion
 
         _lineIndex = 0;
-        SetDialoguePart();
+        SetDialoguePart(dialoguePartIndex);
         _dialoguePanelUI.StartDialogue(_guestPortret, _guestName);
         _playerController.StartActiveInteraction(this);
         NextLineDialogue();
@@ -101,18 +99,18 @@ public class GuestDialogue : IActiveInteraction
             EndDialogue();
     }
 
-    private void SetDialoguePart()
+    private void SetDialoguePart(int dialoguePartIndex)
     {
         if (_isStoryFinished) return;
 
         if (_dialoguesData.Length == 0 ||
-            _dialoguePartIndex >= _dialoguesData.Length)
+            dialoguePartIndex >= _dialoguesData.Length)
         {
             _isStoryFinished = true;
             _dialogueDataPart = _defaultDialogueData;
             return;
         }
-        _dialogueDataPart = _dialoguesData[_dialoguePartIndex];
+        _dialogueDataPart = _dialoguesData[dialoguePartIndex];
     }
 
     private void EndDialogue()
@@ -123,8 +121,6 @@ public class GuestDialogue : IActiveInteraction
         _playerController.EndActiveInteraction();
         _dialoguePanelUI.EndDialogue();
     }
-
-    public void SetNextDialoguePart() => _dialoguePartIndex++;
 
     // TypeLine
     private void OnStringChanged(string newValue)

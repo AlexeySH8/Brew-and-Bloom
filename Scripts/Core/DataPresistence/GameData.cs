@@ -14,6 +14,7 @@ public class GameData
     public List<SceneItemData> ScenesItemsData = new();
     public List<ItemHolderSaveData> ItemHoldersSaveData = new();
     public List<SoilSaveData> SoilsSaveData = new();
+    public List<int> CompletedDishes = new();
 }
 
 [Serializable]

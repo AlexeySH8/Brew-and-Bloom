@@ -20,7 +20,7 @@ public class TavernPortal : MonoBehaviour, IFreeInteractable
 
     private void Start()
     {
-        StartCoroutine(GiveCompletedDishesRoutine(_ordersManager.CompletedDishes));
+        StartCoroutine(GiveCompletedDishesRoutine());
     }
 
     public void Interact()
@@ -33,16 +33,17 @@ public class TavernPortal : MonoBehaviour, IFreeInteractable
         _gameSceneManager.LoadHouseScene();
     }
 
-    private IEnumerator GiveCompletedDishesRoutine(IReadOnlyList<DishData> dishesData)
+    private IEnumerator GiveCompletedDishesRoutine()
     {
-        foreach (var dishData in dishesData)
+        var completedDishes = new List<DishData>(_ordersManager.CompletedDishes);
+        foreach (var dishData in completedDishes)
         {
             GameObject dish = Instantiate(dishData.DishPrefab);
             Vector3 spawnOffset = new Vector3(Random.Range(-1.5f, 1.5f), -2, 0);
             dish
                 .GetComponent<BaseHoldItem>()
                 .ArcAnimation.Animate(transform.position, spawnOffset);
-
+            _ordersManager.RemoveCompletedDish(dishData);
             yield return new WaitForSeconds(1f);
         }
     }

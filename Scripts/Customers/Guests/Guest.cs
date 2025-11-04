@@ -1,11 +1,12 @@
 using System;
+using UnityEngine;
 
 public class Guest
 {
     public GuestData Data { get; private set; }
     public Order CurrentOrder { get; set; }
     public int DialoguePartIndex { get; private set; }
-    public bool IsServed { get; private set; }
+    public bool IsServed { get; set; }
 
     public event Action<Guest, bool> OnOrderCompleted;
 
@@ -21,7 +22,7 @@ public class Guest
         IsServed = isServed;
         _recipes = recipes;
         _playerWallet = playerWallet;
-        _guestDialogue = new GuestDialogue(Data, DialoguePartIndex);
+        _guestDialogue = new GuestDialogue(Data);
     }
 
     public void MakeOrder()
@@ -44,12 +45,33 @@ public class Guest
             _playerWallet.AddToDailyEarning(CurrentOrder.Payment);
         }
         OnOrderCompleted?.Invoke(this, CurrentOrder.IsCompleted);
-        CurrentOrder = null;
     }
 
-    public void StartDialogue() => _guestDialogue.StartDialogue();
+    public void StartDialogue() => _guestDialogue.StartDialogue(DialoguePartIndex);
 
-    public void SetNextDialoguePart() => _guestDialogue.SetNextDialoguePart();
+    public void SetNextDialoguePart()
+    {
+        DialoguePartIndex++;
+    }
+
+    public void RestoreFromSaveData(Guest guestSaveData, Recipes recipes, PlayerWallet playerWallet)
+    {
+        DialoguePartIndex = guestSaveData.DialoguePartIndex;
+        IsServed = guestSaveData.IsServed;
+        CurrentOrder = null;
+
+        if (guestSaveData.CurrentOrder != null &&
+            guestSaveData.CurrentOrder.Dish.IngredientsMask != 0)
+        {
+            if (recipes.TryGetDish(
+                guestSaveData.CurrentOrder.Dish.IngredientsMask, out GameObject dishObj))
+            {
+                var loadDish = dishObj.GetComponent<Dish>();
+                CurrentOrder = new Order(this, loadDish.Data,
+                    guestSaveData.CurrentOrder.Payment, guestSaveData.CurrentOrder.IsCompleted);
+            }
+        }
+    }
 
     public override string ToString() => Data.Name;
 }

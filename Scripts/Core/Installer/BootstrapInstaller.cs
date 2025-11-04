@@ -5,7 +5,6 @@ public class BootstrapInstaller : MonoInstaller
 {
     [SerializeField] private Recipes _recipesPref;
     [SerializeField] private DataPersistenceManager _dataPersistenceManagerPref;
-    [SerializeField] private DayManager _dayManagerPref;
     [SerializeField] private GuestSaveSystem _guestSaveSystemPref;
     [SerializeField] private GameSceneManager _gameSceneManagerPref;
     [SerializeField] private ItemPool _itemPoolPref;
@@ -41,10 +40,6 @@ public class BootstrapInstaller : MonoInstaller
 
         Container.Bind<GuestsManager>()
             .FromComponentInNewPrefab(_guestsManagerPref)
-            .AsSingle().NonLazy();
-
-        Container.Bind<DayManager>()
-            .FromComponentInNewPrefab(_dayManagerPref)
             .AsSingle().NonLazy();
 
         Container.Bind<GuestSaveSystem>()
