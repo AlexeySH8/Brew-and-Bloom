@@ -1,10 +1,14 @@
 using System.Collections;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using Zenject;
 
 public class GrowPlant : MonoBehaviour
 {
+    public Coroutine GrowingPlant { get; private set; }
     public bool IsWaterNeed { get; private set; }
+    public Seed Seed { get; private set; }
+    public int GrowthStage { get; private set; }
 
     [SerializeField] private int _minHarvestCount = 1;
     [SerializeField] private int _maxHarvestCount = 3;
@@ -15,21 +19,20 @@ public class GrowPlant : MonoBehaviour
     private Soil _soil;
     private SeedData _seedData;
     private SoilVisual _soilVisual;
-    private Coroutine _growingPlant;
     private Coroutine _dryOutRoutine;
-    private GameSceneManager _gameSceneManager;
+    // private GameSceneManager _gameSceneManager;
 
-    [Inject]
-    public void Construct(GameSceneManager gameSceneManager)
-    {
-        _gameSceneManager = gameSceneManager;
-        SubscribeToEvents();
-    }
+    //[Inject]
+    //public void Construct(GameSceneManager gameSceneManager)
+    //{
+    //    _gameSceneManager = gameSceneManager;
+    //    SubscribeToEvents();
+    //}
 
-    private void SubscribeToEvents()
-    {
-        _gameSceneManager.OnHouseUnloading += EndGrowPlant;
-    }
+    //private void SubscribeToEvents()
+    //{
+    //    _gameSceneManager.OnHouseUnloading += EndGrowPlant;
+    //}
 
     private void Awake()
     {
@@ -37,24 +40,31 @@ public class GrowPlant : MonoBehaviour
         _soilVisual = GetComponent<SoilVisual>();
     }
 
-    public void PlantSeed(SeedData seedData)
+    public void PlantSeed(Seed seed, int growthStage)
     {
-        if (seedData == null || _growingPlant != null) return;
-        _seedData = seedData;
-        _growingPlant = StartCoroutine(GrowPlantRoutine());
+        Seed = seed;
+        GrowthStage = growthStage;
+        _seedData = Seed.Data;
+        GrowingPlant = StartCoroutine(GrowPlantRoutine());
+
+        _soil.DisableInteractive();
+        _soil.StopStageReset();
     }
 
     private IEnumerator GrowPlantRoutine()
     {
-        foreach (Sprite stage in _seedData.GrowthStageSprites)
+        while (GrowthStage < _seedData.GrowthStageSprites.Count)
         {
+            var stage = _seedData.GrowthStageSprites[GrowthStage];
             _soilVisual.UpdateGrowPlantStage(stage);
             MaybeRequireWater();
 
             yield return new WaitUntil(() => !IsWaterNeed);
             yield return new WaitForSeconds(Random.Range(_seedData.MinStageTime, _seedData.MaxStageTime));
+            GrowthStage++;
         }
         yield return new WaitForSeconds(Random.Range(_seedData.MinStageTime, _seedData.MaxStageTime));
+        GrowthStage = 0;
         EndGrowPlant();
     }
 
@@ -94,20 +104,19 @@ public class GrowPlant : MonoBehaviour
 
     private void EndGrowPlant()
     {
-        if (_seedData == null) return;
-        SpawnHarvest();
-
-        if (_growingPlant != null)
+        if (GrowingPlant != null)
         {
-            StopCoroutine(_growingPlant);
-            _growingPlant = null;
+            StopCoroutine(GrowingPlant);
+            GrowingPlant = null;
         }
 
-        IsWaterNeed = false;
-
-        _soil.UpdateLayer();
+        _soil.EnableInteractive();
         _soil.StartStageReset();
         _soilVisual.ClearContentPlace();
+        IsWaterNeed = false;
+
+        if (_seedData != null)
+            SpawnHarvest();
     }
 
     private void SpawnHarvest()
@@ -115,15 +124,11 @@ public class GrowPlant : MonoBehaviour
         for (int i = 0; i < Random.Range(_minHarvestCount, _maxHarvestCount + 1); i++)
             Instantiate(_seedData.IngredientPrefab, transform.position, transform.rotation);
         _seedData = null;
+        Seed = null;
     }
 
-    private void OnDisable()
-    {
-        UnsubscribeFromEvents();
-    }
-
-    private void UnsubscribeFromEvents()
-    {
-        _gameSceneManager.OnHouseUnloading -= EndGrowPlant;
-    }
+    //private void OnDisable()
+    //{
+    //    _gameSceneManager.OnHouseUnloading -= EndGrowPlant;
+    //}
 }

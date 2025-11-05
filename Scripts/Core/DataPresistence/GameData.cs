@@ -61,4 +61,12 @@ public class SoilSaveData
 {
     public string SoilId;
     public int CultivationStage;
+    public SeedSaveData SeedSaveData;
+}
+
+[Serializable]
+public class SeedSaveData
+{
+    public string SeedPrefabPath;
+    public int growthStageIndex;
 }

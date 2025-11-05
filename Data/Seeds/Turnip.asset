@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d337d0fef05406445b1d3a2ff3785ee4, type: 3}
   m_Name: Turnip
   m_EditorClassIdentifier: 
-  <MinStageTime>k__BackingField: 15
-  <MaxStageTime>k__BackingField: 45
+  <MinStageTime>k__BackingField: 3
+  <MaxStageTime>k__BackingField: 5
   <GrowthStageSprites>k__BackingField:
   - {fileID: -724344081, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}
   - {fileID: -776531605, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}

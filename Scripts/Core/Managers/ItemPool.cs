@@ -20,7 +20,7 @@ public class ItemPool : MonoBehaviour, IDataPersistence
         _gameSceneManager = gameSceneManager;
         _dataPersistenceManager = dataPersistenceManager;
         _dataPersistenceManager.Register(this);
-        _gameSceneManager.OnTavernUnloading += DiscardTavernItems;
+        _gameSceneManager.OnTavernUnloading += UnregisterTavernItems; 
     }
 
     private void Awake()
@@ -55,10 +55,11 @@ public class ItemPool : MonoBehaviour, IDataPersistence
         oldestItem.Discard();
     }
 
-    private void DiscardTavernItems()
+    private void UnregisterTavernItems()
     {
-        foreach (var item in _registeredHoldItems)
-            Destroy(item);
+        var registeredHoldItems = new List<BaseHoldItem>(_registeredHoldItems);
+        foreach (var item in registeredHoldItems)
+            Unregister(item);
     }
 
     public void LoadData(GameData gameData)
@@ -123,7 +124,7 @@ public class ItemPool : MonoBehaviour, IDataPersistence
 
     private void OnDisable()
     {
-        _gameSceneManager.OnTavernUnloading -= DiscardTavernItems;
+        _gameSceneManager.OnTavernUnloading -= UnregisterTavernItems;
         _dataPersistenceManager.Unregister(this);
     }
 }

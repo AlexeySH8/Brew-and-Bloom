@@ -161,4 +161,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 411cefb9ec865fc4cb6792267d71395f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PrefabPath: Prefabs/Seeds/Turnip
   <Data>k__BackingField: {fileID: 11400000, guid: 4a827942169b6b742a13ca33a1ca3f8e, type: 2}

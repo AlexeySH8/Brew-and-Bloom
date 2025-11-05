@@ -12,6 +12,7 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
     [SerializeField] private string _soilId;
 
     private GrowPlant _growPlant;
+    private SeedSaveData _seedSaveData;
     private SoilVisual _soilVisual;
     private Coroutine _stageResetRoutine;
     private IDataPersistenceManager _persistenceManager;
@@ -38,6 +39,14 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
     private void Start()
     {
         UpdateStage();
+        if (_seedSaveData != null &&
+            !string.IsNullOrEmpty(_seedSaveData.SeedPrefabPath))
+        {
+            var a = _currentStage;
+            Seed seedPref = Resources.Load<Seed>(_seedSaveData.SeedPrefabPath);
+            int growthStageIndex = _seedSaveData.growthStageIndex;
+            _growPlant.PlantSeed(seedPref, growthStageIndex);
+        }
     }
 
     public void InteractWithPick() => Cultivate();
@@ -46,14 +55,15 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
 
     public void InteractWithStaff() => _growPlant.SetPlantNeedWater(false);
 
-    public bool TryReceive(BaseHoldItem heldItem)
+    public bool TryReceive(BaseHoldItem heldItem) => TryPlantSeed(heldItem);
+
+    private bool TryPlantSeed(BaseHoldItem item)
     {
-        if (heldItem.TryGetComponent(out Seed seed))
+        if (_growPlant.GrowingPlant == null &&
+            item.TryGetComponent(out Seed seed))
         {
-            DisableInteractive();
-            StopStageReset();
-            _growPlant.PlantSeed(seed.Data);
-            heldItem.Discard();
+            _growPlant.PlantSeed(seed, 0);
+            item.Discard();
             return true;
         }
         return false;
@@ -73,7 +83,7 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
         _stageResetRoutine = StartCoroutine(StageResetRoutine());
     }
 
-    private void StopStageReset()
+    public void StopStageReset()
     {
         if (_stageResetRoutine != null)
         {
@@ -110,10 +120,10 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
         _soilVisual.UpdateCultivationStage(_currentStage);
     }
 
-    private void EnableInteractive() =>
+    public void EnableInteractive() =>
         gameObject.layer = LayerMask.NameToLayer(InteractiveItemLayer);
 
-    private void DisableInteractive() =>
+    public void DisableInteractive() =>
         gameObject.layer = LayerMask.NameToLayer(DefaultLayer);
 
     public void LoadData(GameData gameData)
@@ -124,6 +134,7 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
         if (soilData == null) return;
 
         _currentStage = (CultivationStage)soilData.CultivationStage;
+        _seedSaveData = soilData.SeedSaveData;
     }
 
     public void SaveData(GameData gameData)
@@ -137,6 +148,11 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
             gameData.SoilsSaveData.Add(soilData);
         }
         soilData.CultivationStage = (int)_currentStage;
+
+        SeedSaveData seedSaveData = new SeedSaveData();
+        seedSaveData.SeedPrefabPath = _growPlant.Seed == null ? "" : _growPlant.Seed.PrefabPath;
+        seedSaveData.growthStageIndex = _growPlant.GrowthStage;
+        soilData.SeedSaveData = seedSaveData;
     }
 
     private void OnDestroy()
