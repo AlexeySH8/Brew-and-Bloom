@@ -43,7 +43,7 @@ public class SellerMovement : MonoBehaviour
 
     public void StartMovingAround()
     {
-        if (_movingRoutine != null || !isActiveAndEnabled) return;
+        if (_movingRoutine != null) return;
 
         _stopZone.EnableStopMoving();
         _movingRoutine = StartCoroutine(MovingAround());

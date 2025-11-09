@@ -42,10 +42,9 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
         if (_seedSaveData != null &&
             !string.IsNullOrEmpty(_seedSaveData.SeedPrefabPath))
         {
-            var a = _currentStage;
-            Seed seedPref = Resources.Load<Seed>(_seedSaveData.SeedPrefabPath);
+            var seedPref = Resources.Load<Seed>(_seedSaveData.SeedPrefabPath);
             int growthStageIndex = _seedSaveData.growthStageIndex;
-            _growPlant.PlantSeed(seedPref, growthStageIndex);
+            _growPlant.PlantSeed(seedPref.Data, _seedSaveData.SeedPrefabPath, growthStageIndex);
         }
     }
 
@@ -62,7 +61,7 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
         if (_growPlant.GrowingPlant == null &&
             item.TryGetComponent(out Seed seed))
         {
-            _growPlant.PlantSeed(seed, 0);
+            _growPlant.PlantSeed(seed.Data, seed.PrefabPath, 0);
             item.Discard();
             return true;
         }
@@ -150,7 +149,7 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
         soilData.CultivationStage = (int)_currentStage;
 
         SeedSaveData seedSaveData = new SeedSaveData();
-        seedSaveData.SeedPrefabPath = _growPlant.Seed == null ? "" : _growPlant.Seed.PrefabPath;
+        seedSaveData.SeedPrefabPath = _growPlant.PrefabPath;
         seedSaveData.growthStageIndex = _growPlant.GrowthStage;
         soilData.SeedSaveData = seedSaveData;
     }

@@ -21,11 +21,13 @@ public class ShopItemUI : MonoBehaviour
         _priceText.text = Data.Price.ToString();
         _buyButton = GetComponent<Button>();
         _buyButton.onClick.AddListener(Buy);
+        _buyButton.onClick.AddListener(SFX.Instance.PlayClickButtonBuy);
     }
 
     public void Buy()
     {
-        _shop.TryBuy(this);
+        if (_shop.IsOpen)
+            _shop.TryBuy(this);
     }
 
     public void BlockItem()

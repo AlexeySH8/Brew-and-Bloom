@@ -14,7 +14,6 @@ public class DialoguePanelUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _dialogueText;
 
     private Coroutine _typing;
-    private SFXManager _sfxManager;
     private char[] _sentenceDelimiters = new char[]
 {
     '.',
@@ -23,12 +22,6 @@ public class DialoguePanelUI : MonoBehaviour
     ';',
     ':'
 };
-
-    [Inject]
-    public void Construct(SFXManager sfxManager)
-    {
-        _sfxManager = sfxManager;
-    }
 
     public void StartDialogue(Sprite guestPortrait, string guestName)
     {
@@ -59,7 +52,7 @@ public class DialoguePanelUI : MonoBehaviour
         {
             _dialogueText.text += letters;
             if (counter % 2 == 0)
-                _sfxManager.PlayAudioClip(typingSound);
+                SFX.Instance.PlayAudioClip(typingSound);
 
             if (_sentenceDelimiters.Contains(letters))
             {

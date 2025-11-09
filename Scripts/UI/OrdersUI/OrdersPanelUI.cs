@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class OrdersPanelUI : MonoBehaviour
@@ -9,6 +9,7 @@ public class OrdersPanelUI : MonoBehaviour
     [SerializeField] private Transform _content;
     [SerializeField] private GameObject _orderTemplatePref;
     [SerializeField] private TextMeshProUGUI _moneyEarnedText;
+    [SerializeField] private Button _closeButton;
 
     private Dictionary<Guest, GameObject> _activeOrders = new();
     private SlideAnimation _slideAnimation;
@@ -28,6 +29,7 @@ public class OrdersPanelUI : MonoBehaviour
     private void Awake()
     {
         _slideAnimation = GetComponent<SlideAnimation>();
+        _closeButton.onClick.AddListener(SFX.Instance.PlayClickButtonClose);
     }
 
     private void Start()
@@ -89,19 +91,18 @@ public class OrdersPanelUI : MonoBehaviour
     {
         if (_isOpen) return;
         _isOpen = true;
+        _closeButton.gameObject.SetActive(true);
         _slideAnimation.Transition(_isOpen);
     }
 
     public void Close()
     {
         if (_isOpen)
-            StartCoroutine(CloseRoutine());
-    }
-
-    private IEnumerator CloseRoutine()
-    {
-        yield return _slideAnimation.TransitionRoutine(!_isOpen);
-        _isOpen = false;
+        {
+            _isOpen = false;
+            _closeButton.gameObject.SetActive(false);
+            _slideAnimation.Transition(_isOpen);
+        }
     }
 
     private void Clear()

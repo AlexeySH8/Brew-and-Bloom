@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Shovel : BaseUsableItem
@@ -10,6 +8,7 @@ public class Shovel : BaseUsableItem
         if (target != null &&
             target.TryGetComponent(out IShovelTarget shovelTarget))
         {
+            SFX.Instance.PlayChop();
             shovelTarget.InteractWithShovel();
             return true;
         }

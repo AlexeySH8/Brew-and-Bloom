@@ -27,6 +27,7 @@ public class SellerStopZone : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!gameObject.activeInHierarchy) return;
         if (collision.TryGetComponent(out PlayerController _) &&
             _canStop && _waiting == null)
             _waiting = StartCoroutine(PlayerNearby());
@@ -34,7 +35,7 @@ public class SellerStopZone : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (!isActiveAndEnabled) return;
+        if (!gameObject.activeInHierarchy) return;
         if (collision.TryGetComponent(out PlayerController _) &&
             _canStop && !_shop.IsOpen)
             _movement.StartMovingAround();

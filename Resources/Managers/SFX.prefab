@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6733135348341317942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1023155985447514281}
+  - component: {fileID: 8967833500583239847}
+  - component: {fileID: 2281560629854901777}
+  m_Layer: 0
+  m_Name: SFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1023155985447514281
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6733135348341317942}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &8967833500583239847
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6733135348341317942}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 3281784732046695707, guid: 19b9f9488c49ac846a34bb4f9583bebb, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &2281560629854901777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6733135348341317942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8437847b956cdbe4cac3de843fb28476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nightSound: {fileID: 8300000, guid: 7959cd74ee380af47a1e3b052accb7fa, type: 3}
+  _clickButtonDefault: {fileID: 8300000, guid: eb81909588bcbe241b60c9465d9f0499, type: 3}
+  _clickButtonBuy: {fileID: 8300000, guid: 3e5dfe6bc11659f4a9e2de88f5ac6bf9, type: 3}
+  _clickButtonCancel: {fileID: 8300000, guid: 00651c13d8ab4af439f76def684a2972, type: 3}
+  _clickButtonNewDay: {fileID: 8300000, guid: 341912a238e12f143b911b6c6309fa8e, type: 3}
+  _clickButtonNewGame: {fileID: 8300000, guid: d89c1f57b68caec4aa43919a1848de0c, type: 3}
+  _pickupItem: {fileID: 8300000, guid: 852af8a9238112f40bafd791f1e0d514, type: 3}
+  _dropItem: {fileID: 8300000, guid: 6359856d0faea224f9024cf50e767ba2, type: 3}
+  _plantSeed: {fileID: 8300000, guid: 18ad0dad15acc254f90c6a153a251657, type: 3}
+  _plantGetHarvest: {fileID: 8300000, guid: cbc791128551ddd459de5fea322eafc9, type: 3}
+  _plantNeedWater: {fileID: 8300000, guid: 5ed6e6ae12bd8fa4d9d0cb36d262308c, type: 3}
+  _plantDriedOut: {fileID: 8300000, guid: 396f77e8e27dcab4fb8c545d2865b931, type: 3}
+  _waterMagic: {fileID: 8300000, guid: a2833b248c270bb4283211af45929355, type: 3}
+  _fireMagic: {fileID: 8300000, guid: f83e2bc1a86a1c24f9acc4ae3dfc49a5, type: 3}
+  _chops:
+  - {fileID: 8300000, guid: 1f04d01449dce9746831de471dba064e, type: 3}
+  - {fileID: 8300000, guid: f7dec0dd5f1d7514c9fbedaec5cde08b, type: 3}
+  - {fileID: 8300000, guid: 3e51f1753ae7af54e948b2fce291b2df, type: 3}
+  _mines:
+  - {fileID: 8300000, guid: 889917bf21a99a14a8a37ad3161f791c, type: 3}
+  - {fileID: 8300000, guid: 3353e684228eaf842b5fac956d9b6500, type: 3}
+  - {fileID: 8300000, guid: c4a0e74ec9bae61489b62bb7d6b27f19, type: 3}

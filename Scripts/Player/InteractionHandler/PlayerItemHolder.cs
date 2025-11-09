@@ -22,7 +22,10 @@ public class PlayerItemHolder : BaseItemHolder
     public void PickUp(BaseHoldItem holdItem)
     {
         if (TryReceive(holdItem))
+        {
+            SFX.Instance.PlayPickUpItem();
             SetItemPosition();
+        }
     }
 
     public void Drop(Vector2 forceDirection)
@@ -31,6 +34,7 @@ public class PlayerItemHolder : BaseItemHolder
 
         if (heldItem == null) return;
 
+        SFX.Instance.PlayDropItem();
         var rb = heldItem.Rigidbody;
         rb.transform.position += (Vector3)(forceDirection * 0.2f); // Moves the object collider away from the player collider
         rb.AddForce(forceDirection * _throwingForce, ForceMode2D.Impulse);

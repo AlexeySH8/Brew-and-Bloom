@@ -43,6 +43,7 @@ public class Fire : MonoBehaviour, IStaffTarget
 
     private void Ignite()
     {
+        SFX.Instance.PlayFireMagic();
         float intensity = _currentIntensity + _igniteRate;
         _currentIntensity = Mathf.Min(_maxIntensity, intensity);
     }

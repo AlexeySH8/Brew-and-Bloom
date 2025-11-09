@@ -30,6 +30,7 @@ public class TavernPortal : MonoBehaviour, IFreeInteractable
 
     public void EndDay()
     {
+        SFX.Instance.PlayClickButtonNewDay();
         _gameSceneManager.LoadHouseScene();
     }
 

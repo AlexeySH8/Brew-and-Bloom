@@ -27,12 +27,14 @@ public class PortalUI : MonoBehaviour
 
     private void OnCancelPressed()
     {
+        SFX.Instance.PlayClickButtonClose();
         _onCancel?.Invoke();
         Hide();
     }
 
     private void OnConfirmPressed()
     {
+        SFX.Instance.PlayClickButtonNewDay();
         _onConfirm?.Invoke();
         Hide();
     }

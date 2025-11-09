@@ -32,12 +32,14 @@ public class Menu : MonoBehaviour
 
     private void NewGame()
     {
+        SFX.Instance.PlayClickButtonNewGame();
         _dataPersistenceManager.NewGame();
         _gameSceneManager.LoadHouseScene();
     }
 
     private void ContinueGame()
     {
+        SFX.Instance.PlayClickButtonNewGame();
         _dataPersistenceManager.LoadGameMeta();
         _gameSceneManager.LoadCurrentScene();
     }

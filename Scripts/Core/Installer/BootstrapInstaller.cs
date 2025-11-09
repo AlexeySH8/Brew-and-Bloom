@@ -8,7 +8,7 @@ public class BootstrapInstaller : MonoInstaller
     [SerializeField] private GuestSaveSystem _guestSaveSystemPref;
     [SerializeField] private GameSceneManager _gameSceneManagerPref;
     [SerializeField] private ItemPool _itemPoolPref;
-    [SerializeField] private SFXManager _sfxManagerPref;
+    [SerializeField] private SFX _sfxPref;
     [SerializeField] private MusicManager _musicManagerPref;
     [SerializeField] private GuestsManager _guestsManagerPref;
     [SerializeField] private OrdersManager _ordersManagerPref;
@@ -34,8 +34,8 @@ public class BootstrapInstaller : MonoInstaller
             .FromComponentInNewPrefab(_musicManagerPref)
             .AsSingle().NonLazy();
 
-        Container.Bind<SFXManager>()
-            .FromComponentInNewPrefab(_sfxManagerPref)
+        Container.Bind<SFX>()
+            .FromComponentInNewPrefab(_sfxPref)
             .AsSingle().NonLazy();
 
         Container.Bind<GuestsManager>()

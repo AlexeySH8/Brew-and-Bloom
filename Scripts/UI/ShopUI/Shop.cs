@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class Shop : MonoBehaviour
@@ -9,6 +10,7 @@ public class Shop : MonoBehaviour
 
     [SerializeField] private ShopItemData[] Assortment;
     [SerializeField] private GameObject _shopItemPrefab;
+    [SerializeField] private Button _closeButton;
 
     [SerializeField] private Vector3 _startPos = new Vector3(-340f, 180f, 0f);
     [SerializeField] private int _colNumber = 3;
@@ -36,6 +38,7 @@ public class Shop : MonoBehaviour
     {
         _container = transform.Find("Container").gameObject.transform;
         _slideAnimation = GetComponent<SlideAnimation>();
+        _closeButton.onClick.AddListener(SFX.Instance.PlayClickButtonClose);
         InitShop();
     }
 
@@ -80,6 +83,7 @@ public class Shop : MonoBehaviour
     public void OpenShop()
     {
         IsOpen = true;
+        _closeButton.gameObject.SetActive(true);
         _purchasedItems = new List<GameObject>();
         _slideAnimation.Transition(IsOpen);
     }
@@ -87,6 +91,7 @@ public class Shop : MonoBehaviour
     public void CloseShop()
     {
         IsOpen = false;
+        _closeButton.gameObject.SetActive(false);
         _seller.DeliverItems(_purchasedItems);
         _purchasedItems = new List<GameObject>();
         _slideAnimation.Transition(IsOpen);

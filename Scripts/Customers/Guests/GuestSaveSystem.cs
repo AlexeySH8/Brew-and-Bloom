@@ -81,6 +81,12 @@ public class GuestSaveSystem : MonoBehaviour, IDataPersistence
         {
             GuestSaveData guestSaveData = new();
 
+            if (string.IsNullOrEmpty(guest.Data.GuestId))
+            {
+                Debug.LogError($"The guest {guest.Data.Name} doesn't have a key");
+                return;
+            }
+
             guestSaveData.GuestId = guest.Data.GuestId;
             guestSaveData.DialoguePartIndex = guest.DialoguePartIndex;
             guestSaveData.IsServed = guest.IsServed;

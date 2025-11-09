@@ -8,6 +8,7 @@ public class Pick : BaseUsableItem
         if (target != null &&
             target.TryGetComponent(out IPickTarget pickTarget))
         {
+            SFX.Instance.PlayMine();
             pickTarget.InteractWithPick();
             return true;
         }

@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using Zenject;
 
@@ -7,32 +6,17 @@ public class GrowPlant : MonoBehaviour
 {
     public Coroutine GrowingPlant { get; private set; }
     public bool IsWaterNeed { get; private set; }
-    public Seed Seed { get; private set; }
     public int GrowthStage { get; private set; }
+    public string PrefabPath { get; private set; } = string.Empty;
 
-    [SerializeField] private int _minHarvestCount = 1;
-    [SerializeField] private int _maxHarvestCount = 3;
-    [SerializeField] private float _waterNeedChance = 0.1f;
-    [SerializeField] private int _minTimeToDryOut = 5;
-    [SerializeField] private int _maxTimeToDryOut = 7;
+    private float _waterNeedChance = 0.2f;
+    private int _minTimeToDryOut = 10;
+    private int _maxTimeToDryOut = 30;
 
     private Soil _soil;
     private SeedData _seedData;
     private SoilVisual _soilVisual;
     private Coroutine _dryOutRoutine;
-    // private GameSceneManager _gameSceneManager;
-
-    //[Inject]
-    //public void Construct(GameSceneManager gameSceneManager)
-    //{
-    //    _gameSceneManager = gameSceneManager;
-    //    SubscribeToEvents();
-    //}
-
-    //private void SubscribeToEvents()
-    //{
-    //    _gameSceneManager.OnHouseUnloading += EndGrowPlant;
-    //}
 
     private void Awake()
     {
@@ -40,15 +24,15 @@ public class GrowPlant : MonoBehaviour
         _soilVisual = GetComponent<SoilVisual>();
     }
 
-    public void PlantSeed(Seed seed, int growthStage)
+    public void PlantSeed(SeedData seedData, string prefabPath, int growthStage)
     {
-        Seed = seed;
-        GrowthStage = growthStage;
-        _seedData = Seed.Data;
-        GrowingPlant = StartCoroutine(GrowPlantRoutine());
-
+        SFX.Instance.PlayPlantSeed();
         _soil.DisableInteractive();
         _soil.StopStageReset();
+        GrowthStage = growthStage;
+        _seedData = seedData;
+        PrefabPath = prefabPath;
+        GrowingPlant = StartCoroutine(GrowPlantRoutine());
     }
 
     private IEnumerator GrowPlantRoutine()
@@ -74,6 +58,7 @@ public class GrowPlant : MonoBehaviour
 
         if (isWaterNeed)
         {
+            SFX.Instance.PlayPlantNeedWater();
             SetPlantNeedWater(isWaterNeed);
             _dryOutRoutine = StartCoroutine(PlantDriedOut());
         }
@@ -84,6 +69,7 @@ public class GrowPlant : MonoBehaviour
         yield return new WaitForSeconds(
             Random.Range(_minTimeToDryOut, _maxTimeToDryOut));
         _seedData = null;
+        SFX.Instance.PlayPlantDriedOut();
         EndGrowPlant();
     }
 
@@ -93,6 +79,7 @@ public class GrowPlant : MonoBehaviour
 
         if (!isWaterNeed && _dryOutRoutine != null)
         {
+            SFX.Instance.PlayWaterMagic();
             StopCoroutine(_dryOutRoutine);
             _dryOutRoutine = null;
         }
@@ -114,6 +101,7 @@ public class GrowPlant : MonoBehaviour
         _soil.StartStageReset();
         _soilVisual.ClearContentPlace();
         IsWaterNeed = false;
+        PrefabPath = string.Empty;
 
         if (_seedData != null)
             SpawnHarvest();
@@ -121,14 +109,11 @@ public class GrowPlant : MonoBehaviour
 
     private void SpawnHarvest()
     {
-        for (int i = 0; i < Random.Range(_minHarvestCount, _maxHarvestCount + 1); i++)
+        SFX.Instance.PlayPlantGetHarvest();
+        int min = _seedData.MinHarvestCount;
+        int max = _seedData.MaxHarvestCount;
+        for (int i = 0; i < Random.Range(min, max); i++)
             Instantiate(_seedData.IngredientPrefab, transform.position, transform.rotation);
         _seedData = null;
-        Seed = null;
     }
-
-    //private void OnDisable()
-    //{
-    //    _gameSceneManager.OnHouseUnloading -= EndGrowPlant;
-    //}
 }
