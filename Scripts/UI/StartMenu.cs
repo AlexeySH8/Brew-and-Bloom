@@ -2,10 +2,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class Menu : MonoBehaviour
+public class StartMenu : MonoBehaviour
 {
     [SerializeField] private Button _continueGameButton;
     [SerializeField] private Button _newGameButton;
+    [SerializeField] private Button _exitButton;
 
     private IDataPersistenceManager _dataPersistenceManager;
     private GameSceneManager _gameSceneManager;
@@ -28,6 +29,7 @@ public class Menu : MonoBehaviour
     {
         _newGameButton.onClick.AddListener(NewGame);
         _continueGameButton.onClick.AddListener(ContinueGame);
+        _exitButton.onClick.AddListener(ExitGame);
     }
 
     private void NewGame()
@@ -44,9 +46,13 @@ public class Menu : MonoBehaviour
         _gameSceneManager.LoadCurrentScene();
     }
 
+    private void ExitGame()
+    {
+        Application.Quit();
+    }
+
     private void SetDisplayContinueButton()
     {
-        _continueGameButton.gameObject
-            .SetActive(_dataPersistenceManager.HasSave());
+        _continueGameButton.interactable = _dataPersistenceManager.HasSave();
     }
 }

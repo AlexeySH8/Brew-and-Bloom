@@ -59,6 +59,7 @@ public class GrowPlant : MonoBehaviour
         if (isWaterNeed)
         {
             SFX.Instance.PlayPlantNeedWater();
+            _soil.EnableInteractiveWithStaff();
             SetPlantNeedWater(isWaterNeed);
             _dryOutRoutine = StartCoroutine(PlantDriedOut());
         }
@@ -82,11 +83,11 @@ public class GrowPlant : MonoBehaviour
             SFX.Instance.PlayWaterMagic();
             StopCoroutine(_dryOutRoutine);
             _dryOutRoutine = null;
+            _soil.DisableInteractive();
         }
 
         IsWaterNeed = isWaterNeed;
         _soilVisual.SetWaterNeedIcon(IsWaterNeed);
-        _soil.UpdateLayer();
     }
 
     private void EndGrowPlant()

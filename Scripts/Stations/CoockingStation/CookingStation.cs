@@ -12,6 +12,11 @@ public class CookingStation : BaseItemHolder
     [SerializeField] private IngredientData[] _unavailableIngredients;
     [SerializeField] private float _minCookingTime;
     [SerializeField] private float _maxCookingTime;
+    [Header("Audio")]
+    [SerializeField] private AudioClip _receiveSound;
+    [SerializeField] private AudioClip _startCoockingSound;
+    [SerializeField] private AudioClip _spawnDishSound;
+    [SerializeField] private AudioClip _loseIngredientSound;
 
     private int _currentIngredientsMask;
     private int _index = 0;
@@ -40,11 +45,12 @@ public class CookingStation : BaseItemHolder
 
     public override bool TryReceive(BaseHoldItem heldItem)
     {
-        if (heldItem.TryGetComponent(out Ingredient ingredient) &&
+        if (_cooking == null &&
+            heldItem.TryGetComponent(out Ingredient ingredient) &&
             !_unavailableIngredients.Contains(ingredient.Data) &&
-            _cooking == null &&
-            (_currentIngredientsMask & (int)ingredient.Data.IngredientType) == 0) // the ingredient is not there yet
+            !ContainsIngredient(ingredient))
         {
+            SFX.Instance.PlayAudioClip(_receiveSound);
             heldItem.Discard();
             Cook(ingredient);
             return true;
@@ -73,23 +79,44 @@ public class CookingStation : BaseItemHolder
             _cooking = StartCoroutine(CookingDish(dish));
             _stationVisual.ClearIngredients();
         }
+        else if (!CouldMakeDish())
+        {
+            SFX.Instance.PlayAudioClip(_loseIngredientSound);
+            Clear();
+        }
+    }
+
+    private bool CouldMakeDish()
+    {
+        foreach (var recipe in _recipes.RecipesDic)
+        {
+            var recipeMask = recipe.Key;
+            if ((_currentIngredientsMask & recipeMask) == _currentIngredientsMask)
+                return true;
+        }
+        return false;
     }
 
     private IEnumerator CookingDish(GameObject dish)
     {
+        SFX.Instance.PlayAudioClip(_startCoockingSound);
         float duration = UnityEngine.Random.Range(_minCookingTime, _maxCookingTime);
         float elapsed = 0;
         while (elapsed < duration)
         {
             if (!IsCookingStop)
                 elapsed += Time.deltaTime;
+
+            _stationVisual.UpdateClockAnimation(elapsed / duration);
             yield return null;
         }
+        _stationVisual.UpdateClockAnimation(1);
         SpawnDish(dish);
     }
 
     private void SpawnDish(GameObject dish)
     {
+        SFX.Instance.PlayAudioClip(_spawnDishSound);
         BaseHoldItem holdItem = Instantiate(
             dish, transform.position, transform.rotation)
             .GetComponent<BaseHoldItem>();
@@ -101,6 +128,11 @@ public class CookingStation : BaseItemHolder
         _currentIngredientsMask |= (int)ingredient.Data.IngredientType;
         _stationVisual.AddIngredient(ingredient.Data.Icon);
         _index++;
+    }
+
+    private bool ContainsIngredient(Ingredient ingredient)
+    {
+        return (_currentIngredientsMask & (int)ingredient.Data.IngredientType) != 0;
     }
 
     private void Clear()

@@ -12,6 +12,8 @@ public class CoockingStationVisual : MonoBehaviour
     [SerializeField] private bool _canChangeColor;
     [SerializeField] private SpriteRenderer _spriteColor;
     [SerializeField] private float _duration = 1f;
+    [Header("Clock Animation")]
+    [SerializeField] private Animator _clock;
 
     public SpriteRenderer SpriteRenderer { get; private set; }
     private List<GameObject> _containersList = new();
@@ -19,6 +21,11 @@ public class CoockingStationVisual : MonoBehaviour
     private void Awake()
     {
         SpriteRenderer = _spriteColor;
+    }
+
+    public void UpdateClockAnimation(float normalizedTime)
+    {
+        _clock.Play("Countdown", 0, normalizedTime);
     }
 
     public void AddIngredient(Sprite ingredient)

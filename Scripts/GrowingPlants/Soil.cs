@@ -106,8 +106,6 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
             gameObject.layer = LayerMask.NameToLayer(PickTargetLayer);
         else if (_currentStage < CultivationStage.CultivatedSoil)
             gameObject.layer = LayerMask.NameToLayer(ShovelTargetLayer);
-        else if (_growPlant.IsWaterNeed)
-            gameObject.layer = LayerMask.NameToLayer(StaffTargetLayer);
         else
             EnableInteractive();
     }
@@ -118,6 +116,9 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
         UpdateLayer();
         _soilVisual.UpdateCultivationStage(_currentStage);
     }
+
+    public void EnableInteractiveWithStaff() =>
+        gameObject.layer = LayerMask.NameToLayer(StaffTargetLayer);
 
     public void EnableInteractive() =>
         gameObject.layer = LayerMask.NameToLayer(InteractiveItemLayer);
