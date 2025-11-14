@@ -7,6 +7,7 @@ public class MusicManager : MonoBehaviour
 {
     [SerializeField] private AudioClip _houseMusic;
     [SerializeField] private AudioClip _tavernMusic;
+    [SerializeField] private AudioClip _menuMusic;
 
     private AudioSource _musicSource;
     private GameSceneManager _gameSceneManager;
@@ -21,14 +22,19 @@ public class MusicManager : MonoBehaviour
     private void Awake()
     {
         _musicSource = GetComponent<AudioSource>();
+        EnterMenu();
     }
 
     private void SubcribeToEvents()
     {
         _gameSceneManager.OnHouseLoaded += EnterHouse;
-        _gameSceneManager.OnHouseUnloading += ExitHouse;
         _gameSceneManager.OnTavernLoaded += EnterTavern;
-        _gameSceneManager.OnTavernUnloading += ExitTavern;
+    }
+
+    private void EnterMenu()
+    {
+        _musicSource.clip = _menuMusic;
+        _musicSource.Play();
     }
 
     private void EnterHouse()
@@ -37,20 +43,10 @@ public class MusicManager : MonoBehaviour
         _musicSource.Play();
     }
 
-    private void ExitHouse()
-    {
-
-    }
-
     private void EnterTavern()
     {
         _musicSource.clip = _tavernMusic;
         _musicSource.Play();
-    }
-
-    private void ExitTavern()
-    {
-
     }
 
     private void OnDestroy()
@@ -61,8 +57,6 @@ public class MusicManager : MonoBehaviour
     private void UnscribeFromEvents()
     {
         _gameSceneManager.OnHouseLoaded -= EnterHouse;
-        _gameSceneManager.OnHouseUnloading -= ExitHouse;
         _gameSceneManager.OnTavernLoaded -= EnterTavern;
-        _gameSceneManager.OnTavernUnloading -= ExitTavern;
     }
 }
