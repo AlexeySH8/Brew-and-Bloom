@@ -7,14 +7,17 @@ public class InteractionDetector : MonoBehaviour
     [SerializeField] private float _interactionDistance = 1;
     [SerializeField] private float _radius = 0.1f;
     [SerializeField] private float _interactionOffset = 0.1f;
+
+    private PlayerItemHolder _itemHolder;
     private PlayerController _playerController;
 
     private void Awake()
     {
         _playerController = GetComponent<PlayerController>();
+        _itemHolder = GetComponent<PlayerItemHolder>();
     }
 
-    public RaycastHit2D DetectInterectiveItem(bool hasHeldItem)
+    public RaycastHit2D DetectInteractiveItem(bool hasHeldItem)
     {
         Vector2 direction = _playerController.InteractionDirection.normalized;
         Vector2 origin = (Vector2)transform.position + direction * _interactionOffset;
@@ -22,17 +25,32 @@ public class InteractionDetector : MonoBehaviour
         RaycastHit2D[] hits = Physics2D.CircleCastAll(origin, _radius, direction,
             _interactionDistance, _interectiveItemMask);
 
-        // priority on items that cannot be picked up
-        if (hasHeldItem)
+        return SelectBestHit(hits);
+    }
+
+    private RaycastHit2D SelectBestHit(RaycastHit2D[] hits)
+    {
+        // priority on items that cannot be picked up if player has Item
+        if (_itemHolder.HasItem())
             return hits
-                .FirstOrDefault(item => !item.collider
-                .TryGetComponent<BaseHoldItem>(out _));
+                .FirstOrDefault(item =>
+                !item.collider.TryGetComponent<BaseHoldItem>(out _));
 
         // priority on items that can be picked up
-        var heldItem = hits
-            .FirstOrDefault(item => item.collider
-            .TryGetComponent<BaseHoldItem>(out _));
-        return heldItem != default ? heldItem : hits.FirstOrDefault();
+        var heldItemHit = hits
+            .FirstOrDefault(item =>
+            item.collider.TryGetComponent<BaseHoldItem>(out _));
+
+        if (heldItemHit != default) return heldItemHit;
+
+        foreach (var hit in hits) 
+        { 
+            var item = hit.collider; 
+            if (item.TryGetComponent(out IGiveHeldItem giver) && giver.HasItem()) 
+                    return hit; 
+        }
+
+        return hits.FirstOrDefault();
     }
 
 #if UNITY_EDITOR

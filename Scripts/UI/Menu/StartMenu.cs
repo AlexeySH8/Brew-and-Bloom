@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -23,13 +24,13 @@ public class StartMenu : MonoBehaviour
     {
         SetFunctionsToButtons();
         SetDisplayContinueButton();
-    }
+    }   
 
     private void SetFunctionsToButtons()
     {
         _newGameButton.onClick.AddListener(NewGame);
         _continueGameButton.onClick.AddListener(ContinueGame);
-        _exitButton.onClick.AddListener(ExitGame);
+        _exitButton.onClick.AddListener(Application.Quit);
     }
 
     private void NewGame()
@@ -46,13 +47,20 @@ public class StartMenu : MonoBehaviour
         _gameSceneManager.LoadCurrentScene();
     }
 
-    private void ExitGame()
-    {
-        Application.Quit();
-    }
-
     private void SetDisplayContinueButton()
     {
-        _continueGameButton.interactable = _dataPersistenceManager.HasSave();
+        if (!_dataPersistenceManager.HasSave())
+        {
+            _continueGameButton.interactable = false;
+            var text = _continueGameButton
+                .GetComponentInChildren<TextMeshProUGUI>();
+            Color colorText = text.color;
+            colorText.a = 0.5f;
+            text.color = colorText;
+        }
     }
+
+    public void PlayClickDefault() => SFX.Instance.PlayClickButtonDefault();
+
+    public void PlayClickClose() => SFX.Instance.PlayClickButtonClose();
 }

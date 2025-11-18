@@ -12,6 +12,7 @@ public class GameData
     public int CurrentPowderCount;
     public List<GuestSaveData> GuestsSaveData = new();
     public List<SceneItemData> ScenesItemsData = new();
+    public List<ItemStandSaveData> ItemStandsSaveData = new();
     public List<ItemHolderSaveData> ItemHoldersSaveData = new();
     public List<SoilSaveData> SoilsSaveData = new();
     public List<int> CompletedDishes = new();
@@ -47,6 +48,13 @@ public class ItemSaveData
     public string PrefabPath;
     public float[] Position = new float[3];
     public float[] Rotation = new float[4];
+}
+
+[Serializable]
+public class ItemStandSaveData
+{
+    public string HolderId;
+    public int CurrentPlaceCount;
 }
 
 [Serializable]

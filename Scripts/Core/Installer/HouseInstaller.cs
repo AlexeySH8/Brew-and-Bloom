@@ -12,6 +12,10 @@ public class HouseInstaller : MonoInstaller
             .FromComponentInNewPrefab(_playerControllerPref)
             .AsSingle();
 
+        Container.Bind<ItemStandManager>()
+            .FromComponentInHierarchy()
+            .AsSingle();
+
         Container.Bind<Shop>()
             .FromComponentInHierarchy()
             .AsSingle();

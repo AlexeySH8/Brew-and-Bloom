@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
-using Zenject;
 
 public class GrowPlant : MonoBehaviour
 {
+    public BaseItemHolder Harvest { get; private set; }
     public Coroutine GrowingPlant { get; private set; }
     public bool IsWaterNeed { get; private set; }
     public int GrowthStage { get; private set; }
@@ -99,7 +99,6 @@ public class GrowPlant : MonoBehaviour
         }
 
         _soil.EnableInteractive();
-        _soil.StartStageReset();
         _soilVisual.ClearContentPlace();
         IsWaterNeed = false;
         PrefabPath = string.Empty;
@@ -111,10 +110,10 @@ public class GrowPlant : MonoBehaviour
     private void SpawnHarvest()
     {
         SFX.Instance.PlayPlantGetHarvest();
-        int min = _seedData.MinHarvestCount;
-        int max = _seedData.MaxHarvestCount;
-        for (int i = 0; i < Random.Range(min, max); i++)
+        GameObject harvest = 
             Instantiate(_seedData.IngredientPrefab, transform.position, transform.rotation);
+
+        _soil.TryReceiveBase(harvest.GetComponent<BaseHoldItem>());
         _seedData = null;
     }
 }

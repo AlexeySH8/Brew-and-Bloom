@@ -13,17 +13,16 @@ public class PlayerInteractionHandler : MonoBehaviour
 
     public void Interact(float faceDirection)
     {
-        BaseHoldItem heldItem = _itemHolder.HeldItem;
-        RaycastHit2D hit = _detector.DetectInterectiveItem(heldItem != null);
+        RaycastHit2D hit = _detector.DetectInteractiveItem(_itemHolder.HeldItem != null);
         Collider2D interactiveItem = hit.collider;
 
-        if (heldItem != null)
+        if (_itemHolder.HeldItem != null)
         {
-            if (TryUseItem(heldItem)) return;
+            if (TryUseItem(_itemHolder.HeldItem)) return;
 
             if (interactiveItem == null) return;
 
-            HandleFullHandInteraction(heldItem, interactiveItem);
+            HandleFullHandInteraction(_itemHolder.HeldItem, interactiveItem);
             return;
         }
 

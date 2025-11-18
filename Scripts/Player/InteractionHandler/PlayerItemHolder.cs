@@ -40,6 +40,8 @@ public class PlayerItemHolder : BaseItemHolder
         rb.AddForce(forceDirection * _throwingForce, ForceMode2D.Impulse);
     }
 
+    public bool CanReceive(BaseHoldItem heldItem) => _heldItem != null && IsCorrectItemToReceive(heldItem);
+
     private void SetItemPosition()
     {
         if (_heldItem.TryGetComponent(out BaseUsableItem tool))

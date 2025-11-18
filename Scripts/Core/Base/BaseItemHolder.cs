@@ -6,6 +6,7 @@ public abstract class BaseItemHolder : MonoBehaviour, IGiveHeldItem, IReceiveHel
 {
     public abstract Transform ParentPoint { get; }
     public abstract int SortingOrderOffset { get; }
+    public string HolderId => _holderId;
     public BaseHoldItem HeldItem => _heldItem;
     protected BaseHoldItem _heldItem;
     [SerializeField] protected string _holderId = "";
@@ -15,7 +16,9 @@ public abstract class BaseItemHolder : MonoBehaviour, IGiveHeldItem, IReceiveHel
         CheckChildren();
     }
 
-    public virtual bool TryReceive(BaseHoldItem heldItem)
+    public virtual bool TryReceive(BaseHoldItem heldItem) => TryReceiveBase(heldItem);
+
+    public bool TryReceiveBase(BaseHoldItem heldItem)
     {
         if (_heldItem != null) return false;
 
@@ -37,6 +40,8 @@ public abstract class BaseItemHolder : MonoBehaviour, IGiveHeldItem, IReceiveHel
         _heldItem = null;
         return item;
     }
+
+    public bool HasItem() => _heldItem != null;
 
     protected virtual bool IsCorrectItemToReceive(BaseHoldItem heldItem) => true;
 
@@ -74,7 +79,7 @@ public abstract class BaseItemHolder : MonoBehaviour, IGiveHeldItem, IReceiveHel
         GameObject prefab = Resources.Load<GameObject>(holderData.PrefabPath);
         var item = Instantiate(prefab);
         BaseHoldItem holdItem = item.GetComponent<BaseHoldItem>();
-        TryReceive(holdItem);
+        TryReceiveBase(holdItem);
     }
 
     protected virtual void SaveHeldItem(GameData gameData)
@@ -86,7 +91,7 @@ public abstract class BaseItemHolder : MonoBehaviour, IGiveHeldItem, IReceiveHel
         }
 
         ItemHolderSaveData holderData = gameData.ItemHoldersSaveData
-            .FirstOrDefault(h => h.HolderId == name);
+            .FirstOrDefault(h => h.HolderId == _holderId);
 
         if (holderData == null)
         {

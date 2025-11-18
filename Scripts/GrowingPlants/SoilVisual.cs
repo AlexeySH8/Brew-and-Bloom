@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class SoilVisual : MonoBehaviour
@@ -8,6 +9,9 @@ public class SoilVisual : MonoBehaviour
 
     private SpriteRenderer _ñontentSprite;
     private SpriteRenderer _soilSprite;
+
+    public Transform SpawnHarvestPos => _ñontentSprite.gameObject.transform;
+    public int SortingOrder => _ñontentSprite.sortingOrder;
 
     private void Awake()
     {

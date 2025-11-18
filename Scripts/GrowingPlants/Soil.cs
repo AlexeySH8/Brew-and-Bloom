@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using Zenject;
 
-public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IReceiveHeldItem, IDataPersistence
+public class Soil : BaseItemHolder, IPickTarget, IShovelTarget, IStaffTarget, IDataPersistence
 {
     [SerializeField] private CultivationStage _currentStage;
     [SerializeField] private float _minResetStageTime;
@@ -15,6 +15,7 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
     private SeedSaveData _seedSaveData;
     private SoilVisual _soilVisual;
     private Coroutine _stageResetRoutine;
+    private ItemStandManager _itemStandManager;
     private IDataPersistenceManager _persistenceManager;
 
     private const string PickTargetLayer = "PickTarget";
@@ -23,17 +24,25 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
     private const string InteractiveItemLayer = "InteractiveItem";
     private const string DefaultLayer = "Default";
 
+    public override Transform ParentPoint => _soilVisual.SpawnHarvestPos;
+
+    public override int SortingOrderOffset => _soilVisual.SortingOrder;
+
     [Inject]
-    public void Construct(IDataPersistenceManager persistenceManager)
+    public void Construct(IDataPersistenceManager persistenceManager,
+        ItemStandManager itemStandManager)
     {
+        _itemStandManager = itemStandManager;
         _persistenceManager = persistenceManager;
         _persistenceManager.Register(this);
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        _holderId = _soilId;
         _soilVisual = GetComponent<SoilVisual>();
         _growPlant = GetComponent<GrowPlant>();
+        base.Awake();
     }
 
     private void Start()
@@ -54,11 +63,12 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
 
     public void InteractWithStaff() => _growPlant.SetPlantNeedWater(false);
 
-    public bool TryReceive(BaseHoldItem heldItem) => TryPlantSeed(heldItem);
+    public override bool TryReceive(BaseHoldItem heldItem) => TryPlantSeed(heldItem);
 
     private bool TryPlantSeed(BaseHoldItem item)
     {
         if (_growPlant.GrowingPlant == null &&
+            _heldItem == null &&
             item.TryGetComponent(out Seed seed))
         {
             _growPlant.PlantSeed(seed.Data, seed.PrefabPath, 0);
@@ -66,6 +76,18 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
             return true;
         }
         return false;
+    }
+
+    public override BaseHoldItem GiveItem()
+    {
+        BaseHoldItem harvest = base.GiveItem();
+        if (harvest == null) return null;
+
+        StartStageReset();
+        if (_itemStandManager.TryPlaceHarvest(harvest))
+            return null;
+        else
+            return harvest;
     }
 
     private void Cultivate()
@@ -135,6 +157,8 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
 
         _currentStage = (CultivationStage)soilData.CultivationStage;
         _seedSaveData = soilData.SeedSaveData;
+
+        LoadHeldItem(gameData);
     }
 
     public void SaveData(GameData gameData)
@@ -153,6 +177,8 @@ public class Soil : MonoBehaviour, IPickTarget, IShovelTarget, IStaffTarget, IRe
         seedSaveData.SeedPrefabPath = _growPlant.PrefabPath;
         seedSaveData.growthStageIndex = _growPlant.GrowthStage;
         soilData.SeedSaveData = seedSaveData;
+
+        SaveHeldItem(gameData);
     }
 
     private void OnDestroy()

@@ -9,4 +9,6 @@ public class ItemGiver : MonoBehaviour, IGiveHeldItem
     {
         return Instantiate(_itemPrefab);
     }
+
+    public bool HasItem() => true;
 }

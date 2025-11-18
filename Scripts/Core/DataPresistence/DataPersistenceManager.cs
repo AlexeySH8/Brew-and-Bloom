@@ -18,15 +18,6 @@ public class DataPersistenceManager : MonoBehaviour, IDataPersistenceManager
         _gameSceneManager = gameSceneManager;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            Debug.Log("Player press manual saving");
-            SaveGame();
-        }
-    }
-
     public void NewGame()
     {
         GameData = new GameData();

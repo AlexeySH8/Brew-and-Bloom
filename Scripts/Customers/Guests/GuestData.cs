@@ -15,13 +15,11 @@ public class GuestData : ScriptableObject
     [field: SerializeField] public DialogueData[] DialoguesData { get; private set; }
 
 #if UNITY_EDITOR
-    private void OnValidate()
+    [ContextMenu("Generate Unique Id")]
+    private void GenerateUniqueId()
     {
-        if (string.IsNullOrEmpty(GuestId))
-        {
-            GuestId = GUID.Generate().ToString();
-            EditorUtility.SetDirty(this);
-        }
+        GuestId = GUID.Generate().ToString();
+        EditorUtility.SetDirty(this);
     }
 #endif
 }

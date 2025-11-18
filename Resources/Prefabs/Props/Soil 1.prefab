@@ -147,9 +147,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89bbfe09227f6a5499eac2ce1b2e87dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _holderId: 
   _currentStage: 0
-  _minResetStageTime: 120
-  _maxResetStageTime: 240
+  _minResetStageTime: 240
+  _maxResetStageTime: 360
   _soilId: feb347d4cd345f34aad87f1844986684
 --- !u!114 &5442566680945433312
 MonoBehaviour:
@@ -163,11 +164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e63ff5aede0f2c4f8f73c132c2002a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minHarvestCount: 1
-  _maxHarvestCount: 3
-  _waterNeedChance: 0.25
-  _minTimeToDryOut: 20
-  _maxTimeToDryOut: 40
 --- !u!114 &4199415154315683973
 MonoBehaviour:
   m_ObjectHideFlags: 0
