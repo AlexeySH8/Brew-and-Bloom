@@ -18,13 +18,43 @@ MonoBehaviour:
   m_GUID: 0de4729fe3f79dc4da37b7b3e13c722b
   m_SerializeEntries:
   - m_GUID: 28187c7818bb65040910c47e131da134
-    m_Address: Guest1Dialogue_en
+    m_Address: Guest2Dialogue_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 70e0f3ca3b33c71449c91181cc84c706
-    m_Address: DefaultDialogue_en
+    m_Address: DefaultDialogueGuest1_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 21bd06496f5ed0142a022e3332df08b7
+    m_Address: Guest3Dialogue_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dc30892780811384b9cb03c71a04303c
+    m_Address: Guest4Dialogue_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3f22c310d2051a240b427e9697bf069f
+    m_Address: Guest5Dialogue_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 404bc8e614122f04c983503fe08f21e3
+    m_Address: Guest6Dialogue_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba726d88e7bac254d97be52a6e3e3eba
+    m_Address: DefaultDialogueGuest7_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en

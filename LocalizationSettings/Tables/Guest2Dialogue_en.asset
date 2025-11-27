@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Guest2Dialogue_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: e2c77b8dd9995714e84866cc90de90a5, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 1773476380672
+    m_Localized: "Thank you. It\u2019s nice to see a guest with a tray, rather than
+      a blade drawn."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5006341046272
+    m_Localized: "Usually, people descend into my dungeon with a single question:
+      \u201CWhere is the artifact, old dead man?\u201D"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22061026395422720
+    m_Localized: "And every time I give the same answer\u2014IT IS NOT HERE. But
+      of course, who listens to me."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22061030325485568
+    m_Localized: Although once, among those clueless seekers, there was a girl. Brave,
+      foolish, and remarkably stubborn.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22061033815146496
+    m_Localized: I warned her the corner chest was a mimic, but she told me not to
+      bother the professional.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22061721890717696
+    m_Localized: "I couldn\u2019t get her out alive."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22063466985422848
+    m_Localized: "Thank you. You know, I\u2019ve grown used to people visiting my
+      dungeon more often than the city tavern."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22063751979991040
+    m_Localized: A young necromancer visited recently, barely understanding the texts
+      he was reading.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22065522789974016
+    m_Localized: "He claimed he sought the \u201Cgreat,\u201D but ended up accidentally
+      raising the bones of that stubborn girl."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22066068993212416
+    m_Localized: She rose, turned her head to me, and even faceless recognized me.
+      The necromancer fled.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22066997494677504
+    m_Localized: "Thank you. It\u2019s strange, but with this girl, the silence of
+      the dungeon doesn\u2019t feel so deafening."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22067577399148544
+    m_Localized: "She\u2019s here\u2014not quite alive, not quite dead\u2014and I\u2026
+      don\u2019t feel so lonely anymore."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22067799206526976
+    m_Localized: I used to curse those seekers, their loud steps
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22068054077603840
+    m_Localized: and endless questions, but without them it would be too empty.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22068174336688128
+    m_Localized: Let them come. Sometimes even a dead dungeon needs a little life.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

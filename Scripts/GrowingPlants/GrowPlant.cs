@@ -47,7 +47,7 @@ public class GrowPlant : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(_seedData.MinStageTime, _seedData.MaxStageTime));
             GrowthStage++;
         }
-        yield return new WaitForSeconds(Random.Range(_seedData.MinStageTime, _seedData.MaxStageTime));
+        yield return new WaitForSeconds(_seedData.MaxStageTime);
         GrowthStage = 0;
         EndGrowPlant();
     }
@@ -110,7 +110,7 @@ public class GrowPlant : MonoBehaviour
     private void SpawnHarvest()
     {
         SFX.Instance.PlayPlantGetHarvest();
-        GameObject harvest = 
+        GameObject harvest =
             Instantiate(_seedData.IngredientPrefab, transform.position, transform.rotation);
 
         _soil.TryReceiveBase(harvest.GetComponent<BaseHoldItem>());

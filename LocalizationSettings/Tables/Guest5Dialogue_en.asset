@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Guest5Dialogue_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 6c8881d92a189274fa58c0f13a70b0b0, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 697540935680
+    m_Localized: "Thanks for the dish\u2026 just what I needed after a long road.
+      I\u2019m Emma, a seeker of artifacts."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 735646187520
+    m_Localized: "Recently we almost killed one of the Guardians \u2014 the artifact
+      was practically in our hands."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 748312985600
+    m_Localized: "But\u2026 he managed to teleport. We were so exhausted we couldn\u2019t
+      keep up the chase."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 780604932096
+    m_Localized: "We were this close. With a good cook who could\u2019ve restored
+      our strength, we would\u2019ve finished the job."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 796249686016
+    m_Localized: "So if you ever decide to step outside the tavern \u2014 there will
+      always be a place for you on my team."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2171004125184
+    m_Localized: Thank you. Do you know where that Guardian teleported? North.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2205573578752
+    m_Localized: "The coldest, emptiest place imaginable. We followed him\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2219226038272
+    m_Localized: I thought we could make it. But it turned out differently.Frost
+      that breaks your breath.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2232199020544
+    m_Localized: A cold wind that cuts like a knife. Supplies for days, not weeks.
+      The campaign turned into survival.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2245759205376
+    m_Localized: Those lands took everything from us, if you were with us, everything
+      might have turned out differently.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6844582854656
+    m_Localized: "Sorry I was angry. I\u2019ve learned not every road must lead to
+      artifacts."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7083863703552
+    m_Localized: "When I came back from the north, I picked up an old sword. I just
+      wanted to clean it up\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7098275332096
+    m_Localized: And then I noticed that the work calms me. The iron listens. The
+      fire answers.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7111265091584
+    m_Localized: " realized maybe it\u2019s time to stop chasing mirages. I\u2019m
+      opening my own forge."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7125815132160
+    m_Localized: And for the first time in a long while, I feel truly warm.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8188295249920
+    m_Localized: "If you ever need new knives, a poker, or even a sword \u2014 come
+      by. I\u2019ll make something good for you."
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: DefaultDialogueGuest7_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 237a403b7da72df4599dcf414da4efc0, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 32336904192
+    m_Localized: "Crav is hungry . Crav would eat all the food you brought. But he
+      won\u2019t, it\u2019s far too disgusting."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53203566592
+    m_Localized: "Did you bring this\u2026 or did Crav bring it to you? Ha!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64624656384
+    m_Localized: Crav knows what happens if you gather three artifacts. Crav is no
+      fool. Seekers are fools.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 77060767744
+    m_Localized: "Mmm\u2026 it smells so strong even the rats would run away."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90230882304
+    m_Localized: "Oh, food! Or just a picture of food? Eat it or swear an oath? Crav
+      swears\u2026 by hunger."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 103627489280
+    m_Localized: "Crav chose to end up in the side one himself\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 162314190848
+    m_Localized: "Crav will survive the catastrophe, but you won\u2019t. Crav can
+      slip into the true one at any moment\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 175454945280
+    m_Localized: "Crav sees food, Crav sees you\u2026 strange, which one is scarier?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 191716261888
+    m_Localized: You think Crav is grateful? No, Crav demands more.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208640278528
+    m_Localized: "Crav knows: if you eat slowly, you can die of boredom\u2026 or
+      hunger."
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

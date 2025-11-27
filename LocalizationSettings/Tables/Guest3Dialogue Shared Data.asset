@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Guest3Dialogue Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Guest3Dialogue
+  m_TableCollectionNameGuidString: b7d2b7f6f0845fa40b9840aefab5eb1c
+  m_Entries:
+  - m_Id: 7099777024
+    m_Key: part1.line0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49877483520
+    m_Key: part1.line1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52264042496
+    m_Key: part1.line2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54818373632
+    m_Key: part1.line3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1606501138432
+    m_Key: part2.line0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1640101707776
+    m_Key: part2.line1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1647932473344
+    m_Key: part2.line2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1669734465536
+    m_Key: part2.line3
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 5171387496096858124
+  references:
+    version: 2
+    RefIds:
+    - rid: 5171387496096858124
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1764088660853

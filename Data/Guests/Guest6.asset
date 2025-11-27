@@ -20,4 +20,7 @@ MonoBehaviour:
   <Portrait>k__BackingField: {fileID: 21300000, guid: 8e0dd3a032ae1f14493e5d787531e96c, type: 3}
   <DefaultDialogueData>k__BackingField: {fileID: 0}
   <TypingSound>k__BackingField: {fileID: 8300000, guid: 61adeac8f62003347831e237baa288b0, type: 3}
-  <DialoguesData>k__BackingField: []
+  <DialoguesData>k__BackingField:
+  - {fileID: 11400000, guid: 243d3413a32bb9246b20e051addc32ed, type: 2}
+  - {fileID: 11400000, guid: 8aa72dbc99a986f4dadaa19267ddf416, type: 2}
+  - {fileID: 11400000, guid: 66b247d17e7576b42afe9adeda4c0ecf, type: 2}

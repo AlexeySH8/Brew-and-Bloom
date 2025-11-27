@@ -27,6 +27,31 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b7d2b7f6f0845fa40b9840aefab5eb1c
+    m_Address: Assets/LocalizationSettings/Tables/Guest3Dialogue Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0d187a04c0da9da4d99e476ada590186
+    m_Address: Assets/LocalizationSettings/Tables/Guest4Dialogue Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6c8881d92a189274fa58c0f13a70b0b0
+    m_Address: Assets/LocalizationSettings/Tables/Guest5Dialogue Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 94bed6aea476b67458d6ed486d5e2f2e
+    m_Address: Assets/LocalizationSettings/Tables/Guest6Dialogue Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 237a403b7da72df4599dcf414da4efc0
+    m_Address: Assets/LocalizationSettings/Tables/DefaultDialogueGuest7 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 898f18dc7d1d83e46ac8dd38d6ca3dc6, type: 2}
   m_SchemaSet:

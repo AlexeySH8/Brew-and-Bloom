@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Guest6Dialogue_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 94bed6aea476b67458d6ed486d5e2f2e, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 13189906432
+    m_Localized: Thank you, the smell truly is wonderful. It reminded me of a strange
+      dream.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 47771942912
+    m_Localized: I found myself in bright chambers where everything glowed with a
+      steady white light, yet there was no sun anywhere.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3801162317824
+    m_Localized: The rest was like a fog.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59780235264
+    m_Localized: People in identical robes stood in silence, as if performing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 76251267072
+    m_Localized: "a mysterious ritual around a large black cube rising in the center
+      of the room\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5156509712384
+    m_Localized: Thank you.That same night,the dream returned.This time I noticed
+      unfamiliar alchemical instruments on the tables.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5185941143552
+    m_Localized: "In one of them, I saw my own reflection \u2014 holding a book that
+      emitted a soft glow."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5196544344064
+    m_Localized: There was a faint smell of iron in the air, and the black cube gave
+      off a steady hum
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5213384474624
+    m_Localized: "as if it were a living creature watching me. There was something
+      else\u2026 but I can\u2019t recall it."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6619864629248
+    m_Localized: "Thank you\u2026 These dreams have begun to trouble me deeply."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6657827274752
+    m_Localized: After the last one, waking up frightened me.  I realized I had truly
+      been asleep all this time.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6670695399424
+    m_Localized: 'The world there was strange: colorful lights burned everywhere,
+      iron carriages flew like swarms of bees'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6682762412032
+    m_Localized: and towering structures rose into the sky
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6699975835648
+    m_Localized: It felt as though I had lived in that place for decades
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7637599911936
+    m_Localized: ... only to suddenly find myself here again, at an ordinary table.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7644474376192
+    m_Localized: "Where is the real Chuen-Zy now? And what does \u201Creal\u201D
+      even mean?"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

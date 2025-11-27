@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Guest4Dialogue_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 0d187a04c0da9da4d99e476ada590186, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 6306772418560
+    m_Localized: "There are so many seekers around\u2026 do you want to hear the
+      legends about the Guardians?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6366323146752
+    m_Localized: The first Guardian was once a temple keeper who grew tired of watching
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6377454829568
+    m_Localized: people ruin their destinies with a single step backward or forward.
+      And one day he stopped so firmly
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6390390063104
+    m_Localized: "that he ceased moving altogether. Time won\u2019t allow stillness
+      and stretched him like a shadow at noon."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6409075687424
+    m_Localized: "If you look at his face long enough, you see your own mistakes
+      \u2014 even the ones you never made."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8894246944768
+    m_Localized: "This time I\u2019ll tell the second legend, about a city found
+      on no map and in no memory."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8932784209920
+    m_Localized: The second Guardian dwells there. He gathers the light that once
+      belonged to the living.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8943634874368
+    m_Localized: "Not souls, not shadows \u2014 light itself. The last sparks of
+      joy, hope, inspiration."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8955618000896
+    m_Localized: Everything a person loses when they bend under the weight of the
+      world.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9547971166208
+    m_Localized: 'Only one legend remains: a river flowing with the remnants of broken,
+      forgotten, betrayed promises.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9579998871552
+    m_Localized: Every word a person fails to keep turns into gray ash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9590786621440
+    m_Localized: "slips from someone\u2019s memory, and falls into this river. He
+      stands in the middle of it. And listens."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9623611244544
+    m_Localized: They say you can hear his whisper in the forests.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

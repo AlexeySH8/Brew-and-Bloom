@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f5663f961715ec47ba43c4c1de610d8, type: 3}
+  m_Name: Part1
+  m_EditorClassIdentifier: 
+  <TypingSpeed>k__BackingField: 0.03
+  <DialogueLines>k__BackingField:
+  - m_TableReference:
+      m_TableCollectionName: GUID:6c8881d92a189274fa58c0f13a70b0b0
+    m_TableEntryReference:
+      m_KeyId: 697540935680
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:6c8881d92a189274fa58c0f13a70b0b0
+    m_TableEntryReference:
+      m_KeyId: 735646187520
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:6c8881d92a189274fa58c0f13a70b0b0
+    m_TableEntryReference:
+      m_KeyId: 748312985600
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:6c8881d92a189274fa58c0f13a70b0b0
+    m_TableEntryReference:
+      m_KeyId: 780604932096
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:6c8881d92a189274fa58c0f13a70b0b0
+    m_TableEntryReference:
+      m_KeyId: 796249686016
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []

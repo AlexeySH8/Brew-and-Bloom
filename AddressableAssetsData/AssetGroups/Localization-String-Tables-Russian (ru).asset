@@ -18,13 +18,43 @@ MonoBehaviour:
   m_GUID: 35b9b7f27992137489f3791182e3b457
   m_SerializeEntries:
   - m_GUID: d97b55343f11ce549bed8d81512bb969
-    m_Address: Guest1Dialogue_ru
+    m_Address: Guest2Dialogue_ru
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ru
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 32394d89cc3f5174bbd39af04218e0dd
-    m_Address: DefaultDialogue_ru
+    m_Address: DefaultDialogueGuest1_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8009ef793109bb145acae01ba9f8d578
+    m_Address: Guest3Dialogue_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 92a6c48abb5d3e34983fb1c2a4a9e487
+    m_Address: Guest4Dialogue_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 896cf2e2da99ce24d9749158b072a5ea
+    m_Address: Guest5Dialogue_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 54133db87d393984a8f922788b8c372a
+    m_Address: Guest6Dialogue_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e2313bad2e7c3e84f99e02b87255a3f2
+    m_Address: DefaultDialogueGuest7_ru
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ru

@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Guest3Dialogue_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: b7d2b7f6f0845fa40b9840aefab5eb1c, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 7099777024
+    m_Localized: "Thank you\u2026 for the food for Crav. I know he can be sharp and
+      bold, but he has his reasons."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49877483520
+    m_Localized: Once, he lived in the northern part of the forest, until an Eidolon
+      attacked his family.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52264042496
+    m_Localized: "It took the form of Crav\u2019s father, and when he returned home,
+      it leapt at him."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54818373632
+    m_Localized: "That day left a deep mark on him\u2026 and since then, he has been
+      the way he is."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1606501138432
+    m_Localized: "Thank you\u2026 last time I forgot to tell you how Crav survived."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1640101707776
+    m_Localized: "He was lucky\u2014a seeker happened to pass by and pulled him out
+      of the monster\u2019s jaws."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1647932473344
+    m_Localized: "He lost part of his head, but it doesn\u2019t stop him. Later we
+      met at the shelter and became friends."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1669734465536
+    m_Localized: "Thank you again for your care and patience\u2014it means more to
+      him than he can say."
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

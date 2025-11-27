@@ -1,10 +1,14 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Zenject;
 
 public class GameSceneManager : MonoBehaviour, IDataPersistence
 {
+    [SerializeField] private GameObject _houseLoadingUI;
+    [SerializeField] private GameObject _tavernLoadingUI;
     private const string HouseSceneName = "House";
     private const string TavernSceneName = "Tavern";
 
@@ -46,7 +50,7 @@ public class GameSceneManager : MonoBehaviour, IDataPersistence
         }
     }
 
-    public void LoadCurrentScene()
+    public void LoadSavedScene()
     {
         switch (_persistenceManager.GameData.SavedSceneName)
         {
@@ -66,7 +70,7 @@ public class GameSceneManager : MonoBehaviour, IDataPersistence
             OnTavernUnloading?.Invoke();
             _persistenceManager.SaveGame();
         }
-        SceneManager.LoadScene(HouseSceneName);
+        StartCoroutine(LoadSceneRoutine(HouseSceneName, _houseLoadingUI));
     }
 
     public void LoadTavernScene()
@@ -76,7 +80,26 @@ public class GameSceneManager : MonoBehaviour, IDataPersistence
             OnHouseUnloading?.Invoke();
             _persistenceManager.SaveGame();
         }
-        SceneManager.LoadScene(TavernSceneName);
+        StartCoroutine(LoadSceneRoutine(TavernSceneName, _tavernLoadingUI));
+    }
+
+    private IEnumerator LoadSceneRoutine(string sceneName, GameObject loadingUI)
+    {
+        loadingUI.SetActive(true);
+        Animator anim = loadingUI.GetComponent<Animator>();
+
+        anim.Play("StartLoading");
+        yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+
+        anim.Play("LoopLoading");
+
+        AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
+        yield return new WaitUntil(() => op.isDone);
+
+        anim.Play("EndLoading");
+        yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+
+        loadingUI.SetActive(false);
     }
 
     public void LoadData(GameData gameData)

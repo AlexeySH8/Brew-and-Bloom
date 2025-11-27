@@ -44,7 +44,7 @@ public class StartMenu : MonoBehaviour
     {
         SFX.Instance.PlayClickButtonNewGame();
         _dataPersistenceManager.LoadGameMeta();
-        _gameSceneManager.LoadCurrentScene();
+        _gameSceneManager.LoadSavedScene();
     }
 
     private void SetDisplayContinueButton()

@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: DefaultDialogueGuest1_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 47d4c3c0ad8b30345b807be9996f4768, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 275119996928
+    m_Localized: "137\u2026 could it be the minimally required number? Ah, thank
+      you."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432603529216
+    m_Localized: Could it be that the algorithm really produces only a single True
+      Aeon? But how?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21779664392290304
+    m_Localized: Thank you. If only one copy remains, can it be considered the original?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21779675050016768
+    m_Localized: "This tavern serves the best food in the entire Pleroma. Pleroma?
+      Perhaps you\u2019ll learn about it someday. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21779722307239936
+    m_Localized: "It\u2019s sad that this is a Side Aeon . I\u2019ll miss this place."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21779725415219200
+    m_Localized: 'Out of 137 Aeons, the explanation by the Guardians in yours is
+      the strangest. '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21779730465161216
+    m_Localized: And after all, all interactions boil down to just four forces.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21779733908684800
+    m_Localized: 0001 111 00 100
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21779739097038848
+    m_Localized: 100 0 11 00 001 010 110 0
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

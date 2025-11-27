@@ -18,13 +18,31 @@ MonoBehaviour:
   m_GUID: d15fd1fd2508b364291f2f61acff5b0e
   m_SerializeEntries:
   - m_GUID: 762d6d2902367eb48974e95b7628a2b0
-    m_Address: Guest1Dialogue_es
+    m_Address: Guest2Dialogue_es
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-es
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 55c6a8d6f12764d48ad5bc10b7ce150d
-    m_Address: DefaultDialogue_es
+    m_Address: DefaultDialogueGuest1_es
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 24ba086cd267c9d40af68ae5c3e0a47b
+    m_Address: Guest5Dialogue_es
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4c32092ae92c2504aac276cf90ab5382
+    m_Address: Guest6Dialogue_es
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5f3b4bd7928c4fb418e8f18d6148a0da
+    m_Address: DefaultDialogueGuest7_es
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-es

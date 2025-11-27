@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be51871efa6c3e4eae1703925c8f5ac, type: 3}
+  m_Name: Guest5Dialogue
+  m_EditorClassIdentifier: 
+  m_SharedTableData: {fileID: 11400000, guid: 6c8881d92a189274fa58c0f13a70b0b0, type: 2}
+  m_Tables:
+  - {fileID: 11400000, guid: 3f22c310d2051a240b427e9697bf069f, type: 2}
+  - {fileID: 11400000, guid: 896cf2e2da99ce24d9749158b072a5ea, type: 2}
+  - {fileID: 11400000, guid: 24ba086cd267c9d40af68ae5c3e0a47b, type: 2}
+  m_Extensions: []
+  m_Group: String Table
+  references:
+    version: 2
+    RefIds: []
