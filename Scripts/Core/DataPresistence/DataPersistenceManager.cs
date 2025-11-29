@@ -69,4 +69,9 @@ public class DataPersistenceManager : MonoBehaviour, IDataPersistenceManager
     }
 
     public bool HasSave() => _dataHandler.Exists();
+
+    private void OnApplicationQuit()
+    {
+        SaveGame();
+    }
 }

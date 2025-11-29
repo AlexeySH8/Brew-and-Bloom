@@ -392,8 +392,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -1.0298502, y: 0.92280006, z: 0}
-    m_Extent: {x: 7.7878504, y: 5.7959, z: 0}
+    m_Center: {x: -1.0297499, y: 0.92155004, z: 0}
+    m_Extent: {x: 7.78685, y: 5.7955503, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -4731,6 +4731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e06d0bd901265a14bbe6731165d4f490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _giveDishSFX: {fileID: 8300000, guid: 2632aa5c5d05b4c4fb65e854daae4eb8, type: 3}
 --- !u!4 &781357681 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7735623843903714051, guid: fee1271f5e092c44aafc5adbe5c9dcad, type: 3}

@@ -3,6 +3,7 @@ using Zenject;
 
 public class HousePortal : MonoBehaviour, IReceiveHeldItem, IFreeInteractable
 {
+    [SerializeField] private AudioClip _receiveDishSFX;
     private OrdersManager _ordersManager;
     private GameSceneManager _gameSceneManager;
     private PortalUI _portalUI;
@@ -25,6 +26,7 @@ public class HousePortal : MonoBehaviour, IReceiveHeldItem, IFreeInteractable
     {
         if (heldItem.TryGetComponent(out Dish dish))
         {
+            SFX.Instance.PlayAudioClip(_receiveDishSFX);
             _ordersManager.AddPlayerDish(dish.Data);
             dish.Discard();
             return true;

@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: MenuUI_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 21bad0108b66c204ea0b68f86cd6fa12, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 7070416896
+    m_Localized: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 66730196992
+    m_Localized: New Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85197717504
+    m_Localized: Options
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2305964244992
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38823168704512
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 438566285869056
+    m_Localized: Save Game
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

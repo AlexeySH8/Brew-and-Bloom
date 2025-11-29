@@ -17,6 +17,8 @@ public class DialoguePanelUI : MonoBehaviour
     private char[] _sentenceDelimiters = new char[]
 {
     '.',
+    ',',
+    '-',
     '!',
     '?',
     ';',
@@ -64,6 +66,8 @@ public class DialoguePanelUI : MonoBehaviour
         }
         _typing = null;
     }
+
+    public void UpdateGuestName(string newName) => _guestName.text = newName;
 
     public void EndDialogue()
     {

@@ -73,5 +73,5 @@ public class Guest
         }
     }
 
-    public override string ToString() => Data.Name;
+    //public override string ToString() => Data.Name;
 }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f5663f961715ec47ba43c4c1de610d8, type: 3}
   m_Name: DefaultDialogue
   m_EditorClassIdentifier: 
+  <TypingSpeed>k__BackingField: 0.03
   <DialogueLines>k__BackingField:
   - m_TableReference:
       m_TableCollectionName: GUID:47d4c3c0ad8b30345b807be9996f4768
@@ -29,7 +30,6 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  <AutoProgressLines>k__BackingField: 
   references:
     version: 2
     RefIds: []

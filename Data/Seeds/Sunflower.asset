@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d337d0fef05406445b1d3a2ff3785ee4, type: 3}
   m_Name: Sunflower
   m_EditorClassIdentifier: 
-  <MinStageTime>k__BackingField: 10
-  <MaxStageTime>k__BackingField: 60
+  <MinStageTime>k__BackingField: 5
+  <MaxStageTime>k__BackingField: 65
   <MinHarvestCount>k__BackingField: 1
   <MaxHarvestCount>k__BackingField: 2
   <GrowthStageSprites>k__BackingField:

@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class EndGameService : IShopService
 {
+    private EndGame _endGame;
+
+    public EndGameService(EndGame endGame)
+    {
+        _endGame = endGame;
+    }
+
     public bool TryApply()
     {
-        Debug.Log("Game is End");
+        _endGame.gameObject.SetActive(true);
+        _endGame.StartEndGame();
         return true;
     }
 }

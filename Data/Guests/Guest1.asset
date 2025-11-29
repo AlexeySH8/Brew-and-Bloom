@@ -12,7 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75afbd1f56cb71c419cfa562cd427b4e, type: 3}
   m_Name: Guest1
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Guest1
+  <Name>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: GUID:9f22a113bb202244ca44a168978c34da
+    m_TableEntryReference:
+      m_KeyId: 6667763712
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   <GuestId>k__BackingField: 30ae7893a401bc443970c3a2854c2c08
   <MinPayment>k__BackingField: 50
   <MaxPayment>k__BackingField: 150
@@ -21,3 +29,6 @@ MonoBehaviour:
   <DefaultDialogueData>k__BackingField: {fileID: 11400000, guid: 90144004896fff640888a5a3dd5e9a7b, type: 2}
   <TypingSound>k__BackingField: {fileID: 8300000, guid: 40754123023d9bd47ba9b905e52a1549, type: 3}
   <DialoguesData>k__BackingField: []
+  references:
+    version: 2
+    RefIds: []

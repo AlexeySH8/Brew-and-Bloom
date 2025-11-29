@@ -8,7 +8,7 @@ public class PlayerWallet : IDataPersistence
     public event Action<int> OnBalanceChanged;
     public event Action<int> OnDailyEarningChanged;
 
-    private const int _startingBalance = 300;
+    private const int _startingBalance = 999;
     private const int MaxBalance = 999;
     private GameSceneManager _gameSceneManager;
     private IDataPersistenceManager _dataPresistenceManager;

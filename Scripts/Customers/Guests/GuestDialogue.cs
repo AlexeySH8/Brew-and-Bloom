@@ -11,7 +11,7 @@ public class GuestDialogue : IActiveInteraction
     private PlayerController _playerController;
     private DialoguePanelUI _dialoguePanelUI;
     private Sprite _guestPortret;
-    private string _guestName;
+    private LocalizedString _guestName;
     private AudioClip _guestTypingSound;
     private LocalizedString _currentLine;
     private bool _isStoryFinished;
@@ -66,7 +66,8 @@ public class GuestDialogue : IActiveInteraction
 
         _lineIndex = 0;
         SetDialoguePart(dialoguePartIndex);
-        _dialoguePanelUI.StartDialogue(_guestPortret, _guestName);
+        _dialoguePanelUI.StartDialogue(_guestPortret, _guestName.GetLocalizedString());
+        _guestName.StringChanged += _dialoguePanelUI.UpdateGuestName;
         _playerController.StartActiveInteraction(this);
         NextLineDialogue();
     }
@@ -117,7 +118,7 @@ public class GuestDialogue : IActiveInteraction
     {
         if (_currentLine != null)
             _currentLine.StringChanged -= OnStringChanged;
-
+        _guestName.StringChanged -= _dialoguePanelUI.UpdateGuestName;
         _playerController.EndActiveInteraction();
         _dialoguePanelUI.EndDialogue();
     }

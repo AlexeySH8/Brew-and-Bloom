@@ -37,6 +37,10 @@ public class HouseInstaller : MonoInstaller
         Container.Bind<PortalUI>()
             .FromComponentInHierarchy()
             .AsSingle().NonLazy();
+
+        Container.Bind<EndGame>()
+            .FromComponentInHierarchy()
+            .AsSingle().NonLazy();
     }
 }
 

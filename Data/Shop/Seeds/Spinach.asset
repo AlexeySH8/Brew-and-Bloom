@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fa8fe80abc6d34da8869f0c5a41649, type: 3}
   m_Name: Spinach
   m_EditorClassIdentifier: 
-  <Price>k__BackingField: 10
+  <Price>k__BackingField: 3
   <Icon>k__BackingField: {fileID: 1109119540, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}
   <ItemPrefab>k__BackingField: {fileID: 3570712398520165727, guid: 5b256ad441e8f4e4baf488f7f7f44d02, type: 3}
   <ServiceType>k__BackingField: 0

@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.Audio;
 using Zenject;
 
 public class SFX : MonoBehaviour
 {
     public static SFX Instance { get; private set; }
+    [SerializeField] private AudioMixer _mixer;
 
     [Header("General")]
     [SerializeField] private AudioClip _nightSound;
@@ -26,6 +28,8 @@ public class SFX : MonoBehaviour
     [SerializeField] private AudioClip[] _chops;
     [SerializeField] private AudioClip[] _mines;
 
+    private const string SFX_VOLUME = "sfxVolume";
+    private const string SFX_MIXER = "SFXVolume";
     private AudioSource _sfxSource;
 
     private void Awake()
@@ -38,6 +42,18 @@ public class SFX : MonoBehaviour
         }
         Instance = this;
         _sfxSource = GetComponent<AudioSource>();
+    }
+
+    private void Start()
+    {
+        LoadVolume();
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        _mixer.SetFloat(SFX_MIXER, Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat(SFX_VOLUME, volume);
+        PlayerPrefs.Save();
     }
 
     #region General
@@ -71,5 +87,11 @@ public class SFX : MonoBehaviour
     {
         if (audioClip != null)
             _sfxSource.PlayOneShot(audioClip);
+    }
+
+    private void LoadVolume()
+    {
+        var volume = PlayerPrefs.GetFloat(SFX_VOLUME, 0.5f);
+        SetSFXVolume(volume);
     }
 }

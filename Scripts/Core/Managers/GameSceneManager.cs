@@ -85,6 +85,12 @@ public class GameSceneManager : MonoBehaviour, IDataPersistence
 
     private IEnumerator LoadSceneRoutine(string sceneName, GameObject loadingUI)
     {
+        if (loadingUI == null)
+        {
+            SceneManager.LoadScene(sceneName);
+            yield break;
+        }
+
         loadingUI.SetActive(true);
         Animator anim = loadingUI.GetComponent<Animator>();
 

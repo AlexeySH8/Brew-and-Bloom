@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8437847b956cdbe4cac3de843fb28476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mixer: {fileID: 24100000, guid: 19b9f9488c49ac846a34bb4f9583bebb, type: 2}
   _nightSound: {fileID: 8300000, guid: 7959cd74ee380af47a1e3b052accb7fa, type: 3}
   _clickButtonDefault: {fileID: 8300000, guid: eb81909588bcbe241b60c9465d9f0499, type: 3}
   _clickButtonBuy: {fileID: 8300000, guid: 3e5dfe6bc11659f4a9e2de88f5ac6bf9, type: 3}

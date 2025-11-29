@@ -12,7 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75afbd1f56cb71c419cfa562cd427b4e, type: 3}
   m_Name: Guest5
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Guest5
+  <Name>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: GUID:9f22a113bb202244ca44a168978c34da
+    m_TableEntryReference:
+      m_KeyId: 22283157504
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   <GuestId>k__BackingField: af687fbbf4aab724da9d4500cf9099a4
   <MinPayment>k__BackingField: 30
   <MaxPayment>k__BackingField: 70
@@ -24,3 +32,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 427395eb8ee30fd45a695a3a6b680f30, type: 2}
   - {fileID: 11400000, guid: 4c89a906f6dc3744fbd78611f0f98bb2, type: 2}
   - {fileID: 11400000, guid: c149bade12380f146b31d2de26523d9a, type: 2}
+  references:
+    version: 2
+    RefIds: []

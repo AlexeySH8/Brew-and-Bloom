@@ -5,6 +5,8 @@ using Zenject;
 
 public class TavernPortal : MonoBehaviour, IFreeInteractable
 {
+    [SerializeField] private AudioClip _giveDishSFX;
+
     private OrdersManager _ordersManager;
     private OrdersPanelUI _ordersPanelUI;
     private GameSceneManager _gameSceneManager;
@@ -39,6 +41,7 @@ public class TavernPortal : MonoBehaviour, IFreeInteractable
         var completedDishes = new List<DishData>(_ordersManager.CompletedDishes);
         foreach (var dishData in completedDishes)
         {
+            SFX.Instance.PlayAudioClip(_giveDishSFX);
             GameObject dish = Instantiate(dishData.DishPrefab);
             Vector3 spawnOffset = new Vector3(Random.Range(-1.5f, 1.5f), -2, 0);
             dish

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fa8fe80abc6d34da8869f0c5a41649, type: 3}
   m_Name: Rose
   m_EditorClassIdentifier: 
-  <Price>k__BackingField: 20
+  <Price>k__BackingField: 7
   <Icon>k__BackingField: {fileID: -524023823, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}
   <ItemPrefab>k__BackingField: {fileID: 3378697735348527230, guid: 0a76bed6e23f1f849a123409146bd654, type: 3}
   <ServiceType>k__BackingField: 0

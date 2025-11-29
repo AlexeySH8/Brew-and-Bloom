@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64fa8fe80abc6d34da8869f0c5a41649, type: 3}
   m_Name: Sunflower
   m_EditorClassIdentifier: 
-  <Price>k__BackingField: 10
+  <Price>k__BackingField: 7
   <Icon>k__BackingField: {fileID: 556594995, guid: fc81f0d4c84233344b2cd9e313981d67, type: 3}
   <ItemPrefab>k__BackingField: {fileID: 4324623612265046025, guid: cac00311ba1f6cc46a2ae214f8c34e80, type: 3}
   <ServiceType>k__BackingField: 0
