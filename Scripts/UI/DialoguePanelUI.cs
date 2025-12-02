@@ -14,11 +14,11 @@ public class DialoguePanelUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _dialogueText;
 
     private Coroutine _typing;
+    private string _currentLine;
     private char[] _sentenceDelimiters = new char[]
 {
     '.',
     ',',
-    '-',
     '!',
     '?',
     ';',
@@ -48,6 +48,7 @@ public class DialoguePanelUI : MonoBehaviour
     public IEnumerator TypeLineRoutine(string line, float typingSpeed, AudioClip typingSound)
     {
         _dialogueText.SetText("");
+        _currentLine = line;
         int counter = 0;
 
         foreach (char letters in line)
@@ -65,6 +66,13 @@ public class DialoguePanelUI : MonoBehaviour
             yield return new WaitForSeconds(typingSpeed);
         }
         _typing = null;
+    }
+
+    public void SkipTyping()
+    {
+        StopCoroutine(_typing);
+        _typing = null;
+        _dialogueText.text = _currentLine;
     }
 
     public void UpdateGuestName(string newName) => _guestName.text = newName;

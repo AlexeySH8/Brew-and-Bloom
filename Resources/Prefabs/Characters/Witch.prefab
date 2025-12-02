@@ -160,7 +160,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.03, y: -0.29}
+  m_Offset: {x: -0.03, y: -0.09}
   m_Size: {x: 0.47, y: 0.55}
   m_Direction: 0
 --- !u!114 &4201505269331970972
@@ -175,9 +175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b41b43e2d30ab534980987abc740e694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canMove: 0
-  _canDrop: 0
-  _canInteract: 0
 --- !u!114 &6996514465472350033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,9 +200,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29290c21ba8b2414a94bb37ebcc0199f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _holderId: 
   _holdToolPoint: {fileID: 2173342254922158584}
   _holdItemPoint: {fileID: 63956232600998575}
-  _witchVisual: {fileID: 6991232686041946899}
   _throwingForce: 30
 --- !u!114 &5847831708017810119
 MonoBehaviour:
@@ -219,11 +216,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d23e02820099197448c76ed98e6850f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interectiveItemMask:
+  _interactiveItemMask:
     serializedVersion: 2
     m_Bits: 64
-  _interactionDistance: 0.5
-  _radius: 0.4
+  _interactionDistance: 0.4
+  _radius: 0.25
   _interactionOffset: 0.2
 --- !u!114 &8659951469332290978
 MonoBehaviour:
@@ -265,7 +262,7 @@ Transform:
   m_GameObject: {fileID: 6991232686041946899}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

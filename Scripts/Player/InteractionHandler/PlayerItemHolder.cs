@@ -1,5 +1,4 @@
 using UnityEngine;
-using Zenject;
 
 public class PlayerItemHolder : BaseItemHolder
 {
@@ -7,16 +6,14 @@ public class PlayerItemHolder : BaseItemHolder
     [SerializeField] private Transform _holdItemPoint;
     [SerializeField] private float _throwingForce;
 
-    private PlayerVisual _witchVisual;
-    private Rigidbody2D _heldItemRB;
+    private PlayerVisual _playerVisual;
+    private float _dropOffset = 0.2f;
+    public override Transform ParentPoint => _playerVisual.transform;
+    public override int SortingOrderOffset => _playerVisual.SpriteRenderer.sortingOrder + 1;
 
-    public override Transform ParentPoint => _witchVisual.transform;
-    public override int SortingOrderOffset => _witchVisual.SpriteRenderer.sortingOrder + 1;
-
-    protected override void Awake()
+    private void Awake()
     {
-        _witchVisual = GetComponentInChildren<PlayerVisual>();
-        base.Awake();
+        _playerVisual = GetComponentInChildren<PlayerVisual>();
     }
 
     public void PickUp(BaseHoldItem holdItem)
@@ -36,11 +33,9 @@ public class PlayerItemHolder : BaseItemHolder
 
         SFX.Instance.PlayDropItem();
         var rb = heldItem.Rigidbody;
-        rb.transform.position += (Vector3)(forceDirection * 0.2f); // Moves the object collider away from the player collider
+        rb.transform.position += (Vector3)(forceDirection * _dropOffset); // Moves the object collider away from the player collider
         rb.AddForce(forceDirection * _throwingForce, ForceMode2D.Impulse);
     }
-
-    public bool CanReceive(BaseHoldItem heldItem) => _heldItem != null && IsCorrectItemToReceive(heldItem);
 
     private void SetItemPosition()
     {

@@ -13,10 +13,10 @@ public class PlayerInteractionHandler : MonoBehaviour
 
     public void Interact(float faceDirection)
     {
-        RaycastHit2D hit = _detector.DetectInteractiveItem(_itemHolder.HeldItem != null);
+        RaycastHit2D hit = _detector.DetectInteractiveItem(_itemHolder.HasItem());
         Collider2D interactiveItem = hit.collider;
 
-        if (_itemHolder.HeldItem != null)
+        if (_itemHolder.HasItem())
         {
             if (TryUseItem(_itemHolder.HeldItem)) return;
 
@@ -40,7 +40,6 @@ public class PlayerInteractionHandler : MonoBehaviour
         {
             interactable.Interact();
         }
-        return;
     }
 
     private void HandleEmptyHandInteraction(Collider2D target)

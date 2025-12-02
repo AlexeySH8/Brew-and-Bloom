@@ -21,7 +21,6 @@ public abstract class BaseHoldItem : MonoBehaviour
             ArcAnimation = gameObject.AddComponent<ArcAnimation>();
 
         ItemPool.Instance.Register(this);
-        CheckParent();
     }
 
     public void SetHolder(BaseItemHolder newHolder)
@@ -54,13 +53,6 @@ public abstract class BaseHoldItem : MonoBehaviour
             _spriteRenderer.sortingOrder = _defaultSortingOrder;
             ItemPool.Instance.Register(this);
         }
-    }
-
-    private void CheckParent()
-    {
-        Transform parent = transform.parent;
-        if (parent != null && !parent.TryGetComponent<BaseItemHolder>(out _))
-            Debug.LogError($"The parent of {gameObject.name} does not implement the IItemHolder");
     }
 
     public bool HasParent() => _currentHolder != null;

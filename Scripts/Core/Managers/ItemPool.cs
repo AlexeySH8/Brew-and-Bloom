@@ -32,6 +32,7 @@ public class ItemPool : MonoBehaviour, IDataPersistence
             return;
         }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public void Register(BaseHoldItem newItem)

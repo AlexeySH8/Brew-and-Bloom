@@ -31,6 +31,7 @@ public class GameSceneManager : MonoBehaviour, IDataPersistence
     private void Awake()
     {
         SceneManager.sceneLoaded += HandleSceneLoaded;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)

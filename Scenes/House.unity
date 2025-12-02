@@ -6765,7 +6765,7 @@ Transform:
   m_GameObject: {fileID: 621463635}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.2900004, y: -1.12, z: 0}
+  m_LocalPosition: {x: 4.2900004, y: -1.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12819,7 +12819,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _aeonPositionText: {fileID: 222238927}
-  _typingSound: {fileID: 8300000, guid: 40754123023d9bd47ba9b905e52a1549, type: 3}
   _typingSpeed: 0.5
 --- !u!82 &1135445037
 AudioSource:
@@ -13365,7 +13364,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.12634301, y: -0.6326122}
+  m_Offset: {x: -0.10590845, y: -0.6326122}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -13376,7 +13375,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.13966, y: 2.7979345}
+  m_Size: {x: 1.4565595, y: 2.7979345}
   m_EdgeRadius: 0
 --- !u!1 &1200319459
 GameObject:
@@ -15822,6 +15821,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 59f621d6c9b258144b8a402fb9db7bc5, type: 3}
+    - target: {fileID: 5956909566299915148, guid: 023fb75537949bb4da43cffe5fca67b5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23220,7 +23223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2521669164127101452, guid: 9f59be8604efec04cab874d1123d4569, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.96
+      value: 1.27
       objectReference: {fileID: 0}
     - target: {fileID: 2521669164127101452, guid: 9f59be8604efec04cab874d1123d4569, type: 3}
       propertyPath: m_LocalPosition.z
@@ -23257,6 +23260,10 @@ PrefabInstance:
     - target: {fileID: 2865133330096155575, guid: 9f59be8604efec04cab874d1123d4569, type: 3}
       propertyPath: m_Name
       value: Portal
+      objectReference: {fileID: 0}
+    - target: {fileID: 5398654680731401274, guid: 9f59be8604efec04cab874d1123d4569, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7056764334812423256, guid: 9f59be8604efec04cab874d1123d4569, type: 3}
       propertyPath: _ordersManager

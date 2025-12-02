@@ -11,11 +11,6 @@ public abstract class BaseItemHolder : MonoBehaviour, IGiveHeldItem, IReceiveHel
     protected BaseHoldItem _heldItem;
     [SerializeField] protected string _holderId = "";
 
-    protected virtual void Awake()
-    {
-        CheckChildren();
-    }
-
     public virtual bool TryReceive(BaseHoldItem heldItem) => TryReceiveBase(heldItem);
 
     public bool TryReceiveBase(BaseHoldItem heldItem)
@@ -51,24 +46,6 @@ public abstract class BaseItemHolder : MonoBehaviour, IGiveHeldItem, IReceiveHel
         _heldItem = null;
     }
 
-    private void CheckChildren()
-    {
-        if (ParentPoint.childCount == 0) return;
-
-        for (int i = 0; i < ParentPoint.childCount; i++)
-        {
-            Transform child = ParentPoint.GetChild(i);
-
-            // If the object was manually inserted into the parent
-            if (child.TryGetComponent(out BaseHoldItem holdItem) &&
-                !holdItem.HasParent())
-            {
-                if (!TryReceive(holdItem))
-                    Debug.LogError($"Object {holdItem.name} cannot be inserted into parent {this.name}");
-            }
-        }
-    }
-
     protected virtual void LoadHeldItem(GameData gameData)
     {
         ItemHolderSaveData holderData = gameData.ItemHoldersSaveData
@@ -101,10 +78,12 @@ public abstract class BaseItemHolder : MonoBehaviour, IGiveHeldItem, IReceiveHel
         holderData.PrefabPath = _heldItem != null ? _heldItem.PrefabPath : "";
     }
 
+#if UNITY_EDITOR
     [ContextMenu("Generate Unique Id")]
     private void GenerateUniqueId()
     {
         _holderId = GUID.Generate().ToString();
         EditorUtility.SetDirty(this);
     }
+#endif
 }

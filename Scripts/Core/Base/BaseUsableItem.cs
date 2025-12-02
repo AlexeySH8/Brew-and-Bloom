@@ -1,5 +1,4 @@
 using UnityEngine;
-using Zenject;
 
 public abstract class BaseUsableItem : BaseHoldItem
 {
@@ -15,7 +14,9 @@ public abstract class BaseUsableItem : BaseHoldItem
         Vector2 origin = transform.position;
         RaycastHit2D toolTarget = Physics2D.Raycast(origin, direction,
             InteractionDistance, InteractionMask);
+#if UNITY_EDITOR
         Debug.DrawRay(origin, direction * InteractionDistance, Color.red, 0.5f);
+#endif
         return toolTarget.collider;
     }
 }

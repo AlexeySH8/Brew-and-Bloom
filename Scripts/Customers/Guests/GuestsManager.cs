@@ -23,6 +23,11 @@ public class GuestsManager : MonoBehaviour
         SubscribeToEvents();
     }
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void Start()
     {
         if (_guestSaveSystem.AllGuests == null ||

@@ -26,6 +26,7 @@ public class MusicManager : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         _musicSource = GetComponent<AudioSource>();
     }
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class InteractionDetector : MonoBehaviour
 {
-    [SerializeField] private LayerMask _interectiveItemMask;
+    [SerializeField] private LayerMask _interactiveItemMask;
     [SerializeField] private float _interactionDistance = 1;
     [SerializeField] private float _radius = 0.1f;
     [SerializeField] private float _interactionOffset = 0.1f;
@@ -23,7 +23,7 @@ public class InteractionDetector : MonoBehaviour
         Vector2 origin = (Vector2)transform.position + direction * _interactionOffset;
 
         RaycastHit2D[] hits = Physics2D.CircleCastAll(origin, _radius, direction,
-            _interactionDistance, _interectiveItemMask);
+            _interactionDistance, _interactiveItemMask);
 
         return SelectBestHit(hits);
     }

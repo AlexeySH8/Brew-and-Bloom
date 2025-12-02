@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerVisual : MonoBehaviour
@@ -20,6 +18,7 @@ public class PlayerVisual : MonoBehaviour
     {
         var isRunning = horizontalInput != 0 || verticalInput != 0;
         UpdateAnimation(isRunning);
+        FlipVisual();
     }
 
     private void UpdateAnimation(bool isRunning)

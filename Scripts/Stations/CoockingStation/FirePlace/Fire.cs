@@ -20,6 +20,10 @@ public class Fire : MonoBehaviour, IStaffTarget
         _firePlace = GetComponentInParent<CookingStation>();
         _fireVisual = GetComponent<FireVisual>();
         _currentIntensity = _maxIntensity;
+    }
+
+    private void Start()
+    {
         _fireVisual.StartFire();
     }
 

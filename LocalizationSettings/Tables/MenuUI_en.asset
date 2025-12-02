@@ -42,6 +42,10 @@ MonoBehaviour:
     m_Localized: Save Game
     m_Metadata:
       m_Items: []
+  - m_Id: 1745807421079552
+    m_Localized: End Day
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -74,7 +74,11 @@ public class GuestDialogue : IActiveInteraction
 
     private void NextLineDialogue()
     {
-        if (_dialoguePanelUI.IsTyping()) return;
+        if (_dialoguePanelUI.IsTyping())
+        {
+            _dialoguePanelUI.SkipTyping();
+            return;
+        }
 
         if (_currentLine != null)
             _currentLine.StringChanged -= OnStringChanged;

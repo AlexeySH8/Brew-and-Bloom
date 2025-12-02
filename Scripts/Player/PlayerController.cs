@@ -4,11 +4,7 @@ using Zenject;
 public class PlayerController : MonoBehaviour
 {
     public Vector2 InteractionDirection { get; private set; }
-    public float FaceDirection { get; private set; }
-
-    [SerializeField] private bool _canMove;
-    [SerializeField] private bool _canDrop;
-    [SerializeField] private bool _canInteract;
+    public float FaceDirection { get; private set; } = 1;
 
     private IPlayerInput _input;
     private PlayerMovement _movement;
@@ -19,8 +15,9 @@ public class PlayerController : MonoBehaviour
     private GameSceneManager _gameSceneManager;
     private float _horizontalInput;
     private float _verticalInput;
-    private float _xInteractionDirection;
-    private float _yInteractionDirection;
+    private bool _canMove = true;
+    private bool _canDrop = true;
+    private bool _canInteract = true;
 
     [Inject]
     public void Construct(IPlayerInput input, GameSceneManager gameSceneManager)
@@ -35,12 +32,6 @@ public class PlayerController : MonoBehaviour
         _visual = GetComponentInChildren<PlayerVisual>();
         _interactiveHandler = GetComponent<PlayerInteractionHandler>();
         _itemHolder = GetComponent<PlayerItemHolder>();
-        FaceDirection = 1;
-        _xInteractionDirection = 1;
-        _yInteractionDirection = 0;
-        _canMove = true;
-        _canDrop = true;
-        _canInteract = true;
     }
 
     private void Start()
@@ -50,17 +41,40 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        HandleInput();
+        UpdateDirections();
+        _visual.UpdateVisual(_horizontalInput, _verticalInput);
+        HandleInteractInput();
+    }
+
+    private void FixedUpdate()
+    {
+        if (_canMove)
+            _movement.Move(_horizontalInput, _verticalInput);
+    }
+
+    private void HandleInput()
+    {
         if (_canMove)
         {
             _horizontalInput = _input.GetHorizontal();
             _verticalInput = _input.GetVertical();
         }
+    }
 
-        UpdateDirections();
+    private void UpdateDirections()
+    {
+        var direction = new Vector2(_horizontalInput, _verticalInput);
 
-        _visual.UpdateVisual(_horizontalInput, _verticalInput);
-        _visual.FlipVisual();
+        if (direction.x != 0)
+            FaceDirection = Mathf.Sign(direction.x);
 
+        if (direction != Vector2.zero)
+            InteractionDirection = direction.normalized;
+    }
+
+    private void HandleInteractInput()
+    {
         if (_canInteract && _input.IsInteractPressed())
         {
             if (_interactionPartner != null)
@@ -71,30 +85,6 @@ public class PlayerController : MonoBehaviour
 
         if (_canDrop && _input.IsDropPressed())
             DropHeldItem();
-    }
-
-    private void FixedUpdate()
-    {
-        if (_canMove)
-            _movement.Move(_horizontalInput, _verticalInput);
-    }
-
-    private void UpdateDirections()
-    {
-        if (_horizontalInput != 0)
-        {
-            _xInteractionDirection = _horizontalInput;
-            FaceDirection = _horizontalInput;
-        }
-        else if (_verticalInput != 0)
-            _xInteractionDirection = 0;
-
-        if (_verticalInput != 0)
-            _yInteractionDirection = _verticalInput;
-        else if (_horizontalInput != 0)
-            _yInteractionDirection = 0;
-
-        InteractionDirection = new Vector2(_xInteractionDirection, _yInteractionDirection);
     }
 
     private void DropHeldItem() => _itemHolder.Drop(InteractionDirection.normalized);

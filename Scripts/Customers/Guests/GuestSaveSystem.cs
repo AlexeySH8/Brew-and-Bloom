@@ -27,6 +27,7 @@ public class GuestSaveSystem : MonoBehaviour, IDataPersistence
 
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         CreateNewGuests();
     }
 

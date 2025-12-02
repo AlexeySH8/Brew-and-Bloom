@@ -7,24 +7,15 @@ public class ItemStand : BaseItemHolder
     public int CurrentPlaceCount { get; private set; }
     [SerializeField] private IngredientData _heldIngredientData;
     [SerializeField] private Transform _standPoint;
-    // private IDataPersistenceManager _persistenceManager;
     private ItemStandVisual _itemStandVisual;
 
     public override Transform ParentPoint => _standPoint;
     public override int SortingOrderOffset => _itemStandVisual.SortingOrderOffset;
     public IngredientData HeldIngredientData => _heldIngredientData;
 
-    //[Inject]
-    //public void Construct(IDataPersistenceManager persistenceManager)
-    //{
-    //    _persistenceManager = persistenceManager;
-    //    _persistenceManager.Register(this);
-    //}
-
-    protected override void Awake()
+    private void Awake()
     {
         _itemStandVisual = GetComponent<ItemStandVisual>();
-        base.Awake();
     }
 
     public override bool TryReceive(BaseHoldItem heldItem)
@@ -64,9 +55,4 @@ public class ItemStand : BaseItemHolder
             return ingredient.Data == _heldIngredientData;
         return false;
     }
-
-    //private void OnDisable()
-    //{
-    //    _persistenceManager.Unregister(this);
-    //}
 }

@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: DefaultDialogue_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: dc250a42167b8d34f9b93da2b0f85ef9, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 2351220785152
+    m_Localized: I swear, this is the best meal in many moons!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2405486690304
+    m_Localized: My hunger is sated. Praise to your hands!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2652401172480
+    m_Localized: 137 ... What ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2509169885184
+    m_Localized: Oh, so filling! They don't serve this in castles. Thanks!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2519798251520
+    m_Localized: Ah, I ate well! You're the best cook in these lands.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2531760406528
+    m_Localized: May your cauldron always be full! I'm satisfied. Wonderful!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2543332491264
+    m_Localized: Thank you, it was delicious!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2555227537408
+    m_Localized: Wonderful dish, thank you!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2566992560128
+    m_Localized: "I haven\u2019t had this in ages!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2580770848768
+    m_Localized: Very filling and tasty!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2598638583808
+    m_Localized: Thanks, it was excellent!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2613389950976
+    m_Localized: A real pleasure!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2624458719232
+    m_Localized: Magic on the plate!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2634021732352
+    m_Localized: Fit for a king!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2644817870848
+    m_Localized: A dish worthy of legend!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4237151830016
+    m_Localized: 0001 111 00 100 Hmm... ?
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

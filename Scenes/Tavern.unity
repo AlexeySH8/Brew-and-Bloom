@@ -392,8 +392,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -1.0297499, y: 0.92155004, z: 0}
-    m_Extent: {x: 7.78685, y: 5.7955503, z: 0}
+    m_Center: {x: -1.0292497, y: 0.92180014, z: 0}
+    m_Extent: {x: 7.78715, y: 5.7953, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -12163,8 +12163,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -127, y: -24}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -126, y: -24}
+  m_SizeDelta: {x: 383.5, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &2603794133254799141
 PrefabInstance:
@@ -12399,6 +12399,7 @@ GameObject:
   - component: {fileID: 1672795290810675486}
   - component: {fileID: 2797867028681944990}
   - component: {fileID: 8557664012360596920}
+  - component: {fileID: 8557664012360596921}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -12489,8 +12490,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -296, y: -385.55557}
-  m_SizeDelta: {x: 356.2, y: 100}
+  m_AnchoredPosition: {x: -234, y: -385.55557}
+  m_SizeDelta: {x: 449.2, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &6393911355385847481
 PrefabInstance:
@@ -12959,7 +12960,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: End the day
+  m_text: End Day
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 724d2ab94baab3c4ca663021ad606ee1, type: 2}
   m_sharedMaterial: {fileID: -228271629196940093, guid: 724d2ab94baab3c4ca663021ad606ee1, type: 2}
@@ -13028,6 +13029,46 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8557664012360596921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4929880915911234112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:21bad0108b66c204ea0b68f86cd6fa12
+    m_TableEntryReference:
+      m_KeyId: 1745807421079552
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8557664012360596920}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1001 &9157273051533178649
 PrefabInstance:
   m_ObjectHideFlags: 0

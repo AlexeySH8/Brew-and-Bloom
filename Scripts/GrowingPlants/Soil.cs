@@ -37,12 +37,11 @@ public class Soil : BaseItemHolder, IPickTarget, IShovelTarget, IStaffTarget, ID
         _persistenceManager.Register(this);
     }
 
-    protected override void Awake()
+    private void Awake()
     {
         _holderId = _soilId;
         _soilVisual = GetComponent<SoilVisual>();
         _growPlant = GetComponent<GrowPlant>();
-        base.Awake();
     }
 
     private void Start()
@@ -186,10 +185,12 @@ public class Soil : BaseItemHolder, IPickTarget, IShovelTarget, IStaffTarget, ID
         _persistenceManager.Unregister(this);
     }
 
+#if UNITY_EDITOR
     [ContextMenu("Generate Unique Id")]
     private void GenerateUniqueId()
     {
         _soilId = GUID.Generate().ToString();
         EditorUtility.SetDirty(this);
     }
+#endif
 }

@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Audio;
-using Zenject;
 
 public class SFX : MonoBehaviour
 {
@@ -41,6 +40,7 @@ public class SFX : MonoBehaviour
             return;
         }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
         _sfxSource = GetComponent<AudioSource>();
     }
 

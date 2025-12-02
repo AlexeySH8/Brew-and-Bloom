@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ba3cd6122372f479b83c0ca14b034d, type: 3}
   m_Name: yellowStew
   m_EditorClassIdentifier: 
+  <CoockingStationType>k__BackingField: 1
   <Ingredients>k__BackingField:
   - {fileID: 11400000, guid: 5605ae6e33cc97b4291859d72803dcb3, type: 2}
   - {fileID: 11400000, guid: 821fe2ec1f12d6b4cac73a40149267d4, type: 2}

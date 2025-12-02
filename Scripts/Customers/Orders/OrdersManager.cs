@@ -35,6 +35,11 @@ public class OrdersManager : MonoBehaviour, IDataPersistence
         SubscribeToEvents();
     }
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void SubscribeToEvents()
     {
         _guestsManager.OnGuestsArrived += AcceptOrders;

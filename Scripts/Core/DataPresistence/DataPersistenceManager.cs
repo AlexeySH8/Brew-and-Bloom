@@ -18,6 +18,11 @@ public class DataPersistenceManager : MonoBehaviour, IDataPersistenceManager
         _gameSceneManager = gameSceneManager;
     }
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     public void NewGame()
     {
         GameData = new GameData();
@@ -26,11 +31,7 @@ public class DataPersistenceManager : MonoBehaviour, IDataPersistenceManager
 
     public void SaveGame()
     {
-        if (GameData == null)
-        {
-            Debug.Log("Cannot save: GameData is null.");
-            return;
-        }
+        if (GameData == null) return;
 
         foreach (IDataPersistence persistence in _dataPersistences)
             persistence.SaveData(GameData);

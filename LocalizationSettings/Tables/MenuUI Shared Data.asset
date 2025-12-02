@@ -39,6 +39,10 @@ MonoBehaviour:
     m_Key: saveGame
     m_Metadata:
       m_Items: []
+  - m_Id: 1745807421079552
+    m_Key: endDay
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
